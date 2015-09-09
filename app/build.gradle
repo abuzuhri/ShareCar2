@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "sharearide.com.orchidatech.jma.sharearide"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:palette-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:cardview-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.3'
+    compile 'com.squareup.picasso:picasso:2.4.0'
+    compile 'com.github.lzyzsd:circleprogress:1.0.1@aar'
+    compile('com.mikepenz.materialdrawer:library:2.0.3@aar') {
+        transitive = true
+    }
+    compile 'de.keyboardsurfer.android.widget:crouton:1.8.5@aar'
+    compile 'de.hdodenhof:circleimageview:1.3.0'
+    compile 'com.rengwuxian.materialedittext:library:1.8.3'
+    compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
+    compile 'com.eftimoff:androidplayer:1.0.3@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    compile 'com.mcxiaoke.volley:library:1.0.18'
+}
