@@ -2,16 +2,5 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Adapter" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Constant" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Database" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Fragment" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Interface" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Logic" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Model" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Utility" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/View" charset="UTF-8" />
   </component>
 </project>
-
