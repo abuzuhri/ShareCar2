@@ -12,13 +12,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.google.gson.Gson;
-import com.orchida.android.sharearide.Constant.AppConstant;
-import com.orchida.android.sharearide.Constant.AppLog;
-import com.orchida.android.sharearide.Model.SocialUser;
-import com.orchida.android.sharearide.View.Interface.OnLoginListener;
-import com.orchida.android.sharearide.View.Interface.SocialNetwork;
 
 import java.util.UUID;
+
+import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
+import sharearide.com.orchidatech.jma.sharearide.Constant.AppLog;
+import sharearide.com.orchidatech.jma.sharearide.Model.SocialUser;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoginListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.SocialNetwork;
 
 
 /**

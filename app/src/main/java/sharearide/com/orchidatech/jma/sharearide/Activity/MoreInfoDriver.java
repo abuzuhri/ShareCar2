@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.orchida.android.sharearide.Logic.DriverInfo;
-import com.orchida.android.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.Logic.DriverInfo;
+
 
 /**
  * Created by Shadow on 8/31/2015.
@@ -17,11 +17,11 @@ public class MoreInfoDriver extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.more_info);
+        //setContentView(R.layout.more_info);
     }
 
     public void moreInfoClicked(View view) {
-        DriverInfo.showInputDialog(this);
+        //DriverInfo.showInputDialog(this);
     }
 
     public void callClicked(View view) {

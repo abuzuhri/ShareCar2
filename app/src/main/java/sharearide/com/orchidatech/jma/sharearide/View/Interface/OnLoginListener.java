@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Interface;
 
-import com.orchida.android.sharearide.Model.SocialUser;
+
+import sharearide.com.orchidatech.jma.sharearide.Model.SocialUser;
 
 public interface OnLoginListener {
 

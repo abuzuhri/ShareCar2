@@ -21,17 +21,18 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.gson.Gson;
-import com.orchida.android.sharearide.Constant.AppConstant;
-import com.orchida.android.sharearide.Constant.AppLog;
-import com.orchida.android.sharearide.Model.SocialUser;
-import com.orchida.android.sharearide.View.Interface.OnLoginListener;
-import com.orchida.android.sharearide.View.Interface.SocialNetwork;
 
 import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+
+import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
+import sharearide.com.orchidatech.jma.sharearide.Constant.AppLog;
+import sharearide.com.orchidatech.jma.sharearide.Model.SocialUser;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoginListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.SocialNetwork;
 
 public class FacebookLogin implements SocialNetwork {
 

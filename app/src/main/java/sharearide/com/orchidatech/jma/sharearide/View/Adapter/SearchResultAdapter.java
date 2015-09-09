@@ -2,15 +2,13 @@ package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.orchida.android.sharearide.Model.SearchResultInfo;
-import com.orchida.android.sharearide.R;
-
 import java.util.List;
+
+import sharearide.com.orchidatech.jma.sharearide.Model.SearchResultInfo;
 
 /**
  * Created by Shadow on 9/8/2015.
@@ -38,8 +36,9 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
     @Override
     public SearchResultViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout, viewGroup, false);
-        return new SearchResultViewHolder(itemView);
+        //View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout, viewGroup, false);
+        //return new SearchResultViewHolder(itemView);
+        return null;
     }
 
     public static class SearchResultViewHolder extends RecyclerView.ViewHolder {
@@ -51,9 +50,9 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         public SearchResultViewHolder(View v) {
             super(v);
             //cv = (CardView)itemView.findViewById(R.id.car);
-            vName = (TextView) v.findViewById(R.id.textView_name_searchResult);
-            vTime = (TextView) v.findViewById(R.id.textView_time_searchResult);
-            vDate = (TextView) v.findViewById(R.id.textView_date_searchResult);
+            //vName = (TextView) v.findViewById(R.id.textView_name_searchResult);
+            //vTime = (TextView) v.findViewById(R.id.textView_time_searchResult);
+            //vDate = (TextView) v.findViewById(R.id.textView_date_searchResult);
         }
     }
 

@@ -10,7 +10,6 @@ import android.widget.Toast;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Logic.FacebookLogin;
 import sharearide.com.orchidatech.jma.sharearide.Logic.GooglePlusLogin;
-import sharearide.com.orchidatech.jma.sharearide.R;
 
 /**
  * Created by Shadow on 8/30/2015.
@@ -24,7 +23,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        //setContentView(R.layout.login);
 
         // components inflation goes here..
         // editText_username = (EditText) findViewById(R.id.editText_username);

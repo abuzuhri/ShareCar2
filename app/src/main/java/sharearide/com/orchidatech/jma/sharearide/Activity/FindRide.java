@@ -6,13 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
-import com.orchida.android.sharearide.Database.DAO.RideDAO;
-import com.orchida.android.sharearide.Database.Model.Ride;
-import com.orchida.android.sharearide.R;
-
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
+
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
+import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 
 /**
  * Created by Shadow on 8/30/2015.
@@ -26,7 +23,7 @@ public class FindRide extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.find_ride);
+        //setContentView(R.layout.find_ride);
 
         /*
         fromCity = (EditText) findViewById(R.id.editText_fromCity);
@@ -55,8 +52,7 @@ public class FindRide extends AppCompatActivity {
         ride.toState = toState.getText().toString();
         ride.toCountry = toCountry.getText().toString();
 
-        ride.time = Time.valueOf(time.getText().toString());
-        ride.date = Date.valueOf(date.getText().toString());
+        ride.dateTime = Long.valueOf(time.getText().toString());
 
         List<Ride> rides = RideDAO.searchForAllRides(ride);
         Intent intent = new Intent();

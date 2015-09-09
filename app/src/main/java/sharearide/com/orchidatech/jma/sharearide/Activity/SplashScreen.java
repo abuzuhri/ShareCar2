@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.orchida.android.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.R;
+
 
 /**
  * Created by Shadow on 9/8/2015.

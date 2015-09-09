@@ -1,23 +1,18 @@
 package sharearide.com.orchidatech.jma.sharearide.Logic;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.orchida.android.sharearide.Activity.QuickMessage;
-import com.orchida.android.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.Activity.QuickMessage;
 
 /**
  * Created by Shadow on 9/8/2015.
  */
 public class DriverInfo {
 
+    /*
     public static void showInputDialog(Context context) {
 
         // get prompts.xml view
@@ -55,6 +50,7 @@ public class DriverInfo {
         alertDialog.show();
 
     }
+    */
 
     public static void CallIntent(Context context, String phone) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
