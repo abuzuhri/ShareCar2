@@ -2,5 +2,27 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity/Database/App.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity/Database/DAO/ChatDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity/Database/DAO/RideDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity/Database/DAO/UserDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity/Database/Model/Chat.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity/Database/Model/Contact.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity/Database/Model/Ride.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Activity/Database/Model/User.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Constant/AppConstant.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Constant/AppLog.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Constant/AppLog.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Logic/DriverInfo.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Logic/FacebookLogin.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Logic/GooglePlusLogin.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Model/SearchResultInfo.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Model/SocialUser.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Utility/EmailValidator.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/Utility/EmptyFieldException.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/View/Adapter/SearchResultAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/View/Interface/OnLoginListener.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/sharearide/com/orchidatech/jma/sharearide/View/Interface/SocialNetwork.java" charset="UTF-8" />
   </component>
 </project>
