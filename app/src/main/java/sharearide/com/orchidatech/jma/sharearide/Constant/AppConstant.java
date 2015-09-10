@@ -7,9 +7,6 @@ import java.util.TimeZone;
 
 public class AppConstant {
 
-
-    private static String ServerUrl = "http://www.ubicuomanagement.com/";
-    public static String ServerUrlNewFeed = ServerUrl + "ums/json.php?dev_id=";
     public static long User_ID = 0;
     public static boolean isInSetting = false;
 
