@@ -17,11 +17,8 @@ public class Ride extends Model {
     @Column(name = "remote_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     public long remoteId;
 
-    @Column(name = "RideId")
-    public long rideId;
-
-    @Column(name = "User", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
-    public User user;
+    @Column(name = "UserId", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
+    public long userId;
 
     @Column(name = "FromCity")
     public String fromCity;

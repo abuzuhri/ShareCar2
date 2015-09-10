@@ -18,20 +18,20 @@ public class Chat extends Model {
     @Column(name = "remote_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     public long remoteId;
 
-    @Column(name = "MsgId")
-    public long msgId;
+    @Column(name = "Name")
+    public String name;
 
     @Column(name = "Message")
     public String message;
 
-    @Column(name = "Sender")
-    public User sender;
+    @Column(name = "SenderId")
+    public long senderId;
 
-    @Column(name = "Receiver")
-    public User receiver;
+    @Column(name = "ReceiverId")
+    public long receiverId;
 
-    @Column(name = "Date")
-    public String date;
+    @Column(name = "DateTime")
+    public long dateTime;
 
     @Column(name = "Address")
     public String address;

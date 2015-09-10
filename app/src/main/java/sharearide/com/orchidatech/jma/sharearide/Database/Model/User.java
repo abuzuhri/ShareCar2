@@ -18,9 +18,6 @@ public class User extends Model {
     @Column(name = "remote_id", unique = true)
     public long remoteId;
 
-    @Column(name = "UserId")
-    public long userId;
-
     @Column(name = "Name")
     public String name;
 
@@ -30,11 +27,24 @@ public class User extends Model {
     @Column(name = "Password")
     public String password;
 
+    @Column(name = "Image")
+    public String image;
+
     @Column(name = "Phone")
-    public long phone;
+    public String phone;
 
     @Column(name = "Email")
     public String email;
+
+    @Column(name = "Address")
+    public String address;
+
+    @Column(name = "Birthdate")
+    public long birthdate;
+
+    @Column(name = "Gender")
+    public String gender;
+
 
     public User() {
         super();
