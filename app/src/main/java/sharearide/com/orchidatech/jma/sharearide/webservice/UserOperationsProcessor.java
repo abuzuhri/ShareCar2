@@ -30,41 +30,4 @@ public class UserOperationsProcessor {
         Request mRequest = new Request(method, url, listener, errorListener, params);
         RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
     }
-/*
-    public void sendSignUpRequest(int method, String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> params){
-
-        Request mRequest = new Request(method, url, listener, errorListener, params);
-        RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
-    }
-
-    public void sendGetAllRidesRequest(int method, String url,Response.Listener<JSONObject> listener, Response.ErrorListener errorListener,Map<String, String> params){
-        Request mRequest = new Request(method, url, listener, errorListener, params);
-        RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
-    }
-
-    public void sendGetAllCountriesRequest(int method, String url,Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> params){
-        Request mRequest = new Request(method, url, listener, errorListener, params);
-        RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
-    }
-
-    public void sendGetAllAppsRequest(int method, String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> params){
-        Request mRequest = new Request(method, url, listener, errorListener, params);
-        RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
-    }
-
-    public void sendGetAllMessagesRequest(int method, String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> params){
-        Request mRequest = new Request(method, url, listener, errorListener, params);
-        RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
-    }
-
-    public void sendGetAboutRequest(int method, String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> params){
-        Request mRequest = new Request(method, url, listener, errorListener, params);
-        RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
-    }
-
-    public void sendGetUserInfoRequest(int method, String url,  Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> params){
-        Request mRequest = new Request(method, url, listener, errorListener, params);
-        RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
-    }
-*/
 }
