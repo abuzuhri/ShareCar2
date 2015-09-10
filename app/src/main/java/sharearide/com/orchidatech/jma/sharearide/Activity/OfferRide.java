@@ -7,6 +7,8 @@ import android.widget.EditText;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
+import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
+import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
 
 /**
  * Created by Shadow on 8/30/2015.
@@ -58,6 +60,12 @@ public class OfferRide extends AppCompatActivity {
         ride.user.email = email.getText().toString();
         */
 
-        RideDAO.addNewRide(ride);
+        try {
+            RideDAO.addNewRide(ride);
+        } catch (EmptyFieldException e) {
+            e.printStackTrace();
+        } catch (InvalidInputException e) {
+            e.printStackTrace();
+        }
     }
 }
