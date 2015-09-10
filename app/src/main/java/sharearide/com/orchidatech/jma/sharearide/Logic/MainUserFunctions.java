@@ -47,7 +47,7 @@ public class MainUserFunctions {
         });
     }
 
-    public void signUp(String username, String password, String image, String address, long birthdate, String gender, long phone, String email ){
+    public void signUp(String username, String password, String image, String address, long birthdate, String gender, String phone, String email ){
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -56,7 +56,7 @@ public class MainUserFunctions {
         params.put("address", address);
         params.put("birthdate", String.valueOf(birthdate));
         params.put("Gender", gender);
-        params.put("phone", String.valueOf(phone));
+        params.put("phone", phone);
         params.put("email", email);
 
         UserOperations.getInstance(context).signUp(params, new OnLoadFinished() {
