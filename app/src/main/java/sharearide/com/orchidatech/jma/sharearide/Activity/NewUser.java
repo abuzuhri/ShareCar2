@@ -1,14 +1,9 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
-import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
 
 
 /**
@@ -57,6 +52,7 @@ public class NewUser extends AppCompatActivity {
      * @param email      of user
      */
     private void verifySignUp(String username, String password, String repassword, String email) {
+        /*
         long userId = 0;
         try {
             userId = UserDAO.addNewUser(username, password, repassword, email);
@@ -70,5 +66,6 @@ public class NewUser extends AppCompatActivity {
         } else {
             Toast.makeText(NewUser.this, "Failed to create new user !", Toast.LENGTH_SHORT).show();
         }
+        */
     }
 }

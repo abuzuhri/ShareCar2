@@ -9,22 +9,24 @@ import com.android.volley.toolbox.Volley;
  * Created by Bahaa on 8/9/2015.
  */
 public class RequestQueueHandler {
+
     private static RequestQueueHandler instance;
     private RequestQueue requestQueue;
     private static Context mContext;
-    private RequestQueueHandler(){
+
+    private RequestQueueHandler() {
         requestQueue = Volley.newRequestQueue(mContext);
     }
 
-    public static synchronized RequestQueueHandler getInstance(Context context){
+    public static synchronized RequestQueueHandler getInstance(Context context) {
         mContext = context;
-        if(instance == null){
+        if (instance == null) {
             instance = new RequestQueueHandler();
         }
-       return instance;
+        return instance;
     }
 
-    public void addToRequestQueue(Request req){
+    public void addToRequestQueue(Request req) {
         requestQueue.add(req);
     }
 }

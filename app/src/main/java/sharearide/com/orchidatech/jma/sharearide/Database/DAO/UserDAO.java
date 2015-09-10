@@ -9,6 +9,7 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmailValidator;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
+import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
 
 /**
  * Created by Shadow on 9/6/2015.
@@ -20,20 +21,17 @@ public class UserDAO {
     public static final String NAME = "name";
 
 
+    public static String getUsername(long userId) {
+        User user = new Select().from(User.class).where("remote_id = ?", userId).executeSingle();
+        return user.username;
+    }
+
     public static long checkUserExist(long userId) {
-        User user = new Select().from(User.class).where("UserId = ?", userId).executeSingle();
+        User user = new Select().from(User.class).where("remote_id = ?", userId).executeSingle();
         return user.getId();
     }
 
     //<editor-fold defaultstate="collapsed" desc="signIn(String un, String pass){...}">
-
-    /**
-     * This method for user sign in operation..
-     *
-     * @param username of user
-     * @param password of user
-     * @return boolean true if username exists, false otherwise
-     */
     public boolean signIn(String username, String password) {
 
         User user = null;
@@ -53,11 +51,6 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="retreivePassword(String email){...}">
-
-    /**
-     * @param email of user to retrieve password with it
-     * @return password string
-     */
     public static String retreivePassword(String email) {
         User user = new Select("Password").from(User.class).where("Email = ?", email).executeSingle();
         return user.password;
@@ -65,17 +58,60 @@ public class UserDAO {
 
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="addNewUser(String name, String password, String repassword, String email){...}">
 
-    /**
-     * this method for add a new user
-     *
-     * @param name
-     * @param password
-     * @param email
-     * @return
-     */
-    public static long addNewUser(String name, String password, String repassword, String email) throws EmptyFieldException {
+    public static long addNewUser(long userId, String username, String password, String image,
+                                  String address, long birthdate, String gender, String phone, String email)
+            throws EmptyFieldException, InvalidInputException {
+
+        User user = new User();
+        boolean isValid = true;
+
+        EmailValidator emailValidator = new EmailValidator();
+
+        if (userId != 0) {
+            user.remoteId = userId;
+        } else {
+            isValid = false;
+            throw new InvalidInputException("Invalid user id !");
+        }
+
+        if (!username.equals("")) {
+            user.username = username;
+        } else {
+            isValid = false;
+            throw new EmptyFieldException("Username field is empty !");
+        }
+
+        if (!password.equals("")) {
+            user.password = password;
+        } else {
+            isValid = false;
+            throw new EmptyFieldException("Password field is empty !");
+        }
+
+        // TODO: check for validation
+        user.image = image;
+        user.address = address;
+        user.birthdate = birthdate;
+        user.gender = gender;
+        user.phone = phone;
+
+        if (emailValidator.isValidEmailAddress(email)) {
+            user.email = email;
+        } else {
+            isValid = false;
+            throw new EmptyFieldException("Email is invalid !");
+        }
+
+        if (isValid) {
+            return user.save();
+        }
+        return 0;
+    }
+
+
+    //<editor-fold defaultstate="collapsed" desc="addNewUser(String name, String password, String repassword, String email){...}">
+    public static long SignUp(String name, String password, String repassword, String email) throws EmptyFieldException {
 
         User user = new User();
         boolean isValid = true;
@@ -113,14 +149,6 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="updateUser(long userId, String name, String password, String email){...}">
-
-    /**
-     * @param userId
-     * @param name
-     * @param password
-     * @param email
-     * @return
-     */
     public long updateUser(long userId, String name, String password, String email) throws EmptyFieldException {
 
         User user = User.load(User.class, userId);
@@ -155,11 +183,6 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="getUserById(long userId){...}">
-
-    /**
-     * @param userId: the id of user
-     * @return User object with specified id
-     */
     public static User getUserById(long userId) {
         return new Select().from(User.class).where("UserId = ?", userId).executeSingle();
     }
@@ -178,11 +201,6 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="getUserRides(long userId){...}">
-
-    /**
-     * @param userId
-     * @return
-     */
     public static List<Ride> getUserRides(long userId) {
         User user = User.load(User.class, userId);
         //User u = getUserById(id);
@@ -192,11 +210,6 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="searchForUserById(long userId){...}">
-
-    /**
-     * @param userId
-     * @return
-     */
     public static Ride searchForUserById(long userId) {
         return new Select().from(User.class).where("UserId = ?", userId).orderBy("Name").executeSingle();
     }
@@ -204,11 +217,6 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="searchForUserByName(String name){...}">
-
-    /**
-     * @param name
-     * @return
-     */
     public static Ride searchForUserByName(String name) {
         return new Select().from(User.class).where("Name = ?", name).orderBy("Name").executeSingle();
     }
@@ -216,11 +224,6 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="searchForUserByEmail(String email){...}">
-
-    /**
-     * @param email
-     * @return
-     */
     public static Ride searchForUserByEmail(String email) {
         return new Select().from(User.class).where("Email = ?", email).orderBy("Name").executeSingle();
     }
@@ -228,10 +231,6 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="deleteUser(long userId){...}">
-
-    /**
-     * @param userId
-     */
     public void deleteUser(long userId) {
         //  load an Item object by Id and delete it.
         User user = User.load(User.class, userId);
@@ -246,10 +245,6 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="deleteAllUsers(){...}">
-
-    /**
-     *
-     */
     public static void deleteAllUsers() {
         new Delete().from(User.class).execute();
     }
