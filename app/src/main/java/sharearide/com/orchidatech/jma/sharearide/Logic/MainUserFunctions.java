@@ -23,6 +23,7 @@ import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
 /**
  * Created by Bahaa on 10/9/2015.
  */
+// TODO: Test all functions
 public class MainUserFunctions {
 
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -33,6 +34,8 @@ public class MainUserFunctions {
         this.context = context;
     }
 
+
+    // TODO: ...
     public void login(String username, String password) {
 
         Map<String, String> params = new HashMap<>();
@@ -58,6 +61,7 @@ public class MainUserFunctions {
         });
     }
 
+    // TODO: ...
     public void signUp(String username, String password, String image, String address, long birthdate, String gender, String phone, String email) {
 
         Map<String, String> params = new HashMap<>();
