@@ -166,6 +166,22 @@ public class UserOperations {
                     }
                 }, params);
     }
+    public void getUserName(Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.Url.USER_NAME, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        onLoadFinished.onSuccess(o);
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                }, params);
+    }
 /////////////////////////////////////////////////////////////////
 
     private static class Submit {

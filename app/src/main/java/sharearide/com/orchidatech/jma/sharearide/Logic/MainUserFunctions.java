@@ -344,4 +344,39 @@ public class MainUserFunctions {
             }
         });
     }
+
+    public void userName(String id) {
+
+        Map<String, String> params = new HashMap<>();
+        params.put("username", id);
+
+        UserOperations.getInstance(context).getUserName(params, new OnLoadFinished() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                try {
+                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                    String username = mJsonObject.getString("username");
+
+                    // Store in DB
+                    //UserDAO.addNewUser(id, username, password, image, address, birthdate, gender, phone, email);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } /*catch (EmptyFieldException e) {
+                    e.displayMessage();
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
+                    e.displayMessage();
+                    e.printStackTrace();
+                }*/
+
+            }
+
+            @Override
+            public void onFail(String error) {
+
+            }
+        });
+    }
 }
