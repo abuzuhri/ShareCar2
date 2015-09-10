@@ -1,10 +1,10 @@
 package sharearide.com.orchidatech.jma.sharearide.Utility;
 
-public class EmptyFieldException extends Exception {
+public class InvalidInputException extends Exception {
 
     String exceptionMsg;
 
-    public EmptyFieldException(String exceptionMsg) {
+    public InvalidInputException(String exceptionMsg) {
         super(exceptionMsg);
         this.exceptionMsg = exceptionMsg;
         displayMessage();

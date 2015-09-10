@@ -3,22 +3,37 @@
     package="sharearide.com.orchidatech.jma.sharearide">
 
     <application
+        android:name=".Database.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"></application>
+        android:theme="@style/AppTheme">
+
+        <!--  metadata for version and database name -->
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="sharearide.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="sharearide.com.orchidatech.jma.sharearide.Database.Model.User,
+                            sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride,
+                            sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat" />
+
+        <activity
+            android:name=".Activity.SplashScreen"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
 
-    <meta-data
-        android:name="AA_DB_NAME"
-        android:value="sharearide.db" />
-    <meta-data
-        android:name="AA_DB_VERSION"
-        android:value="1" />
-    <meta-data
-        android:name="AA_MODELS"
-        android:value="sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO,
-                            sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO,
-                            sharearide.com.orchidatech.jma.sharearide.Database.DAO.ChatDAO" />
+    </application>
+
 
 </manifest>

@@ -21,13 +21,15 @@ public class NewUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.new_user);
+        /*
+        setContentView(R.layout.new_user);
 
         // components inflation
-        //editText_username = (EditText) findViewById(R.id.editText_addUser_username);
-        //editText_password = (EditText) findViewById(R.id.editText_addUser_password);
-        //editText_repassword = (EditText) findViewById(R.id.editText_addUser_repassword);
-        //editText_email = (EditText) findViewById(R.id.editText_addUser_email);
+        editText_username = (EditText) findViewById(R.id.editText_addUser_username);
+        editText_password = (EditText) findViewById(R.id.editText_addUser_password);
+        editText_repassword = (EditText) findViewById(R.id.editText_addUser_repassword);
+        editText_email = (EditText) findViewById(R.id.editText_addUser_email);
+        */
     }
 
     /**
@@ -36,12 +38,14 @@ public class NewUser extends AppCompatActivity {
      * @param view the clicked button
      */
     public void addUser(View view) {
+        /*
         String username = editText_username.getText().toString();
         String password = editText_password.getText().toString();
         String repassword = editText_repassword.getText().toString();
         String email = editText_email.getText().toString();
 
         verifySignUp(username, password, repassword, email);
+        */
     }
 
     /**
@@ -53,14 +57,14 @@ public class NewUser extends AppCompatActivity {
      * @param email      of user
      */
     private void verifySignUp(String username, String password, String repassword, String email) {
-        boolean success = false;
+        long userId = 0;
         try {
-            success = UserDAO.addNewUser(username, password, repassword, email);
+            userId = UserDAO.addNewUser(username, password, repassword, email);
         } catch (EmptyFieldException e) {
             e.displayMessage();
             e.printStackTrace();
         }
-        if (success) {
+        if (userId != 0) {
             Intent intent = new Intent(NewUser.this, FindRide.class);
             startActivity(intent);
         } else {

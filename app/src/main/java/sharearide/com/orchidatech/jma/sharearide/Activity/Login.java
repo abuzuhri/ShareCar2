@@ -23,13 +23,15 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.login);
+        /*
+        setContentView(R.layout.login);
 
         // components inflation goes here..
-        // editText_username = (EditText) findViewById(R.id.editText_username);
-        // editText_password = (EditText) findViewById(R.id.editText_password);
+         editText_username = (EditText) findViewById(R.id.editText_username);
+         editText_password = (EditText) findViewById(R.id.editText_password);
 
-        // editText_retreivePassword = (EditText) findViewById(R.id.editText_retreivePassword);
+         editText_retreivePassword = (EditText) findViewById(R.id.editText_retreivePassword);
+         */
     }
 
     /**
