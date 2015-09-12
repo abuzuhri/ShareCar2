@@ -31,7 +31,6 @@ public class MainUserFunctions {
     public static void login(Context context,String username, String password){
 
 
-
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
