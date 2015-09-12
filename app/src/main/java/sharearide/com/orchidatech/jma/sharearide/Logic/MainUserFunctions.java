@@ -272,7 +272,6 @@ public class MainUserFunctions {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
