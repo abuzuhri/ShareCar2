@@ -6,7 +6,4 @@ package sharearide.com.orchidatech.jma.sharearide.Logic;
 public class PopulateDB {
 
 
-    MainUserFunctions userFunctions = new MainUserFunctions(null);
-
-
 }
