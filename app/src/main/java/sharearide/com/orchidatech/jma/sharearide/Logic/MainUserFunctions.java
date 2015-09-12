@@ -17,12 +17,9 @@ import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
  * Created by Bahaa on 10/9/2015.
  */
 public class MainUserFunctions {
-    Context context;
+    private MainUserFunctions(){}
 
-    public MainUserFunctions(Context context){
-        this.context = context;
-    }
-    public void login(String username, String password){
+    public static void login(Context context,String username, String password){
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -47,7 +44,7 @@ public class MainUserFunctions {
         });
     }
 
-    public void signUp(String username, String password, String image, String address, long birthdate, String gender, String phone, String email ){
+    public static void signUp(Context context, String username, String password, String image, String address, long birthdate, String gender, String phone, String email ){
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -78,7 +75,7 @@ public class MainUserFunctions {
         });
     }
 
-    public void getAllRides(){
+    public static void getAllRides(Context context){
         UserOperations.getInstance(context).getAllRides(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -110,7 +107,7 @@ public class MainUserFunctions {
         });
 
     }
-    public void getAllCountries(){
+    public static void getAllCountries(Context context){
         UserOperations.getInstance(context).getAllCountries(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -135,7 +132,7 @@ public class MainUserFunctions {
             }
         });
     }
-    public void getAllApps(){
+    public static void getAllApps(Context context){
         UserOperations.getInstance(context).getAllApps(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -161,7 +158,7 @@ public class MainUserFunctions {
             }
         });
     }
-    public void getAllMessages(String username, String password){
+    public static void getAllMessages(Context context, String username, String password){
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -193,7 +190,7 @@ public class MainUserFunctions {
             }
         });
     }
-    public void getAbout(){
+    public static void getAbout(Context context){
         UserOperations.getInstance(context).getAbout(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -225,7 +222,7 @@ public class MainUserFunctions {
             }
         });
     }
-    public void userInfo(String username, String password){
+    public static void userInfo(Context context, String username, String password){
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -258,5 +255,31 @@ public class MainUserFunctions {
 
             }
         });
+    }
+    public static String getUserName(Context context, long id){
+        Map<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(id));
+        UserOperations.getInstance(context).getUserName(params, new OnLoadFinished() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                try {
+                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                    long id = Long.parseLong(mJsonObject.getString("id"));
+                    String username = mJsonObject.getString("username");
+
+                    //store in DB
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFail(String error) {
+
+            }
+        });
+        return null;
     }
 }

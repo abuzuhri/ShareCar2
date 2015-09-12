@@ -33,7 +33,7 @@ public class UserOperations {
 
     public void login(Map<String,String> params, final OnLoadFinished onLoadFinished){
         params.put("submit", Submit.LOGIN);
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.Url.LOGIN_URL, new Response.Listener<JSONObject>(){
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.LOGIN_URL, new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject o) {
                         onLoadFinished.onSuccess(o);
@@ -50,7 +50,7 @@ public class UserOperations {
 
     public void signUp(Map<String,String> params, final OnLoadFinished onLoadFinished){
         params.put("submit", Submit.SIGNUP);
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.Url.SIGNUP_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.SIGNUP_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -67,7 +67,7 @@ public class UserOperations {
     }
 
     public void getAllRides(final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.Url.ALL_RIDES_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ALL_RIDES_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -84,7 +84,7 @@ public class UserOperations {
     }
 
     public void getAllCountries(final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.Url.ALL_COUNTRIES_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ALL_COUNTRIES_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -101,7 +101,7 @@ public class UserOperations {
     }
 
     public void getAllApps(final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.Url.ALL_APPS_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ALL_APPS_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -118,7 +118,7 @@ public class UserOperations {
     }
 
     public void getAllMessages(Map<String,String> params, final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.Url.ALL_MESSAGES_URL,new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.ALL_MESSAGES_URL,new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -135,7 +135,7 @@ public class UserOperations {
     }
 
     public void getAbout(final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.Url.ABOUT_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ABOUT_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -152,7 +152,7 @@ public class UserOperations {
     }
 
     public void getUserInfo(Map<String,String> params, final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.Url.USER_INFO, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.USER_INFO, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -167,6 +167,25 @@ public class UserOperations {
                     }
                 }, params);
     }
+
+    public void getUserName(Map<String,String> params, final OnLoadFinished onLoadFinished){
+        params.put("submit", Submit.SIGNUP);
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.USER_NAME_URL, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        onLoadFinished.onSuccess(o);
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                },params);
+    }
+
 /////////////////////////////////////////////////////////////////
 
     private  static class Submit{
