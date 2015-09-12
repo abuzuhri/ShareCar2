@@ -16,20 +16,21 @@ import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
 public class RideDAO {
 
     public static long checkRideExist(long rideId) {
-        Ride ride = new Select().from(Ride.class).where("UserId = ?", rideId).executeSingle();
+        Ride ride = new Select().from(Ride.class).where("remote_id = ?", rideId).executeSingle();
         return ride.getId();
     }
 
-    /**
-     * @param r Ride instance
-     */
     public static long addNewRide(Ride r) throws EmptyFieldException, InvalidInputException {
 
         Ride ride = new Ride();
         boolean isValid = true;
 
-        //ride.rideId = r.rideId;
-        //ride.user = r.user;
+        if (r.userId != 0) {
+            ride.userId = r.userId;
+        } else {
+            isValid = false;
+            throw new InvalidInputException("Invalid user id !");
+        }
 
         if (!r.fromCity.equals("")) {
             ride.fromCity = r.fromCity;
@@ -89,6 +90,7 @@ public class RideDAO {
 
         ride.info = r.info;
 
+        /*
         if (!r.user.name.equals("")) {
             ride.user.name = r.user.name;
         } else {
@@ -109,6 +111,7 @@ public class RideDAO {
             isValid = false;
             throw new InvalidInputException("Email field is empty !");
         }
+        */
 
         if (isValid) {
             return ride.save();
@@ -116,10 +119,7 @@ public class RideDAO {
         return 0;
     }
 
-    /**
-     * @param id
-     * @param r
-     */
+
     public long updateRide(long id, Ride r) throws EmptyFieldException, InvalidInputException {
 
         Ride ride = Ride.load(Ride.class, id);
@@ -183,6 +183,7 @@ public class RideDAO {
 
         ride.info = r.info;
 
+        /*
         if (!r.user.name.equals("")) {
             ride.user.name = r.user.name;
         } else {
@@ -203,6 +204,7 @@ public class RideDAO {
             isValid = false;
             throw new InvalidInputException("Email field is empty !");
         }
+        */
 
         if (isValid) {
             return ride.save();
@@ -210,43 +212,23 @@ public class RideDAO {
         return 0;
     }
 
-
-    /**
-     * @param userId
-     * @return
-     */
     public static Ride getRideByUserId(long userId) {
         User user = new User();
-        return new Select().from(Ride.class).where(user.userId + " = ?", userId).executeSingle();
+        return new Select().from(Ride.class).where(user.getId() + " = ?", userId).executeSingle();
     }
 
-    /**
-     * @param rideId
-     * @return
-     */
     public static Ride getRideById(long rideId) {
         return new Select().from(Ride.class).where("RideId = ?", rideId).executeSingle();
     }
 
-    /**
-     * @return
-     */
     public static List<Ride> getAllRides() {
         return new Select().from(Ride.class).execute();
     }
 
-    /**
-     * @param rideId
-     * @return
-     */
     public static Ride searchForRide(long rideId) {
         return new Select().from(Ride.class).where("RideId = ?", rideId).orderBy("Cost").executeSingle();
     }
 
-    /**
-     * @param ride
-     * @return
-     */
     public static List<Ride> searchForAllRides(Ride ride) {
         return new Select()
                 .from(Ride.class)
@@ -254,9 +236,6 @@ public class RideDAO {
                 .execute();
     }
 
-    /**
-     * @param rideId
-     */
     public void deleteRide(long rideId) {
         //  load an Item object by Id and delete it.
         Ride ride = Ride.load(Ride.class, rideId);
@@ -269,9 +248,6 @@ public class RideDAO {
         //new Delete().from(User.class).where("Id = ?", id).execute();
     }
 
-    /**
-     *
-     */
     public static void deleteAllRides() {
         new Delete().from(Ride.class).execute();
     }

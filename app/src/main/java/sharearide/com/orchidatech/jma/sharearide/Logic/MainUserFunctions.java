@@ -1,7 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Logic;
 
 import android.content.Context;
-
+import android.content.SharedPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,6 +10,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.ChatDAO;
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.CountryDAO;
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
+import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
+import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
+import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
 import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
 
@@ -17,9 +24,13 @@ import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
  * Created by Bahaa on 10/9/2015.
  */
 public class MainUserFunctions {
+    private static String PREFS_NAME = "";
+
     private MainUserFunctions(){}
 
     public static void login(Context context,String username, String password){
+
+
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -44,7 +55,8 @@ public class MainUserFunctions {
         });
     }
 
-    public static void signUp(Context context, String username, String password, String image, String address, long birthdate, String gender, String phone, String email ){
+
+    public static void signUp(Context context, String username, String password, String image, String address, long birthdate, String gender, String phone, String email) {
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -75,7 +87,8 @@ public class MainUserFunctions {
         });
     }
 
-    public static void getAllRides(Context context){
+
+    public  static void getAllRides(Context context) {
         UserOperations.getInstance(context).getAllRides(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -93,9 +106,30 @@ public class MainUserFunctions {
                         String country_to = mJsonObject.getString("country_to");
                         long date_time = mJsonObject.getLong("date_time");
                         double price = Double.parseDouble(mJsonObject.getString("price"));
-                        ////store in DB
+
+                        // Store in DB
+                        Ride ride = null;
+
+                        ride.remoteId = id;
+                        ride.userId = user_id;
+                        ride.fromCity = city_from;
+                        ride.fromState = state_from;
+                        ride.fromCountry = country_from;
+                        ride.toCity = city_to;
+                        ride.toState = state_to;
+                        ride.toCountry = country_to;
+                        ride.dateTime = date_time;
+                        ride.cost = price;
+
+                        RideDAO.addNewRide(ride);
                     }
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.displayMessage();
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
+                    e.displayMessage();
                     e.printStackTrace();
                 }
             }
@@ -107,7 +141,9 @@ public class MainUserFunctions {
         });
 
     }
-    public static void getAllCountries(Context context){
+
+
+    public static void getAllCountries(Context context) {
         UserOperations.getInstance(context).getAllCountries(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -119,9 +155,17 @@ public class MainUserFunctions {
                         String name = mJsonObject.getString("name");
                         String alpha_2 = mJsonObject.getString("alpha_2");
                         String alpha_3 = mJsonObject.getString("alpha_3");
-                        ///store in DB
+
+                        // Store in DB
+                        CountryDAO.addNewCountry(id, name, alpha_2);
                     }
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.displayMessage();
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
+                    e.displayMessage();
                     e.printStackTrace();
                 }
             }
@@ -132,7 +176,9 @@ public class MainUserFunctions {
             }
         });
     }
-    public static void getAllApps(Context context){
+
+    /*
+    public void getAllApps() {
         UserOperations.getInstance(context).getAllApps(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -146,7 +192,9 @@ public class MainUserFunctions {
                         String description = mJsonObject.getString("description");
                         String apple_link = mJsonObject.getString("app_link");
                         String google_link = mJsonObject.getString("google_link");
-                        //store in DB
+
+                        // Store in DB
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -158,7 +206,12 @@ public class MainUserFunctions {
             }
         });
     }
+<<<<<<< HEAD
     public static void getAllMessages(Context context, String username, String password){
+=======
+    */
+
+    public static void getAllMessages(Context context, String username, String password) {
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -177,9 +230,17 @@ public class MainUserFunctions {
                         long receiver_id = Long.parseLong(mJsonObject.getString("receiver_id"));
                         String message = mJsonObject.getString("message");
                         long date_time = mJsonObject.getLong("date_time");
+
                         //store in DB
+                        ChatDAO.addNewChat(id, message, sender_id, receiver_id, date_time);
                     }
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.displayMessage();
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
+                    e.displayMessage();
                     e.printStackTrace();
                 }
             }
@@ -190,7 +251,9 @@ public class MainUserFunctions {
             }
         });
     }
-    public static void getAbout(Context context){
+
+
+    public static void getAbout(final Context context) {
         UserOperations.getInstance(context).getAbout(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -204,11 +267,26 @@ public class MainUserFunctions {
                     String address = mJsonObject.getString("address");
                     String tel = mJsonObject.getString("tel");
                     String fax = mJsonObject.getString("fax");
-                    String face_account = mJsonObject.getString("facebook_account");
-                    String twit_account = mJsonObject.getString("twitter_account");
+                    String facebook_account = mJsonObject.getString("facebook_account");
+                    String twitter_account = mJsonObject.getString("twitter_account");
                     String google_account = mJsonObject.getString("google_account");
-                    ///store in DB
 
+                    // Store in SharedPreferences
+                    SharedPreferences sharedpreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putLong("id", id);
+                    editor.putString("name", name);
+                    editor.putString("country", country);
+                    editor.putString("city", city);
+                    editor.putString("address", address);
+                    editor.putString("tel", tel);
+                    editor.putString("fax", fax);
+                    editor.putString("facebook_account", facebook_account);
+                    editor.putString("twitter_account", twitter_account);
+                    editor.putString("google_account", google_account);
+
+                    editor.commit();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -222,7 +300,9 @@ public class MainUserFunctions {
             }
         });
     }
-    public static void userInfo(Context context, String username, String password){
+
+
+    public static void userInfo(Context context, String username, String password) {
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -243,8 +323,17 @@ public class MainUserFunctions {
                     String gender = mJsonObject.getString("Gender");
                     String phone = mJsonObject.getString("phone");
                     String email = mJsonObject.getString("email");
-                    //store in DB
+
+                    // Store in DB
+                    UserDAO.addNewUser(id, username, password, image, address, birthdate, gender, phone, email);
+
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.displayMessage();
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
+                    e.displayMessage();
                     e.printStackTrace();
                 }
 
@@ -256,9 +345,11 @@ public class MainUserFunctions {
             }
         });
     }
-    public static String getUserName(Context context, long id){
+
+    public static  void userName(Context context, String id) {
+
         Map<String, String> params = new HashMap<>();
-        params.put("id", String.valueOf(id));
+        params.put("username", id);
         UserOperations.getInstance(context).getUserName(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -269,9 +360,19 @@ public class MainUserFunctions {
                     String username = mJsonObject.getString("username");
 
                     //store in DB
+
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                } /*catch (EmptyFieldException e) {
+                    e.displayMessage();
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
+                    e.displayMessage();
+                    e.printStackTrace();
+                }*/
+
             }
 
             @Override
@@ -279,6 +380,5 @@ public class MainUserFunctions {
 
             }
         });
-        return null;
     }
 }
