@@ -39,7 +39,7 @@ public class MainUserFunctions {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                     boolean success = mJsonObject.getBoolean("login");
                 } catch (JSONException e) {
@@ -71,7 +71,7 @@ public class MainUserFunctions {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                     boolean success = mJsonObject.getBoolean("signup");
                 } catch (JSONException e) {
@@ -92,7 +92,7 @@ public class MainUserFunctions {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     for (int i = 0; i < mJsonArray.length(); i++) {
                         JSONObject mJsonObject = mJsonArray.getJSONObject(i);
                         long id = Long.parseLong(mJsonObject.getString("id"));
@@ -147,7 +147,7 @@ public class MainUserFunctions {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     for (int i = 0; i < mJsonArray.length(); i++) {
                         JSONObject mJsonObject = mJsonArray.getJSONObject(i);
                         long id = Long.parseLong(mJsonObject.getString("id"));
@@ -182,7 +182,7 @@ public class MainUserFunctions {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");////****
                     mJsonArray = jsonObject.getJSONArray("");
                     for (int i = 0; i < mJsonArray.length(); i++) {
                         JSONObject mJsonObject = mJsonArray.getJSONObject(i);
@@ -205,9 +205,6 @@ public class MainUserFunctions {
             }
         });
     }
-<<<<<<< HEAD
-    public static void getAllMessages(Context context, String username, String password){
-=======
     */
 
     public static void getAllMessages(Context context, String username, String password) {
@@ -220,7 +217,7 @@ public class MainUserFunctions {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     mJsonArray = jsonObject.getJSONArray("");
                     for (int i = 0; i < mJsonArray.length(); i++) {
                         JSONObject mJsonObject = mJsonArray.getJSONObject(i);
@@ -257,7 +254,7 @@ public class MainUserFunctions {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                     long id = Long.parseLong(mJsonObject.getString("id"));
                     String name = mJsonObject.getString("name");
@@ -311,7 +308,7 @@ public class MainUserFunctions {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                     long id = Long.parseLong(mJsonObject.getString("id"));
                     String username = mJsonObject.getString("username");
@@ -353,7 +350,7 @@ public class MainUserFunctions {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("");////****
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                     long id = Long.parseLong(mJsonObject.getString("id"));
                     String username = mJsonObject.getString("username");

@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.Services.RefreshRideService;
 
 
 /**
@@ -23,8 +27,10 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 Intent i = new Intent(SplashScreen.this, ServicesScreen.class);
                 startActivity(i);
+                finish();
             }
         };
         thread.start();

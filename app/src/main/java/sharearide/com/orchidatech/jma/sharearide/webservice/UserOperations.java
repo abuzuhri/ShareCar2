@@ -169,7 +169,6 @@ public class UserOperations {
     }
 
     public void getUserName(Map<String,String> params, final OnLoadFinished onLoadFinished){
-        params.put("submit", Submit.SIGNUP);
         UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.USER_NAME_URL, new Response.Listener<JSONObject>() {
 
                     @Override

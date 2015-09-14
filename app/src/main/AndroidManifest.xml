@@ -31,7 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".Activity.ServicesScreen"
+            android:label="Services Screen"/>
+       <service android:name=".Services.RefreshRideService" />
 
     </application>
 

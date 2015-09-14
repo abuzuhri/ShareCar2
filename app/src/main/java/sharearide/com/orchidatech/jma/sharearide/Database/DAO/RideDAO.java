@@ -222,7 +222,7 @@ public class RideDAO {
     }
 
     public static List<Ride> getAllRides() {
-        return new Select().from(Ride.class).execute();
+        return new Select().from(Ride.class).orderBy("DateTime DESC").execute();
     }
 
     public static Ride searchForRide(long rideId) {
@@ -236,7 +236,7 @@ public class RideDAO {
                 .execute();
     }
 
-    public void deleteRide(long rideId) {
+    public static void deleteRide(long rideId) {
         //  load an Item object by Id and delete it.
         Ride ride = Ride.load(Ride.class, rideId);
         ride.delete();
