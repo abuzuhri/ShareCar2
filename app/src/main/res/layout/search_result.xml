@@ -1,0 +1,372 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.amal.kronz.layoutsdialogxml.Search"
+    android:orientation="vertical"
+    android:background="#fff">
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar">
+
+    </include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:layout_marginTop="@dimen/CardView_marginTop">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#fff"
+                >
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/result_img"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/sresult"
+                    android:layout_marginLeft="@dimen/margin_left_image"
+
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp"
+                    android:layout_marginLeft="@dimen/margin_left_image"
+                    >
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Heyam AbuSitta"
+                        android:id="@+id/textView4"
+                        android:textColor="#000"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/date_marginTop"
+                        >
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/time"
+                            android:background="@drawable/time"
+                            android:layout_gravity="left|bottom"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="08:20:00"
+                            android:id="@+id/textView5"
+                            android:textColor="#b2b2b2"
+
+                            android:layout_marginRight="@dimen/date_marginRight"
+                            android:layout_marginLeft="@dimen/date_marginLeft"
+                            android:layout_gravity="left|center"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/date"
+                            android:background="@drawable/date"
+                            android:layout_gravity="left|bottom"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jun_22_2015"
+                            android:layout_marginLeft="@dimen/date_marginLeft"
+                            android:textColor="#b2b2b2"
+                            android:layout_gravity="left|center"
+                            android:id="@+id/textView6" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            >
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#fff"
+                >
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/result_img2"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/sresult"
+                    android:layout_marginLeft="@dimen/margin_left_image"
+
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp"
+                    android:layout_marginLeft="@dimen/margin_left_image"
+                    >
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Heyam AbuSitta"
+                        android:id="@+id/t"
+                        android:textColor="#000"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/date_marginTop"
+                        >
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/time2"
+                            android:background="@drawable/time"
+                            android:layout_gravity="left|bottom"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="08:20:00"
+                            android:id="@+id/tex5"
+                            android:textColor="#b2b2b2"
+
+                            android:layout_marginRight="@dimen/date_marginRight"
+                            android:layout_marginLeft="@dimen/date_marginLeft"
+                            android:layout_gravity="left|center"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/date2"
+                            android:background="@drawable/date"
+                            android:layout_gravity="left|bottom"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jun_22_2015"
+                            android:layout_marginLeft="@dimen/date_marginLeft"
+                            android:textColor="#b2b2b2"
+                            android:layout_gravity="left|center"
+                            android:id="@+id/tex6" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            >
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#fff"
+                >
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/result_img3"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/sresult"
+                    android:layout_marginLeft="@dimen/margin_left_image"
+
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp"
+                    android:layout_marginLeft="@dimen/margin_left_image"
+                    >
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Heyam AbuSitta"
+                        android:id="@+id/jj4"
+                        android:textColor="#000"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/date_marginTop"
+                        >
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/time3"
+                            android:background="@drawable/time"
+                            android:layout_gravity="left|bottom"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="08:20:00"
+                            android:id="@+id/tw5"
+                            android:textColor="#b2b2b2"
+
+                            android:layout_marginRight="@dimen/date_marginRight"
+                            android:layout_marginLeft="@dimen/date_marginLeft"
+                            android:layout_gravity="left|center"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/date3"
+                            android:background="@drawable/date"
+                            android:layout_gravity="left|bottom"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jun_22_2015"
+                            android:layout_marginLeft="@dimen/date_marginLeft"
+                            android:textColor="#b2b2b2"
+                            android:layout_gravity="left|center"
+                            android:id="@+id/tw6" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            >
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#fff"
+                >
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/result_img4"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/sresult"
+                    android:layout_marginLeft="@dimen/margin_left_image"
+
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp"
+                    android:layout_marginLeft="@dimen/margin_left_image"
+                    >
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Heyam AbuSitta"
+                        android:id="@+id/textg4"
+                        android:textColor="#000"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/date_marginTop"
+                        >
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/time4"
+                            android:background="@drawable/time"
+                            android:layout_gravity="left|bottom"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="08:20:00"
+                            android:id="@+id/t4w5"
+                            android:textColor="#b2b2b2"
+
+                            android:layout_marginRight="@dimen/date_marginRight"
+                            android:layout_marginLeft="@dimen/date_marginLeft"
+                            android:layout_gravity="left|center"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/date4"
+                            android:background="@drawable/date"
+                            android:layout_gravity="left|bottom"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jun_22_2015"
+                            android:layout_marginLeft="@dimen/date_marginLeft"
+                            android:textColor="#b2b2b2"
+                            android:layout_gravity="left|center"
+                            android:id="@+id/texs6" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</LinearLayout>

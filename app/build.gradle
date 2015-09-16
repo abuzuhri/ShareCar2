@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "sharearide.com.orchidatech.jma.sharearide"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -37,6 +37,15 @@ dependencies {
     compile 'com.android.support:cardview-v7:22+'
     compile 'com.android.support:recyclerview-v7:22+'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
+
+
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.android.support:design:22.2.0'
+    compile 'com.melnykov:floatingactionbutton:1.3.0'
+    compile 'de.hdodenhof:circleimageview:1.2.1'
+    compile 'it.neokree:MaterialNavigationDrawer:1.3.3'
+
 
 
     /*

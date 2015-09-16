@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#fff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="From"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold"
+            android:id="@+id/textView"
+            android:textColor="#000"
+            android:gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="@dimen/vertical_margintopTextView"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/imageView6"
+                android:background="@drawable/city_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:text="   Ramallah"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/imageVieew6"
+                android:background="@drawable/country_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   Weast bank"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/imagew6"
+                android:background="@drawable/time_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   08:10:00"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/aa"
+                android:background="@drawable/date_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   11/09/2015"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+
+        </LinearLayout>
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="To"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold"
+            android:id="@+id/textView1"
+            android:textColor="#000"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="40dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/imageVie5"
+                android:background="@drawable/city_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/city1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   Gaza"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/imageV6"
+                android:background="@drawable/country_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/country1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   Gaza Strip"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/ss"
+                android:background="@drawable/price"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   50"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="More Information"
+            android:id="@+id/more_info"
+            android:background="@drawable/cyan_roundrect"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/horizontal_margin"
+            android:layout_marginRight="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/vertical_margintopTextView"
+            android:textStyle="bold"
+            android:textColor="@color/whiteText"
+            />
+
+        <!--  <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/imageView6"
+              android:background="@drawable/line"
+              android:layout_marginLeft="@dimen/horizontal_margin"
+              android:layout_marginRight="@dimen/horizontal_margin"
+              android:layout_marginBottom="15dp"/>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Contact Info"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold"
+            android:id="@+id/td1"
+            android:textColor="#000"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="40dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/imageccVie5"
+                android:background="@drawable/user_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   Ahmed abu Zuhree"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/imageddV6"
+                android:background="@drawable/phone"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   05998751257"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/call"
+                android:background="@drawable/call"
+                android:layout_marginRight="10dp"/>
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/send_message"
+                android:background="@drawable/send_mail"/>
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/sss"
+                android:background="@drawable/email_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   Juist@gmail.com"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/go"
+                android:background="@drawable/enter"
+                android:layout_marginLeft="20dp"/>
+
+
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quick Message"
+            android:id="@+id/save"
+            android:background="#ff9d1e"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="0dp"
+            android:textStyle="bold"
+            android:textColor="@color/whiteText"
+            />
+
+
+    </LinearLayout>
+</ScrollView>

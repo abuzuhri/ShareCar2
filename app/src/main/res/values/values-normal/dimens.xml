@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size">15dp</dimen>
+    <dimen name="text_size_smaller">10dp</dimen>
+
+    <dimen name="horizontal_margin">50dp</dimen>
+    <dimen name="vertical_margintopPage">90dp</dimen>
+    <dimen name="vertical_margintopTextView">40dp</dimen>
+    <dimen name="vertical_margin_btwn_view">10dp</dimen>
+    <dimen name="vertical_logoTop">30dp</dimen>
+    <dimen name="vertical_logoBottom">5dp</dimen>
+    <dimen name="vertical_topBtn">10dp</dimen>
+    <dimen name="horizontal_BTW_Btn">60dp</dimen>
+
+    <dimen name="vertical_topWarningImgi">60dp</dimen>
+    <dimen name="verticalbottomopWarningImgi">50dp</dimen>
+
+
+    <dimen name="margin_left_image">15dp</dimen>
+    <dimen name="layout_marginLeft">10dp</dimen>
+    <dimen name="date_marginLeft">10dp</dimen>
+    <dimen name="date_marginRight">10dp</dimen>
+    <dimen name="date_marginTop">15dp</dimen>
+    <dimen name="CardView_marginTop">15dp</dimen>
+
+
+
+
+
+
+
+</resources>

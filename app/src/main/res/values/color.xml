@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ColorPrimary">#22a5bf</color>
+    <color name="ColorPrimaryDark">#2591a8</color>
+
+    <color name="tabsScrollColor">#3bd8f1</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="whiteText">#ffffff</color>
+    <color name="blueText">#25839d </color>
+    <color name="cyanText">#30d5e8</color>
+
+    <color name="Floatbtn">#ff9d1e</color>
+    <color name="btn">#25859e</color>
+    <color name="white_btn">#fff</color>
+
+</resources>

@@ -1,0 +1,130 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.amal.kronz.findaride.Login"
+    android:background="@drawable/backgro">
+
+    <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/tool_bar"
+            android:id="@+id/tool_bar"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/logo"
+        android:layout_marginTop="@dimen/vertical_logoTop"
+        android:layout_marginBottom="@dimen/vertical_logoBottom" />
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/username"
+        android:hint="   User Name"
+        android:padding="5dp"
+        android:textColor="#30d5e8"
+        android:textSize="@dimen/text_size"
+        android:textDirection="ltr"
+
+        android:drawableLeft="@drawable/profile"
+        android:background="@drawable/lightgray_roundrect"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_marginLeft="@dimen/horizontal_margin"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/editText"
+        android:hint="   Password"
+        android:textColor="#30d5e8"
+        android:padding="5dp"
+        android:textSize="@dimen/text_size"
+        android:textDirection="ltr"
+        android:drawableLeft="@drawable/padlocknav"
+        android:layout_marginTop="@dimen/vertical_topBtn"
+        android:background="@drawable/lightgray_roundrect"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_marginLeft="@dimen/horizontal_margin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_marginLeft="@dimen/horizontal_margin"
+        android:layout_marginTop="@dimen/vertical_margin_btwn_view">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fBbtn"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/facebook"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gplusbtn"
+            android:layout_marginTop="5dp"
+
+            android:background="@drawable/googlepluse"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Gobtnx"
+            android:layout_marginLeft="@dimen/horizontal_BTW_Btn"
+            android:background="@drawable/login" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/vertical_margin_btwn_view">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not a member? "
+            android:id="@+id/textView2"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size"
+      />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="Sign Up"
+            android:background="@android:color/transparent"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold"
+            android:gravity="center|left"
+            android:id="@+id/signUpbtn" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Lost password? "
+        android:background="@android:color/transparent"
+        android:textColor="#fff"
+        android:textSize="@dimen/text_size"
+        android:id="@+id/resetPwbtn"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

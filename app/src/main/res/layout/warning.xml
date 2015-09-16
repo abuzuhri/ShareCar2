@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+  >
+
+    <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/tool_bar"
+            android:id="@+id/tool_bar"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/warn"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/vertical_topWarningImgi"
+        android:background="@drawable/attention"
+        android:layout_marginBottom="@dimen/verticalbottomopWarningImgi"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You have to login  "
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size"
+        android:id="@+id/textView7"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to send a quick message"
+        android:textSize="@dimen/text_size"
+        android:id="@+id/textView8"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:id="@+id/logbtn"
+        android:layout_marginTop="@dimen/vertical_margintopTextView"
+        android:layout_marginLeft="@dimen/horizontal_margin"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_gravity="center"
+        android:background="@drawable/cyan_roundrect"
+        android:textColor="#fff"
+        />
+</LinearLayout>

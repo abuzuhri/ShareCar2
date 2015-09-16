@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.amal.kronz.findaride.Signup"
+    android:orientation="vertical"
+    android:background="#fff">
+
+    <include layout="@layout/tool_bar"
+        android:id="@+id/tool_bar"/>
+
+
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="   User Name"
+        android:padding="10dp"
+        android:textDirection="ltr"
+
+        android:drawableLeft="@drawable/profile"
+        android:layout_marginTop="@dimen/vertical_margintopPage"
+        android:background="@drawable/lightgray_roundrect"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_marginLeft="@dimen/horizontal_margin"/>
+    
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:hint="   Password"
+        android:padding="10dp"
+        android:textDirection="ltr"
+
+        android:drawableLeft="@drawable/padlocknav"
+        android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+        android:background="@drawable/lightgray_roundrect"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_marginLeft="@dimen/horizontal_margin"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/re_password"
+        android:hint="   Re_Password"
+        android:padding="10dp"
+        android:textDirection="ltr"
+
+        android:drawableLeft="@drawable/padlocknav"
+        android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+        android:background="@drawable/lightgray_roundrect"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_marginLeft="@dimen/horizontal_margin"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:hint="   Email"
+        android:padding="10dp"
+        android:textDirection="ltr"
+
+        android:drawableLeft="@drawable/symbol"
+        android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+        android:background="@drawable/lightgray_roundrect"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_marginLeft="@dimen/horizontal_margin"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textColor="@color/whiteText"
+        android:background="@drawable/yallow_roundrect"
+        android:layout_marginTop="@dimen/vertical_margintopTextView"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_marginLeft="@dimen/horizontal_margin"
+
+        android:id="@+id/register" />
+
+
+
+
+
+
+</LinearLayout>
