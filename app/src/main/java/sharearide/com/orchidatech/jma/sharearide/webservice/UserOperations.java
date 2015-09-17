@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -31,11 +32,16 @@ public class UserOperations {
     }
 
     public void login(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        params.put("submit", Submit.LOGIN);
+     ///   params.put("submit", Submit.LOGIN);
         UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.LOGIN_URL, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
-                        onLoadFinished.onSuccess(o);
+                        //JSONObject jsonObject = new JSONObject(string);
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -48,12 +54,16 @@ public class UserOperations {
     }
 
     public void signUp(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        params.put("submit", Submit.SIGNUP);
+        ///params.put("submit", Submit.SIGNUP);
         UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.SIGNUP_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
-                        onLoadFinished.onSuccess(o);
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -70,7 +80,11 @@ public class UserOperations {
 
                     @Override
                     public void onResponse(JSONObject o) {
-                        onLoadFinished.onSuccess(o);
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -86,7 +100,11 @@ public class UserOperations {
         UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ALL_COUNTRIES_URL, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
-                        onLoadFinished.onSuccess(o);
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -104,7 +122,11 @@ public class UserOperations {
 
                     @Override
                     public void onResponse(JSONObject o) {
-                        onLoadFinished.onSuccess(o);
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -122,7 +144,11 @@ public class UserOperations {
 
                     @Override
                     public void onResponse(JSONObject o) {
-                        onLoadFinished.onSuccess(o);
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -139,7 +165,11 @@ public class UserOperations {
 
                     @Override
                     public void onResponse(JSONObject o) {
-                        onLoadFinished.onSuccess(o);
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -156,7 +186,11 @@ public class UserOperations {
 
                     @Override
                     public void onResponse(JSONObject o) {
-                        onLoadFinished.onSuccess(o);
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -173,7 +207,11 @@ public class UserOperations {
 
                     @Override
                     public void onResponse(JSONObject o) {
-                        onLoadFinished.onSuccess(o);
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -184,6 +222,72 @@ public class UserOperations {
                     }
 
 
+                }, params);
+    }
+
+    public void getSearchResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.SEARCH_URL, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                }, params);
+    }
+
+    public void getPublicUserInfo(Map<String,String> params, final OnLoadFinished onLoadFinished){
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.PUBLIC_USER_DATA, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+
+
+                }, params);
+    }
+
+
+    public void offer_a_ride(Map<String, String> params, final OnLoadFinished onLoadFinished)    {
+        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ADD_RIDE_URL, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
                 }, params);
     }
 /////////////////////////////////////////////////////////////////

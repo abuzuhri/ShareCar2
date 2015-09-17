@@ -65,7 +65,7 @@ public class FacebookLogin implements SocialNetwork {
     public void Login(final OnLoginListener lsnr) {
         try {
             FacebookLogin.getFacebookHashKey(activity);
-            FacebookSdk.sdkInitialize(activity.getApplicationContext());
+            //FacebookSdk.sdkInitialize(activity.getApplicationContext());
             LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile", "email"));
             callbackManager = CallbackManager.Factory.create();
             LoginManager.getInstance().registerCallback(callbackManager,

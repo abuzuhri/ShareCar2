@@ -22,6 +22,8 @@
                             sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride,
                             sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat" />
 
+        <meta-data android:name="com.facebook.FacebookActivity.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".Activity.SplashScreen"
             android:label="@string/app_name">
@@ -31,6 +33,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
         <activity android:name=".Activity.ServicesScreen"
             android:label="Services Screen"/>
        <service android:name=".Services.RefreshRideService" />

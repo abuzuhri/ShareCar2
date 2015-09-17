@@ -25,7 +25,7 @@ import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
  */
 public class RefreshRideService extends IntentService {
 
-    private static final int MAX_NUM_RIDES = 40;
+    private static final int MAX_NUM_RIDES = 200;
     private  ArrayList<Ride> allFetchedRides;
     private ArrayList<Ride> allStoredRides;
     public RefreshRideService() {
@@ -34,8 +34,13 @@ public class RefreshRideService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        allFetchedRides = new ArrayList<>();
-        allStoredRides = new ArrayList<>(RideDAO.getAllRides());
+        loadNewData();
+    }
+
+    public void loadNewData(){
+        final int MAX_NUM_RIDES = 200;
+
+        ///load data from server DB...
         UserOperations.getInstance(getApplicationContext()).getAllRides(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -54,64 +59,32 @@ public class RefreshRideService extends IntentService {
                         long date_time = mJsonObject.getLong("date_time");
                         double price = Double.parseDouble(mJsonObject.getString("price"));
                         Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
-                        allFetchedRides.add(ride);
+                        RideDAO.addNewRide(ride);
                     }
-              ///      Log.i("RefreshRideService", allFetchedRides.size()+"");
+                    ///      Log.i("RefreshRideService", allFetchedRides.size()+"");
 
-                     filterRides();
-                     refreshRides();
+
+                    ///To Ensure that max num of items in db is 200....
+                    ArrayList<Ride> allStoredRides = new ArrayList<>(RideDAO.getAllRides());
+                    int numOfRemovedRides = allStoredRides.size() - MAX_NUM_RIDES;
+                    for (int delRideIndex = 0; delRideIndex < numOfRemovedRides; delRideIndex++)
+                        RideDAO.deleteRide(allStoredRides.get(delRideIndex).getId());
 
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
             }
 
             @Override
             public void onFail(String error) {
-                    //Log.i("RefreshService" , error);
             }
         });
-              //  Log.i("RefreshRideService", "Service Running at " + System.currentTimeMillis());
-    }
 
-    private void refreshRides(){
 
-        ///remove all un-needed rides
-        if(allFetchedRides.size() < MAX_NUM_RIDES) {
-            int numOfRemovedRides = (allFetchedRides.size() + allStoredRides.size()) - MAX_NUM_RIDES;
-            Collections.reverse(allStoredRides);
-            for (int delRideIndex = 0; delRideIndex < numOfRemovedRides; delRideIndex++)
-                RideDAO.deleteRide(allStoredRides.get(delRideIndex).getId());
-        }else {
-            RideDAO.deleteAllRides();
-        }
 
-        ///add all new fetched rides to DB
-        for(int newRideIndex = 0; newRideIndex < allFetchedRides.size(); newRideIndex++)
-            try {
-                RideDAO.addNewRide(allFetchedRides.get(newRideIndex));
-            } catch (EmptyFieldException e) {
-                e.printStackTrace();
-            } catch (InvalidInputException e) {
-                e.printStackTrace();
-            }
-
-    }
-
-    private void filterRides() {
-        if(allFetchedRides.size() > MAX_NUM_RIDES)
-            allFetchedRides = new ArrayList<>(allFetchedRides.subList(0, MAX_NUM_RIDES));
-       else {
-            Iterator<Ride> iterator = allFetchedRides.iterator();
-            while (iterator.hasNext()) {
-                Ride fetchedRide = iterator.next();
-                for (Ride storedRide : allStoredRides) {
-                    if (fetchedRide.getRemoteId() == storedRide.getRemoteId()) {
-                        iterator.remove();
-                        break;
-                    }
-                }
-            }
-        }
     }
 }

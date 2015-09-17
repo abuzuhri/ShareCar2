@@ -2,11 +2,13 @@ package sharearide.com.orchidatech.jma.sharearide.Logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,9 +17,12 @@ import sharearide.com.orchidatech.jma.sharearide.Database.DAO.CountryDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
+import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnChattingListListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
 import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
 
 /**
@@ -25,7 +30,6 @@ import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
  */
 public class MainUserFunctions {
     private static String PREFS_NAME = "";
-
     private MainUserFunctions(){}
 
     public static void login(Context context,String username, String password){
@@ -34,6 +38,7 @@ public class MainUserFunctions {
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
+        Log.i("Login ", "Processing");
 
         UserOperations.getInstance(context).login(params, new OnLoadFinished() {
             @Override
@@ -42,6 +47,10 @@ public class MainUserFunctions {
                     JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                     boolean success = mJsonObject.getBoolean("login");
+                    if(success)
+                        Log.i("Login ", "Success");
+                    else
+                        Log.i("Login ", "Failed");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -49,31 +58,40 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-
+Log.i("Error", error);
             }
         });
     }
 
 
-    public static void signUp(Context context, String username, String password, String image, String address, long birthdate, String gender, String phone, String email) {
+    public static void signUp(Context context, String username, String password, String image, String address, String birthdate, String gender, String phone, String email) {
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
         params.put("img", image);
         params.put("address", address);
-        params.put("birthdate", String.valueOf(birthdate));
+        params.put("birthdate", birthdate);
         params.put("Gender", gender);
         params.put("phone", phone);
         params.put("email", email);
+        Log.i("Signup ", "Processing");
 
         UserOperations.getInstance(context).signUp(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
                     JSONArray mJsonArray = jsonObject.getJSONArray("json");
-                    JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-                    boolean success = mJsonObject.getBoolean("signup");
+                        JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                        boolean success = mJsonObject.getBoolean("signup");
+                        if(success) {
+                            Log.i("Signup ", "Success");
+                        }
+                            else {
+                            Log.i("Signup ", "Failed");
+
+                        }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -81,7 +99,7 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-
+                Log.i("SignUpError", error);
             }
         });
     }
@@ -218,7 +236,6 @@ public class MainUserFunctions {
             public void onSuccess(JSONObject jsonObject) {
                 try {
                     JSONArray mJsonArray = jsonObject.getJSONArray("json");
-                    mJsonArray = jsonObject.getJSONArray("");
                     for (int i = 0; i < mJsonArray.length(); i++) {
                         JSONObject mJsonObject = mJsonArray.getJSONObject(i);
                         long id = Long.parseLong(mJsonObject.getString("id"));
@@ -358,7 +375,6 @@ public class MainUserFunctions {
                     //store in DB
 
 
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } /*catch (EmptyFieldException e) {
@@ -369,6 +385,208 @@ public class MainUserFunctions {
                     e.printStackTrace();
                 }*/
 
+            }
+
+            @Override
+            public void onFail(String error) {
+
+            }
+        });
+    }
+    public static void find_a_ride(final OnSearchListener listener, final Context context, String item){
+        Map<String, String> params = new HashMap<>();
+        params.put("item", item);
+        final ArrayList<Ride> allMatchedRides = new ArrayList<Ride>();
+        UserOperations.getInstance(context).getSearchResult(params, new OnLoadFinished() {
+            @Override
+            public void onSuccess(JSONObject jsonObject){
+
+                JSONArray mJsonArray = null;
+                try {
+                    mJsonArray = jsonObject.getJSONArray("json");
+                    for (int i = 0; i < mJsonArray.length(); i++) {
+                        JSONObject mJsonObject = mJsonArray.getJSONObject(i);
+                        long remoteId = Long.parseLong(mJsonObject.getString("id"));
+                        long user_id = Long.parseLong(mJsonObject.getString("user_id"));
+                        String city_from = mJsonObject.getString("city_from");
+                        String city_to = mJsonObject.getString("city_to");
+                        String state_from = mJsonObject.getString("state_from");
+                        String state_to = mJsonObject.getString("state_to");
+                        String country_from = mJsonObject.getString("country_from");
+                        String country_to = mJsonObject.getString("country_to");
+                        long date_time = mJsonObject.getLong("date_time");
+                        double price = Double.parseDouble(mJsonObject.getString("price"));
+                        Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
+                        RideDAO.addNewRide(ride);
+                        allMatchedRides.add(ride);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
+                    e.printStackTrace();
+                }
+
+                ///fetch user data for all matched rides
+                    final Map<Ride, User> matchedRidesData = new HashMap<Ride, User>();
+                    Map<String, String> params = new HashMap<>();
+                    for(final Ride ride : allMatchedRides){
+                        params.put("id", String.valueOf(ride.getUserId()));
+                        UserOperations.getInstance(context).getPublicUserInfo(params, new OnLoadFinished() {
+                            @Override
+                            public void onSuccess(JSONObject jsonObject) {
+                                JSONArray mJsonArray = null;
+                                try {
+                                    mJsonArray = jsonObject.getJSONArray("json");
+                                    JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                                    User user = new User();
+                                    user.username = mJsonObject.getString("username");
+                                    user.phone = mJsonObject.getString("phone");
+                                    user.image = mJsonObject.getString("img");
+                                    matchedRidesData.put(ride, user);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFail(String error) {
+
+                            }
+                        });
+                        params.clear();
+                    }
+                    listener.onSearchFinished(matchedRidesData);
+            }
+
+            @Override
+            public void onFail(String error) {
+
+            }
+        });
+    }
+
+    public static void offerRide(Context context, final long user_id, final String city_from, final String city_to, final String state_from, final String state_to, final String country_from, final String country_to, final long date_time, final double price){
+        Map<String, String> params = new HashMap<>();
+        params.put("user_id", String.valueOf(user_id));
+        params.put("city_from", city_from);
+        params.put("city_to", city_to);
+        params.put("state_from", state_from);
+        params.put("state_to", state_to);
+        params.put("country_from", country_from);
+        params.put("country_to", country_to);
+        params.put("date_time", String.valueOf(date_time));
+        params.put("price", String.valueOf(price));
+        UserOperations.getInstance(context).offer_a_ride(params, new OnLoadFinished() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                try {
+                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
+                    JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                    long remoteId = Long.parseLong(mJsonObject.getString("id"));
+
+                    if (remoteId != -1) {
+                       /* Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
+                        RideDAO.addNewRide(ride);*/
+                        Log.i("Offer a Ride", "Succeeded");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+
+            }
+        });
+    }
+
+    public static void last_chatting_users(final Context context, final OnChattingListListener listener, final long user_id, String username, String password) {
+
+        final Map<String, String> params = new HashMap<>();
+        params.put("username", username);
+        params.put("password", password);
+
+        UserOperations.getInstance(context).getAllMessages(params, new OnLoadFinished() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                try {
+                JSONArray mJsonArray = jsonObject.getJSONArray("json");
+                final ArrayList<User> all_users = new ArrayList<User>();
+                for (int i = 0; i < mJsonArray.length(); i++) {
+                    params.clear();
+                        JSONObject mJsonObject = mJsonArray.getJSONObject(i);
+                        long id = Long.parseLong(mJsonObject.getString("id"));
+                        long sender_id = Long.parseLong(mJsonObject.getString("sender_id"));
+                        long receiver_id = Long.parseLong(mJsonObject.getString("receiver_id"));
+                        String message = mJsonObject.getString("message");
+                        long date_time = mJsonObject.getLong("date_time");
+                        ChatDAO.addNewChat(id, message, sender_id, receiver_id, date_time);
+
+                        if(sender_id != user_id)
+                            params.put("id", String.valueOf(sender_id));
+                        else
+                            params.put("id", String.valueOf(receiver_id));
+
+                    UserOperations.getInstance(context).getPublicUserInfo(params, new OnLoadFinished() {
+                        @Override
+                        public void onSuccess(JSONObject jsonObject) {
+                            try {
+                                JSONArray mJsonArray = jsonObject.getJSONArray("json");
+                                JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                                String name = mJsonObject.getString("username");
+                                String email = mJsonObject.getString("email");
+                                String phone = mJsonObject.getString("phone");
+                                String image = mJsonObject.getString("img");
+                                Long birthdate = mJsonObject.getLong("birthdate");
+                                String gender = mJsonObject.getString("Gender");
+                                UserDAO.addNewUser(Long.parseLong(params.get("id")), name, null, image, null, birthdate, gender, phone, email);
+                                User user = UserDAO.getUserById(Long.parseLong(params.get("id")));
+
+                                if(user != null) {
+                                    boolean isAdded = false;
+                                    for (User storedUser : all_users) {
+                                        if (storedUser.getRemoteId() == Long.parseLong(params.get("id"))) {
+                                            isAdded = true;
+                                            break;
+                                        }
+                                    }
+                                    if(!isAdded)
+                                        all_users.add(user);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (InvalidInputException e) {
+                                e.printStackTrace();
+                            } catch (EmptyFieldException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFail(String error) {
+
+                        }
+                    });
+                    listener.onChattingListRefreshed(all_users);
+
+                }
+
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

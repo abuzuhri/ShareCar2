@@ -218,11 +218,14 @@ public class RideDAO {
     }
 
     public static Ride getRideById(long rideId) {
-        return new Select().from(Ride.class).where("RideId = ?", rideId).executeSingle();
+      //  return new Select().from(Ride.class).where("RideId = ?", rideId).executeSingle();
+        return Ride.load(Ride.class, rideId);
     }
-
+    public static Ride getRideByRemoteId(long rideRemoteId) {
+         return new Select().from(Ride.class).where("remoteId = ?", rideRemoteId).executeSingle();
+    }
     public static List<Ride> getAllRides() {
-        return new Select().from(Ride.class).orderBy("DateTime DESC").execute();
+        return new Select().from(Ride.class).orderBy("DateTime ASC").execute();
     }
 
     public static Ride searchForRide(long rideId) {

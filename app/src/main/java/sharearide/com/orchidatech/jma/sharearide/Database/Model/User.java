@@ -18,6 +18,59 @@ public class User extends Model {
     @Column(name = "remote_id", unique = true)
     public long remoteId;
 
+    public User(long remoteId, String name, String username, String password, String image, String phone, String email, String address, long birthdate, String gender) {
+        this.remoteId = remoteId;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.image = image;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.birthdate = birthdate;
+        this.gender = gender;
+    }
+
+    public long getRemoteId() {
+        return remoteId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public long getBirthdate() {
+        return birthdate;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
     @Column(name = "Name")
     public String name;
 

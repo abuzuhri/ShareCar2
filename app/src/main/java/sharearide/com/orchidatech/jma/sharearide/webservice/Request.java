@@ -12,7 +12,6 @@ import java.util.Map;
  * Created by Bahaa on 8/9/2015.
  */
 public class Request extends JsonObjectRequest {
-
     private Map<String, String> params;
 
     public Request(int method, String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> params) {

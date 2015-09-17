@@ -7,9 +7,11 @@ import java.util.List;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
+import sharearide.com.orchidatech.jma.sharearide.Model.SocialUser;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmailValidator;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoginListener;
 
 /**
  * Created by Shadow on 9/6/2015.
@@ -57,7 +59,13 @@ public class UserDAO {
     }
 
     //</editor-fold>
-
+    public static void addNewSocialUser(SocialUser socialUser){
+        User user = new User();
+        user.email = socialUser.getEmail();
+        user.image = socialUser.getAvatarURL();
+        user.username = socialUser.getName();
+        user.save();
+    }
 
     public static long addNewUser(long userId, String username, String password, String image,
                                   String address, long birthdate, String gender, String phone, String email)

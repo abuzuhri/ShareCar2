@@ -8,8 +8,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
+import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.FacebookLogin;
 import sharearide.com.orchidatech.jma.sharearide.Logic.GooglePlusLogin;
+import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
+import sharearide.com.orchidatech.jma.sharearide.Model.SocialUser;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoginListener;
 
 /**
  * Created by Shadow on 8/30/2015.
@@ -80,7 +84,19 @@ public class Login extends AppCompatActivity {
         FacebookLogin facebookLogin = new FacebookLogin(this);
         boolean isLoggedIn = facebookLogin.isLoggedIn();
         if (!isLoggedIn) {
-            //facebookLogin.Login();
+            facebookLogin.Login(new OnLoginListener() {
+                @Override
+                public void onSuccess(SocialUser socialUser) {
+                    //UserDAO.addNewSocialUser(socialUser);
+///                    MainUserFunctions.signUp(getApplicationContext(), socialUser.getName(), null, socialUser.getAvatarURL(), null, null, null, null, socialUser.getEmail());
+
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+            });
         }
     }
 
@@ -93,7 +109,18 @@ public class Login extends AppCompatActivity {
         GooglePlusLogin googlePlusLogin = new GooglePlusLogin(this);
         boolean isLoggedIn = googlePlusLogin.isLoggedIn();
         if (!isLoggedIn) {
-            //googlePlusLogin.Login();
+                 googlePlusLogin.Login(new OnLoginListener() {
+                @Override
+                public void onSuccess(SocialUser socialUser) {
+                  ///  UserDAO.addNewSocialUser(socialUser);
+                  //  MainUserFunctions.signUp(getApplicationContext(), socialUser.getName(), null, socialUser.getAvatarURL(), null, null, null, null, socialUser.getEmail());
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+            });
         }
     }
 

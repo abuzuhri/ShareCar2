@@ -3,6 +3,7 @@ package sharearide.com.orchidatech.jma.sharearide.Database;
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Configuration;
 import com.activeandroid.app.Application;
+import com.facebook.FacebookSdk;
 
 /**
  * Created by Shadow on 9/6/2015.
@@ -23,6 +24,7 @@ public class App extends Application {
         //configBuilder.addModelClasses(Ride.class, User.class, Chat.class);
 
         ActiveAndroid.initialize(this);
+        FacebookSdk.sdkInitialize(getApplicationContext());
     }
 
     @Override
