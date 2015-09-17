@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import sharearide.com.orchidatech.jma.sharearide.Logic.DriverInfo;
+import sharearide.com.orchidatech.jma.sharearide.R;
 
 
 /**
@@ -17,7 +18,7 @@ public class MoreInfoDriver extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.more_info);
+      // setContentView(R.layout.more_info);
     }
 
     public void moreInfoClicked(View view) {

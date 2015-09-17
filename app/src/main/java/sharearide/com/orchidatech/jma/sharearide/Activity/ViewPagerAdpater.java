@@ -1,7 +1,7 @@
-package findaride;
+package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 /**
- * Created by Amal on 9/16/2015.
+ * Created by Amal on 9/17/2015.
  */
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,7 +28,7 @@ class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         if(position == 0) // if the position is 0 we are returning the First tab
         {
-            FindRide tab1 = new FindRide();
+          FindRide tab1 = new FindRide();
             return tab1;
         }
         else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab

@@ -43,15 +43,64 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener
 import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
 
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
+
 public class ServicesScreen extends AppCompatActivity implements View.OnClickListener {
 
-    Button login, findRide, offerRide;
+    Button  findRide, offerRide;
     private static final long INITIAL_SERVICE_DELAY = 60 * 1000L;//FOR ONE MINUTE
     private Timer mTimer;
+    private ImageView logo;
+    private ImageView imageView2;
+    private Button  login,find_ride_btn , offer_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_services);
+        setContentView(R.layout.main);
+        logo=(ImageView)findViewById(R.id.logo);
+
+        Display display=getWindowManager().getDefaultDisplay();
+        int height=display.getHeight();
+        int width=display.getWidth();
+        logo.getLayoutParams().height=(int)(height*0.35);
+        logo.getLayoutParams().width
+                =(int)(width*0.45);
+
+        login=(Button)findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ServicesScreen.this,Login.class);
+                startActivity(i);
+            }
+        });
+
+        find_ride_btn=(Button)findViewById(R.id.find_ride_btn);
+        find_ride_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ServicesScreen.this,ResetPassword.class);
+                startActivity(i);
+            }
+        });
+        offer_btn=(Button)findViewById(R.id.offer_btn);
+        offer_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ServicesScreen.this,Logout.class);
+                startActivity(i);
+            }
+        });
+
 
         /*
         login = (Button) findViewById(R.id.button_login_main);
@@ -124,10 +173,10 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, Login.class));
 
         } else if (v.getId() == R.id.button_findRide_main) {
-            startActivity(new Intent(this, FindRide.class));
+            startActivity(new Intent(this, ShareRide.class));
 
         } else if (v.getId() == R.id.button_offerRide_main) {
-            startActivity(new Intent(this, OfferRide.class));
+            startActivity(new Intent(this, ShareRide.class));
         }
         */
     }

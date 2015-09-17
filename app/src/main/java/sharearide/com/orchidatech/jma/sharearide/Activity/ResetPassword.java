@@ -1,29 +1,50 @@
-package findaride;
+package sharearide.com.orchidatech.jma.sharearide.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import sharearide.com.orchidatech.jma.sharearide.R;
 
 
-public class Map extends ActionBarActivity {
+public class ResetPassword extends ActionBarActivity {
+private Button CancleBtn,SendBtn;
     private Toolbar tool_bar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.map);
-
+        setContentView(R.layout.reset_password);
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
 
+        CancleBtn=(Button)findViewById(R.id.CancleBtn);
+        CancleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ResetPassword.this,Inbox.class);
+                startActivity(i);
+            }
+        });
+
+        SendBtn=(Button)findViewById(R.id.SendBtn);
+        SendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ResetPassword.this,NewUser.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_map, menu);
+        getMenuInflater().inflate(R.menu.menu_reset_password, menu);
         return true;
     }
 

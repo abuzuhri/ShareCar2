@@ -1,5 +1,5 @@
 
-package findaride;
+package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,7 +35,7 @@ public class Logout extends ActionBarActivity {
         find_ride_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Logout.this,Signup.class);
+                Intent i=new Intent(Logout.this,NewUser.class);
                 startActivity(i);
             }
         });

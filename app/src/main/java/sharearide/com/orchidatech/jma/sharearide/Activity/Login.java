@@ -3,8 +3,13 @@ package sharearide.com.orchidatech.jma.sharearide.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
@@ -13,6 +18,7 @@ import sharearide.com.orchidatech.jma.sharearide.Logic.FacebookLogin;
 import sharearide.com.orchidatech.jma.sharearide.Logic.GooglePlusLogin;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.Model.SocialUser;
+import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoginListener;
 
 /**
@@ -21,14 +27,71 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoginListener;
 public class Login extends AppCompatActivity {
 
     EditText editText_username, editText_password, editText_retreivePassword;
-
     UserDAO userDAO;
 
+    private ImageView logo;
+    private Button signUpbtn,resetPwbtn;
+    private ImageButton fBbtn,gplusbtn,Gobtnx;
+    private Toolbar tool_bar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
         setContentView(R.layout.login);
+        tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        setSupportActionBar(tool_bar);
+
+        logo=(ImageView)findViewById(R.id.logo);
+        fBbtn=(ImageButton)findViewById(R.id.fBbtn);
+        gplusbtn=(ImageButton)findViewById(R.id.gplusbtn);
+        Gobtnx=(ImageButton)findViewById(R.id.Gobtnx);
+        signUpbtn=(Button)findViewById(R.id.signUpbtn);
+        resetPwbtn=(Button)findViewById(R.id.resetPwbtn);
+
+        signUpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i=new Intent(Login.this, NewUser.class);
+                startActivity(i);
+            }
+        });
+
+        resetPwbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i=new Intent(Login.this, ResetPassword.class);
+                startActivity(i);
+            }
+        });
+
+
+
+
+        Display display=getWindowManager().getDefaultDisplay();
+        int height=display.getHeight();
+        int width=display.getWidth();
+        logo.getLayoutParams().height=(int)(height*0.3);
+        logo.getLayoutParams().width =(int)(width*0.35);
+
+        fBbtn.getLayoutParams().height=(int)(height*0.09);
+        fBbtn.getLayoutParams().width =(int)(width*0.15);
+
+        gplusbtn.getLayoutParams().height=(int)(height*0.09);
+        gplusbtn.getLayoutParams().width =(int)(width*0.15);
+
+        Gobtnx.getLayoutParams().height=(int)(height*0.12);
+        Gobtnx.getLayoutParams().width =(int)(width*0.2);
+
+        Gobtnx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(Login.this, ShareRide.class);
+                startActivity(i);
+            }
+        });
+
+        /*
 
         // components inflation goes here..
          editText_username = (EditText) findViewById(R.id.editText_username);
@@ -47,7 +110,7 @@ public class Login extends AppCompatActivity {
     private void verifyLogin(String username, String password) {
 
         if (userDAO.signIn(username, password)) {
-            startActivity(new Intent(this, FindRide.class));
+            startActivity(new Intent(this, ShareRide.class));
         } else {
             Toast.makeText(this, "Please check your username and password !", Toast.LENGTH_SHORT).show();
         }

@@ -1,4 +1,4 @@
-package findaride;
+package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.R;
 import android.content.Context;

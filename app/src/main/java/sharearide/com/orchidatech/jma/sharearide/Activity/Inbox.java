@@ -1,4 +1,4 @@
-package findaride;
+package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import com.melnykov.fab.FloatingActionButton;
 
 import sharearide.com.orchidatech.jma.sharearide.R;
 

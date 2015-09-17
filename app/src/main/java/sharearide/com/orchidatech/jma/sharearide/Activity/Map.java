@@ -1,50 +1,31 @@
-package findaride;
+package sharearide.com.orchidatech.jma.sharearide.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+
+import sharearide.com.orchidatech.jma.sharearide.R;
 
 
-public class Warning extends ActionBarActivity {
-private Button logbtn;
-    private ImageView warn;
+public class Map extends ActionBarActivity {
     private Toolbar tool_bar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.warning);
+        setContentView(R.layout.map);
 
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
 
-        warn=(ImageView)findViewById(R.id.warn);
-        Display display=getWindowManager().getDefaultDisplay();
-        int height=display.getHeight();
-        int width=display.getWidth();
-        warn.getLayoutParams().height=(int)(height*0.2);
-        warn.getLayoutParams().width =(int)(width*0.4);
-
-        logbtn=(Button)findViewById(R.id.logbtn);
-        logbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =new Intent(Warning.this,Map.class);
-                startActivity(i);
-            }
-        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_warning, menu);
+        getMenuInflater().inflate(R.menu.menu_map, menu);
         return true;
     }
 

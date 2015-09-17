@@ -1,9 +1,14 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+
+import sharearide.com.orchidatech.jma.sharearide.R;
 
 
 /**
@@ -11,11 +16,27 @@ import android.widget.EditText;
  */
 public class NewUser extends AppCompatActivity {
 
-    EditText editText_username, editText_password, editText_repassword, editText_email;
+    private Toolbar tool_bar;
+    private EditText username;
+    private Button register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.signup);
+        tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        setSupportActionBar(tool_bar);
+        register = (Button) findViewById(R.id.register);
+        username = (EditText) findViewById(R.id.username);
+
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(NewUser.this, Login.class);
+                startActivity(i);
+            }
+        });
         /*
         setContentView(R.layout.new_user);
 
@@ -61,7 +82,7 @@ public class NewUser extends AppCompatActivity {
             e.printStackTrace();
         }
         if (userId != 0) {
-            Intent intent = new Intent(NewUser.this, FindRide.class);
+            Intent intent = new Intent(NewUser.this, FindaRide.class);
             startActivity(intent);
         } else {
             Toast.makeText(NewUser.this, "Failed to create new user !", Toast.LENGTH_SHORT).show();
