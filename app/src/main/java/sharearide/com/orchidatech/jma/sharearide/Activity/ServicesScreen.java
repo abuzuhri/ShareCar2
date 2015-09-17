@@ -177,80 +177,16 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
                 if(status)
                     MainUserFunctions.find_a_ride(listener, context, item);
                 else
-                    Toast.makeText(context, "No Internet Access..", Toast.LENGTH_LONG).show();
+                    listener.onSearchFailed("No Internet Access..");
             }
         });;
     }
 
     /////Called when last item in listview accessed....
-    public void loadNewData(final OnRidesListListener listener){
-        final int MAX_NUM_RIDES = 200;
-
-       //view loading progress...
-
-         ///load data from server DB...
-        UserOperations.getInstance(getApplicationContext()).getAllRides(new OnLoadFinished() {
-            @Override
-            public void onSuccess(JSONObject jsonObject) {
-                try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
-                    for (int i = 0; i < mJsonArray.length(); i++) {
-                        JSONObject mJsonObject = mJsonArray.getJSONObject(i);
-                        long remoteId = Long.parseLong(mJsonObject.getString("id"));
-                        long user_id = Long.parseLong(mJsonObject.getString("user_id"));
-                        String city_from = mJsonObject.getString("city_from");
-                        String city_to = mJsonObject.getString("city_to");
-                        String state_from = mJsonObject.getString("state_from");
-                        String state_to = mJsonObject.getString("state_to");
-                        String country_from = mJsonObject.getString("country_from");
-                        String country_to = mJsonObject.getString("country_to");
-                        long date_time = mJsonObject.getLong("date_time");
-                        double price = Double.parseDouble(mJsonObject.getString("price"));
-                        Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
-                        RideDAO.addNewRide(ride);
-                    }
-
-                    ///To Ensure that max num of items in db is MAX_NUM_RIDES....
-                    final ArrayList<Ride> allStoredRides = new ArrayList<>(RideDAO.getAllRides());
-                    int numOfRemovedRides = allStoredRides.size() - MAX_NUM_RIDES;
-                    for (int delRideIndex = 0; delRideIndex < numOfRemovedRides; delRideIndex++)
-                        RideDAO.deleteRide(allStoredRides.get(delRideIndex).getId());
-
-                   ArrayList<Ride> adapterList = new ArrayList<Ride>(); // list of items used by listview adapter
-
-                    //To add all new items in DB to listview
-                    for(Ride storedRide : RideDAO.getAllRides()){
-                        boolean isFoundInListView = false;
-                        for(Ride listRide : adapterList){
-                            if(storedRide.getRemoteId() == listRide.getRemoteId()){
-                               isFoundInListView = true;
-                                break;
-                            }
-                        }
-                        if(!isFoundInListView)
-                            adapterList.add(storedRide);
-                    }
-                    /// To synchronize listview with local DB, remove from list if it's size exceeded MAX_NUM_RIDES
-                // adapterList = (adapterList.size()> MAX_NUM_RIDES)?(ArrayList<Ride>) adapterList.subList(adapterList.size()-MAX_NUM_RIDES, adapterList.size()): adapterList;
-
-                        //hide loading progress....
-                    listener.onRidesRefresh();/// refresh listview
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (EmptyFieldException e) {
-                    e.printStackTrace();
-                } catch (InvalidInputException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFail(String error) {
-                //hide loading progress....
-            }
-        });
-
+    public void loadNewRides(Context context, final OnRidesListListener listener){
+             MainUserFunctions.get_a_rides(context, listener);
     }
+
     public void offerRide(final Context context,  final long user_id,  final String city_from,  final String city_to,  final String state_from,  final String state_to,  final String country_from,  final String country_to,  final long date_time,  final double price)
         {
             InternetConnectionChecker.isConnectedToInternet(new OnInternetConnectionListener() {

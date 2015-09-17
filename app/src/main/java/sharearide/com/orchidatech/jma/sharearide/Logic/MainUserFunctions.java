@@ -22,6 +22,7 @@ import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnChattingListListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRidesListListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
 import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
 
@@ -31,6 +32,7 @@ import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
 public class MainUserFunctions {
     private static String PREFS_NAME = "";
     private MainUserFunctions(){}
+    final static int MAX_NUM_RIDES = 200;
 
     public static void login(Context context,String username, String password){
 
@@ -105,7 +107,8 @@ Log.i("Error", error);
     }
 
 
-    public  static void getAllRides(Context context) {
+    public  static void get_a_rides(Context context, final OnRidesListListener listener) {
+        final ArrayList<Ride> newItems = new ArrayList<Ride>(); // list of new items...
         UserOperations.getInstance(context).getAllRides(new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -113,7 +116,7 @@ Log.i("Error", error);
                     JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     for (int i = 0; i < mJsonArray.length(); i++) {
                         JSONObject mJsonObject = mJsonArray.getJSONObject(i);
-                        long id = Long.parseLong(mJsonObject.getString("id"));
+                        long remoteId = Long.parseLong(mJsonObject.getString("id"));
                         long user_id = Long.parseLong(mJsonObject.getString("user_id"));
                         String city_from = mJsonObject.getString("city_from");
                         String city_to = mJsonObject.getString("city_to");
@@ -125,7 +128,7 @@ Log.i("Error", error);
                         double price = Double.parseDouble(mJsonObject.getString("price"));
 
                         // Store in DB
-                        Ride ride = null;
+              /*          Ride ride = null;
 
                         ride.remoteId = id;
                         ride.userId = user_id;
@@ -136,9 +139,13 @@ Log.i("Error", error);
                         ride.toState = state_to;
                         ride.toCountry = country_to;
                         ride.dateTime = date_time;
-                        ride.cost = price;
+                        ride.cost = price;*/
+                      Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
+                        RideDAO.addNewRide(ride);
+                        newItems.add(ride);
 
                         RideDAO.addNewRide(ride);
+                        newItems.add(ride);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -149,6 +156,12 @@ Log.i("Error", error);
                     e.displayMessage();
                     e.printStackTrace();
                 }
+                ///To Ensure that max num of items in db is MAX_NUM_RIDES....
+                final ArrayList<Ride> allStoredRides = new ArrayList<>(RideDAO.getAllRides());
+                int numOfRemovedRides = allStoredRides.size() - MAX_NUM_RIDES;
+                for (int delRideIndex = 0; delRideIndex < numOfRemovedRides; delRideIndex++)
+                    RideDAO.deleteRide(allStoredRides.get(delRideIndex).getId());
+                listener.onRidesRefresh(newItems);/// refresh listview
             }
 
             @Override
@@ -460,7 +473,7 @@ Log.i("Error", error);
                         });
                         params.clear();
                     }
-                    listener.onSearchFinished(matchedRidesData);
+                    listener.onSearchSucceed(matchedRidesData);
             }
 
             @Override
