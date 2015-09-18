@@ -56,7 +56,7 @@ import android.widget.ImageView;
 
 public class ServicesScreen extends AppCompatActivity implements View.OnClickListener {
 
-    Button  findRide, offerRide;
+  Button  findRide, offerRide;
     private static final long INITIAL_SERVICE_DELAY = 60 * 1000L;//FOR ONE MINUTE
     private Timer mTimer;
     private ImageView logo;
@@ -65,8 +65,8 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        logo=(ImageView)findViewById(R.id.logo);
+       // setContentView(R.layout.main);
+       /* logo=(ImageView)findViewById(R.id.logo);
 
         Display display=getWindowManager().getDefaultDisplay();
         int height=display.getHeight();
@@ -100,7 +100,7 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
                 startActivity(i);
             }
         });
-
+*/
 
         /*
         login = (Button) findViewById(R.id.button_login_main);
@@ -173,10 +173,10 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, Login.class));
 
         } else if (v.getId() == R.id.button_findRide_main) {
-            startActivity(new Intent(this, ShareRide.class));
+            startActivity(new Intent(this, FindRide.class));
 
         } else if (v.getId() == R.id.button_offerRide_main) {
-            startActivity(new Intent(this, ShareRide.class));
+            startActivity(new Intent(this, OfferRide.class));
         }
         */
     }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sharearide.com.orchidatech.jma.sharearide">
+    package="sharearide.com.orchidatech.jma.sharearide" >
 
     <application
         android:name=".Database.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
 
-        <!--  metadata for version and database name -->
+        <!-- metadata for version and database name -->
         <meta-data
             android:name="AA_DB_NAME"
             android:value="sharearide.db" />
@@ -18,78 +18,69 @@
             android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="sharearide.com.orchidatech.jma.sharearide.Database.Model.User,
-                            sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride,
-                            sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat" />
-
+            android:value="sharearide.com.orchidatech.jma.sharearide.Database.Model.User,                             sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride,                             sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat" />
         <meta-data
             android:name="com.facebook.FacebookActivity.sdk.ApplicationId"
-
             android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".Activity.SplashScreen"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category
-                    android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
-
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".Activity.ServicesScreen"
-            android:label="Services Screen"/>
-       <service
-           android:name=".Services.RefreshRideService" />
+            android:label="Services Screen" />
+
+        <service android:name=".Services.RefreshRideService" />
 
         <activity
             android:name=".Activity.NewUser"
             android:label="@string/title_activity_signup" />
-
         <activity
             android:name=".Activity.Login"
             android:label="@string/title_activity_login" />
-
         <activity
             android:name=".Activity.SearchResult"
             android:label="@string/title_activity_search_result" />
-
         <activity
             android:name=".Activity.Logout"
             android:label="@string/title_activity_logout" />
-
         <activity
             android:name=".Activity.ResetPassword"
             android:label="@string/title_activity_reset_password" />
-
         <activity
             android:name=".Activity.Inbox"
             android:label="@string/title_activity_inbox" />
-
         <activity
             android:name=".Activity.Warning"
             android:label="@string/title_activity_warning" >
         </activity>
-
         <activity
             android:name=".Activity.Map"
             android:label="@string/title_activity_map" >
         </activity>
-
         <activity
             android:name=".Activity.ShareRide"
             android:label="@string/title_activity_share_ride" >
         </activity>
-
+        <activity
+            android:name=".Activity.Main"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name=".Activity.Save_info"
+            android:label="@string/title_activity_save_info" >
+        </activity>
     </application>
-
 
 </manifest>

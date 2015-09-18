@@ -20,4 +20,5 @@
     <string name="title_activity_map">Map</string>
     <string name="title_activity_search_result">SearchResult</string>
     <string name="title_activity_share_ride">ShareRide</string>
+    <string name="title_activity_save_info">Save_info</string>
 </resources>

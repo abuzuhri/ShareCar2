@@ -1,5 +1,5 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
-import android.content.Intent;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,32 +7,18 @@ import android.view.MenuItem;
 
 import sharearide.com.orchidatech.jma.sharearide.R;
 
-
-public class SplashScreen extends ActionBarActivity {
+public class Save_info extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen);
-        Thread t=new Thread(){
-            public  void run(){
-                try {
-                    sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Intent i=new Intent(SplashScreen.this,Main.class);
-                startActivity(i);
-            }
-        };
-        t.start();
+        setContentView(R.layout.save_info);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_splash_screen, menu);
+        getMenuInflater().inflate(R.menu.menu_save_info, menu);
         return true;
     }
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context="com.amal.kronz.findaride.Inbox"
+    tools:context="sharearide.com.orchidatech.jma.sharearide.Activity.Inbox"
     android:orientation="vertical">
 
     <LinearLayout

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.amal.kronz.findaride.Map"
+    tools:context="sharearide.com.orchidatech.jma.sharearide.Activity.Map"
     android:orientation="vertical"
     android:background="#fff">
 

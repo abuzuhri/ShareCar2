@@ -8,7 +8,7 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    tools:context=".splashScreen"
+    tools:context="sharearide.com.orchidatech.jma.sharearide.Activity.splashScreen"
     android:background="@drawable/main"
     android:orientation="vertical">
 

@@ -1,10 +1,18 @@
-
 package sharearide.com.orchidatech.jma.sharearide.Activity;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import sharearide.com.orchidatech.jma.sharearide.R;
+
+
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,38 +20,52 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import sharearide.com.orchidatech.jma.sharearide.R;
+import java.util.Timer;
 
 
-public class Logout extends AppCompatActivity {
+public class Main extends ActionBarActivity{
+
+    Button  findRide, offerRide;
+    private static final long INITIAL_SERVICE_DELAY = 60 * 1000L;//FOR ONE MINUTE
+    private Timer mTimer;
     private ImageView logo;
-    private Button find_ride_btn,logout_Btn;
-
+    private ImageView imageView2;
+    private Button  login,find_ride_btn , offer_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.logout);
-        logo=(ImageView)findViewById(R.id.logo);
+        setContentView(R.layout.main);
+      logo=(ImageView)findViewById(R.id.logo);
+
         Display display=getWindowManager().getDefaultDisplay();
         int height=display.getHeight();
         int width=display.getWidth();
         logo.getLayoutParams().height=(int)(height*0.35);
         logo.getLayoutParams().width
                 =(int)(width*0.45);
-        logout_Btn=(Button)findViewById(R.id.logout_Btn);
+
+        login=(Button)findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Main.this,Login.class);
+                startActivity(i);
+            }
+        });
 
         find_ride_btn=(Button)findViewById(R.id.find_ride_btn);
         find_ride_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Logout.this,NewUser.class);
+                Intent i=new Intent(Main.this,ResetPassword.class);
                 startActivity(i);
             }
         });
-        logout_Btn.setOnClickListener(new View.OnClickListener() {
+        offer_btn=(Button)findViewById(R.id.offer_btn);
+        offer_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Logout.this,SearchResult.class);
+                Intent i=new Intent(Main.this,Logout.class);
                 startActivity(i);
             }
         });
@@ -52,7 +74,7 @@ public class Logout extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
