@@ -27,8 +27,8 @@
             android:layout_marginLeft="20dp"/>
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:id="@+id/close_btn"
             android:layout_marginTop="10dp"
             android:background="@drawable/close"

@@ -31,13 +31,13 @@ public class Warning extends ActionBarActivity {
         int height=display.getHeight();
         int width=display.getWidth();
         warn.getLayoutParams().height=(int)(height*0.2);
-        warn.getLayoutParams().width =(int)(width*0.4);
+        warn.getLayoutParams().width =(int)(width*0.3);
 
         logbtn=(Button)findViewById(R.id.logbtn);
         logbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(Warning.this, Map.class);
+                Intent i =new Intent(Warning.this, Login.class);
                 startActivity(i);
             }
         });

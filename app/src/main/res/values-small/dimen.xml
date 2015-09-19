@@ -5,8 +5,8 @@
 
     <dimen name="horizontal_margin">50dp</dimen>
 
-    <dimen name="vertical_margintopPage">100dp</dimen>
-    <dimen name="vertical_margintopTextView">90dp</dimen>
+    <dimen name="vertical_margintopPage">70dp</dimen>
+    <dimen name="vertical_margintopTextView">30dp</dimen>
     <dimen name="vertical_margin_btwn_view">5dp</dimen>
     <dimen name="vertical_logoTop">30dp</dimen>
 
@@ -24,5 +24,12 @@
     <dimen name="date_marginRight">20dp</dimen>
     <dimen name="date_marginTop">10dp</dimen>
     <dimen name="CardView_marginTop">10dp</dimen>
+
+
+    <dimen name="vertical_margin">20dp</dimen>
+    <dimen name="horizontal_marginLeft">30dp</dimen>
+
+    <dimen name="tab_height">40dp</dimen>
+
 
 </resources>

@@ -33,7 +33,7 @@ public class NewUser extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(NewUser.this, Login.class);
+                Intent i = new Intent(NewUser.this, SearchResult.class);
                 startActivity(i);
             }
         });

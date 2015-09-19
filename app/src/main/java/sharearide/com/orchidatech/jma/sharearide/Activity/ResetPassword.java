@@ -26,7 +26,7 @@ private Button CancleBtn,SendBtn;
         CancleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ResetPassword.this,Inbox.class);
+                Intent i = new Intent(ResetPassword.this,Login.class);
                 startActivity(i);
             }
         });
@@ -35,7 +35,7 @@ private Button CancleBtn,SendBtn;
         SendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(ResetPassword.this,NewUser.class);
+                Intent i=new Intent(ResetPassword.this,Main.class);
                 startActivity(i);
             }
         });

@@ -57,7 +57,7 @@ public class Main extends ActionBarActivity{
         find_ride_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Main.this,ResetPassword.class);
+                Intent i=new Intent(Main.this,ShareRide.class);
                 startActivity(i);
             }
         });

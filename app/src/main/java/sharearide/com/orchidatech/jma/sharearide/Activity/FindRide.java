@@ -16,20 +16,21 @@ import android.widget.Button;
 
 import sharearide.com.orchidatech.jma.sharearide.R;
 
-
 public class FindRide extends Fragment {
 private Button save,more_info;
     private Context context;
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.find_ride,container,false);
         save=(Button)v.findViewById(R.id.save);
         more_info=(Button)v.findViewById(R.id.more_info);
 
-        save.setOnClickListener(new View.OnClickListener() {
+ save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(context,Save_info.class);
+                Intent i=new Intent(getActivity(),Save_info.class);
                 startActivity(i);
             }
         });
@@ -37,8 +38,8 @@ private Button save,more_info;
         more_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent i = new Intent(context, Save_info.class);
-               // startActivity(i);
+              Intent i = new Intent(getActivity(),MoreInfo.class);
+              startActivity(i);
             }
         });
         return v;

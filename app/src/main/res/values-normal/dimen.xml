@@ -6,10 +6,12 @@
     <dimen name="horizontal_margin">50dp</dimen>
     <dimen name="vertical_margintopPage">90dp</dimen>
     <dimen name="vertical_margintopTextView">40dp</dimen>
-    <dimen name="vertical_margin_btwn_view">10dp</dimen>
-    <dimen name="vertical_logoTop">30dp</dimen>
-    <dimen name="vertical_logoBottom">5dp</dimen>
+    <dimen name="vertical_margin_btwn_view">5dp</dimen>
+
+    <dimen name="vertical_logoTop">40dp</dimen>
+    <dimen name="vertical_logoBottom">20dp</dimen>
     <dimen name="vertical_topBtn">10dp</dimen>
+
     <dimen name="horizontal_BTW_Btn">60dp</dimen>
 
     <dimen name="vertical_topWarningImgi">60dp</dimen>
@@ -22,6 +24,12 @@
     <dimen name="date_marginRight">10dp</dimen>
     <dimen name="date_marginTop">15dp</dimen>
     <dimen name="CardView_marginTop">15dp</dimen>
+
+    <dimen name="vertical_margin">30dp</dimen>
+    <dimen name="horizontal_marginLeft">40dp</dimen>
+
+    <dimen name="tab_height">50dp</dimen>
+
 
 
 

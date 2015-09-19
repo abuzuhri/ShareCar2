@@ -1,6 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context="com.amal.kronz.findaride.Warning">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.amal.kronz.findaride.Warning">
 
 
     <item
@@ -10,5 +11,6 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="ifRoom"
         ></item>
+
 
 </menu>

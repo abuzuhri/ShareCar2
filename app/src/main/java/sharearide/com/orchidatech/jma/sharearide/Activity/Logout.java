@@ -17,7 +17,8 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 
 public class Logout extends AppCompatActivity {
     private ImageView logo;
-    private Button find_ride_btn,logout_Btn;
+    private Button find_ride_btn,logout_Btn,offer_btn;
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +32,29 @@ public class Logout extends AppCompatActivity {
         logo.getLayoutParams().width
                 =(int)(width*0.45);
         logout_Btn=(Button)findViewById(R.id.logout_Btn);
-
+        offer_btn=(Button)findViewById(R.id.offer_btn);
         find_ride_btn=(Button)findViewById(R.id.find_ride_btn);
-        find_ride_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(Logout.this,NewUser.class);
-                startActivity(i);
-            }
-        });
+
         logout_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Logout.this,SearchResult.class);
+                Intent i=new Intent(Logout.this,Main.class);
+                startActivity(i);
+            }
+        });
+
+        find_ride_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Logout.this,ShareRide.class);
+                startActivity(i);
+            }
+        });
+
+        offer_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Logout.this,ShareRide.class);
                 startActivity(i);
             }
         });

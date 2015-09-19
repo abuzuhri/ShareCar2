@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#fff">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,21 +21,22 @@
             android:id="@+id/textView"
             android:textColor="#000"
             android:gravity="center"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"/>
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:layout_marginTop="@dimen/vertical_margin"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginBottom="@dimen/date_marginTop"
             >
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imageView6"
                 android:background="@drawable/city_icon"
                 android:layout_gravity="left|center"/>
@@ -57,12 +59,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imagaew6"
                 android:background="@drawable/flagg"
                 android:layout_gravity="left|center"/>
@@ -76,8 +78,7 @@
                 android:padding="10dp"
                 android:textDirection="ltr"
                 android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
-                />
+                android:layout_marginRight="@dimen/horizontal_margin"                />
 
         </LinearLayout>
 
@@ -85,12 +86,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imageVieew6"
                 android:background="@drawable/country_icon"
                 android:layout_gravity="left|center"/>
@@ -114,12 +115,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
-            android:layout_marginBottom="@dimen/date_marginTop">
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:layout_marginBottom="@dimen/vertical_margin">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imagew6"
                 android:background="@drawable/time_icon"
                 android:layout_gravity="left|center"/>
@@ -141,13 +142,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/imagesew6"
+            android:id="@+id/imageViews"
             android:background="@drawable/line"
             android:layout_marginLeft="@dimen/horizontal_margin"
-            android:layout_marginRight="@dimen/horizontal_margin"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="15dp"/>
-
+            android:layout_marginBottom="@dimen/vertical_margin"/>
 
 
         <TextView
@@ -160,22 +158,20 @@
             android:id="@+id/textView1"
             android:textColor="#000"
             android:gravity="center"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"
-            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop"
             >
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imageVie5"
                 android:background="@drawable/city_icon"
                 android:layout_gravity="left|center"/>
@@ -198,12 +194,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imagae"
                 android:background="@drawable/flagg"
                 android:layout_gravity="left|center"/>
@@ -225,12 +221,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imageV6"
                 android:background="@drawable/country_icon"
                 android:layout_gravity="left|center"/>
@@ -256,8 +252,8 @@
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imasgew6"
                 android:background="@drawable/date_icon"
                 android:layout_gravity="left|center"/>
@@ -275,16 +271,6 @@
                 />
 
         </LinearLayout>
-
-
-
-
-
-
-
-
-
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -292,13 +278,11 @@
             android:id="@+id/search"
             android:background="#ff9d1e"
             android:gravity="center"
-            android:padding="5dp"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginBottom="0dp"
             android:textStyle="bold"
             android:textColor="@color/whiteText"
             />
-
 
     </LinearLayout>
 </ScrollView>

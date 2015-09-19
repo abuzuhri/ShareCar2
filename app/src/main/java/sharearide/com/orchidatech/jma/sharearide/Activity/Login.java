@@ -47,6 +47,15 @@ public class Login extends AppCompatActivity {
         signUpbtn=(Button)findViewById(R.id.signUpbtn);
         resetPwbtn=(Button)findViewById(R.id.resetPwbtn);
 
+        Gobtnx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(Login.this, Inbox.class);
+                startActivity(i);
+            }
+        });
+
+
         signUpbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,13 +92,6 @@ public class Login extends AppCompatActivity {
         Gobtnx.getLayoutParams().height=(int)(height*0.12);
         Gobtnx.getLayoutParams().width =(int)(width*0.2);
 
-        Gobtnx.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =new Intent(Login.this, ShareRide.class);
-                startActivity(i);
-            }
-        });
 
         /*
 

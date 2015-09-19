@@ -13,15 +13,17 @@
         android:id="@+id/logo"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/logo"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="35dp"/>
+        android:layout_marginTop="@dimen/vertical_logoTop"
+        android:layout_marginBottom="@dimen/vertical_logoBottom"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/dots"/>
+        android:background="@drawable/dots"
+        android:layout_marginTop="@dimen/vertical_margintopTextView"
+        android:layout_marginBottom="@dimen/vertical_margin_btwn_view"/>
 
     <Button
         android:layout_width="match_parent"
@@ -30,12 +32,11 @@
         android:textColor="@color/blueText"
         android:id="@+id/login"
         android:gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="@dimen/horizontal_margin"
+        android:layout_marginRight="@dimen/horizontal_margin"
         android:background="@drawable/roundedbtn"
         android:layout_gravity="center"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="@dimen/vertical_margin_btwn_view" />
 
 
 
@@ -48,9 +49,9 @@
         android:id="@+id/find_ride_btn"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp" />
+        android:layout_marginBottom="@dimen/vertical_margin_btwn_view"
+        android:layout_marginLeft="@dimen/horizontal_margin"
+        android:layout_marginRight="@dimen/horizontal_margin" />
 
 
     <Button
@@ -62,8 +63,8 @@
         android:id="@+id/offer_btn"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp" />
+        android:layout_marginLeft="@dimen/horizontal_margin"
+        android:layout_marginRight="@dimen/horizontal_margin" />
 
 </LinearLayout>
 

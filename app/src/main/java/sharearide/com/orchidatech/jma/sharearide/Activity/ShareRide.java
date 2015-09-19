@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.astuetz.PagerSlidingTabStrip;
+
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 /**
@@ -19,7 +21,9 @@ public class ShareRide extends ActionBarActivity {
     Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter adapter;
-    SlidingTabLayout tabs;
+  //   SlidingTabLayout tabs;
+    PagerSlidingTabStrip tabs;
+
     CharSequence Titles[]={"Find a Ride","Offer a Ride"};
     int Numboftabs =2;
 
@@ -43,17 +47,15 @@ public class ShareRide extends ActionBarActivity {
         pager.setAdapter(adapter);
 
         // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+     //   tabs = ( SlidingTabLayout) findViewById(R.id.tabs);
+      //  tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
 
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
-            }
-        });
-
+        tabs = (PagerSlidingTabStrip ) findViewById(R.id.tabs);
+          // Setting Custom Color for the Scroll bar indicator of the Tab View
+        tabs.setIndicatorColor(getResources().getColor(R.color.tabsScrollColor));
+        tabs.setShouldExpand(true);
+        tabs.setTextColor(getResources().getColor(R.color.whiteText));
+       // tabs.setIndicatorHeight((int)getResources().getDimension(R.dimen.tab_height));
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 

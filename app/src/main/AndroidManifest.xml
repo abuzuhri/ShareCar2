@@ -81,6 +81,10 @@
             android:name=".Activity.Save_info"
             android:label="@string/title_activity_save_info" >
         </activity>
+        <activity
+            android:name=".Activity.MoreInfo"
+            android:label="@string/title_activity_more_info" >
+        </activity>
     </application>
 
 </manifest>

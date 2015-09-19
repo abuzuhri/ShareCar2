@@ -21,36 +21,36 @@
             android:id="@+id/textView"
             android:textColor="#000"
             android:gravity="center"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"/>
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:layout_marginTop="@dimen/vertical_margin"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"
-            android:layout_marginBottom="@dimen/date_marginTop"
-            >
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/imageView6"
-                android:background="@drawable/city_icon"
-                android:layout_gravity="left|center"/>
-
-            <EditText
-                android:id="@+id/city"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   City"
-                android:layout_gravity="left|bottom"
-                android:padding="10dp"
-                android:textDirection="ltr"
-                android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
-                />
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginBottom="@dimen/date_marginTop"
+                >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imageView6"
+                    android:background="@drawable/city_icon"
+                    android:layout_gravity="left|center"/>
+
+                <EditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="   City"
+                    android:layout_gravity="left|bottom"
+                    android:padding="10dp"
+                    android:textDirection="ltr"
+                    android:background="#fff"
+                    android:layout_marginRight="@dimen/horizontal_margin"
+                    />
 
         </LinearLayout>
 
@@ -58,12 +58,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imageVieew6"
                 android:background="@drawable/country_icon"
                 android:layout_gravity="left|center"/>
@@ -87,12 +87,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imagew6"
                 android:background="@drawable/time_icon"
                 android:layout_gravity="left|center"/>
@@ -115,12 +115,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
-            android:layout_marginBottom="@dimen/date_marginTop">
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:layout_marginBottom="@dimen/vertical_margin">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/aa"
                 android:background="@drawable/date_icon"
                 android:layout_gravity="left|center"/>
@@ -139,7 +139,13 @@
 
         </LinearLayout>
 
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViews"
+            android:background="@drawable/line"
+            android:layout_marginLeft="@dimen/horizontal_margin"
+            android:layout_marginBottom="@dimen/vertical_margin"/>
 
 
         <TextView
@@ -152,22 +158,22 @@
             android:id="@+id/textView1"
             android:textColor="#000"
             android:gravity="center"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"
-            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop"
             >
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imageVie5"
                 android:background="@drawable/city_icon"
                 android:layout_gravity="left|center"/>
@@ -189,12 +195,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imageV6"
                 android:background="@drawable/country_icon"
                 android:layout_gravity="left|center"/>
@@ -218,12 +224,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/vertical_margintopTextView"
-            android:layout_marginBottom="@dimen/date_marginTop">
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+           >
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/ss"
                 android:background="@drawable/price"
                 android:layout_gravity="left|center"/>
@@ -254,19 +260,18 @@
             android:layout_marginLeft="@dimen/horizontal_margin"
             android:layout_marginRight="@dimen/horizontal_margin"
             android:layout_marginTop="@dimen/vertical_margintopTextView"
-            android:layout_marginBottom="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/vertical_margin"
             android:textStyle="bold"
             android:textColor="@color/whiteText"
             />
 
-        <!--  <ImageView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:id="@+id/imageView6"
-              android:background="@drawable/line"
-              android:layout_marginLeft="@dimen/horizontal_margin"
-              android:layout_marginRight="@dimen/horizontal_margin"
-              android:layout_marginBottom="15dp"/>-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageVdiews"
+            android:background="@drawable/line"
+            android:layout_marginLeft="@dimen/horizontal_margin"
+            android:layout_marginBottom="@dimen/vertical_margin"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -278,8 +283,8 @@
             android:id="@+id/td1"
             android:textColor="#000"
             android:gravity="center"
-            android:layout_marginBottom="@dimen/vertical_margintopTextView"
-            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -290,8 +295,8 @@
             >
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imageccVie5"
                 android:background="@drawable/user_icon"
                 android:layout_gravity="left|center"/>
@@ -317,8 +322,8 @@
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/imageddV6"
                 android:background="@drawable/phone"
                 android:layout_gravity="left|center"/>
@@ -346,8 +351,8 @@
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:id="@+id/sss"
                 android:background="@drawable/email_icon"
                 android:layout_gravity="left|center"/>
@@ -374,7 +379,7 @@
             android:id="@+id/save"
             android:background="#ff9d1e"
             android:gravity="center"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginBottom="0dp"
             android:textStyle="bold"
             android:textColor="@color/whiteText"
