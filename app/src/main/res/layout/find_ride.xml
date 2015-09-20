@@ -305,8 +305,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginLeft="@dimen/vertical_margintopTextView"
-            android:layout_marginBottom="@dimen/date_marginTop"
-            >
+            android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
                 android:layout_width="25dp"

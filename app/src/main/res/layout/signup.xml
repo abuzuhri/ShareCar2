@@ -38,7 +38,6 @@
         android:textDirection="ltr"
         android:inputType="textPassword"
         android:imeOptions="actionNext"
-
         android:drawableLeft="@drawable/padlocknav"
         android:layout_marginTop="@dimen/vertical_margin_btwn_view"
         android:background="@drawable/lightgray_roundrect"
@@ -85,12 +84,6 @@
         android:layout_marginTop="@dimen/vertical_margintopTextView"
         android:layout_marginRight="@dimen/horizontal_margin"
         android:layout_marginLeft="@dimen/horizontal_margin"
-
         android:id="@+id/register" />
-
-
-
-
-
 
 </LinearLayout>
