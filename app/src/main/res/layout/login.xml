@@ -38,7 +38,6 @@
         android:textDirection="ltr"
         android:inputType="text"
         android:imeOptions="actionNext"
-
         android:drawableLeft="@drawable/profile"
         android:background="@drawable/lightgray_roundrect"
         android:layout_marginRight="@dimen/horizontal_margin"
