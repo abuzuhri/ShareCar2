@@ -277,7 +277,27 @@ public class UserOperations {
 
 
     public void offer_a_ride(Map<String, String> params, final OnLoadFinished onLoadFinished)    {
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ADD_RIDE_URL, new Response.Listener<JSONObject>() {
+        String url = UrlConstant.ADD_RIDE_URL +"?user_id=" + params.get("user_id")
+                                            +"&city_from=" + params.get("city_from")
+                                            +"&city_to=" + params.get("city_to")
+                                            +"&state_from=" + params.get("state_from")
+                                            +"&state_to=" + params.get("state_to")
+                                            +"&country_from=" + params.get("country_from")
+                                            +"&country_to=" + params.get("country_to")
+                                            +"&price=" + params.get("price")
+                                            +"&date_time=" + params.get("date_time");
+        Log.i("Ride", url);
+
+        /* params.put("user_id", String.valueOf(user_id));
+        params.put("city_from", city_from);
+        params.put("city_to", city_to);
+        params.put("state_from", state_from);
+        params.put("state_to", state_to);
+        params.put("country_from", country_from);
+        params.put("country_to", country_to);
+        params.put("date_time", String.valueOf(date_time));
+        params.put("price", String.valueOf(price));*/
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {

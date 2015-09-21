@@ -4,13 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#fff">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,66 +24,35 @@
             android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginTop="@dimen/vertical_margin"/>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginTop="@dimen/vertical_margin"
-            android:layout_marginBottom="@dimen/date_marginTop"
-            >
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/imageView6"
-                android:background="@drawable/city_icon"
-                android:layout_gravity="left|center"/>
-
-            <EditText
-                android:id="@+id/city"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   City"
-                android:layout_gravity="left|bottom"
-                android:padding="10dp"
-                android:textDirection="ltr"
-                android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                />
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginBottom="@dimen/date_marginTop"
+                >
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imageView6"
+                    android:background="@drawable/city_icon"
+                    android:layout_gravity="left|center"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/date_marginTop"
-            >
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/imagaew6"
-                android:background="@drawable/flagg"
-                android:layout_gravity="left|center"/>
-
-            <EditText
-                android:id="@+id/state"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="   State"
-                android:layout_gravity="left|bottom"
-                android:padding="10dp"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                android:textDirection="ltr"
-                android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"                />
+                <EditText
+                    android:id="@+id/cityFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
+                    android:layout_gravity="left|bottom"
+                    android:padding="10dp"
+                    android:textDirection="ltr"
+                    android:background="#fff"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:layout_marginRight="@dimen/horizontal_margin"
+                    />
 
         </LinearLayout>
 
@@ -101,12 +70,11 @@
                 android:background="@drawable/country_icon"
                 android:layout_gravity="left|center"/>
 
-
             <EditText
-                android:id="@+id/country"
+                android:id="@+id/countryFrom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   Country"
+                android:hint="Country"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
@@ -118,13 +86,42 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/statefgg"
+                android:background="@drawable/flagg"
+                android:layout_gravity="left|center"/>
+
+            <EditText
+                android:id="@+id/stateFrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="State"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:inputType="text"
+                android:imeOptions="actionNext"
+                />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/vertical_margin">
+            android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
                 android:layout_width="25dp"
@@ -137,13 +134,43 @@
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   Time"
+                android:hint="Time"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
                 android:background="#fff"
                 android:layout_marginRight="@dimen/horizontal_margin"
                 android:inputType="time"
+                android:imeOptions="actionNext"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:layout_marginBottom="@dimen/vertical_margin">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/aa"
+                android:background="@drawable/date_icon"
+                android:layout_gravity="left|center"/>
+
+            <EditText
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Date"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:inputType="date"
                 android:imeOptions="actionNext"
                 />
 
@@ -171,6 +198,8 @@
             android:layout_marginBottom="@dimen/vertical_margin"
             android:layout_marginLeft="@dimen/horizontal_marginLeft"
             />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -187,40 +216,10 @@
                 android:layout_gravity="left|center"/>
 
             <EditText
-                android:id="@+id/city1"
+                android:id="@+id/cityTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   City"
-                android:layout_gravity="left|bottom"
-                android:padding="10dp"
-                android:textDirection="ltr"
-                android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/date_marginTop">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/imagae"
-                android:background="@drawable/flagg"
-                android:layout_gravity="left|center"/>
-
-            <EditText
-                android:id="@+id/state2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="   State"
+                android:hint="City"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
@@ -246,10 +245,10 @@
                 android:layout_gravity="left|center"/>
 
             <EditText
-                android:id="@+id/country1"
+                android:id="@+id/countryTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   Country"
+                android:hint="Country"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
@@ -257,6 +256,133 @@
                 android:layout_marginRight="@dimen/horizontal_margin"
                 android:inputType="text"
                 android:imeOptions="actionNext"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/dfd"
+                android:background="@drawable/flagg"
+                android:layout_gravity="left|center"/>
+
+            <EditText
+                android:id="@+id/stateTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="State"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:inputType="text"
+                android:imeOptions="actionNext"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+           >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/ss"
+                android:background="@drawable/price"
+                android:layout_gravity="left|center"/>
+
+           <EditText
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Price"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                />
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="More Information"
+            android:id="@+id/more_info"
+            android:background="@drawable/cyan_roundrect"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/horizontal_margin"
+            android:layout_marginRight="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:textStyle="bold"
+            android:textColor="@color/whiteText"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageVdiews"
+            android:background="@drawable/line"
+            android:layout_marginLeft="@dimen/horizontal_margin"
+            android:layout_marginBottom="@dimen/vertical_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Contact Info"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold"
+            android:id="@+id/td1"
+            android:textColor="#000"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageccVie5"
+                android:background="@drawable/user_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:text="Username"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
                 />
 
         </LinearLayout>
@@ -270,30 +396,59 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:id="@+id/imasgew6"
-                android:background="@drawable/date_icon"
+                android:id="@+id/imageddV6"
+                android:background="@drawable/phone"
                 android:layout_gravity="left|center"/>
 
-            <EditText
-                android:id="@+id/date"
+            <TextView
+                android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   Date"
+                android:text="Phone Nimber"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
                 android:background="#fff"
                 android:layout_marginRight="@dimen/horizontal_margin"
-                android:inputType="date"
-                android:imeOptions="actionDone"
                 />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_margintopTextView"
+            android:layout_marginBottom="@dimen/date_marginTop">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/sss"
+                android:background="@drawable/email_icon"
+                android:layout_gravity="left|center"/>
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:layout_gravity="left|bottom"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:background="#fff"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                />
+
+
 
         </LinearLayout>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SEARCH"
-            android:id="@+id/search"
+            android:text="Save"
+            android:id="@+id/save"
             android:background="#ff9d1e"
             android:gravity="center"
             android:layout_marginTop="@dimen/vertical_margin"
@@ -302,5 +457,8 @@
             android:textColor="@color/whiteText"
             />
 
+
     </LinearLayout>
+
+
 </ScrollView>

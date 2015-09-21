@@ -29,20 +29,30 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRidesListListe
 public class SplashScreen extends ActionBarActivity {
     private static final long INITIAL_SERVICE_DELAY = 120 * 1000L;//FOR ONE MINUTE
     private Timer mTimer;
+    private long user_id;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
+        user_id = this.getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1);
         setTimerForRefreshRideService();
         InternetConnectionChecker.isConnectedToInternet(SplashScreen.this, new OnInternetConnectionListener() {
             @Override
             public void internetConnectionStatus(boolean status) {
-                final Intent intent = new Intent(SplashScreen.this, Login.class);
+                final Intent intent;
+                if(user_id == -1)
+                         intent = new Intent(SplashScreen.this, Login.class);
+                else
+                        intent = new Intent(SplashScreen.this, ShareRide.class);
+
+
                 if (status) {
-                    if (getPreferences(MODE_PRIVATE).getBoolean("FIRST_TIME", true)) {
-//                        Toast.makeText(SplashScreen.this, "Loading Data...", Toast.LENGTH_SHORT).show();
+                    if (SplashScreen.this.getSharedPreferences("pref",MODE_PRIVATE).getBoolean("FIRST_TIME", true)) {
+                          Toast.makeText(SplashScreen.this, "Loading Data...", Toast.LENGTH_SHORT).show();
                         loadNewRides(SplashScreen.this);
-                        getPreferences(MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
+                        SplashScreen.this.getSharedPreferences("pref", MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
                     }
 
                 } else {

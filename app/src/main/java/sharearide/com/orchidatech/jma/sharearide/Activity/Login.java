@@ -63,6 +63,7 @@ public class Login extends AppCompatActivity {
                     MainUserFunctions.login(Login.this, username.getText().toString(), ed_password.getText().toString());
                   /*  Intent i = new Intent(Login.this, ShareRide.class);
                     startActivity(i);*/
+
                 }
             }
         });

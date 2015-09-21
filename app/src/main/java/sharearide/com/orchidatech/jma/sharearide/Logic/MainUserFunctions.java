@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import sharearide.com.orchidatech.jma.sharearide.Activity.Login;
 import sharearide.com.orchidatech.jma.sharearide.Activity.ShareRide;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.ChatDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.CountryDAO;
@@ -51,13 +52,13 @@ public class MainUserFunctions {
             public void onSuccess(JSONObject jsonObject) {
                 try {
                     JSONArray mJsonArray = jsonObject.getJSONArray("json");
-                    JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-                    boolean success = mJsonObject.getBoolean("login");
-                    Log.i("Success", success+"");
-                    if(success){
-                       context.startActivity(new Intent(context,ShareRide.class));
+                    if(mJsonArray.length() > 0){
+                        JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                        long id = mJsonObject.getLong("id");
+                        Log.i("Success", id+"");
+                        context.getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putLong("id", id).commit();
+                        context.startActivity(new Intent(context,ShareRide.class));
                     }
-//                        Log.i("Login ", "Success");
                     else
                         Toast.makeText(context, "Invalid username or password", Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
@@ -73,8 +74,7 @@ public class MainUserFunctions {
     }
 
 
-    public static void signUp(final Context context, String username, String password, String image, String address, String birthdate, String gender, String phone, String email) {
-
+    public static void signUp(final Context context, final String username, final String password, final String image, final String address, final String birthdate, final String gender, final String phone, final String email) {
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
@@ -84,24 +84,26 @@ public class MainUserFunctions {
         params.put("Gender", gender);
         params.put("phone", phone);
         params.put("email", email);
-        Log.i("Signup ", "Processing");
 
         UserOperations.getInstance(context).signUp(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
                     JSONArray mJsonArray = jsonObject.getJSONArray("json");
-                        JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-                        boolean success = mJsonObject.getBoolean("signup");
-                        if(success) {
-                            Toast.makeText(context, "Registered Succeeded, Forwarding to Share A Ride...", Toast.LENGTH_LONG).show();
+//                        boolean success = mJsonObject.getBoolean("signup");
+                        if(mJsonArray.length() > 0) {
+                            JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                            long user_id = Long.parseLong(mJsonObject.getString("id"));
+                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
+                            Toast.makeText(context, "Registered Succeeded, login to continue...", Toast.LENGTH_LONG).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                Intent intent = new Intent(context, ShareRide.class);
+                                Intent intent = new Intent(context, Login.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }
-                        },2000);
+                        },3000);
                         }
                             else {
                             Log.i("Signup ", "Failed");
@@ -109,6 +111,10 @@ public class MainUserFunctions {
                         }
 
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
             }
@@ -497,7 +503,7 @@ public class MainUserFunctions {
         });
     }
 
-    public static void offerRide(Context context, final long user_id, final String city_from, final String city_to, final String state_from, final String state_to, final String country_from, final String country_to, final long date_time, final double price){
+    public static void offerRide(final Context context, final long user_id, final String city_from, final String city_to, final String state_from, final String state_to, final String country_from, final String country_to, final long date_time, final double price){
         Map<String, String> params = new HashMap<>();
         params.put("user_id", String.valueOf(user_id));
         params.put("city_from", city_from);
@@ -519,8 +525,10 @@ public class MainUserFunctions {
                     if (remoteId != -1) {
                        /* Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                         RideDAO.addNewRide(ride);*/
-                        Log.i("Offer a Ride", "Succeeded");
-                    }
+                        Toast.makeText(context,"Added Successfully",Toast.LENGTH_LONG).show();
+                    }else
+                        Toast.makeText(context,"Adding Failed, try again later..",Toast.LENGTH_LONG).show();
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -530,7 +538,7 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-
+                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
             }
         });
     }
