@@ -3,6 +3,7 @@ package sharearide.com.orchidatech.jma.sharearide.Logic;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -93,7 +94,14 @@ public class MainUserFunctions {
                         JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                         boolean success = mJsonObject.getBoolean("signup");
                         if(success) {
-                            Log.i("Signup ", "Success");
+                            Toast.makeText(context, "Registered Succeeded, Forwarding to Share A Ride...", Toast.LENGTH_LONG).show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(context, ShareRide.class);
+                                context.startActivity(intent);
+                            }
+                        },2000);
                         }
                             else {
                             Log.i("Signup ", "Failed");

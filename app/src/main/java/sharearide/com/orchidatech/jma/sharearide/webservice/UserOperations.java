@@ -145,7 +145,8 @@ public class UserOperations {
 
 
     public void getAllMessages(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ALL_MESSAGES_URL, new Response.Listener<JSONObject>() {
+        String url = UrlConstant.ALL_MESSAGES_URL + "?username=" + params.get("username")+"&password="+params.get("password");
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
