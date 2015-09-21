@@ -27,7 +27,7 @@ private android.support.design.widget.FloatingActionButton addMessage;
         addMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Inbox.this,Map.class);
+                Intent i=new Intent(Inbox.this,MapViewActivity.class);
                 startActivity(i);
             }
         });

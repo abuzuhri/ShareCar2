@@ -1,3 +1,4 @@
+
 package sharearide.com.orchidatech.jma.sharearide.Database.DAO;
 
 import com.activeandroid.query.Delete;
@@ -97,14 +98,12 @@ public class RideDAO {
             isValid = false;
             throw new InvalidInputException("Name field is empty !");
         }
-
         if (r.user.phone == 0) {
             ride.user.phone = r.user.phone;
         } else {
             isValid = false;
             throw new InvalidInputException("Invalid phone value !");
         }
-
         if (!r.user.email.equals("")) {
             ride.user.email = r.user.email;
         } else {
@@ -190,14 +189,12 @@ public class RideDAO {
             isValid = false;
             throw new InvalidInputException("Name field is empty !");
         }
-
         if (r.user.phone == 0) {
             ride.user.phone = r.user.phone;
         } else {
             isValid = false;
             throw new InvalidInputException("Invalid phone value !");
         }
-
         if (!r.user.email.equals("")) {
             ride.user.email = r.user.email;
         } else {
@@ -218,12 +215,14 @@ public class RideDAO {
     }
 
     public static Ride getRideById(long rideId) {
-      //  return new Select().from(Ride.class).where("RideId = ?", rideId).executeSingle();
+        //  return new Select().from(Ride.class).where("RideId = ?", rideId).executeSingle();
         return Ride.load(Ride.class, rideId);
     }
+
     public static Ride getRideByRemoteId(long rideRemoteId) {
-         return new Select().from(Ride.class).where("remoteId = ?", rideRemoteId).executeSingle();
+        return new Select().from(Ride.class).where("remoteId = ?", rideRemoteId).executeSingle();
     }
+
     public static List<Ride> getAllRides() {
         return new Select().from(Ride.class).orderBy("DateTime ASC").execute();
     }
