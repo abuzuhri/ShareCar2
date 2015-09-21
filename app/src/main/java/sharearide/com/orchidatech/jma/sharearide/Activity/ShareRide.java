@@ -24,7 +24,7 @@ public class ShareRide extends ActionBarActivity {
   //   SlidingTabLayout tabs;
     PagerSlidingTabStrip tabs;
 
-    CharSequence Titles[]={"Find a Ride","Offer a Ride"};
+    CharSequence Titles[]={"Offer a Ride","Find a Ride"};
     int Numboftabs =2;
 
     @Override
