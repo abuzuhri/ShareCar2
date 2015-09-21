@@ -14,7 +14,7 @@ import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
  */
 public class CountryDAO {
 
-
+    //<editor-fold defaultstate="collapsed" desc="addNewCountry(long countryId, String name, String alpha){...}">
     public static long addNewCountry(long countryId, String name, String alpha) throws EmptyFieldException, InvalidInputException {
 
         Country country = new Country();
@@ -47,9 +47,12 @@ public class CountryDAO {
 
         return 0;
     }
+    //</editor-fold>
 
-
+    //<editor-fold defaultstate="collapsed" desc="getAllCountries(){...}">
     public static List<User> getAllCountries() {
         return new Select().from(Country.class).orderBy("Name").execute();
     }
+    //</editor-fold>
+
 }

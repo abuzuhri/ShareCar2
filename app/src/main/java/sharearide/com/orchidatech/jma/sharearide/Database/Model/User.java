@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "Users", id = BaseColumns._ID)
 public class User extends Model {
 
-    @Column(name = "remote_id", unique = true)
+    @Column(name = "remote_id") // , unique = true
     public long remoteId;
 
     public User(long remoteId, String name, String username, String password, String image, String phone, String email, String address, long birthdate, String gender) {

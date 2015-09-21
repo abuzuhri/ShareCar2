@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sharearide.com.orchidatech.jma.sharearide" >
+    package="sharearide.com.orchidatech.jma.sharearide">
 
+
+    <permission
+        android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- android:name=".Common"-->
     <application
         android:name=".Database.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
         <!-- metadata for version and database name -->
         <meta-data
@@ -18,14 +40,16 @@
             android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="sharearide.com.orchidatech.jma.sharearide.Database.Model.User,                             sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride,                             sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat" />
+            android:value="sharearide.com.orchidatech.jma.sharearide.Database.Model.User,
+            sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride,
+            sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat" />
         <meta-data
             android:name="com.facebook.FacebookActivity.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".Activity.SplashScreen"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,28 +87,49 @@
             android:label="@string/title_activity_inbox" />
         <activity
             android:name=".Activity.Warning"
-            android:label="@string/title_activity_warning" >
-        </activity>
+            android:label="@string/title_activity_warning"></activity>
         <activity
-            android:name=".Activity.Map"
-            android:label="@string/title_activity_map" >
-        </activity>
+            android:name=".Activity.MapViewActivity"
+            android:label="@string/title_activity_map"></activity>
         <activity
             android:name=".Activity.ShareRide"
-            android:label="@string/title_activity_share_ride" >
-        </activity>
+            android:label="@string/title_activity_share_ride"></activity>
         <activity
             android:name=".Activity.Main"
-            android:label="@string/title_activity_main" >
-        </activity>
+            android:label="@string/title_activity_main"></activity>
         <activity
             android:name=".Activity.Save_info"
-            android:label="@string/title_activity_save_info" >
-        </activity>
+            android:label="@string/title_activity_save_info"></activity>
         <activity
             android:name=".Activity.MoreInfo"
-            android:label="@string/title_activity_more_info" >
-        </activity>
+            android:label="@string/title_activity_more_info"></activity>
+
+
+
+
+        <provider
+            android:name=".Chat.DataProvider"
+            android:authorities="sharearide.com.orchidatech.jma.sharearide.provider"
+            android:exported="false"></provider>
+
+        <receiver
+            android:name=".Chat.Client.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="sharearide.com.orchidatech.jma.sharearide" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".Chat.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
+        <activity
+            android:name=".Chat.ChatActivity"
+            android:logo="@drawable/ic_contact_picture"></activity>
+
+
+
     </application>
 
 </manifest>

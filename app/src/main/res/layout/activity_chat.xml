@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/darker_gray" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chat_activiy_header"
+        android:gravity="right" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_weight="0.79"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Send Quick Message"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/holo_orange_dark" />
+
+        <Button
+            android:id="@+id/crosscancel"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/chatcross"
+            android:onClick="onClick" />
+    </LinearLayout>
+
+    <fragment
+        android:name="sharearide.com.orchidatech.jma.sharearide.Chat.MessagesFragment"
+        android:id="@+id/msg_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        tools:layout="@layout/chat_list_item" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white" >
+
+        <Button
+            android:id="@+id/send_btn"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:onClick="onClick"
+            android:textStyle="bold"
+            android:enabled="false"
+            android:background="@drawable/sendchat"
+            />
+
+        <EditText
+            android:id="@+id/msg_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/send_btn"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/send_btn"
+            android:hint="Write new message"
+            android:paddingLeft="10dp"
+            android:background="@drawable/inp_text" >
+
+        </EditText>
+
+    </RelativeLayout>
+
+</LinearLayout>
