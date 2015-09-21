@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
@@ -33,12 +34,16 @@ public class Login extends AppCompatActivity {
     private Button signUpbtn,resetPwbtn;
     private ImageButton fBbtn,gplusbtn,Gobtnx;
     private Toolbar tool_bar;
+    private EditText username,ed_password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
+        username=(EditText)findViewById(R.id.username);
+        ed_password=(EditText)findViewById(R.id.ed_password);
+
 
         logo=(ImageView)findViewById(R.id.logo);
         fBbtn=(ImageButton)findViewById(R.id.fBbtn);
@@ -50,8 +55,15 @@ public class Login extends AppCompatActivity {
         Gobtnx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(Login.this, Inbox.class);
-                startActivity(i);
+                if (username.getText().toString().equals("")) {
+                    username.setError("Enter Username");
+                } else if (ed_password.getText().toString().equals(""))
+                    ed_password.setError("Enter Password");
+                else {
+                    MainUserFunctions.login(Login.this, username.getText().toString(), ed_password.getText().toString());
+                  /*  Intent i = new Intent(Login.this, ShareRide.class);
+                    startActivity(i);*/
+                }
             }
         });
 

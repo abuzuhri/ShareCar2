@@ -1,8 +1,10 @@
 package sharearide.com.orchidatech.jma.sharearide.Logic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import sharearide.com.orchidatech.jma.sharearide.Activity.ShareRide;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.ChatDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.CountryDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
@@ -34,7 +37,7 @@ public class MainUserFunctions {
     private MainUserFunctions(){}
     final static int MAX_NUM_RIDES = 200;
 
-    public static void login(Context context,String username, String password){
+    public static void login(final Context context,String username, String password){
 
 
         Map<String, String> params = new HashMap<>();
@@ -49,24 +52,27 @@ public class MainUserFunctions {
                     JSONArray mJsonArray = jsonObject.getJSONArray("json");
                     JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                     boolean success = mJsonObject.getBoolean("login");
-                    if(success)
-                        Log.i("Login ", "Success");
+                    Log.i("Success", success+"");
+                    if(success){
+                       context.startActivity(new Intent(context,ShareRide.class));
+                    }
+//                        Log.i("Login ", "Success");
                     else
-                        Log.i("Login ", "Failed");
+                        Toast.makeText(context, "Invalid username or password", Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+               }
             }
 
             @Override
             public void onFail(String error) {
-Log.i("Error", error);
+                Toast.makeText(context, "An Error Occurred, try again", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 
-    public static void signUp(Context context, String username, String password, String image, String address, String birthdate, String gender, String phone, String email) {
+    public static void signUp(final Context context, String username, String password, String image, String address, String birthdate, String gender, String phone, String email) {
 
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -101,7 +107,7 @@ Log.i("Error", error);
 
             @Override
             public void onFail(String error) {
-                Log.i("SignUpError", error);
+                Toast.makeText(context, "An Error Occurred, try again", Toast.LENGTH_SHORT).show();
             }
         });
     }

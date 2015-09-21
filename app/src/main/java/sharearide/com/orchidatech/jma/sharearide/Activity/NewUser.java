@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 
@@ -17,7 +18,7 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 public class NewUser extends AppCompatActivity {
 
     private Toolbar tool_bar;
-    private EditText username;
+    private EditText username,password,re_password,email;
     private Button register;
 
     @Override
@@ -28,13 +29,31 @@ public class NewUser extends AppCompatActivity {
         setSupportActionBar(tool_bar);
         register = (Button) findViewById(R.id.register);
         username = (EditText) findViewById(R.id.username);
+        password=(EditText)findViewById(R.id.password);
+        re_password=(EditText)findViewById(R.id.re_password);
+        email=(EditText)findViewById(R.id.email);
+
+
+
 
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(NewUser.this, SearchResult.class);
-                startActivity(i);
+                if (username.getText().toString().equals("")) {
+                    username.setError("Enter Username");
+                } else if (password.getText().toString().equals(""))
+                    password.setError("Enter Password");
+                else if (!re_password.getText().toString().equals(password.getText().toString()))
+                    re_password.setError(" Password doesn't match ");
+                else if (email.getText().toString().equals(""))
+                    email.setError("Enter email ");
+
+                else {
+                MainUserFunctions.signUp(getApplicationContext(), username.getText().toString(), password.getText().toString(), "", "", "", "", "", email.getText().toString());
+                   /* Intent i = new Intent(NewUser.this, SearchResult.class);
+                    startActivity(i);**/                }
+
             }
         });
         /*

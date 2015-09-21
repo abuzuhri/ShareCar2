@@ -2,6 +2,7 @@ package sharearide.com.orchidatech.jma.sharearide.webservice;
 
 import android.content.Context;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
@@ -26,7 +27,10 @@ public class RequestQueueHandler {
         return instance;
     }
 
-    public void addToRequestQueue(Request req) {
+    public <T> void addToRequestQueue(Request<T> req) {
         requestQueue.add(req);
     }
+//    public void addToRequestQueue(MyRequest req) {
+//        requestQueue.add(req);
+//    }
 }

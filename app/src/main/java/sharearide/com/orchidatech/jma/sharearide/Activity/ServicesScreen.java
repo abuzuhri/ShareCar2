@@ -144,14 +144,14 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
         TimerTask mTimerTask = new TimerTask() {
             @Override
             public void run() {
-               InternetConnectionChecker.isConnectedToInternet(new OnInternetConnectionListener() {
+               InternetConnectionChecker.isConnectedToInternet(getApplicationContext(), new OnInternetConnectionListener() {
                    @Override
                    public void internetConnectionStatus(boolean status) {
                        if (status) {
                           startService(new Intent(ServicesScreen.this, RefreshRideService.class));
                        }else if(getPreferences(MODE_PRIVATE).getBoolean("FIRST_TIME", true)) {
                            Toast.makeText(ServicesScreen.this, "No Internet Access", Toast.LENGTH_LONG).show();
-                           getPreferences(MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
+//                           getPreferences(MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
                        }
                    }
                });
@@ -220,7 +220,7 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
     }
 
     public void find_a_ride(final OnSearchListener listener, final Context context, final String item){
-        InternetConnectionChecker.isConnectedToInternet(new OnInternetConnectionListener() {
+        InternetConnectionChecker.isConnectedToInternet(getApplicationContext(), new OnInternetConnectionListener() {
             @Override
             public void internetConnectionStatus(boolean status) {
                 if(status)
@@ -234,11 +234,12 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
     /////Called when last item in listview accessed....
     public void loadNewRides(Context context, final OnRidesListListener listener){
              MainUserFunctions.get_a_rides(context, listener);
+
     }
 
     public void offerRide(final Context context,  final long user_id,  final String city_from,  final String city_to,  final String state_from,  final String state_to,  final String country_from,  final String country_to,  final long date_time,  final double price)
         {
-            InternetConnectionChecker.isConnectedToInternet(new OnInternetConnectionListener() {
+            InternetConnectionChecker.isConnectedToInternet(getApplicationContext(), new OnInternetConnectionListener() {
                 @Override
                 public void internetConnectionStatus(boolean status) {
                     if (status)
@@ -250,7 +251,7 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
         }
 
     public void last_chatting_users(final Context context, final OnChattingListListener listener, final long id){
-        InternetConnectionChecker.isConnectedToInternet(new OnInternetConnectionListener() {
+        InternetConnectionChecker.isConnectedToInternet(getApplicationContext(), new OnInternetConnectionListener() {
             @Override
             public void internetConnectionStatus(boolean status) {
                 if (status) {

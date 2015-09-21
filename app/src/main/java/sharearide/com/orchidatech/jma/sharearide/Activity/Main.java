@@ -26,7 +26,6 @@ import java.util.Timer;
 public class Main extends ActionBarActivity{
 
     Button  findRide, offerRide;
-    private static final long INITIAL_SERVICE_DELAY = 60 * 1000L;//FOR ONE MINUTE
     private Timer mTimer;
     private ImageView logo;
     private ImageView imageView2;

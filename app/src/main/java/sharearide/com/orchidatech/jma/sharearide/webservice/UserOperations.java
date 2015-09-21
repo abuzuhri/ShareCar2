@@ -1,6 +1,8 @@
 package sharearide.com.orchidatech.jma.sharearide.webservice;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,11 +34,11 @@ public class UserOperations {
     }
 
     public void login(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-     ///   params.put("submit", Submit.LOGIN);
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.LOGIN_URL, new Response.Listener<JSONObject>() {
+        String url = UrlConstant.LOGIN_URL + "?username=" + params.get("username")+"&password="+params.get("password");
+        Log.i("url", url);
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
-                        //JSONObject jsonObject = new JSONObject(string);
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
@@ -50,12 +52,15 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, params);
+                });
     }
 
     public void signUp(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        ///params.put("submit", Submit.SIGNUP);
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.SIGNUP_URL, new Response.Listener<JSONObject>() {
+        String url = UrlConstant.SIGNUP_URL + "?username=" + params.get("username")+"&password="+params.get("password")
+               +"&img="+params.get("img") +"&address="+params.get("address")+"&brithdate="+params.get("birthdate")
+                +"&phone="+params.get("phone")+"&Gender="+params.get("Gender")+"&email="+params.get("email");
+        Log.i("Signup", url);
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -72,11 +77,11 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, params);
+                });
     }
 
     public void getAllRides(final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ALL_RIDES_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ALL_RIDES_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -93,11 +98,11 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, null);
+                });
     }
 
      public void getAllCountries(final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ALL_COUNTRIES_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ALL_COUNTRIES_URL, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
                         try {
@@ -113,12 +118,12 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, null);
+                });
     }
 
 
     public void getAllApps(final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ALL_APPS_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ALL_APPS_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -135,12 +140,12 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, null);
+                });
     }
 
 
     public void getAllMessages(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.ALL_MESSAGES_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ALL_MESSAGES_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -157,11 +162,11 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, params);
+                });
     }
 
     public void getAbout(final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ABOUT_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ABOUT_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -178,11 +183,11 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, null);
+                });
     }
 
     public void getUserInfo(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.POST, UrlConstant.USER_INFO, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.USER_INFO, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -199,11 +204,11 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, params);
+                });
     }
 
     public void getUserName(Map<String,String> params, final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.USER_NAME_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.USER_NAME_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -222,11 +227,11 @@ public class UserOperations {
                     }
 
 
-                }, params);
+                });
     }
 
     public void getSearchResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.SEARCH_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.SEARCH_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -243,11 +248,11 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, params);
+                });
     }
 
     public void getPublicUserInfo(Map<String,String> params, final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.PUBLIC_USER_DATA, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.PUBLIC_USER_DATA, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -266,12 +271,12 @@ public class UserOperations {
                     }
 
 
-                }, params);
+                });
     }
 
 
     public void offer_a_ride(Map<String, String> params, final OnLoadFinished onLoadFinished)    {
-        UserOperationsProcessor.getInstance(context).sendRequest(Request.Method.GET, UrlConstant.ADD_RIDE_URL, new Response.Listener<JSONObject>() {
+        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ADD_RIDE_URL, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -288,7 +293,7 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                }, params);
+                });
     }
 /////////////////////////////////////////////////////////////////
 

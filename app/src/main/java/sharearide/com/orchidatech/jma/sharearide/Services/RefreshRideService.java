@@ -3,6 +3,7 @@ package sharearide.com.orchidatech.jma.sharearide.Services;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+import sharearide.com.orchidatech.jma.sharearide.Activity.Login;
+import sharearide.com.orchidatech.jma.sharearide.Activity.Main;
+import sharearide.com.orchidatech.jma.sharearide.Activity.SplashScreen;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
@@ -28,12 +32,17 @@ public class RefreshRideService extends IntentService {
     private static final int MAX_NUM_RIDES = 200;
     private  ArrayList<Ride> allFetchedRides;
     private ArrayList<Ride> allStoredRides;
+    private boolean firstLaunch;
+
     public RefreshRideService() {
         super(RefreshRideService.class.getName());
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
+
+//        firstLaunch = intent.getBooleanExtra("FIRST_LAUNCH", false);
+//        Toast.makeText(this, firstLaunch+"", Toast.LENGTH_LONG).show();
         loadNewData();
     }
 
@@ -77,13 +86,19 @@ public class RefreshRideService extends IntentService {
                 } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
+//                if(firstLaunch){
+//
+//                    Intent intent = new Intent(RefreshRideService.this ,Login.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(intent);
+//
+//                }
             }
 
             @Override
             public void onFail(String error) {
             }
         });
-
 
 
     }

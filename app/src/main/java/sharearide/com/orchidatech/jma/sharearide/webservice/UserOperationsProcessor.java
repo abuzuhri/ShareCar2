@@ -3,6 +3,7 @@ package sharearide.com.orchidatech.jma.sharearide.webservice;
 import android.content.Context;
 
 import com.android.volley.Response;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
@@ -27,9 +28,11 @@ public class UserOperationsProcessor {
         return instance;
     }
 
-    public void sendRequest(int method, String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> params) {
+    public void sendRequest(String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
+//        Request mRequest = new Request( url, listener, errorListener, params);
+//        RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
 
-        Request mRequest = new Request(method, url, listener, errorListener, params);
+        JsonObjectRequest mRequest = new JsonObjectRequest(url, null, listener, errorListener);
         RequestQueueHandler.getInstance(context).addToRequestQueue(mRequest);
     }
 }
