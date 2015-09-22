@@ -1,4 +1,4 @@
-package sharearide.com.orchidatech.jma.sharearide.Activity;
+package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 /**
  * Created by Amal on 9/17/2015.
@@ -13,10 +13,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import sharearide.com.orchidatech.jma.sharearide.Activity.MoreInfo;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
@@ -42,6 +46,21 @@ private Button save,more_info;
         stateTo=(EditText)v.findViewById(R.id.stateTo);
         time=(EditText)v.findViewById(R.id.time);
         date=(EditText)v.findViewById(R.id.date);
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePicker dialog = new TimePicker();
+
+                dialog.show(getActivity().getFragmentManager(), "Time Dialog");
+            }
+        });
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePicker dialog = new DatePicker();
+                dialog.show(getActivity().getFragmentManager(), "Date Dialog");
+            }
+        });
         price=(EditText)v.findViewById(R.id.price);
 context = getActivity();
 
@@ -52,20 +71,21 @@ context = getActivity();
                     cityFrom.setError("Required Field");
                 } else if (countryFrom.getText().toString().equals(""))
                     countryFrom.setError("Required Field");
-//                else if (time.getText().toString().equals(""))
-//                    time.setError("Required Field ");
-//                else if (date.getText().toString().equals(""))
-//                    date.setError("Required Field ");
+                else if (time.getText().toString().equals(""))
+                  time.setError("Required Field ");
+              else if (date.getText().toString().equals(""))
+                   date.setError("Required Field ");
                 else if (cityTo.getText().toString().equals(""))
                     cityTo.setError("Required Field ");
                 else if (countryTo.getText().toString().equals(""))
                     countryTo.setError("Required Field ");
                 else{
+
                     offerRide(context.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1),
                             cityFrom.getText().toString(), cityTo.getText().toString(),
                             stateFrom.getText().toString(), stateTo.getText().toString(),
                             countryFrom.getText().toString(), countryTo.getText().toString(),
-                            -1, Double.parseDouble(price.getText().toString())
+                            date_time_converter(), Double.parseDouble(price.getText().toString())
                             );
 
             }}
@@ -81,6 +101,24 @@ context = getActivity();
         return v;
     }
 
+    private long date_time_converter() {
+        SimpleDateFormat mSimpleDateFormat= new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        long timeInMilliseconds = -1;
+        try {
+            Date mDate = mSimpleDateFormat.parse(date.getText().toString() + " " + time.getText().toString());
+            timeInMilliseconds = mDate.getTime();
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTimeInMillis(timeInMilliseconds);
+
+            Toast.makeText(getActivity().getApplicationContext(), timeInMilliseconds+"\n"
+                    + calendar2.get(Calendar.DAY_OF_MONTH) + "/" + (calendar2.get(Calendar.MONTH)+1) + "/" + calendar2.get(Calendar.DAY_OF_MONTH) + "\n"
+                    + calendar2.get(Calendar.HOUR_OF_DAY) + ":" + calendar2.get(Calendar.MINUTE), Toast.LENGTH_LONG).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return timeInMilliseconds;
+    }
+
     public void offerRide( final long user_id,  final String city_from,  final String city_to,  final String state_from,  final String state_to,  final String country_from,  final String country_to,  final long date_time,  final double price)
     {
         InternetConnectionChecker.isConnectedToInternet(context, new OnInternetConnectionListener() {
@@ -92,5 +130,19 @@ context = getActivity();
                     Toast.makeText(context, "No Internet Access..", Toast.LENGTH_LONG).show();
             }
         });
+    }
+    protected String buildValueOf(int value) {
+        if(value>=10)
+            return String.valueOf(value);
+        else
+            return "0" + String.valueOf(value);
+    }
+
+    public void onDateSet(int year, int month, int day) {
+        date.setText(buildValueOf(day) + "/" + buildValueOf(month) + "/" + year);
+    }
+
+    public void onTimeSet(int hour, int minute) {
+        time.setText(buildValueOf(hour) + ":" + buildValueOf(minute));
     }
 }

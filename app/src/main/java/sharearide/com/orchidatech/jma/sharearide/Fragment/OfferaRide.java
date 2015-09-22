@@ -1,4 +1,4 @@
-package sharearide.com.orchidatech.jma.sharearide.Activity;
+package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

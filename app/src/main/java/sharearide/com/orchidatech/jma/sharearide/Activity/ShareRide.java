@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,12 +10,17 @@ import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import java.util.ArrayList;
+
+import sharearide.com.orchidatech.jma.sharearide.Fragment.AddRide;
+import sharearide.com.orchidatech.jma.sharearide.Fragment.DatePicker;
+import sharearide.com.orchidatech.jma.sharearide.Fragment.TimePicker;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 /**
  * Created by Edwin on 15/02/2015.
  */
-public class ShareRide extends ActionBarActivity {
+public class ShareRide extends ActionBarActivity implements DatePicker.OnDateListener, TimePicker.OnTimeListener{
 
     // Declaring Your View and Variables
 
@@ -23,7 +29,9 @@ public class ShareRide extends ActionBarActivity {
     ViewPagerAdapter adapter;
   //   SlidingTabLayout tabs;
     PagerSlidingTabStrip tabs;
-
+    private ArrayList<Fragment> mFragments;
+    AddRide tab1 = new AddRide();
+    FindRide tab2 = new FindRide();
     CharSequence Titles[]={"Offer a Ride","Find a Ride"};
     int Numboftabs =2;
 
@@ -32,15 +40,16 @@ public class ShareRide extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.share_ride);
 
-
+        mFragments = new ArrayList<>();
         // Creating The Toolbar and setting it as the Toolbar for the activity
-
+mFragments.add(tab1);
+mFragments.add(tab2);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs, mFragments);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -58,7 +67,6 @@ public class ShareRide extends ActionBarActivity {
        // tabs.setIndicatorHeight((int)getResources().getDimension(R.dimen.tab_height));
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
 
 
     }
@@ -84,5 +92,15 @@ public class ShareRide extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDateSet(int year, int month, int day) {
+            tab1.onDateSet(year, month, day);
+    }
+
+    @Override
+    public void onTimeSet(int hour, int minute) {
+            tab1.onTimeSet(hour, minute);
     }
 }

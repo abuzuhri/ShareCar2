@@ -143,7 +143,6 @@
                 android:textDirection="ltr"
                 android:background="#fff"
                 android:layout_marginRight="@dimen/horizontal_margin"
-                android:inputType="time"
                 android:imeOptions="actionNext"
                 />
 
@@ -284,7 +283,6 @@
                 android:textDirection="ltr"
                 android:background="#fff"
                 android:layout_marginRight="@dimen/horizontal_margin"
-                android:inputType="date"
                 android:imeOptions="actionDone"
                 />
 
