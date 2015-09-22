@@ -23,7 +23,7 @@ public class FindaRide extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.find_ride);
+        //setContentView(R.layout.add_ride);
 
         /*
         fromCity = (EditText) findViewById(R.id.editText_fromCity);

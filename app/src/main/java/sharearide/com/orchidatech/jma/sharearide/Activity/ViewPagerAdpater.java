@@ -28,12 +28,12 @@ class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         if(position == 0) // if the position is 0 we are returning the First tab
         {
-          FindRide tab1 = new FindRide();
+          AddRide tab1 = new AddRide();
             return tab1;
         }
         else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
-            OfferRide tab2 = new OfferRide();
+            FindRide tab2 = new FindRide();
             return tab2;
         }
 

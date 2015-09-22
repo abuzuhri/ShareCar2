@@ -23,7 +23,7 @@ public class OfferaRide extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.offer_ride);
+        //setContentView(R.layout.find_ride);
 
         /*
         fromCity = (EditText) findViewById(R.id.editText_fromCity_offerRide);

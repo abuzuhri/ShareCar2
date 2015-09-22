@@ -50,7 +50,7 @@ public class NewUser extends AppCompatActivity {
                     email.setError("Enter email ");
 
                 else {
-                MainUserFunctions.signUp(getApplicationContext(), username.getText().toString(), password.getText().toString(), "", "", "", "", "", email.getText().toString());
+                MainUserFunctions.signUp(getApplicationContext(), username.getText().toString(), password.getText().toString(), "", "", "0", "", "", email.getText().toString());
                    /* Intent i = new Intent(NewUser.this, SearchResult.class);
                     startActivity(i);**/                }
 

@@ -11,27 +11,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="#fff">
-            <include
-                android:id="@+id/tool_bar"
-                layout="@layout/tool_bar"
-                />
-            <com.astuetz.PagerSlidingTabStrip
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/tab_height"
-                android:elevation="2dp"
-                android:padding="10dp"
-                android:textColor="#3ad8f1"
-                android:textSize="@dimen/text_size"
-                android:textAlignment="center"
-                android:background="@color/ColorPrimary"/>
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_weight="1">
-            </android.support.v4.view.ViewPager>
 
             <TextView
                 android:layout_width="wrap_content"
