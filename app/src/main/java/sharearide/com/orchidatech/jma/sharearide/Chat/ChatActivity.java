@@ -22,8 +22,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-import sharearide.com.orchidatech.jma.sharearide.Chat.Client.GcmUtil;
-import sharearide.com.orchidatech.jma.sharearide.Chat.Client.ServerUtilities;
+import sharearide.com.orchidatech.jma.sharearide.Chat.client.GcmUtil;
+import sharearide.com.orchidatech.jma.sharearide.Chat.client.ServerUtilities;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 /**

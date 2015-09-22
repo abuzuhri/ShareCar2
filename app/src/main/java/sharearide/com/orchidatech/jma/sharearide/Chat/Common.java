@@ -15,7 +15,7 @@ import com.facebook.FacebookSdk;
 import java.util.ArrayList;
 import java.util.List;
 
-import sharearide.com.orchidatech.jma.sharearide.Chat.Client.Constants;
+import sharearide.com.orchidatech.jma.sharearide.Chat.client.Constants;
 
 
 /**
