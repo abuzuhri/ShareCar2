@@ -42,12 +42,12 @@ public class MapViewActivity extends AppCompatActivity{
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
-        setSupportActionBar(tool_bar);
 
         //Introduction
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
+        tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        setSupportActionBar(tool_bar);
         map = (MapView) findViewById(R.id.mapview);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);

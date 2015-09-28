@@ -42,10 +42,10 @@
                 android:layout_gravity="left|center"/>
 
             <EditText
-                android:id="@+id/city"
+                android:id="@+id/cityFrom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   City"
+                android:hint="City"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
@@ -73,10 +73,10 @@
                 android:layout_gravity="left|center"/>
 
             <EditText
-                android:id="@+id/state"
+                android:id="@+id/stateFrom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   State"
+                android:hint="State"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:inputType="text"
@@ -103,10 +103,10 @@
 
 
             <EditText
-                android:id="@+id/country"
+                android:id="@+id/countryFrom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   Country"
+                android:hint="Country"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
@@ -137,13 +137,12 @@
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   Time"
+                android:hint="Time"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
                 android:background="#fff"
                 android:layout_marginRight="@dimen/horizontal_margin"
-                android:inputType="time"
                 android:imeOptions="actionNext"
                 />
 
@@ -187,10 +186,10 @@
                 android:layout_gravity="left|center"/>
 
             <EditText
-                android:id="@+id/city1"
+                android:id="@+id/cityTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   City"
+                android:hint="City"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
@@ -217,10 +216,10 @@
                 android:layout_gravity="left|center"/>
 
             <EditText
-                android:id="@+id/state2"
+                android:id="@+id/stateTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   State"
+                android:hint="State"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
@@ -246,10 +245,10 @@
                 android:layout_gravity="left|center"/>
 
             <EditText
-                android:id="@+id/country1"
+                android:id="@+id/countryTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="   Country"
+                android:hint="Country"
                 android:layout_gravity="left|bottom"
                 android:padding="10dp"
                 android:textDirection="ltr"
@@ -284,7 +283,6 @@
                 android:textDirection="ltr"
                 android:background="#fff"
                 android:layout_marginRight="@dimen/horizontal_margin"
-                android:inputType="date"
                 android:imeOptions="actionDone"
                 />
 

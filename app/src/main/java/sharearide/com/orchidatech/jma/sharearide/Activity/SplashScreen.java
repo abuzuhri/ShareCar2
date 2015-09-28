@@ -1,4 +1,5 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
@@ -37,36 +39,31 @@ public class SplashScreen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
         user_id = this.getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1);
-        setTimerForRefreshRideService();
-        InternetConnectionChecker.isConnectedToInternet(SplashScreen.this, new OnInternetConnectionListener() {
+       setTimerForRefreshRideService();
+//         this.startService(new Intent(this, RefreshRideService.class));
+
+
+
+            InternetConnectionChecker.isConnectedToInternet(SplashScreen.this, new OnInternetConnectionListener() {
             @Override
             public void internetConnectionStatus(boolean status) {
                 final Intent intent;
                 if(user_id == -1)
                          intent = new Intent(SplashScreen.this, Login.class);
                 else
-                        intent = new Intent(SplashScreen.this, ShareRide.class);
+                        intent = new Intent(SplashScreen.this, Logout.class);
 
 
                 if (status) {
                     if (SplashScreen.this.getSharedPreferences("pref",MODE_PRIVATE).getBoolean("FIRST_TIME", true)) {
                           Toast.makeText(SplashScreen.this, "Loading Data...", Toast.LENGTH_SHORT).show();
                         loadNewRides(SplashScreen.this);
-                        SplashScreen.this.getSharedPreferences("pref", MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
                     }
 
-                } else {
+                } else
                     Toast.makeText(SplashScreen.this, "No Internet Access", Toast.LENGTH_SHORT).show();
-                    getPreferences(MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
 
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            startActivity(intent);
-//                            finish();
-//                        }
-//                    }, 3000);
-                }
+                SplashScreen.this.getSharedPreferences("pref", MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -97,6 +94,7 @@ public class SplashScreen extends ActionBarActivity {
         };
 
         mTimer.scheduleAtFixedRate(mTimerTask, new Date(System.currentTimeMillis() + INITIAL_SERVICE_DELAY), INITIAL_SERVICE_DELAY);
+       // mTimer.scheduleAtFixedRate(mTimerTask, INITIAL_SERVICE_DELAY, INITIAL_SERVICE_DELAY);
         //timer.schedule(mTimerTask, new Date(System.currentTimeMillis() + INITIAL_SERVICE_DELAY));
 
 
@@ -118,8 +116,21 @@ public class SplashScreen extends ActionBarActivity {
                     }
 
             }
+
+            @Override
+            public void onRidesRefreshFailed(String error) {
+
+            }
         });
 
     }
-
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

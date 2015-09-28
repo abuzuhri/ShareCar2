@@ -11,7 +11,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.Login;
 import sharearide.com.orchidatech.jma.sharearide.Activity.Main;
@@ -41,9 +44,8 @@ public class RefreshRideService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-//        firstLaunch = intent.getBooleanExtra("FIRST_LAUNCH", false);
-//        Toast.makeText(this, firstLaunch+"", Toast.LENGTH_LONG).show();
-        loadNewData();
+Log.i("Service", "Service is Running");
+               // loadNewData();
     }
 
     public void loadNewData(){
@@ -54,31 +56,35 @@ public class RefreshRideService extends IntentService {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
-                    JSONArray mJsonArray = jsonObject.getJSONArray("json");
-                    for (int i = 0; i < mJsonArray.length(); i++) {
-                        JSONObject mJsonObject = mJsonArray.getJSONObject(i);
-                        long remoteId = Long.parseLong(mJsonObject.getString("id"));
-                        long user_id = Long.parseLong(mJsonObject.getString("user_id"));
-                        String city_from = mJsonObject.getString("city_from");
-                        String city_to = mJsonObject.getString("city_to");
-                        String state_from = mJsonObject.getString("state_from");
-                        String state_to = mJsonObject.getString("state_to");
-                        String country_from = mJsonObject.getString("country_from");
-                        String country_to = mJsonObject.getString("country_to");
-                        long date_time = mJsonObject.getLong("date_time");
-                        double price = Double.parseDouble(mJsonObject.getString("price"));
-                        Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
-                        RideDAO.addNewRide(ride);
+                   boolean success = jsonObject.getBoolean("success");
+                    if(success) {
+                        JSONArray mJsonArray = jsonObject.getJSONArray("rides");
+                        for (int i = 0; i < mJsonArray.length(); i++) {
+                            JSONObject mJsonObject = mJsonArray.getJSONObject(i);
+                            long remoteId = Long.parseLong(mJsonObject.getString("id"));
+                            long user_id = Long.parseLong(mJsonObject.getString("user_id"));
+                            String city_from = mJsonObject.getString("city_from");
+                            String city_to = mJsonObject.getString("city_to");
+                            String state_from = mJsonObject.getString("state_from");
+                            String state_to = mJsonObject.getString("state_to");
+                            String country_from = mJsonObject.getString("country_from");
+                            String country_to = mJsonObject.getString("country_to");
+                            long date_time = mJsonObject.getLong("date_time");
+                            double price = Double.parseDouble(mJsonObject.getString("price"));
+                            Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
+                            RideDAO.addNewRide(ride);
+                        }
+                             // Log.i("RefreshRideService", allFetchedRides.size()+"");
+
+
+                        ///To Ensure that max num of items in db is 200....
+                        ArrayList<Ride> allStoredRides = new ArrayList<>(RideDAO.getAllRides());
+                        int numOfRemovedRides = allStoredRides.size() - MAX_NUM_RIDES;
+                        for (int delRideIndex = 0; delRideIndex < numOfRemovedRides; delRideIndex++)
+                            RideDAO.deleteRide(allStoredRides.get(delRideIndex).getId());
+                    }else{
+                        //Toast.makeText(RefreshRideService.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                     }
-                    ///      Log.i("RefreshRideService", allFetchedRides.size()+"");
-
-
-                    ///To Ensure that max num of items in db is 200....
-                    ArrayList<Ride> allStoredRides = new ArrayList<>(RideDAO.getAllRides());
-                    int numOfRemovedRides = allStoredRides.size() - MAX_NUM_RIDES;
-                    for (int delRideIndex = 0; delRideIndex < numOfRemovedRides; delRideIndex++)
-                        RideDAO.deleteRide(allStoredRides.get(delRideIndex).getId());
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (EmptyFieldException e) {

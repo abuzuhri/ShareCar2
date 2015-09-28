@@ -232,7 +232,15 @@ public class UserOperations {
     }
 
     public void getSearchResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.SEARCH_URL, new Response.Listener<JSONObject>() {
+        String url = UrlConstant.SEARCH_URL +"?city_from=" + params.get("city_from")
+                +"&city_to=" + params.get("city_to")
+                +"&state_from=" + params.get("state_from")
+                +"&state_to=" + params.get("state_to")
+                +"&country_from=" + params.get("country_from")
+                +"&country_to=" + params.get("country_to")
+                +"&date_time=" + params.get("date_time");
+        Log.i("Ride", url);
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
@@ -253,11 +261,14 @@ public class UserOperations {
     }
 
     public void getPublicUserInfo(Map<String,String> params, final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.PUBLIC_USER_DATA, new Response.Listener<JSONObject>() {
+        String url = UrlConstant.PUBLIC_USER_DATA + "?id="+params.get("id");
+        Log.i("getPublicUserInfo", url);
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
                         try {
+
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
                             e.printStackTrace();

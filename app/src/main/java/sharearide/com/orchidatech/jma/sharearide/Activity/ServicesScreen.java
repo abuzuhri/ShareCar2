@@ -219,12 +219,12 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void find_a_ride(final OnSearchListener listener, final Context context, final String item){
+    public void find_a_ride(final OnSearchListener listener, final Context context,  final String city_from, final String city_to, final String state_from, final String state_to, final String country_from, final String country_to, final long date_time){
         InternetConnectionChecker.isConnectedToInternet(getApplicationContext(), new OnInternetConnectionListener() {
             @Override
             public void internetConnectionStatus(boolean status) {
                 if(status)
-                    MainUserFunctions.find_a_ride(listener, context, item);
+                    MainUserFunctions.find_a_ride(listener, context, city_from, city_to, state_from, state_to, country_from, country_to, date_time);
                 else
                     listener.onSearchFailed("No Internet Access..");
             }

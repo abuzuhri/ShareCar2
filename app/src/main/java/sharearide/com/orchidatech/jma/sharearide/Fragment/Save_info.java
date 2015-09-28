@@ -1,4 +1,4 @@
-package sharearide.com.orchidatech.jma.sharearide.Activity;
+package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
