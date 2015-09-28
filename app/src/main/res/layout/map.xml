@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/tool_bar"
-        layout="@layout/tool_bar" />
+        layout="@layout/toolbar" />
 
     <org.osmdroid.views.MapView
         android:id="@+id/mapview"

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include layout="@layout/tool_bar"
+        <include layout="@layout/toolbar"
             android:id="@+id/tool_bar"/>
 
     </LinearLayout>

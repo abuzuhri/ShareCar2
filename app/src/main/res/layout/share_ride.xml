@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/tool_bar"
-        layout="@layout/tool_bar"
+        layout="@layout/toolbar"
         />
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
