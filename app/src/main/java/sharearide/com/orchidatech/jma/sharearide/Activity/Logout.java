@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +18,7 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 
 public class Logout extends AppCompatActivity {
     private ImageView logo;
-    private Button find_ride_btn,logout_Btn,offer_btn;
+    private Button inbox,logout_Btn,share_ride_Btn;
     ;
 
     @Override
@@ -32,18 +33,18 @@ public class Logout extends AppCompatActivity {
         logo.getLayoutParams().width
                 =(int)(width*0.45);
         logout_Btn=(Button)findViewById(R.id.logout_Btn);
-        offer_btn=(Button)findViewById(R.id.offer_btn);
-        find_ride_btn=(Button)findViewById(R.id.find_ride_btn);
+        share_ride_Btn=(Button)findViewById(R.id.share_ride_Btn);
+        inbox=(Button)findViewById(R.id.inbox);
 
         logout_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Logout.this,Main.class);
-                startActivity(i);
+                getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE).edit().remove("id").commit();
+                startActivity(new Intent(Logout.this, Login.class));
             }
         });
 
-        find_ride_btn.setOnClickListener(new View.OnClickListener() {
+        share_ride_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(Logout.this,ShareRide.class);
@@ -51,10 +52,10 @@ public class Logout extends AppCompatActivity {
             }
         });
 
-        offer_btn.setOnClickListener(new View.OnClickListener() {
+        inbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Logout.this,ShareRide.class);
+                Intent i=new Intent(Logout.this,Inbox.class);
                 startActivity(i);
             }
         });

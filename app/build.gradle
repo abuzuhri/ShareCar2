@@ -53,6 +53,7 @@ dependencies {
     compile(name: 'osmbonuspack_v5.3', ext: 'aar')
     compile 'org.osmdroid:osmdroid-android:4.3'
     compile 'org.slf4j:slf4j-android:1.6.1-RC1'
+    compile 'com.github.citux:datetimepicker:0.1.2'
 
     /*
     compile 'org.apache.commons:commons-lang3:3.3.2'

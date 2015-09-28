@@ -65,29 +65,41 @@
             android:name=".Activity.ServicesScreen"
             android:label="Services Screen" />
 
-        <service android:name=".Services.RefreshRideService" />
+        <service
+            android:name=".Services.RefreshRideService"
+            android:enabled="true"
+            android:exported="false"
+            android:stopWithTask="true"
+            />
 
         <activity
             android:name=".Activity.NewUser"
             android:label="@string/title_activity_signup" />
+
         <activity
             android:name=".Activity.Login"
             android:label="@string/title_activity_login" />
+
         <activity
             android:name=".Activity.SearchResult"
             android:label="@string/title_activity_search_result" />
+
         <activity
             android:name=".Activity.Logout"
             android:label="@string/title_activity_logout" />
+
         <activity
             android:name=".Activity.ResetPassword"
             android:label="@string/title_activity_reset_password" />
+
         <activity
             android:name=".Activity.Inbox"
             android:label="@string/title_activity_inbox" />
+
         <activity
             android:name=".Activity.Warning"
             android:label="@string/title_activity_warning"></activity>
+
         <activity
             android:name=".Activity.MapViewActivity"
             android:label="@string/title_activity_map"></activity>
@@ -103,8 +115,6 @@
         <activity
             android:name=".Activity.MoreInfo"
             android:label="@string/title_activity_more_info"></activity>
-
-
 
 
         <provider
@@ -127,7 +137,6 @@
         <activity
             android:name=".Chat.ChatActivity"
             android:logo="@drawable/ic_contact_picture"></activity>
-
 
 
     </application>

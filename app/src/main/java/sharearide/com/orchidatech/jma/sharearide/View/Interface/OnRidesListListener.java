@@ -11,4 +11,5 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
  */
 public interface OnRidesListListener {
     public void onRidesRefresh(ArrayList<Ride> newItems);
+    public void onRidesRefreshFailed(String error);
 }

@@ -7,7 +7,6 @@
     android:orientation="vertical"
     android:background="@drawable/backgro">
 
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,6 +15,7 @@
         android:background="@drawable/logo"
         android:layout_marginTop="@dimen/vertical_logoTop"
         android:layout_marginBottom="@dimen/vertical_logoBottom"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,9 +28,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="Share a Ride"
         android:textColor="@color/blueText"
-        android:id="@+id/logout_Btn"
+        android:id="@+id/share_ride_Btn"
         android:gravity="center"
         android:layout_marginLeft="@dimen/horizontal_margin"
         android:layout_marginRight="@dimen/horizontal_margin"
@@ -43,10 +43,10 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find a Ride"
+        android:text="Inbox"
         android:textColor="@color/whiteText"
         android:background="@drawable/blue_roundedbtn"
-        android:id="@+id/find_ride_btn"
+        android:id="@+id/inbox"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/vertical_margin_btwn_view"
@@ -57,10 +57,10 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Offer a Ride"
+        android:text="Logout"
         android:textColor="@color/whiteText"
         android:background="@drawable/blue_roundedbtn"
-        android:id="@+id/offer_btn"
+        android:id="@+id/logout_Btn"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/horizontal_margin"

@@ -4,7 +4,6 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
  * Created by Amal on 9/17/2015.
  */
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
+import com.android.datetimepicker.date.DatePickerDialog;
+import com.android.datetimepicker.time.RadialPickerLayout;
+import com.android.datetimepicker.time.TimePickerDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,11 +29,12 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 
-public class AddRide extends Fragment {
+public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 private Button save,more_info;
     private Context context;
     private EditText cityFrom,cityTo,countryFrom,countryTo,stateFrom,stateTo,time,date;
     private EditText price;
+    private Calendar calendar;
 
 
     @Override
@@ -49,20 +53,48 @@ private Button save,more_info;
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePicker dialog = new TimePicker();
-
-                dialog.show(getActivity().getFragmentManager(), "Time Dialog");
+                TimePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
             }
         });
+
+        time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    TimePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
+                }
+            }
+        });
+
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePicker dialog = new DatePicker();
-                dialog.show(getActivity().getFragmentManager(), "Date Dialog");
+               /* DatePicker dialog = new DatePicker();
+                dialog.show(getActivity().getFragmentManager(), "Date Dialog");*/
+                DatePickerDialog dialog = DatePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                dialog.setMinDate(calendar);
+                dialog.setCancelable(false);
+                dialog.show(getActivity().getFragmentManager(), "datePicker");
+            }
+       });
+
+        date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) {
+//                    DatePicker dialog = DatePicker.getInstance();
+//                    dialog.showDateDialog();
+                    DatePickerDialog dialog = DatePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                    dialog.setMinDate(calendar);
+                    dialog.setCancelable(false);
+                    dialog.show(getActivity().getFragmentManager(), "datePicker");
+
+                }
             }
         });
+
         price=(EditText)v.findViewById(R.id.price);
-context = getActivity();
+        context = getActivity();
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +112,6 @@ context = getActivity();
                 else if (countryTo.getText().toString().equals(""))
                     countryTo.setError("Required Field ");
                 else{
-
                     offerRide(context.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1),
                             cityFrom.getText().toString(), cityTo.getText().toString(),
                             stateFrom.getText().toString(), stateTo.getText().toString(),
@@ -99,6 +130,12 @@ context = getActivity();
             }
         });
         return v;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        calendar = Calendar.getInstance();
     }
 
     private long date_time_converter() {
@@ -138,11 +175,13 @@ context = getActivity();
             return "0" + String.valueOf(value);
     }
 
-    public void onDateSet(int year, int month, int day) {
-        date.setText(buildValueOf(day) + "/" + buildValueOf(month) + "/" + year);
+    @Override
+    public void onTimeSet(RadialPickerLayout radialPickerLayout, int hour, int minute) {
+        time.setText(buildValueOf(hour) + ":" + buildValueOf(minute));
     }
 
-    public void onTimeSet(int hour, int minute) {
-        time.setText(buildValueOf(hour) + ":" + buildValueOf(minute));
+    @Override
+    public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
+        date.setText(buildValueOf(day) + "/" + buildValueOf(month+1) + "/" + year);
     }
 }
