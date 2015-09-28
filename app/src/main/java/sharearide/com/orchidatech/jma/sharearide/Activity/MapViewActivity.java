@@ -2,6 +2,7 @@ package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -28,35 +29,51 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 /**
  * Created by sms-1 on 9/21/2015.
  */
-public class MapViewActivity extends AppCompatActivity{
+public class MapViewActivity extends AppCompatActivity {
 
     MapView map;
     //private MapController mapController;
 
     private Toolbar tool_bar;
 
+    private GeoPoint startPoint;
+    private GeoPoint endPoint;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Disable StrictMode.ThreadPolicy to perform network calls in the UI thread.
         //Yes, it's not the good practice, but this is just a tutorial!
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        //StrictMode.setThreadPolicy(policy);
 
-
-        //Introduction
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
+
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
+
         map = (MapView) findViewById(R.id.mapview);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
-        GeoPoint startPoint = new GeoPoint(31.52333,34.44664);
+
+    }
+
+    public void setStartPoint(double aLongitude, double aAltitude) {
+        startPoint = new GeoPoint(aLongitude, aAltitude);
+    }
+
+    public void setEndPoint(double aLongitude, double aAltitude) {
+        endPoint = new GeoPoint(aLongitude, aAltitude);
+    }
+
+    private void initializeRoute() {
+
+        //GeoPoint startPoint = new GeoPoint(31.52333, 34.44664);
         IMapController mapController = map.getController();
         mapController.setZoom(10);
         mapController.setCenter(startPoint);
 
-        //0. Using the Marker overlay
+        // Using the Marker overlay
         Marker startMarker = new Marker(map);
         startMarker.setPosition(startPoint);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
@@ -68,14 +85,14 @@ public class MapViewActivity extends AppCompatActivity{
         //startMarker.setOnMarkerDragListener(new OnMarkerDragListenerDrawer());
         map.getOverlays().add(startMarker);
 
-        //1. "Hello, Routing World"
+
         RoadManager roadManager = new OSRMRoadManager();
-        //2. Playing with the RoadManager
+
         //roadManager roadManager = new MapQuestRoadManager("YOUR_API_KEY");
         //roadManager.addRequestOption("routeType=bicycle");
         ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
         waypoints.add(startPoint);
-        GeoPoint endPoint = new GeoPoint(31.51381,34.44193);
+        //GeoPoint endPoint = new GeoPoint(31.51381, 34.44193);
         waypoints.add(endPoint);
         Road road = roadManager.getRoad(waypoints);
         if (road.mStatus != Road.STATUS_OK)
@@ -84,7 +101,7 @@ public class MapViewActivity extends AppCompatActivity{
         Polyline roadOverlay = RoadManager.buildRoadOverlay(road, this);
         map.getOverlays().add(roadOverlay);
 
-        //3. Showing the Route steps on the map
+        // Showing the Route steps on the map
         FolderOverlay roadMarkers = new FolderOverlay(this);
         map.getOverlays().add(roadMarkers);
         Drawable nodeIcon = getResources().getDrawable(R.drawable.marker_node);
@@ -94,16 +111,17 @@ public class MapViewActivity extends AppCompatActivity{
             nodeMarker.setPosition(node.mLocation);
             nodeMarker.setIcon(nodeIcon);
 
-            //4. Filling the bubbles
+            // Filling the bubbles
             nodeMarker.setTitle("Step " + i);
             nodeMarker.setSnippet(node.mInstructions);
             nodeMarker.setSubDescription(Road.getLengthDurationText(node.mLength, node.mDuration));
             Drawable iconContinue = getResources().getDrawable(R.drawable.ic_continue);
             nodeMarker.setImage(iconContinue);
-            //4. end
+            // end
 
             roadMarkers.add(nodeMarker);
         }
 
     }
+
 }

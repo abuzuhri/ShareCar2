@@ -2,7 +2,9 @@ package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,8 +13,9 @@ import android.view.View;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 
-public class Inbox extends ActionBarActivity {
-private android.support.design.widget.FloatingActionButton addMessage;
+public class Inbox extends AppCompatActivity {
+
+    private FloatingActionButton addMessage;
     private Toolbar tool_bar;
 
     @Override
@@ -23,11 +26,11 @@ private android.support.design.widget.FloatingActionButton addMessage;
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
 
-        addMessage=(android.support.design.widget.FloatingActionButton)findViewById(R.id.addMessage);
+        addMessage = (FloatingActionButton) findViewById(R.id.addMessage);
         addMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Inbox.this,MapViewActivity.class);
+                Intent i = new Intent(Inbox.this, MapViewActivity.class);
                 startActivity(i);
             }
         });

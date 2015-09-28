@@ -1,22 +1,18 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Display;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 
 import java.util.List;
 
 import sharearide.com.orchidatech.jma.sharearide.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.R;
-import sharearide.com.orchidatech.jma.sharearide.View.Adapter.MyAdapter;
+import sharearide.com.orchidatech.jma.sharearide.View.Adapter.SearchResultAdapter;
 
 
 public class SearchResult extends ActionBarActivity {
@@ -102,7 +98,7 @@ public class SearchResult extends ActionBarActivity {
         List<Ride> rides = ride.initializeData();
         //List<Ride> rides = RideDAO.getAllRides();
 
-        MyAdapter adapter = new MyAdapter(rides);
+        SearchResultAdapter adapter = new SearchResultAdapter(rides);
         rv.setAdapter(adapter);
 
     }
