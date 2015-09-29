@@ -44,8 +44,8 @@ public class RefreshRideService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-Log.i("Service", "Service is Running");
-               // loadNewData();
+//Log.i("Service", "Service is Running");
+                loadNewData();
     }
 
     public void loadNewData(){

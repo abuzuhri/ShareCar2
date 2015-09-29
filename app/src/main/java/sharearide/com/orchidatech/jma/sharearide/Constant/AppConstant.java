@@ -45,5 +45,25 @@ public class AppConstant {
             c.setTimeInMillis(milliseconds);
             return c.getTime();
         }
+
+        public static String getDate(long milliSeconds)
+        {
+
+            // Create a DateFormatter object for displaying date in specified format.
+
+            // Create a calendar object that will convert the date and time value in milliseconds to date.
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(milliSeconds);
+            String fullDate = buildValueOf(calendar.get(Calendar.DAY_OF_MONTH)) + "/"+buildValueOf(calendar.get(Calendar.MONTH))+ "/" + calendar.get(Calendar.YEAR) + " "+
+                    buildValueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + buildValueOf(calendar.get(Calendar.MINUTE));
+            return fullDate;
+        }
+
+        private static String buildValueOf(int value) {
+            if (value >= 10)
+                return String.valueOf(value);
+            else
+                return "0" + String.valueOf(value);
+        }
     }
 }

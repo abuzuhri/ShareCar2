@@ -22,6 +22,12 @@ public class UserDAO {
     public static final String NAME = "name";
 
     //<editor-fold defaultstate="collapsed" desc="addNewUser(long userId, String username, String password, String image, String address, long birthdate, String gender, String phone, String email){...}">
+   public static long addNewUser(User user) throws EmptyFieldException, InvalidInputException {
+            if(checkUserExist(user.getRemoteId()) == -1)
+                return user.save();
+        else
+                return user.getRemoteId();
+   }
     public static long addNewUser(long userId, String username, String password, String image,
                                   String address, long birthdate, String gender, String phone, String email)
             throws EmptyFieldException, InvalidInputException {
@@ -74,9 +80,13 @@ public class UserDAO {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="checkUserExist(long userId){...}">
+
     public static long checkUserExist(long userId) {
         User user = new Select().from(User.class).where("remote_id = ?", userId).executeSingle();
-        return user.getId();
+        if(user != null)
+             return user.getId();
+        else
+            return -1;
     }
     //</editor-fold>
 
@@ -263,7 +273,7 @@ public class UserDAO {
 
     //<editor-fold defaultstate="collapsed" desc="getUserById(long userId){...}">
     public static User getUserById(long userId) {
-        return new Select().from(User.class).where("UserId = ?", userId).executeSingle();
+        return new Select().from(User.class).where("remote_id = ?", userId).executeSingle();
     }
 
     //</editor-fold>

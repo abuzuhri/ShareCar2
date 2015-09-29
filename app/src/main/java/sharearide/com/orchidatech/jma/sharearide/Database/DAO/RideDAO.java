@@ -75,12 +75,12 @@ public class RideDAO {
             throw new EmptyFieldException("To country field is empty !");
         }
 
-        if (r.dateTime == 0) {
+      //  if (r.dateTime == 0) {
             ride.dateTime = r.dateTime;
-        } else {
-            isValid = false;
-            throw new InvalidInputException("Invalid date value !");
-        }
+//        } else {
+//            isValid = false;
+//            throw new InvalidInputException("Invalid date value !");
+//        }
 
         if (r.cost == 0) {
             ride.cost = r.cost;
@@ -215,8 +215,8 @@ public class RideDAO {
     }
 
     public static Ride getRideById(long rideId) {
-        //  return new Select().from(Ride.class).where("RideId = ?", rideId).executeSingle();
-        return Ride.load(Ride.class, rideId);
+          return new Select().from(Ride.class).where("remote_id = ?", rideId).executeSingle();
+//        return Ride.load(Ride.class, rideId);
     }
 
     public static Ride getRideByRemoteId(long rideRemoteId) {

@@ -71,7 +71,7 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-                Toast.makeText(context, "An Error Occurred, try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -97,7 +97,7 @@ public class MainUserFunctions {
                              JSONArray mJsonArray = jsonObject.getJSONArray("signup");
                             JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                             long user_id = Long.parseLong(mJsonObject.getString("id"));
-                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
+//                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
                             Toast.makeText(context, "Registered Succeeded, login to continue...", Toast.LENGTH_LONG).show();
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -112,17 +112,14 @@ public class MainUserFunctions {
                     }
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (EmptyFieldException e) {
-                    e.printStackTrace();
-                } catch (InvalidInputException e) {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
 
             @Override
             public void onFail(String error) {
-                Toast.makeText(context, "An Error Occurred, try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -477,7 +474,6 @@ public class MainUserFunctions {
                        boolean success = jsonObject.getBoolean("success");
                     if(success) {
                         mJsonArray = jsonObject.getJSONArray("rides");
-
                         for (int i = 0; i < mJsonArray.length(); i++) {
                             JSONObject mJsonObject = mJsonArray.getJSONObject(i);
                             long remoteId = Long.parseLong(mJsonObject.getString("id"));
@@ -491,46 +487,54 @@ public class MainUserFunctions {
                             long date_time = mJsonObject.getLong("date_time");
                             double price = Double.parseDouble(mJsonObject.getString("price"));
                             Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
-                            // RideDAO.addNewRide(ride);
                             allMatchedRides.add(ride);
+                            JSONObject userJsonObject = mJsonObject.getJSONObject("user");
+                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, userJsonObject.getLong("birthdate"), userJsonObject.getString("Gender"));
+                            matchedRidesData.put(ride, user);
+
+//                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
 
                         }
+                        listener.onSearchSucceed(allMatchedRides, matchedRidesData);
 
                         ///fetch user data for all matched rides
-
-                        for (final Ride ride : allMatchedRides) {
-                            params.clear();
-                            params.put("id", String.valueOf(ride.getUserId()));
-                            UserOperations.getInstance(context).getPublicUserInfo(params, new OnLoadFinished() {
-                                @Override
-                                public void onSuccess(JSONObject jsonObject) {
-
-                                    try {
-                                        boolean success = jsonObject.getBoolean("success");
-                                        if (success) {
-                                            JSONArray mJsonArray = jsonObject.getJSONArray("user");
-                                            JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-                                            User user = new User(ride.getUserId(), null, mJsonObject.getString("username"), null, mJsonObject.getString("img"), mJsonObject.getString("phone"), null, null, mJsonObject.getLong("birthdate"), mJsonObject.getString("Gender"));
-                                            matchedRidesData.put(ride, user);
-                                            if (allMatchedRides.get(allMatchedRides.size() - 1).getRemoteId() == ride.getRemoteId()) {
-                                                listener.onSearchSucceed(allMatchedRides, matchedRidesData);
-                                            }
-                                        } else {
-//                                            Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-//                                            listener.onSearchSucceed(allMatchedRides, matchedRidesData);
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-
-                                @Override
-                                public void onFail(String error) {
-                                }
-                            });
-
-                        }
+//
+//                        for (final Ride ride : allMatchedRides) {
+//                            params.clear();
+//                            params.put("id", String.valueOf(ride.getUserId()));
+//
+//                            UserOperations.getInstance(context).getPublicUserInfo(params, new OnLoadFinished() {
+//                                @Override
+//                                public void onSuccess(JSONObject jsonObject) {
+//
+//                                    try {
+//                                        boolean success = jsonObject.getBoolean("success");
+//                                        if (success) {
+//                                            JSONArray mJsonArray = jsonObject.getJSONArray("user");
+//                                            JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+//                                            User user = new User(ride.getUserId(), null, mJsonObject.getString("username"), null, mJsonObject.getString("img"), mJsonObject.getString("phone"), null, null, mJsonObject.getLong("birthdate"), mJsonObject.getString("Gender"));
+//                                            matchedRidesData.put(ride, user);
+//                                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
+//                                            if (matchedRidesData.size() == allMatchedRides.size()) {
+//                                                listener.onSearchSucceed(allMatchedRides, matchedRidesData);
+//                                            }
+//                                        } else {
+////                                            Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+////                                            listener.onSearchSucceed(allMatchedRides, matchedRidesData);
+//                                        }
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                }
+//
+//                                @Override
+//                                public void onFail(String error) {
+//
+//                                }
+//                            });
+//
+//                        }
                     }else{
                         Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                         listener.onSearchSucceed(allMatchedRides, matchedRidesData);
@@ -538,7 +542,6 @@ public class MainUserFunctions {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
                 //listener.onSearchSucceed(matchedRidesData);
 
 
@@ -546,7 +549,8 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-
+                    Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+listener.onSearchFailed(error);
             }
         });
     }
@@ -573,7 +577,7 @@ public class MainUserFunctions {
                     long remoteId = Long.parseLong(mJsonObject.getString("id"));
                    /* Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                     RideDAO.addNewRide(ride);*/
-                        Toast.makeText(context, "Added Successfully , "+remoteId, Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Added Successfully", Toast.LENGTH_LONG).show();
 
                 }else{
                         String message = jsonObject.getString("message");
@@ -693,5 +697,11 @@ public class MainUserFunctions {
 
             }
         });
+    }
+   private interface OnItemFetched{
+       public void itemFetched(User user);
+   }
+    private void fetchData(){
+
     }
 }

@@ -38,6 +38,8 @@ public class SplashScreen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
+        UserDAO.deleteAllUsers();
+        RideDAO.deleteAllRides();
         user_id = this.getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1);
        setTimerForRefreshRideService();
 //         this.startService(new Intent(this, RefreshRideService.class));

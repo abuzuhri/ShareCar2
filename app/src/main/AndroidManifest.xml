@@ -6,6 +6,8 @@
     <permission
         android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <uses-permission android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -70,6 +72,10 @@
         <activity
             android:name=".Activity.NewUser"
             android:label="@string/title_activity_signup" />
+
+        <activity
+            android:name=".Activity.Save_info"
+            android:label="Save_info" />
 
         <activity
             android:name=".Activity.Login"

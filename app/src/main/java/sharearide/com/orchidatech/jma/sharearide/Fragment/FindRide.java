@@ -4,6 +4,7 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
  * Created by Amal on 9/17/2015.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import sharearide.com.orchidatech.jma.sharearide.Activity.SearchResult;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
@@ -93,26 +95,24 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Intent intent = new Intent(getActivity(), SearchResult.class);
+                ArrayList<String> params = new ArrayList<String>();
+                params.add(cityFrom.getText().toString());
+                params.add(cityTo.getText().toString());
+                params.add(stateFrom.getText().toString());
+                params.add(stateTo.getText().toString());
+                params.add(countryFrom.getText().toString());
+                params.add(countryTo.getText().toString());
+                params.add(date_time_converter()+"");
+                intent.putStringArrayListExtra("PARAMS", params);
                 InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
                     @Override
                     public void internetConnectionStatus(boolean status) {
-                        if (status) {
-                            MainUserFunctions.find_a_ride(new OnSearchListener() {
-                                                              @Override
-                                                              public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData) {
-
-                                                                  Toast.makeText(getActivity().getApplicationContext(), matchedRides.size() + ", " + matchedRidesData.size(), Toast.LENGTH_LONG).show();
-
-                                                              }
-
-                                                              @Override
-                                                              public void onSearchFailed(String error) {
-                                                              }
-                                                          }, getActivity(), cityFrom.getText().toString(), cityTo.getText().toString(), stateFrom.getText().toString(),
-                                    stateTo.getText().toString(), countryFrom.getText().toString(), countryTo.getText().toString(),
-                                    date_time_converter());
-                        } else
+                        if(status){
+                            startActivity(intent);
+                        }else
                             Toast.makeText(getActivity(), "No Internet Access..", Toast.LENGTH_LONG).show();
+
                     }
                 });
 
