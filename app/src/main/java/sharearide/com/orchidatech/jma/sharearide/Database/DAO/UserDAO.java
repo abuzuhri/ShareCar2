@@ -111,7 +111,10 @@ public class UserDAO {
     //<editor-fold defaultstate="collapsed" desc="retreivePassword(String email){...}">
     public static String retreivePassword(String email) {
         User user = new Select("Password").from(User.class).where("Email = ?", email).executeSingle();
+        if(user!=null)
         return user.password;
+        else
+            return null;
     }
     //</editor-fold>
 

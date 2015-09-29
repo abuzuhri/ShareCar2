@@ -5,9 +5,7 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
  */
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import sharearide.com.orchidatech.jma.sharearide.Activity.MoreInfo;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
@@ -150,34 +147,9 @@ private Button save,more_info;
                         alertDialog.dismiss();
                     }
                 });
-
                 // show it
                 alertDialog.show();
-
-
-
-/*
-                // custom dialog
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.more_info);
-               // dialog.setTitle("Title...");
-
-                // set the custom dialog components - text, image and button
-                TextView tittle = (TextView) dialog.findViewById(R.id.tittle);
-             //   tittle.setText("Android custom dialog example!");
-                ImageButton confirm_btn = (ImageButton) dialog.findViewById(R.id.confirm_btn);
-
-
-                // if button is clicked, close the custom dialog
-                confirm_btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-            */}
+}
         });
         return v;
     }

@@ -110,9 +110,6 @@
         <activity
             android:name=".Activity.Main"
             android:label="@string/title_activity_main" />
-        <activity
-            android:name=".Activity.MoreInfo"
-            android:label="@string/title_activity_more_info" />
 
         <activity
             android:name=".Chat.SettingsActivity"

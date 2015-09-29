@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
@@ -43,8 +44,8 @@ public class MapViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //Disable StrictMode.ThreadPolicy to perform network calls in the UI thread.
         //Yes, it's not the good practice, but this is just a tutorial!
-        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        //StrictMode.setThreadPolicy(policy);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+      StrictMode.setThreadPolicy(policy);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
@@ -55,7 +56,13 @@ public class MapViewActivity extends AppCompatActivity {
         map = (MapView) findViewById(R.id.mapview);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
-
+        setStartPoint(31.52333, 34.44664);
+        setEndPoint(31.51381, 34.44193);
+        initializeRoute();
+       Intent intent=getIntent();
+       String cityFrom= intent.getStringExtra("CityFrom");
+       String cityTo=intent.getStringExtra("CityTo");
+       Toast.makeText(MapViewActivity.this,cityFrom+""+cityTo,Toast.LENGTH_LONG).show();
     }
 
     public void setStartPoint(double aLongitude, double aAltitude) {
