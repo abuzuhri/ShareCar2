@@ -97,8 +97,14 @@ public class MainUserFunctions {
                              JSONArray mJsonArray = jsonObject.getJSONArray("signup");
                             JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                             long user_id = Long.parseLong(mJsonObject.getString("id"));
-//                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
-                            Toast.makeText(context, "Registered Succeeded, login to continue...", Toast.LENGTH_LONG).show();
+                        try {
+                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
+                        } catch (EmptyFieldException e) {
+                            e.printStackTrace();
+                        } catch (InvalidInputException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(context, "Registered Succeeded, login to continue...", Toast.LENGTH_LONG).show();
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

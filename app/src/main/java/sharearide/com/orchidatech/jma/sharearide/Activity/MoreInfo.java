@@ -14,14 +14,14 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 
 
 public class MoreInfo extends ActionBarActivity {
-private ImageButton  close_btn;
+private ImageButton  confirm_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.more_info);
 
-        close_btn=(ImageButton)findViewById(R.id.close_btn);
-        close_btn.setOnClickListener(new View.OnClickListener() {
+        confirm_btn=(ImageButton)findViewById(R.id.confirm_btn);
+        confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(MoreInfo.this, ShareRide.class);

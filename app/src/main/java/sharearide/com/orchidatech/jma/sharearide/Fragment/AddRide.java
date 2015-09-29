@@ -4,6 +4,8 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
  * Created by Amal on 9/17/2015.
  */
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ private Button save,more_info;
     private Calendar calendar;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.add_ride,container,false);
@@ -60,7 +63,7 @@ private Button save,more_info;
         time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(b){
+                if (b) {
                     TimePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
                 }
             }
@@ -76,12 +79,12 @@ private Button save,more_info;
                 dialog.setCancelable(false);
                 dialog.show(getActivity().getFragmentManager(), "datePicker");
             }
-       });
+        });
 
         date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(b) {
+                if (b) {
 //                    DatePicker dialog = DatePicker.getInstance();
 //                    dialog.showDateDialog();
                     DatePickerDialog dialog = DatePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -123,11 +126,58 @@ private Button save,more_info;
         });
 
         more_info.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-              Intent i = new Intent(getActivity(),MoreInfo.class);
-              startActivity(i);
-            }
+            public void onClick(View arg0) {
+
+                LayoutInflater li = LayoutInflater.from(context);
+                View v = li.inflate(R.layout.more_info, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
+
+                // set more_info.xml to alertdialog builder
+                alertDialogBuilder.setView(v);
+                TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                ImageButton confirm_btn = (ImageButton) v.findViewById(R.id.confirm_btn);
+                EditText info = (EditText) v.findViewById(R.id.info);
+
+                // create alert dialog
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+                confirm_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                // show it
+                alertDialog.show();
+
+
+
+/*
+                // custom dialog
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.more_info);
+               // dialog.setTitle("Title...");
+
+                // set the custom dialog components - text, image and button
+                TextView tittle = (TextView) dialog.findViewById(R.id.tittle);
+             //   tittle.setText("Android custom dialog example!");
+                ImageButton confirm_btn = (ImageButton) dialog.findViewById(R.id.confirm_btn);
+
+
+                // if button is clicked, close the custom dialog
+                confirm_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+            */}
         });
         return v;
     }
