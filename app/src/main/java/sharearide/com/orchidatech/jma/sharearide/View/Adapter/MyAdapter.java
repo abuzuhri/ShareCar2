@@ -110,7 +110,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             Display display = activity.getWindowManager().getDefaultDisplay();
             int height = display.getHeight();
             int width = display.getWidth();
-            result_img.getLayoutParams().height = (int) (height * 0.09);
+            result_img.getLayoutParams().height = (int) (height * 0.08);
             result_img.getLayoutParams().width = (int) (width * 0.09);
 
             date.getLayoutParams().height = (int) (height * 0.04);
@@ -126,7 +126,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
-            Toast.makeText(activity.getApplicationContext(), ridesData.get(rides.get(position)).getEmail(), Toast.LENGTH_LONG ).show();
             listener.onItemClicked(rides.get(position), ridesData.get(rides.get(position)));
         }
     }

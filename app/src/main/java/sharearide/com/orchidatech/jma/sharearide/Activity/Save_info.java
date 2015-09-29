@@ -56,22 +56,22 @@ public class Save_info  extends Activity {
         send_mail=(ImageButton)findViewById(R.id.send_mail);
         send_msg=(ImageButton)findViewById(R.id.send_msg);
         call=(ImageButton)findViewById(R.id.call);
-     call.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-             Uri number = Uri.parse("tel:"+phone.getText().toString());
-             Intent callIntent = new Intent(Intent.ACTION_CALL, number);
-             startActivity(callIntent);
-         }
-     });
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri number = Uri.parse("tel:"+phone.getText().toString());
+                Intent callIntent = new Intent(Intent.ACTION_CALL, number);
+                startActivity(callIntent);
+            }
+        });
 
         send_mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto",email.getText().toString(), null));
-      //          emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-        //        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                //          emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                //        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
         });

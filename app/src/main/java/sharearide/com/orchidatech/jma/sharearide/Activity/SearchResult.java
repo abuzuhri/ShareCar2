@@ -114,8 +114,31 @@ public class SearchResult extends ActionBarActivity {
         ridesData = new HashMap<>();
         adapter = new MyAdapter(SearchResult.this, rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
             @Override
-            public void onItemClicked(Ride ride, User user) {
+            public void onItemClicked(Ride selected_ride, User target_user) {
+                Intent intent = new Intent(getApplicationContext(), Save_info.class);
+                Bundle args = new Bundle();
+                ArrayList<String> selected_ride_data = new ArrayList<>();
+                selected_ride_data.add(selected_ride.getRemoteId()+"");
+                selected_ride_data.add(selected_ride.getUserId()+"");
+                selected_ride_data.add(selected_ride.getFromCity());
+                selected_ride_data.add(selected_ride.getToCity());
+                selected_ride_data.add(selected_ride.getFromState());
+                selected_ride_data.add(selected_ride.getToState());
+                selected_ride_data.add(selected_ride.getFromCountry());
+                selected_ride_data.add(selected_ride.getToCountry());
+                selected_ride_data.add(selected_ride.getDateTime()+"");
+                selected_ride_data.add(selected_ride.getCost()+"");
 
+                ArrayList<String> target_user_data = new ArrayList<>();
+                target_user_data.add(target_user.getRemoteId()+"");
+                target_user_data.add(target_user.getUsername());
+                target_user_data.add(target_user.getPhone());
+                target_user_data.add(target_user.getEmail());
+                args.putStringArrayList("RIDE", selected_ride_data);
+                args.putStringArrayList("USER", target_user_data);
+                intent.putExtra("ARGS", args);
+                //            Toast.makeText(activity.getApplicationContext(), ridesData.get(rides.get(position)).getUsername()+"", Toast.LENGTH_LONG).show();
+                startActivity(intent);
             }
         });
         rv.setLayoutManager(llm);
