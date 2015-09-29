@@ -107,39 +107,14 @@ public class SearchResult extends ActionBarActivity {
 
         rv = (RecyclerView) findViewById(R.id.rv);
         rv.setHasFixedSize(true);
-         llm = new LinearLayoutManager(this);
+        llm = new LinearLayoutManager(this);
         //llm.setOrientation(LinearLayoutManager.VERTICAL);
 
         rides = new ArrayList<>();
         ridesData = new HashMap<>();
         adapter = new MyAdapter(SearchResult.this, rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
             @Override
-            public void onItemClicked(Ride selected_ride, User target_user) {
-
-                Intent intent = new Intent(getApplicationContext(), Save_info.class);
-                Bundle args = new Bundle();
-                ArrayList<String> selected_ride_data = new ArrayList<>();
-                selected_ride_data.add(selected_ride.getRemoteId()+"");
-                selected_ride_data.add(selected_ride.getUserId()+"");
-                selected_ride_data.add(selected_ride.getFromCity());
-                selected_ride_data.add(selected_ride.getToCity());
-                selected_ride_data.add(selected_ride.getFromState());
-                selected_ride_data.add(selected_ride.getToState());
-                selected_ride_data.add(selected_ride.getFromCountry());
-                selected_ride_data.add(selected_ride.getToCountry());
-                selected_ride_data.add(selected_ride.getDateTime()+"");
-                selected_ride_data.add(selected_ride.getCost()+"");
-
-                ArrayList<String> target_user_data = new ArrayList<>();
-                target_user_data.add(target_user.getRemoteId()+"");
-                target_user_data.add(target_user.getUsername());
-                target_user_data.add(target_user.getPhone());
-                target_user_data.add(target_user.getEmail());
-                args.putStringArrayList("RIDE", selected_ride_data);
-                args.putStringArrayList("USER", target_user_data);
-                intent.putExtra("ARGS", args);
-                //            Toast.makeText(activity.getApplicationContext(), ridesData.get(rides.get(position)).getUsername()+"", Toast.LENGTH_LONG).show();
-                startActivity(intent);
+            public void onItemClicked(Ride ride, User user) {
 
             }
         });
@@ -150,37 +125,37 @@ public class SearchResult extends ActionBarActivity {
     }
 
     private void findRide(final String city_from, final String city_to, final String state_from, final String state_to, final String country_from, final String country_to, final long date_time) {
-                MainUserFunctions.find_a_ride(new OnSearchListener() {
-                                                  @Override
-                                                  public void onSearchSucceed(ArrayList<sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride> matchedRides, Map<sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride, User> matchedRidesData) {
-                                                Toast.makeText(SearchResult.this, matchedRides.size() + ", " + matchedRidesData.size(), Toast.LENGTH_LONG).show();
-                                                      for(Ride ride : matchedRides) {
-                                                          try {
-                                                              RideDAO.addNewRide(ride);
-                                                              UserDAO.addNewUser(matchedRidesData.get(ride));
-                                                          } catch (EmptyFieldException e) {
-                                                              e.printStackTrace();
-                                                          } catch (InvalidInputException e) {
-                                                              e.printStackTrace();
-                                                          }
-                                                      }
+        MainUserFunctions.find_a_ride(new OnSearchListener() {
+                                          @Override
+                                          public void onSearchSucceed(ArrayList<sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride> matchedRides, Map<sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride, User> matchedRidesData) {
+                                              Toast.makeText(SearchResult.this, matchedRides.size() + ", " + matchedRidesData.size(), Toast.LENGTH_LONG).show();
+                                              for(Ride ride : matchedRides) {
+                                                  try {
+                                                      RideDAO.addNewRide(ride);
+                                                      UserDAO.addNewUser(matchedRidesData.get(ride));
+                                                  } catch (EmptyFieldException e) {
+                                                      e.printStackTrace();
+                                                  } catch (InvalidInputException e) {
+                                                      e.printStackTrace();
+                                                  }
+                                              }
 
-                                                      mProgressBar.setVisibility(View.GONE);
-                                                      rides.addAll(matchedRides);
-                                                      ridesData.putAll(matchedRidesData);
-                                                     adapter.notifyDataSetChanged();
+                                              mProgressBar.setVisibility(View.GONE);
+                                              rides.addAll(matchedRides);
+                                              ridesData.putAll(matchedRidesData);
+                                              adapter.notifyDataSetChanged();
 
 //                                                     Toast.makeText(SearchResult.this.getApplicationContext(), matchedRidesData.get(matchedRides.get(0)).getUsername()+"" + matchedRidesData.size(), Toast.LENGTH_LONG).show();
 
-                                                  }
+                                          }
 
-                                                  @Override
-                                                  public void onSearchFailed(String error) {
-                                                      mProgressBar.setVisibility(View.GONE);
-                                                  }
-                                              }, SearchResult.this.getApplicationContext(), city_from, city_to, state_from,
-                        state_to, country_from, country_to,
-                        date_time);
+                                          @Override
+                                          public void onSearchFailed(String error) {
+                                              mProgressBar.setVisibility(View.GONE);
+                                          }
+                                      }, SearchResult.this.getApplicationContext(), city_from, city_to, state_from,
+                state_to, country_from, country_to,
+                date_time);
 
 
 
