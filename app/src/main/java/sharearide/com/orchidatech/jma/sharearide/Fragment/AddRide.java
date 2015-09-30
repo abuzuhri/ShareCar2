@@ -4,14 +4,18 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
  * Created by Amal on 9/17/2015.
  */
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import com.android.datetimepicker.date.DatePickerDialog;
@@ -50,10 +54,13 @@ private Button save,more_info;
         stateTo=(EditText)v.findViewById(R.id.stateTo);
         time=(EditText)v.findViewById(R.id.time);
         date=(EditText)v.findViewById(R.id.date);
+
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TimePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
+                time.setInputType(InputType.TYPE_NULL);
+
             }
         });
 
@@ -205,5 +212,13 @@ private Button save,more_info;
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
         date.setText(buildValueOf(day) + "/" + buildValueOf(month+1) + "/" + year);
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+
+        // or
+        // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 }

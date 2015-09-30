@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class ChatActivity extends Activity implements MessagesFragment.OnFragmen
     private String profileId;
     private String profileName;
     private String profileEmail;
+    private String email;
 
     private GcmUtil gcmUtil;
 
@@ -63,6 +65,21 @@ public class ChatActivity extends Activity implements MessagesFragment.OnFragmen
         registerReceiver(registrationStatusReceiver, new IntentFilter(Common.ACTION_REGISTER));
         gcmUtil = new GcmUtil(getApplicationContext());
 
+    }
+
+
+    public void addContact() {
+
+        email = "";
+
+        try {
+            ContentValues values = new ContentValues(2);
+            values.put(DataProvider.COL_NAME, email.substring(0, email.indexOf('@')));
+            values.put(DataProvider.COL_EMAIL, email);
+            this.getContentResolver().insert(DataProvider.CONTENT_URI_PROFILE, values);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
