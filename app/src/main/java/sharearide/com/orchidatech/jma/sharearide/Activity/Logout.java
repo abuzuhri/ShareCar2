@@ -1,6 +1,7 @@
 
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,8 +13,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
+import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
+import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnChattingListListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 
 
 public class Logout extends AppCompatActivity {
@@ -61,25 +69,19 @@ public class Logout extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_logout, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void last_chatting_users(final Context context, final OnChattingListListener listener, final long id){
+        InternetConnectionChecker.isConnectedToInternet(getApplicationContext(), new OnInternetConnectionListener() {
+            @Override
+            public void internetConnectionStatus(boolean status) {
+                if (status) {
+                    User user = UserDAO.getUserById(id);
+                    String username = user.getUsername();
+                    String password = user.getPassword();
+                    if (username != null && password != null)
+                           MainUserFunctions.last_chatting_users(context, listener, id, username, password);
+                } else
+                    Toast.makeText(context, "No Internet Access..", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

@@ -10,9 +10,12 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat;
+import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 /**
@@ -20,10 +23,12 @@ import sharearide.com.orchidatech.jma.sharearide.R;
  */
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
-    List<Chat> chats;
+    private final Map<Chat, ArrayList<User>> chats_data;
+    ArrayList<Chat> chats;
 
-    public ChatAdapter(List<Chat> chats) {
+    public ChatAdapter(ArrayList<Chat> chats, Map<Chat, ArrayList<User>> chats_data) {
         this.chats = chats;
+        this.chats_data = chats_data;
     }
 
     // Create new views (invoked by the layout manager)

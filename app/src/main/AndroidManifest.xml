@@ -10,8 +10,6 @@
     <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <uses-permission android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
-
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -112,6 +110,9 @@
         <activity
             android:name=".Activity.Main"
             android:label="@string/title_activity_main" />
+        <activity
+            android:name=".Activity.MoreInfo"
+            android:label="@string/title_activity_more_info" />
 
         <activity
             android:name=".Chat.SettingsActivity"

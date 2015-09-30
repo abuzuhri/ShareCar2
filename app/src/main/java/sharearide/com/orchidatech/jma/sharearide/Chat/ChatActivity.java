@@ -45,6 +45,10 @@ public class ChatActivity extends Activity implements MessagesFragment.OnFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        Intent intent = getIntent();
+        String rec_email = intent.getStringExtra("ReceiverEmail");
+        String my_email = intent.getStringExtra("MyEmail");
+        Toast.makeText(this, rec_email + ", " + my_email, Toast.LENGTH_LONG).show();
 
         profileId = getIntent().getStringExtra(Common.PROFILE_ID);
         msgEdit = (EditText) findViewById(R.id.msg_edit);
