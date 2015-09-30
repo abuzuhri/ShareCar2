@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,19 +9,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 
 public class ResetPassword extends ActionBarActivity {
 private Button CancleBtn,SendBtn;
     private Toolbar tool_bar;
+    private EditText ed_email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reset_password);
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
+        ed_email=(EditText)findViewById(R.id.ed_email);
 
         CancleBtn=(Button)findViewById(R.id.CancleBtn);
         CancleBtn.setOnClickListener(new View.OnClickListener() {
@@ -32,13 +38,21 @@ private Button CancleBtn,SendBtn;
         });
 
         SendBtn=(Button)findViewById(R.id.SendBtn);
-        SendBtn.setOnClickListener(new View.OnClickListener() {
+      /*  SendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(ResetPassword.this,Main.class);
-                startActivity(i);
+           if(UserDAO.retreivePassword(ed_email.getText().toString())!= null){
+
+             Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                     "mailto", ed_email.getText().toString(), null));
+                      emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                 emailIntent.putExtra(UserDAO.retreivePassword(ed_email.getText().toString()), "Body");
+             startActivity(Intent.createChooser(emailIntent, "Send email..."));
+
+            }else
+                  Toast.makeText(ResetPassword.this,"null",Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     @Override

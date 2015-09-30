@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:background="@drawable/white_roundrect">
+    >
 
-    <LinearLayout
+
+<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/blue_roundedbtn"
-        android:padding="15dp">
+        android:padding="15dp"
+    android:id="@+id/layout">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="More Information"
-            android:id="@+id/textView3"
+            android:id="@+id/tittle"
             android:layout_weight="0.3"
             android:layout_marginTop="13dp"
             android:textColor="#fff"
@@ -29,9 +31,9 @@
         <ImageButton
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:id="@+id/close_btn"
+            android:id="@+id/confirm_btn"
             android:layout_marginTop="10dp"
-            android:background="@drawable/close"
+            android:background="@drawable/check_icon"
             />
 
 
@@ -41,12 +43,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:inputType="textMultiLine"
-        android:text="wite more information..."
+        android:hint="wite more information..."
         android:textColor="#c4c3c3"
         android:gravity="top"
         android:padding="40dp"
         android:background="#fff"
-        android:id="@+id/info" />
+        android:id="@+id/info"
+        android:layout_below="@+id/layout"/>
 
 
 </LinearLayout>

@@ -8,8 +8,8 @@
         android:protectionLevel="signature" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
 
+    <uses-permission android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -41,6 +41,9 @@
             android:value="sharearide.com.orchidatech.jma.sharearide.Database.Model.User,
             sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride,
             sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat" />
+        <meta-data
+            android:name="com.facebook.FacebookActivity.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".Activity.SplashScreen"
@@ -132,7 +135,6 @@
             </intent-filter>
         </receiver>
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
     </application>
+
 </manifest>

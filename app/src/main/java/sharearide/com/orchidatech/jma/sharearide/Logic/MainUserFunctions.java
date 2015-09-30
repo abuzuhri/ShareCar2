@@ -22,7 +22,6 @@ import sharearide.com.orchidatech.jma.sharearide.Database.DAO.ChatDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.CountryDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
-import sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
@@ -98,7 +97,7 @@ public class MainUserFunctions {
                              JSONArray mJsonArray = jsonObject.getJSONArray("signup");
                             JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                             long user_id = Long.parseLong(mJsonObject.getString("id"));
-                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
+//                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
                             Toast.makeText(context, "Registered Succeeded, login to continue...", Toast.LENGTH_LONG).show();
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -114,10 +113,6 @@ public class MainUserFunctions {
 
                 } catch (JSONException e) {
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                } catch (EmptyFieldException e) {
-
-                } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
             }
@@ -609,8 +604,6 @@ listener.onSearchFailed(error);
         params.put("username", username);
         params.put("password", password);
 
-        final Map<Chat, ArrayList<User>> messages_data = new HashMap<>();
-        final ArrayList<Chat> all_messages = new ArrayList<>();
         UserOperations.getInstance(context).getAllMessages(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -620,67 +613,20 @@ listener.onSearchFailed(error);
                     JSONArray mJsonArray = jsonObject.getJSONArray("messages");
                     final ArrayList<User> all_users = new ArrayList<User>();
                     for (int i = 0; i < mJsonArray.length(); i++) {
+                        params.clear();
                         JSONObject mJsonObject = mJsonArray.getJSONObject(i);
                         long id = Long.parseLong(mJsonObject.getString("id"));
                         long sender_id = Long.parseLong(mJsonObject.getString("sender_id"));
                         long receiver_id = Long.parseLong(mJsonObject.getString("receiver_id"));
                         String message = mJsonObject.getString("message");
                         long date_time = mJsonObject.getLong("date_time");
-
                         ChatDAO.addNewChat(id, message, sender_id, receiver_id, date_time);
-                        Chat chat = new Chat();
-                        chat.setRemoteId(id);
-                        chat.setSenderId(sender_id);
-                        chat.setReceiverId(receiver_id);
-                        chat.setDateTime(date_time);
-                        chat.setMessage(message);
-                        all_messages.add(chat);
 
-                       JSONObject senderJsonObject = mJsonObject.getJSONObject("sender");
-                        String sender_username = senderJsonObject.getString("username");
-                        String sender_email = senderJsonObject.getString("email");
-                        String sender_phone = senderJsonObject.getString("phone");
-                        String sender_image = senderJsonObject.getString("img");
-                        Long sender_birthdate = senderJsonObject.getLong("birthdate");
-                        String sender_gender = senderJsonObject.getString("Gender");
+                        if (sender_id != user_id)
+                            params.put("id", String.valueOf(sender_id));
+                        else
+                            params.put("id", String.valueOf(receiver_id));
 
-                       JSONObject receiverJsonObject = mJsonObject.getJSONObject("receiver");
-                        String receiver_username = receiverJsonObject.getString("username");
-                        String receiver_email = receiverJsonObject.getString("email");
-                        String receiver_phone = receiverJsonObject.getString("phone");
-                        String receiver_image = receiverJsonObject.getString("img");
-                        Long receiver_birthdate = receiverJsonObject.getLong("birthdate");
-                        String receiver_gender = receiverJsonObject.getString("Gender");
-
-                        if(UserDAO.getUserById(receiver_id) == null)
-                             UserDAO.addNewUser(Long.parseLong(params.get("id")), receiver_username, null, receiver_image, null, receiver_birthdate, receiver_gender, receiver_phone, receiver_email);
-                        if(UserDAO.getUserById(sender_id) == null)
-                            UserDAO.addNewUser(Long.parseLong(params.get("id")), sender_username, null, sender_image, null, sender_birthdate, sender_gender, sender_phone, sender_email);
-
-
-                        User sender_info = new User();
-                        sender_info.setRemoteId(sender_id);
-                        sender_info.setUsername(sender_username);
-                        sender_info.setEmail(sender_email);
-                        sender_info.setPhone(sender_phone);
-                        sender_info.setImage(sender_image);
-                        sender_info.setBirthdate(sender_birthdate);
-                        sender_info.setGender(sender_gender);
-
-                        User receiver_info = new User();
-                        receiver_info.setRemoteId(receiver_id);
-                        receiver_info.setUsername(receiver_username);
-                        receiver_info.setEmail(receiver_email);
-                        receiver_info.setPhone(receiver_phone);
-                        receiver_info.setImage(receiver_image);
-                        receiver_info.setBirthdate(receiver_birthdate);
-                        receiver_info.setGender(receiver_gender);
-
-                        ArrayList<User> persons = new ArrayList<User>();
-                        persons.add(sender_info);
-                        persons.add(receiver_info);
-                        messages_data.put(chat, persons);
-/*
                         UserOperations.getInstance(context).getPublicUserInfo(params, new OnLoadFinished() {
                             @Override
                             public void onSuccess(JSONObject jsonObject) {
@@ -728,11 +674,9 @@ listener.onSearchFailed(error);
 
                             }
                         });
-                        */
+                        listener.onChattingListRefreshed(all_users);
 
                     }
-                         listener.onChattingListRefreshed(all_messages, messages_data);
-
 
                 }else{
                          String message = jsonObject.getString("message");

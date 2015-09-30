@@ -24,7 +24,6 @@ import com.astuetz.PagerSlidingTabStrip;
 import java.util.ArrayList;
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.MoreInfo;
-import sharearide.com.orchidatech.jma.sharearide.Chat.ChatActivity;
 import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
@@ -89,10 +88,7 @@ public class Save_info  extends Activity {
         quick_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Intent intent = new Intent(Save_info.this, ChatActivity.class);
-                intent.putExtra("ReceiverEmail", email.getText().toString());
-                intent.putExtra("MyEmail", UserDAO.getUserById(getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1)).getEmail());
-                startActivity(intent);
+
             }
         });
 

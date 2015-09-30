@@ -1,7 +1,10 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -22,7 +25,9 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import sharearide.com.orchidatech.jma.sharearide.R;
 
@@ -43,8 +48,8 @@ public class MapViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //Disable StrictMode.ThreadPolicy to perform network calls in the UI thread.
         //Yes, it's not the good practice, but this is just a tutorial!
-        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        //StrictMode.setThreadPolicy(policy);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+      StrictMode.setThreadPolicy(policy);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
@@ -54,7 +59,22 @@ public class MapViewActivity extends AppCompatActivity {
 
         map = (MapView) findViewById(R.id.mapview);
         map.setBuiltInZoomControls(true);
-        map.setMultiTouchControls(true);
+        map.setMultiTouchControls(true); Intent intent=getIntent();
+        String cityFrom= intent.getStringExtra("CityFrom");
+        String cityTo=intent.getStringExtra("CityTo");
+        Toast.makeText(MapViewActivity.this,cityFrom+""+cityTo,Toast.LENGTH_LONG).show();
+//////////////////////////
+
+//      setStartPoint(31.52333, 34.44664);
+//      setEndPoint(31.51381, 34.44193);
+//
+
+
+      setStartPoint(getLocationFromAddress(cityFrom + "").getLatitude(),getLocationFromAddress(cityFrom + "").getLongitude());
+        setEndPoint(getLocationFromAddress(cityTo + "").getLatitude(),getLocationFromAddress(cityTo + "").getLongitude());
+       initializeRoute();
+//       Toast.makeText(this,getLocationFromAddress(cityFrom).getLongitude()+" , "+getLocationFromAddress(cityFrom).getLongitude(),Toast.LENGTH_LONG).show();
+//        Toast.makeText(this,getLocationFromAddress(cityTo).getLongitude()+" , "+getLocationFromAddress(cityTo).getLongitude(),Toast.LENGTH_LONG).show();
 
     }
 
@@ -123,5 +143,27 @@ public class MapViewActivity extends AppCompatActivity {
         }
 
     }
+    public GeoPoint getLocationFromAddress(String strAddress){
 
+        Geocoder coder = new Geocoder(this);
+        List<Address> address;
+        GeoPoint p1 = null;
+
+        try {
+            address = coder.getFromLocationName(strAddress,5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            p1 = new GeoPoint((int) (location.getLatitude() * 1E6),
+                    (int) (location.getLongitude() * 1E6));
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }    return p1;
+    }
 }
