@@ -12,5 +12,4 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 public interface OnInboxFetchListener {
     public void onFetchInboxSucceed(ArrayList<Chat> allMessages, Map<Chat, ArrayList<User>> allMessagesData);
     public void onFetchInboxFailed(String error);
-
 }

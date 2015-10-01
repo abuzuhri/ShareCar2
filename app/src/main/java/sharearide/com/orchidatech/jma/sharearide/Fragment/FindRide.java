@@ -27,7 +27,6 @@ import java.util.Date;
 import java.util.Map;
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.SearchResult;
-import sharearide.com.orchidatech.jma.sharearide.Activity.ShowRideByItem;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
