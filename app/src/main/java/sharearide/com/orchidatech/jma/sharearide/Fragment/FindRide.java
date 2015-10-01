@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.Map;
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.SearchResult;
+import sharearide.com.orchidatech.jma.sharearide.Activity.ShowRideByItem;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
@@ -55,6 +56,16 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
         stateTo = (EditText) v.findViewById(R.id.stateTo);
         time = (EditText) v.findViewById(R.id.time);
         date = (EditText) v.findViewById(R.id.date);
+   /*     b1 = (Button) v.findViewById(R.id.sr);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(getActivity(), ShowRideByItem.class);
+                startActivity(intent);
+
+
+            }
+        });*/
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,14 +114,14 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
                 params.add(stateTo.getText().toString());
                 params.add(countryFrom.getText().toString());
                 params.add(countryTo.getText().toString());
-                params.add(date_time_converter()+"");
+                params.add(date_time_converter() + "");
                 intent.putStringArrayListExtra("PARAMS", params);
                 InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
                     @Override
                     public void internetConnectionStatus(boolean status) {
-                        if(status){
+                        if (status) {
                             startActivity(intent);
-                        }else
+                        } else
                             Toast.makeText(getActivity(), "No Internet Access..", Toast.LENGTH_LONG).show();
 
                     }
