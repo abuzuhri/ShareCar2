@@ -4,53 +4,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
-import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.FacebookLogin;
 import sharearide.com.orchidatech.jma.sharearide.Logic.GooglePlusLogin;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.Model.SocialUser;
-import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Services.RefreshRideService;
-import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
-import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
-import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnChattingListListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInboxFetchListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRidesListListener;
-import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoginListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
-import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
 
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Display;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 
@@ -250,7 +227,7 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
             });
         }
 
-    public void last_chatting_users(final Context context, final OnChattingListListener listener, final long id){
+    public void last_chatting_users(final Context context, final OnInboxFetchListener listener, final long id){
         InternetConnectionChecker.isConnectedToInternet(getApplicationContext(), new OnInternetConnectionListener() {
             @Override
             public void internetConnectionStatus(boolean status) {
@@ -259,7 +236,7 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
                     String username = user.getUsername();
                     String password = user.getPassword();
                    if(username != null && password != null)
-                        MainUserFunctions.last_chatting_users(context, listener, id, username, password);
+                        MainUserFunctions.getInbox(context, listener, id, username, password);
                 }
                 else
                     Toast.makeText(context, "No Internet Access..", Toast.LENGTH_LONG).show();

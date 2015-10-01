@@ -57,10 +57,10 @@
                         android:textSize="@dimen/text_size_smaller" />
 
                     <TextView
-                        android:id="@+id/chat_status"
+                        android:id="@+id/chat_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="— I'll be in your neighborhood …"
+                        android:text="30/9/2015 12:07"
                         android:textColor="#999999"
                         android:textSize="@dimen/text_size_smaller" />
                 </LinearLayout>

@@ -1,5 +1,6 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,19 +14,25 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
+import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSendPasswordListener;
 
 
 public class ResetPassword extends ActionBarActivity {
 private Button CancleBtn,SendBtn;
     private Toolbar tool_bar;
     private EditText ed_email;
+    ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reset_password);
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please Wait...");
         ed_email=(EditText)findViewById(R.id.ed_email);
 
         CancleBtn=(Button)findViewById(R.id.CancleBtn);
@@ -33,11 +40,37 @@ private Button CancleBtn,SendBtn;
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ResetPassword.this,Login.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
         });
 
         SendBtn=(Button)findViewById(R.id.SendBtn);
+        SendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               if(ed_email.getText().toString().length() > 0){
+                mProgressDialog.show();
+                   MainUserFunctions.forgetPassword(getApplicationContext(), ed_email.getText().toString(), new OnSendPasswordListener() {
+                       @Override
+                       public void onSendingSuccess(String message) {
+                            if(mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
+                           Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                       }
+
+                       @Override
+                       public void onSendingFails(String message) {
+                           if(mProgressDialog.isShowing())
+                               mProgressDialog.dismiss();
+
+                           Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                       }
+                   });
+               }
+            }
+        });
       /*  SendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,25 +88,4 @@ private Button CancleBtn,SendBtn;
         });*/
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_reset_password, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

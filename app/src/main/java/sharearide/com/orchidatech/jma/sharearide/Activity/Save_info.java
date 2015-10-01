@@ -23,7 +23,6 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 
-import sharearide.com.orchidatech.jma.sharearide.Activity.MoreInfo;
 import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
