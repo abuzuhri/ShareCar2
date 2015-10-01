@@ -52,6 +52,19 @@ public class Login extends AppCompatActivity {
         signUpbtn=(Button)findViewById(R.id.signUpbtn);
         resetPwbtn=(Button)findViewById(R.id.resetPwbtn);
 
+        fBbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                facebookLoginClicked();
+            }
+        });
+        gplusbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                googleLoginClicked();
+            }
+        });
+
         Gobtnx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,19 +166,15 @@ public class Login extends AppCompatActivity {
         startActivity(new Intent(this, NewUser.class));
     }
 
-    /**
-     * this method for login with facebook account
-     *
-     * @param view the clicked button
-     */
-    public void facebookLoginClicked(View view) {
+    public void facebookLoginClicked() {
         FacebookLogin facebookLogin = new FacebookLogin(this);
         boolean isLoggedIn = facebookLogin.isLoggedIn();
         if (!isLoggedIn) {
             facebookLogin.Login(new OnLoginListener() {
                 @Override
                 public void onSuccess(SocialUser socialUser) {
-                    //UserDAO.addNewSocialUser(socialUser);
+                    Toast.makeText(getApplicationContext(), socialUser.getName() + ", " + socialUser.getEmail() + ", " + socialUser.getAvatarURL(), Toast.LENGTH_LONG).show();
+//                    UserDAO.addNewSocialUser(socialUser);
 ///                    MainUserFunctions.signUp(getApplicationContext(), socialUser.getName(), null, socialUser.getAvatarURL(), null, null, null, null, socialUser.getEmail());
 
                 }
@@ -178,12 +187,9 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    /**
-     * this method for login with google account
-     *
-     * @param view the clicked button
-     */
-    public void googleLoginClicked(View view) {
+
+
+        public void googleLoginClicked() {
         GooglePlusLogin googlePlusLogin = new GooglePlusLogin(this);
         boolean isLoggedIn = googlePlusLogin.isLoggedIn();
         if (!isLoggedIn) {

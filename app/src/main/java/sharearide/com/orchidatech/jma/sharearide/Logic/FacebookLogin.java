@@ -49,7 +49,7 @@ public class FacebookLogin implements SocialNetwork {
     }
 
     public boolean isLoggedIn() {
-        FacebookSdk.sdkInitialize(activity.getApplicationContext());
+        FacebookSdk.sdkInitialize(activity);
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken == null) {
             return false;
@@ -59,14 +59,14 @@ public class FacebookLogin implements SocialNetwork {
     }
 
     public void Logout() {
-        FacebookSdk.sdkInitialize(activity.getApplicationContext());
+        FacebookSdk.sdkInitialize(activity);
         mSharedPreferences.edit().remove(AppConstant.SharedPreferenceNames.SocialUser).commit();
         LoginManager.getInstance().logOut();
     }
 
     public void Login(final OnLoginListener lsnr) {
         try {
-            FacebookLogin.getFacebookHashKey(activity);
+//            FacebookLogin.getFacebookHashKey(activity);
             FacebookSdk.sdkInitialize(activity.getApplicationContext());
             LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile", "email"));
             callbackManager = CallbackManager.Factory.create();

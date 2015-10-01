@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -17,7 +16,6 @@ import java.util.Map;
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.Login;
 import sharearide.com.orchidatech.jma.sharearide.Activity.Logout;
-import sharearide.com.orchidatech.jma.sharearide.Activity.ShareRide;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.ChatDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.CountryDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
@@ -27,10 +25,11 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
-import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnChattingListListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInboxFetchListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRidesListListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSendPasswordListener;
 import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
 
 /**
@@ -41,7 +40,7 @@ public class MainUserFunctions {
     private MainUserFunctions(){}
     final static int MAX_NUM_RIDES = 200;
 
-    public static void login(final Context context,String username, String password){
+    public static void login(final Context context,String username, final String password){
 
 
         Map<String, String> params = new HashMap<>();
@@ -98,7 +97,7 @@ public class MainUserFunctions {
                              JSONArray mJsonArray = jsonObject.getJSONArray("signup");
                             JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                             long user_id = Long.parseLong(mJsonObject.getString("id"));
-//                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
+                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
                             Toast.makeText(context, "Registered Succeeded, login to continue...", Toast.LENGTH_LONG).show();
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -114,6 +113,10 @@ public class MainUserFunctions {
 
                 } catch (JSONException e) {
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
             }
@@ -451,7 +454,7 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -497,45 +500,6 @@ public class MainUserFunctions {
 
                         }
                         listener.onSearchSucceed(allMatchedRides, matchedRidesData);
-
-                        ///fetch user data for all matched rides
-//
-//                        for (final Ride ride : allMatchedRides) {
-//                            params.clear();
-//                            params.put("id", String.valueOf(ride.getUserId()));
-//
-//                            UserOperations.getInstance(context).getPublicUserInfo(params, new OnLoadFinished() {
-//                                @Override
-//                                public void onSuccess(JSONObject jsonObject) {
-//
-//                                    try {
-//                                        boolean success = jsonObject.getBoolean("success");
-//                                        if (success) {
-//                                            JSONArray mJsonArray = jsonObject.getJSONArray("user");
-//                                            JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-//                                            User user = new User(ride.getUserId(), null, mJsonObject.getString("username"), null, mJsonObject.getString("img"), mJsonObject.getString("phone"), null, null, mJsonObject.getLong("birthdate"), mJsonObject.getString("Gender"));
-//                                            matchedRidesData.put(ride, user);
-//                                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
-//                                            if (matchedRidesData.size() == allMatchedRides.size()) {
-//                                                listener.onSearchSucceed(allMatchedRides, matchedRidesData);
-//                                            }
-//                                        } else {
-////                                            Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-////                                            listener.onSearchSucceed(allMatchedRides, matchedRidesData);
-//                                        }
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//
-//                                }
-//
-//                                @Override
-//                                public void onFail(String error) {
-//
-//                                }
-//                            });
-//
-//                        }
                     }else{
                         Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                         listener.onSearchSucceed(allMatchedRides, matchedRidesData);
@@ -551,7 +515,7 @@ public class MainUserFunctions {
             @Override
             public void onFail(String error) {
                     Toast.makeText(context, error, Toast.LENGTH_LONG).show();
-listener.onSearchFailed(error);
+                    listener.onSearchFailed(error);
             }
         });
     }
@@ -598,7 +562,7 @@ listener.onSearchFailed(error);
             }
         });
     }
-    public static void last_chatting_users(final Context context, final OnChattingListListener listener, final long user_id, String username, String password) {
+    public static void getInbox(final Context context, final OnInboxFetchListener listener, final long user_id, String username, String password) {
 
         final Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -606,6 +570,7 @@ listener.onSearchFailed(error);
 
         final Map<Chat, ArrayList<User>> messages_data = new HashMap<>();
         final ArrayList<Chat> all_messages = new ArrayList<>();
+        final ArrayList<Long> users_id = new ArrayList<>();
         UserOperations.getInstance(context).getAllMessages(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -613,7 +578,6 @@ listener.onSearchFailed(error);
                     boolean success = jsonObject.getBoolean("success");
                     if(success){
                         JSONArray mJsonArray = jsonObject.getJSONArray("messages");
-                        final ArrayList<User> all_users = new ArrayList<User>();
                         for (int i = 0; i < mJsonArray.length(); i++) {
                             JSONObject mJsonObject = mJsonArray.getJSONObject(i);
                             long id = Long.parseLong(mJsonObject.getString("id"));
@@ -622,6 +586,15 @@ listener.onSearchFailed(error);
                             String message = mJsonObject.getString("message");
                             long date_time = mJsonObject.getLong("date_time");
 
+                            if(sender_id != user_id && users_id.contains(sender_id))
+                                continue;
+                            else if(receiver_id != user_id && users_id.contains(receiver_id))
+                                continue;
+                            else if(sender_id != user_id)
+                                users_id.add(sender_id);
+                            else
+                                    users_id.add(receiver_id);
+
                             ChatDAO.addNewChat(id, message, sender_id, receiver_id, date_time);
                             Chat chat = new Chat();
                             chat.setRemoteId(id);
@@ -629,7 +602,6 @@ listener.onSearchFailed(error);
                             chat.setReceiverId(receiver_id);
                             chat.setDateTime(date_time);
                             chat.setMessage(message);
-                            all_messages.add(chat);
 
                             JSONObject senderJsonObject = mJsonObject.getJSONObject("sender");
                             String sender_username = senderJsonObject.getString("username");
@@ -675,63 +647,15 @@ listener.onSearchFailed(error);
                             persons.add(sender_info);
                             persons.add(receiver_info);
                             messages_data.put(chat, persons);
-/*
-                        UserOperations.getInstance(context).getPublicUserInfo(params, new OnLoadFinished() {
-                            @Override
-                            public void onSuccess(JSONObject jsonObject) {
-                                try {
-                                    boolean success = jsonObject.getBoolean("success");
-                                    if(success) {
-                                        JSONArray mJsonArray = jsonObject.getJSONArray("user");
-                                        JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-                                        String name = mJsonObject.getString("username");
-                                        String email = mJsonObject.getString("email");
-                                        String phone = mJsonObject.getString("phone");
-                                        String image = mJsonObject.getString("img");
-                                        Long birthdate = mJsonObject.getLong("birthdate");
-                                        String gender = mJsonObject.getString("Gender");
-                                        UserDAO.addNewUser(Long.parseLong(params.get("id")), name, null, image, null, birthdate, gender, phone, email);
-                                        User user = UserDAO.getUserById(Long.parseLong(params.get("id")));
-
-                                        if (user != null) {
-                                            boolean isAdded = false;
-                                            for (User storedUser : all_users) {
-                                                if (storedUser.getRemoteId() == Long.parseLong(params.get("id"))) {
-                                                    isAdded = true;
-                                                    break;
-                                                }
-                                            }
-                                            if (!isAdded)
-                                                all_users.add(user);
-                                        }
-                                    }else{
-                                      Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                } catch (InvalidInputException e) {
-                                    e.printStackTrace();
-                                } catch (EmptyFieldException e) {
-                                    e.printStackTrace();
-                                }
-
-
-                            }
-
-                            @Override
-                            public void onFail(String error) {
-
-                            }
-                        });
-                        */
-
-                        }
-                        listener.onChattingListRefreshed(all_messages, messages_data);
+                            all_messages.add(chat);
+                         }
+                        listener.onFetchInboxSucceed(all_messages, messages_data);
 
 
                     }else{
                         String message = jsonObject.getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                        listener.onFetchInboxFailed(message);
                     }
                 }catch (JSONException e) {
                     e.printStackTrace();
@@ -745,15 +669,52 @@ listener.onSearchFailed(error);
 
             @Override
             public void onFail(String error) {
-
+                    Toast.makeText(context, error, Toast.LENGTH_LONG).show();
             }
         });
     }
+    public static void add_message(final Context context, final OnInboxFetchListener listener, final String message, final long sender_id, final long receiver_id) {
+        final Map<String, String> params = new HashMap<>();
+        params.put("message", message);
+        params.put("sender_id", sender_id+"");
+        params.put("receiver_id", receiver_id+"");
+        UserOperations.getInstance(context).addMessage(params, new OnLoadFinished() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                try {
+                    boolean success = jsonObject.getBoolean("success");
 
-    private interface OnItemFetched{
-       public void itemFetched(User user);
-   }
-    private void fetchData(){
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+
+            }
+        });
 
     }
+public static void forgetPassword(final Context context, final String email, final OnSendPasswordListener listener){
+    final Map<String, String> params = new HashMap<>();
+    params.put("email", email);
+        UserOperations.getInstance(context).forgetPassword(params, new OnLoadFinished() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) throws JSONException {
+                String message = jsonObject.getString("message");
+                boolean success = jsonObject.getBoolean("success");
+                if(success)
+                    listener.onSendingSuccess(message);
+                else
+                    listener.onSendingFails(message);
+            }
+
+            @Override
+            public void onFail(String error) {
+            listener.onSendingFails(error);
+            }
+        });
+}
 }
