@@ -68,12 +68,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        gplusbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                googleLoginClicked();
-            }
-        });
 
         signUpbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,26 +181,27 @@ public class Login extends AppCompatActivity {
     /**
      * this method for login with google account
      *
+     * @param view the clicked button
      */
-    public void googleLoginClicked() {
-        final GooglePlusLogin googlePlusLogin = new GooglePlusLogin(this);
+    public void googleLoginClicked(View view) {
+        GooglePlusLogin googlePlusLogin = new GooglePlusLogin(this);
         boolean isLoggedIn = googlePlusLogin.isLoggedIn();
-        //     if (!isLoggedIn) {
-        googlePlusLogin.Login(new OnLoginListener() {
-            @Override
-            public void onSuccess(SocialUser socialUser) {
-                //  Toast.makeText(Login.this,"true",Toast.LENGTH_LONG).show();
-                Toast.makeText(Login.this,socialUser.getName()+" "+socialUser.getEmail()+" "+socialUser.getAvatarURL(),Toast.LENGTH_LONG).show();
-            }
+        if (!isLoggedIn) {
+                 googlePlusLogin.Login(new OnLoginListener() {
+                @Override
+                public void onSuccess(SocialUser socialUser) {
+                  ///  UserDAO.addNewSocialUser(socialUser);
+                  //  MainUserFunctions.signUp(getApplicationContext(), socialUser.getName(), null, socialUser.getAvatarURL(), null, null, null, null, socialUser.getEmail());
+                }
 
-            @Override
-            public void onFail() {
-                Toast.makeText(Login.this,"false",Toast.LENGTH_LONG).show();
+                @Override
+                public void onFail() {
 
-            }
-        });
-        //  }
+                }
+            });
+        }
     }
+
     // TODO: Test
 
     /**

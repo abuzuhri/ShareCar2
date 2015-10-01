@@ -8,7 +8,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -65,7 +67,7 @@ public class FacebookLogin implements SocialNetwork {
     public void Login(final OnLoginListener lsnr) {
         try {
             FacebookLogin.getFacebookHashKey(activity);
-            //FacebookSdk.sdkInitialize(activity.getApplicationContext());
+            FacebookSdk.sdkInitialize(activity.getApplicationContext());
             LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile", "email"));
             callbackManager = CallbackManager.Factory.create();
             LoginManager.getInstance().registerCallback(callbackManager,
@@ -77,7 +79,9 @@ public class FacebookLogin implements SocialNetwork {
                             GraphRequestAsyncTask request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
                                 @Override
                                 public void onCompleted(JSONObject user, GraphResponse graphResponse) {
-                                    AppLog.i(user.toString());
+//                                    Toast.makeText(activity, user.optString("email"), Toast.LENGTH_LONG).show();
+
+//                                    AppLog.i(user.toString());
                                     fbUser.email = user.optString("email");
                                     fbUser.name = user.optString("name");
                                     fbUser.id = user.optString("id");
@@ -126,6 +130,7 @@ public class FacebookLogin implements SocialNetwork {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 

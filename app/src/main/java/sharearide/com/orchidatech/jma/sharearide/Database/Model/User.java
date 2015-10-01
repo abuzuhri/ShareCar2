@@ -83,6 +83,46 @@ public class User extends Model {
     @Column(name = "Image")
     public String image;
 
+    public void setRemoteId(long remoteId) {
+        this.remoteId = remoteId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setBirthdate(long birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     @Column(name = "Phone")
     public String phone;
 

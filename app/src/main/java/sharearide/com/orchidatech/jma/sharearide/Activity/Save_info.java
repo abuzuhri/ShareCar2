@@ -3,15 +3,30 @@ package sharearide.com.orchidatech.jma.sharearide.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 
+import sharearide.com.orchidatech.jma.sharearide.Activity.MoreInfo;
 import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.R;
@@ -19,7 +34,7 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 public class Save_info  extends Activity {
     Ride ride;
     User user;
-    private Button quick_msg,more_info;
+    private Button quick_msg;
     private TextView email,phone,username,cityFrom,cityTo,countryFrom,countryTo,date,time,price;
     private ImageButton send_msg,send_mail,call;
     @Override
@@ -38,7 +53,6 @@ public class Save_info  extends Activity {
         phone=(TextView)findViewById(R.id.phone);
         username=(TextView)findViewById(R.id.username);
         quick_msg=(Button)findViewById(R.id.quick_msg);
-        more_info=(Button)findViewById(R.id.more_info);
         send_mail=(ImageButton)findViewById(R.id.send_mail);
         send_msg=(ImageButton)findViewById(R.id.send_msg);
         call=(ImageButton)findViewById(R.id.call);
@@ -78,15 +92,6 @@ public class Save_info  extends Activity {
             }
         });
 
-        more_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
- Intent intent=new Intent(Save_info.this,MapViewActivity.class);
-                intent.putExtra("CityFrom",cityFrom.getText().toString());
-                intent.putExtra("CityTo",cityTo.getText().toString());
-                startActivity(intent);
-            }
-        });
 
 
         Intent intent = getIntent();
@@ -108,8 +113,6 @@ public class Save_info  extends Activity {
             String fullDate = AppConstant.DateConvertion.getDate(date_time);
             time.setText(fullDate.split(" ")[1]);
             date.setText(fullDate.split(" ")[0]);
-
-
 
         }
 
