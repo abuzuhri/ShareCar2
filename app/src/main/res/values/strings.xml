@@ -24,4 +24,5 @@
     <string name="title_activity_share_ride">ShareRide</string>
     <string name="title_activity_save_info">Save_info</string>
     <string name="title_activity_more_info">MoreInfo</string>
+    <string name="title_activity_show_ride_by_item">ShowRideByItem</string>
 </resources>

@@ -231,6 +231,31 @@ public class UserOperations {
                 });
     }
 
+
+    public void getSearchAllResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        String url = UrlConstant.SEARCH_ALL_URL +"?item=" + params.get("item");
+
+        Log.i("Ride", url);
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                });
+    }
+
     public void getSearchResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.SEARCH_URL +"?city_from=" + params.get("city_from")
                 +"&city_to=" + params.get("city_to")

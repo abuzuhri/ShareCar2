@@ -20,4 +20,6 @@ public class UrlConstant {
         public static final String ADD_RIDE_URL = SERVER_URL + WEB_SERVICES_PATH + "add_ride.php";
         public static final String SEARCH_URL =  SERVER_URL + WEB_SERVICES_PATH + "search_ride.php";
         public static final String PUBLIC_USER_DATA = SERVER_URL + WEB_SERVICES_PATH + "get_public_user_data.php";
+        public static final String SEARCH_ALL_URL =  SERVER_URL + WEB_SERVICES_PATH + "searchAllRide.php";//
+
 }
