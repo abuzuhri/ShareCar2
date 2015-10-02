@@ -140,14 +140,16 @@ public class MainUserFunctions {
         final ArrayList<Ride> allMatchedRides = new ArrayList<Ride>();
         final  Map<Ride, User> matchedRidesData = new HashMap<Ride, User>();
         UserOperations.getInstance(context).getSearchAllResult(params, new OnLoadFinished() {
+            JSONArray mJsonArray;
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
                     boolean success = jsonObject.getBoolean("success");
-                    JSONArray mJsonArray = jsonObject.getJSONArray("rides");
 
 
-                    if (success) {
+                    if (true) {
+                        mJsonArray = jsonObject.getJSONArray("rides");
+
                         for (int i = 0; i < mJsonArray.length(); i++) {
                             JSONObject mJsonObject = mJsonArray.getJSONObject(i);
                             long remoteId = Long.parseLong(mJsonObject.getString("id"));
@@ -163,7 +165,8 @@ public class MainUserFunctions {
                             Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                             allMatchedRides.add(ride);
                             JSONObject userJsonObject = mJsonObject.getJSONObject("user");
-                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, userJsonObject.getLong("birthdate"), userJsonObject.getString("Gender"));
+                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"),
+                                    null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, 1, userJsonObject.getString("Gender"));
                             matchedRidesData.put(ride, user);
 
 //                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
@@ -182,6 +185,8 @@ public class MainUserFunctions {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+
 
                 }
             }
