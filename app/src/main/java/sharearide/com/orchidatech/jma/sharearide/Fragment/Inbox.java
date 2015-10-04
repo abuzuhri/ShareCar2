@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,18 +37,12 @@ public class Inbox extends Fragment {
       ChatAdapter adapter;
     RecyclerView inbox_rv;
     ProgressBar inbox_progress;
-    private LinearLayoutManager llm;
-
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.inbox, null, false);
         inbox_rv = (RecyclerView) view.findViewById(R.id.inbox_rv);
-        inbox_rv.setHasFixedSize(true);
-
-        llm = new LinearLayoutManager(getActivity());
-
         inbox_progress = (ProgressBar) view.findViewById(R.id.inbox_progress);
         messages = new ArrayList<>();
         messagesData = new HashMap<>();
@@ -60,23 +53,19 @@ public class Inbox extends Fragment {
 
             }
         });
-        inbox_rv.setLayoutManager(llm);
-
         inbox_rv.setAdapter(adapter);
         last_chatting_users(getActivity(), new OnInboxFetchListener() {
 
             @Override
             public void onFetchInboxSucceed(ArrayList<Chat> allMessages, Map<Chat, ArrayList<User>> allMessagesData) {
-                messages.addAll(allMessages);
-                messagesData.putAll(allMessagesData);
+                messages = allMessages;
+                messagesData = allMessagesData;
                 inbox_progress.setVisibility(View.GONE);
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFetchInboxFailed(String error) {
-                inbox_progress.setVisibility(View.GONE);
-
 
             }
         }, getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));

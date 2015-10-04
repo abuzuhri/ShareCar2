@@ -234,7 +234,7 @@ public class UserOperations {
 
 
     public void getSearchAllResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        String url = UrlConstant.SEARCH_ALL_URL +"?item=" + params.get("item");
+        String url = UrlConstant.SEARCH_ALL_URL +"?item=" + params.get("item") + "&user_id=" + params.get("user_id");
 
        // Log.i("Ride", url);
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
@@ -264,7 +264,8 @@ public class UserOperations {
                 +"&state_to=" + params.get("state_to")
                 +"&country_from=" + params.get("country_from")
                 +"&country_to=" + params.get("country_to")
-                +"&date_time=" + params.get("date_time");
+                +"&date_time=" + params.get("date_time")
+                +"&user_id=" + params.get("user_id");
         Log.i("Ride", url);
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 

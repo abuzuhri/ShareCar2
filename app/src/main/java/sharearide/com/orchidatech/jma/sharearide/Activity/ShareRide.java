@@ -62,7 +62,7 @@ public class ShareRide extends ActionBarActivity {
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
     ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
     ShareRideFragment shareRid;
-
+    Inbox inbox=new Inbox();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

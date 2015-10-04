@@ -99,11 +99,12 @@ public class MainUserFunctions {
         });
     }
 
-    public static void find_all_ride(final OnSearchListener listener, final Context context, final String item ){
+    public static void find_all_ride(final OnSearchListener listener, final Context context, final String item, final long user_id ){
         Map<String, String> params = new HashMap<>();
 
 
         params.put("item", item);
+        params.put("user_id", user_id+"");
         final ArrayList<Ride> allMatchedRides = new ArrayList<Ride>();
         final  Map<Ride, User> matchedRidesData = new HashMap<Ride, User>();
         UserOperations.getInstance(context).getSearchAllResult(params, new OnLoadFinished() {
@@ -542,7 +543,7 @@ public class MainUserFunctions {
             }
         });
     }
-    public static void find_a_ride(final OnSearchListener listener, final Context context, final String city_from, final String city_to, final String state_from, final String state_to, final String country_from, final String country_to, final long date_time){
+    public static void find_a_ride(final OnSearchListener listener, final Context context, final String city_from, final String city_to, final String state_from, final String state_to, final String country_from, final String country_to, final long date_time, final long user_id){
         final Map<String, String> params = new HashMap<>();
         params.put("city_from", city_from);
         params.put("city_to", city_to);
@@ -551,6 +552,7 @@ public class MainUserFunctions {
         params.put("country_from", country_from);
         params.put("country_to", country_to);
         params.put("date_time", String.valueOf(date_time));
+        params.put("user_id", String.valueOf(user_id));
         final ArrayList<Ride> allMatchedRides = new ArrayList<Ride>();
         final  Map<Ride, User> matchedRidesData = new HashMap<Ride, User>();
         UserOperations.getInstance(context).getSearchResult(params, new OnLoadFinished() {
@@ -589,6 +591,8 @@ public class MainUserFunctions {
                         listener.onSearchSucceed(allMatchedRides, matchedRidesData);
                     }
                 } catch (JSONException e) {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    listener.onSearchFailed(e.getMessage());
                     e.printStackTrace();
                 }
                 //listener.onSearchSucceed(matchedRidesData);

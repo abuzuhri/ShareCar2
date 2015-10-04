@@ -201,7 +201,7 @@ public class ServicesScreen extends AppCompatActivity implements View.OnClickLis
             @Override
             public void internetConnectionStatus(boolean status) {
                 if(status)
-                    MainUserFunctions.find_a_ride(listener, context, city_from, city_to, state_from, state_to, country_from, country_to, date_time);
+                    MainUserFunctions.find_a_ride(listener, context, city_from, city_to, state_from, state_to, country_from, country_to, date_time, getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1));
                 else
                     listener.onSearchFailed("No Internet Access..");
             }
