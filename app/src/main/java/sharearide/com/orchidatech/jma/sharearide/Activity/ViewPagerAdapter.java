@@ -6,15 +6,17 @@ package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+
+
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v13.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
 import sharearide.com.orchidatech.jma.sharearide.Fragment.AddRide;
 
-class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private final ArrayList<Fragment> mFragment;
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
@@ -35,7 +37,7 @@ class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-     return  mFragment.get(position);
+        return  mFragment.get(position);
     }
 
     // This method return the titles for the Tabs in the Tab Strip

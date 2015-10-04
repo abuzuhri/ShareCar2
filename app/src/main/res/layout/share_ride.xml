@@ -1,36 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v4.widget.DrawerLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/DrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="sharearide.com.orchidatech.jma.sharearide.Activity.ShareRide">
+    android:elevation="7dp">
 
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/toolbar"
-        />
-    <com.astuetz.PagerSlidingTabStrip
-        android:id="@+id/tabs"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tab_height"
-        android:padding="10dp"
-        android:textColor="#3ad8f1"
-        android:textSize="@dimen/text_size"
-        android:textAlignment="center"
-        android:background="@color/ColorPrimary"/>
-
-  <!--  <samples.exoguru.materialtabs.SlidingTabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="2dp"
-        android:background="@color/ColorPrimary"/>-->
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_weight="1">
-    </android.support.v4.view.ViewPager>
+>
 
-</LinearLayout>
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/toolbar" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_place"
+            android:layout_below="@id/tool_bar">
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerView"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="#ffffff"
+        android:scrollbars="vertical">
+    </android.support.v7.widget.RecyclerView>
+
+
+</android.support.v4.widget.DrawerLayout>
