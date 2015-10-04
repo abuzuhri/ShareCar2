@@ -763,11 +763,12 @@ public class MainUserFunctions {
             }
         });
     }
-    public static void add_message(final Context context, final OnInboxFetchListener listener, final String message, final long sender_id, final long receiver_id) {
+    public static void add_message(final Context context, final String message, final long sender_id, final long receiver_id, final long date_time) {
         final Map<String, String> params = new HashMap<>();
         params.put("message", message);
         params.put("sender_id", sender_id+"");
         params.put("receiver_id", receiver_id+"");
+        params.put("date_time", date_time+"");
         UserOperations.getInstance(context).addMessage(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {

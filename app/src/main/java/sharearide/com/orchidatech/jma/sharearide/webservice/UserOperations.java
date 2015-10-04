@@ -357,7 +357,7 @@ public class UserOperations {
 
 
     public void addMessage(Map<String, String> params, final OnLoadFinished onLoadFinished){
-        String url = UrlConstant.ADD_MESSAGE_URL + "?message=" + params.get("message")+"&sender_id="+params.get("sender_id")+"&receiver_id="+params.get("receiver_id");
+        String url = UrlConstant.ADD_MESSAGE_URL + "?message=" + params.get("message")+"&sender_id="+params.get("sender_id")+"&receiver_id="+params.get("receiver_id") + "&date_time=" + params.get("date_time");
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {

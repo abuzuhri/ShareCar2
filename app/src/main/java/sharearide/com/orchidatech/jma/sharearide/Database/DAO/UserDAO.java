@@ -344,6 +344,12 @@ public class UserDAO {
     public static void deleteAllUsers() {
         new Delete().from(User.class).execute();
     }
+
+    public static User getUserByEmail(String email) {
+        return new Select().from(User.class).where("Email = ?", email).executeSingle();
+
+
+    }
     //</editor-fold>
 
 }
