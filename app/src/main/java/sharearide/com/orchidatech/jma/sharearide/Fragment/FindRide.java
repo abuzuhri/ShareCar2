@@ -26,7 +26,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import sharearide.com.orchidatech.jma.sharearide.Activity.RseultAct;
 import sharearide.com.orchidatech.jma.sharearide.Activity.SearchResult;
+import sharearide.com.orchidatech.jma.sharearide.Activity.ShowRideByItem;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
@@ -40,7 +42,7 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener
  */
 public class FindRide extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private EditText cityFrom, cityTo, countryFrom, countryTo, stateFrom, stateTo, time, date;
-    private Button search;
+    private Button search,b1;
     private Calendar calendar;
 
     @Override
@@ -55,16 +57,14 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
         stateTo = (EditText) v.findViewById(R.id.stateTo);
         time = (EditText) v.findViewById(R.id.time);
         date = (EditText) v.findViewById(R.id.date);
-   /*     b1 = (Button) v.findViewById(R.id.sr);
+       b1 = (Button) v.findViewById(R.id.sr);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(getActivity(), ShowRideByItem.class);
                 startActivity(intent);
-
-
             }
-        });*/
+        });
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

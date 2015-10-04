@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sharearide.com.orchidatech.jma.sharearide">
-
+    package="sharearide.com.orchidatech.jma.sharearide" >
 
     <permission
         android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
-
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -23,13 +20,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!-- android:name=".Common"-->
+    <!-- android:name=".Common" -->
     <application
         android:name=".Chat.Common"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
 
         <!-- metadata for version and database name -->
         <meta-data
@@ -40,20 +37,17 @@
             android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="sharearide.com.orchidatech.jma.sharearide.Database.Model.User,
-            sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride,
-            sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat" />
+            android:value="sharearide.com.orchidatech.jma.sharearide.Database.Model.User,             sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride,             sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat" />
 
         <activity
             android:name=".Activity.SplashScreen"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activity.ServicesScreen"
             android:label="Services Screen" />
@@ -67,32 +61,34 @@
         <activity
             android:name=".Activity.NewUser"
             android:label="@string/title_activity_signup" />
-
         <activity
             android:name=".Activity.Save_info"
             android:label="Save_info" />
-
         <activity
             android:name=".Activity.Login"
             android:label="@string/title_activity_login" />
+        <activity
+            android:name=".Activity.ShowRideByItem"
+            android:label="">
+          <!--  android:theme="@style/Theme.MyCompatTheme">
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".Activity.RseultAct" />-->
+        </activity>
 
         <activity
             android:name=".Activity.SearchResult"
             android:label="@string/title_activity_search_result" />
-
         <activity
             android:name=".Activity.Logout"
             android:label="@string/title_activity_logout" />
-
         <activity
             android:name=".Activity.ResetPassword"
             android:label="@string/title_activity_reset_password" />
-
-
         <activity
             android:name=".Activity.Warning"
             android:label="@string/title_activity_warning" />
-
         <activity
             android:name=".Activity.MapViewActivity"
             android:label="@string/title_activity_map" />
@@ -102,7 +98,6 @@
         <activity
             android:name=".Activity.Main"
             android:label="@string/title_activity_main" />
-
         <activity
             android:name=".Chat.SettingsActivity"
             android:label="@string/title_activity_settings" />
@@ -113,25 +108,45 @@
         <provider
             android:name=".Chat.DataProvider"
             android:authorities="sharearide.com.orchidatech.jma.sharearide.provider"
-            android:exported="false"></provider>
+            android:exported="false" />
 
         <receiver
             android:name=".Chat.client.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="sharearide.com.orchidatech.jma.sharearide" />
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name=".Activity.RseultAct"
+            android:label="@string/title_activity_rseult">
+        <!--    android:theme="@style/Theme.MyCompatTheme">-->
+          <!-- to identify this activity as "searchable"
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".Activity.RseultAct" />-->
+        </activity>
     </application>
 
 </manifest>

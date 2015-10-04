@@ -236,7 +236,7 @@ public class UserOperations {
     public void getSearchAllResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.SEARCH_ALL_URL +"?item=" + params.get("item");
 
-        Log.i("Ride", url);
+       // Log.i("Ride", url);
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
