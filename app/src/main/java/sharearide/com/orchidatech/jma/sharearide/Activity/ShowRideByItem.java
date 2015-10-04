@@ -20,11 +20,11 @@ public class ShowRideByItem extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_ride_by_item);
 
-      Fragment mainFragment = new FindAllRide();
-         getSupportFragmentManager()
-                .beginTransaction()
-                .add(android.R.id.content, mainFragment)
-                .commit();
+//      Fragment mainFragment = new FindAllRide();
+//         getSupportFragmentManager()
+//                .beginTransaction()
+//                .add(android.R.id.content, mainFragment)
+//                .commit();
 
     }
 
