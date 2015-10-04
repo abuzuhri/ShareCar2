@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.AddRide;
+import sharearide.com.orchidatech.jma.sharearide.Fragment.FindAllRide;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.FindRide;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.Inbox;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.SearchRideFragment;
@@ -119,8 +120,13 @@ public class ShareRide extends ActionBarActivity {
                         break;
                     case 4:
                         Drawer.closeDrawers();
-                        SearchRideFragment searchRideFragment=new SearchRideFragment();
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_place,searchRideFragment).addToBackStack(null).commit();
+
+
+                        Fragment mainFragment = new FindAllRide();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .add(android.R.id.content, mainFragment).addToBackStack(null)
+                                .commit();
                         getFragmentManager().executePendingTransactions();
                         break;
                     case 5:

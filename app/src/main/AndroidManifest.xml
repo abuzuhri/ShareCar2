@@ -93,9 +93,7 @@
             android:name=".Activity.ResetPassword"
             android:label="@string/title_activity_reset_password" />
 
-        <activity
-            android:name=".Activity.Inbox"
-            android:label="@string/title_activity_inbox" />
+
 
         <activity
             android:name=".Activity.Warning"
@@ -110,9 +108,6 @@
         <activity
             android:name=".Activity.Main"
             android:label="@string/title_activity_main" />
-        <activity
-            android:name=".Activity.MoreInfo"
-            android:label="@string/title_activity_more_info" />
 
         <activity
             android:name=".Chat.SettingsActivity"

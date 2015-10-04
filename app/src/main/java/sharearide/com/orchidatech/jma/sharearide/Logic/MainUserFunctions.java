@@ -99,7 +99,72 @@ public class MainUserFunctions {
         });
     }
 
+    public static void find_all_ride(final OnSearchListener listener, final Context context, final String item ){
+        Map<String, String> params = new HashMap<>();
 
+
+        params.put("item", item);
+        final ArrayList<Ride> allMatchedRides = new ArrayList<Ride>();
+        final  Map<Ride, User> matchedRidesData = new HashMap<Ride, User>();
+        UserOperations.getInstance(context).getSearchAllResult(params, new OnLoadFinished() {
+            JSONArray mJsonArray;
+
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                try {
+                    boolean success = jsonObject.getBoolean("success");
+
+
+                    if (success) {
+                        mJsonArray = jsonObject.getJSONArray("rides");
+
+                        for (int i = 0; i < mJsonArray.length(); i++) {
+                            JSONObject mJsonObject = mJsonArray.getJSONObject(i);
+                            long remoteId = Long.parseLong(mJsonObject.getString("id"));
+                            long user_id = Long.parseLong(mJsonObject.getString("user_id"));
+                            String city_from = mJsonObject.getString("city_from");
+                            String city_to = mJsonObject.getString("city_to");
+                            String state_from = mJsonObject.getString("state_from");
+                            String state_to = mJsonObject.getString("state_to");
+                            String country_from = mJsonObject.getString("country_from");
+                            String country_to = mJsonObject.getString("country_to");
+                            long date_time = mJsonObject.getLong("date_time");
+                            double price = Double.parseDouble(mJsonObject.getString("price"));
+                            Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
+                            allMatchedRides.add(ride);
+                            JSONObject userJsonObject = mJsonObject.getJSONObject("user");
+                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"),
+                                    null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, 1, userJsonObject.getString("Gender"));
+                            matchedRidesData.put(ride, user);
+
+//                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
+
+                        }
+                        listener.onSearchSucceed(allMatchedRides, matchedRidesData);
+                   /* Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
+                    RideDAO.addNewRide(ride);*/
+                        Toast.makeText(context, "Added Successfully", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        String message = jsonObject.getString("message");
+                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+
+
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     public static void signUp(final Context context, final String username, final String password, final String image, final String address, final String birthdate, final String gender, final String phone, final String email) {
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
