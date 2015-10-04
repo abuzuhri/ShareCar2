@@ -41,7 +41,7 @@ public class MainUserFunctions {
     private MainUserFunctions(){}
     final static int MAX_NUM_RIDES = 200;
 
-    public static void login(final Context context,String username, String password){
+    public static void login(final Context context, final String username, final String password){
 
 
         Map<String, String> params = new HashMap<>();
@@ -58,6 +58,20 @@ public class MainUserFunctions {
                         JSONArray mJsonArray = jsonObject.getJSONArray("login");
                             JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                             long id = mJsonObject.getLong("id");
+                        if(UserDAO.getUserByUserName(username,password)==null) {
+                            String username = mJsonObject.getString("username");
+                            String password = mJsonObject.getString("password");
+                            String image = mJsonObject.getString("img");
+                            String address = mJsonObject.getString("address");
+                            long birthdate = mJsonObject.getLong("birthdate");
+                            String gender = mJsonObject.getString("Gender");
+                            String phone = mJsonObject.getString("phone");
+                            String email = mJsonObject.getString("email");
+
+                            // Store in DB
+                            UserDAO.addNewUser(id, username, password, image, address, birthdate, gender, phone, email);
+                        }
+
 //                            Log.i("Success", id + "");
                             context.getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putLong("id", id).commit();
                             context.startActivity(new Intent(context, Logout.class));
@@ -67,7 +81,11 @@ public class MainUserFunctions {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-               }
+               } catch (EmptyFieldException e) {
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -98,7 +116,7 @@ public class MainUserFunctions {
                              JSONArray mJsonArray = jsonObject.getJSONArray("signup");
                             JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                             long user_id = Long.parseLong(mJsonObject.getString("id"));
-//                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
+                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
                             Toast.makeText(context, "Registered Succeeded, login to continue...", Toast.LENGTH_LONG).show();
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -114,6 +132,10 @@ public class MainUserFunctions {
 
                 } catch (JSONException e) {
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
             }
@@ -490,7 +512,7 @@ public class MainUserFunctions {
                             Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                             allMatchedRides.add(ride);
                             JSONObject userJsonObject = mJsonObject.getJSONObject("user");
-                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, userJsonObject.getLong("birthdate"), userJsonObject.getString("Gender"));
+                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, 1, userJsonObject.getString("Gender"));
                             matchedRidesData.put(ride, user);
 
 //                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();

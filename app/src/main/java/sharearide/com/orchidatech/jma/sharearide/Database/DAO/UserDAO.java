@@ -265,6 +265,10 @@ public class UserDAO {
 
     //</editor-fold>
 
+    public static User getUserByUserName(String username,String password) {
+        return new Select().from(User.class).where("Username = ? and Password = ?", username, password).executeSingle();
+    }
+
 
     public static void addNewSocialUser(SocialUser socialUser){
         User user = new User();

@@ -16,8 +16,8 @@ import android.net.Uri;
  */
 public class DataProvider extends ContentProvider {
 
-    public static final Uri CONTENT_URI_MESSAGES = Uri.parse("content://sharearide.com.orchidatech.jma.sharearide.provider/messages");
-    public static final Uri CONTENT_URI_PROFILE = Uri.parse("content://sharearide.com.orchidatech.jma.sharearide.provider/profile");
+    public static final Uri CONTENT_URI_MESSAGES = Uri.parse("content://sharearide.com.orchidatech.jma.sharearide.Chat.provider/messages");
+    public static final Uri CONTENT_URI_PROFILE = Uri.parse("content://sharearide.com.orchidatech.jma.sharearide.Chat.provider/profile");
 
     public static final String COL_ID = "_id";
 
@@ -43,10 +43,10 @@ public class DataProvider extends ContentProvider {
 
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI("sharearide.com.orchidatech.jma.sharearide.provider", "messages", MESSAGES_ALLROWS);
-        uriMatcher.addURI("sharearide.com.orchidatech.jma.sharearide", "messages/#", MESSAGES_SINGLE_ROW);
-        uriMatcher.addURI("sharearide.com.orchidatech.jma.sharearide", "profile", PROFILE_ALLROWS);
-        uriMatcher.addURI("sharearide.com.orchidatech.jma.sharearide", "profile/#", PROFILE_SINGLE_ROW);
+        uriMatcher.addURI("sharearide.com.orchidatech.jma.sharearide.Chat.provider", "messages", MESSAGES_ALLROWS);
+        uriMatcher.addURI("sharearide.com.orchidatech.jma.sharearide.Chat.provider", "messages/#", MESSAGES_SINGLE_ROW);
+        uriMatcher.addURI("sharearide.com.orchidatech.jma.sharearide.Chat.provider", "profile", PROFILE_ALLROWS);
+        uriMatcher.addURI("sharearide.com.orchidatech.jma.sharearide.Chat.provider", "profile/#", PROFILE_SINGLE_ROW);
     }
 
     @Override
@@ -184,7 +184,7 @@ public class DataProvider extends ContentProvider {
 
     private static class DbHelper extends SQLiteOpenHelper {
 
-        private static final String DATABASE_NAME = "instachat.db";
+        private static final String DATABASE_NAME = "chat.db";
         private static final int DATABASE_VERSION = 1;
 
         public DbHelper(Context context) {
@@ -194,7 +194,7 @@ public class DataProvider extends ContentProvider {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("create table messages (_id integer primary key autoincrement, msg text, email text, email2 text, at datetime default current_timestamp);");
-            db.execSQL("create table profile (_id integer primary key autoincrement, name text, email text unique, count integer default 0);");
+            db.execSQL("create table profile (_id integer primary key autoincrement, name text, email text, count integer default 0);");
         }
 
         @Override
