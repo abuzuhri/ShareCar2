@@ -42,25 +42,6 @@ public class MainActivity extends ListActivity implements LoaderManager.LoaderCa
         super.onCreate(savedInstanceState);
         getHash();
 
-
-        /*
-        ContentValues values = new ContentValues(2);
-        values.put(DataProvider.COL_NAME, "jaffer");
-        values.put(DataProvider.COL_EMAIL, "jaffer@gmail.com");
-        getContentResolver().insert(DataProvider.CONTENT_URI_PROFILE, values);
-
-        ContentValues values2 = new ContentValues(2);
-        values2.put(DataProvider.COL_NAME, "Ahmed");
-        values2.put(DataProvider.COL_EMAIL, "Ahmed@gmail.com");
-        this.getContentResolver().insert(DataProvider.CONTENT_URI_PROFILE, values);
-
-        ContentValues values3 = new ContentValues(2);
-        values3.put(DataProvider.COL_NAME, "Saleem");
-        values3.put(DataProvider.COL_EMAIL, "Saleem@gmail.com");
-        this.getContentResolver().insert(DataProvider.CONTENT_URI_PROFILE, values);
-        */
-
-
         try {
             adapter = new SimpleCursorAdapter(this, R.layout.main_list_item, null, new String[]{
                     DataProvider.COL_NAME,
