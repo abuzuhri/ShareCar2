@@ -7,7 +7,11 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -27,17 +31,22 @@ import sharearide.com.orchidatech.jma.sharearide.webservice.RequestQueueHandler;
 public class InternetConnectionChecker {
 
     public static void isConnectedToInternet(final Context context, final OnInternetConnectionListener listener){
-StringRequest request = new StringRequest("http://www.google.com", new Response.Listener<String>() {
+    JsonObjectRequest request = new JsonObjectRequest(UrlConstant.CHECK_INTERNET_URL, null, new Response.Listener<JSONObject>() {
     @Override
-    public void onResponse(String s) {
-//            Toast.makeText(context, s, Toast.LENGTH_LONG).show();
-        listener.internetConnectionStatus(true);
+    public void onResponse(JSONObject jsonObject) {
+        try {
+            jsonObject.getBoolean("accessed");
+            listener.internetConnectionStatus(true);
+        } catch (JSONException e) {
+            listener.internetConnectionStatus(false);
+            return;
+        }
     }
 }, new Response.ErrorListener() {
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-//        Toast.makeText(context, volleyError.getMessage(), Toast.LENGTH_LONG).show();
     listener.internetConnectionStatus(false);
+    return;
     }
 });
         RequestQueueHandler.getInstance(context).addToRequestQueue(request);

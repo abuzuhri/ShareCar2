@@ -79,7 +79,7 @@ public class FacebookLogin implements SocialNetwork {
                             GraphRequestAsyncTask request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
                                 @Override
                                 public void onCompleted(JSONObject user, GraphResponse graphResponse) {
-//                                    Toast.makeText(activity, user.optString("email"), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(activity, user.optString("name"), Toast.LENGTH_LONG).show();
 
 //                                    AppLog.i(user.toString());
                                     fbUser.email = user.optString("email");

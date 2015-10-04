@@ -42,8 +42,6 @@ public class Inbox extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.inbox, null, false);
-        tool_bar = (Toolbar) view.findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
-        getActivity().setActionBar(tool_bar);
         inbox_rv = (RecyclerView) view.findViewById(R.id.inbox_rv);
         inbox_progress = (ProgressBar) view.findViewById(R.id.inbox_progress);
         messages = new ArrayList<>();
@@ -78,11 +76,6 @@ public class Inbox extends Fragment {
     public void last_chatting_users(final Context context, final OnInboxFetchListener listener, final long id){
         if(id == -1)
             return;
-
-        InternetConnectionChecker.isConnectedToInternet(getActivity().getApplicationContext(), new OnInternetConnectionListener() {
-            @Override
-            public void internetConnectionStatus(boolean status) {
-                if (status) {
                     User user = UserDAO.getUserById(id);
 
                     if (user != null) {
@@ -92,10 +85,6 @@ public class Inbox extends Fragment {
                     }else{
                         Toast.makeText(context, "This User Not Stored In Local DB", Toast.LENGTH_LONG).show();
                     }
-                } else
-                    Toast.makeText(context, "No Internet Access..", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
 }

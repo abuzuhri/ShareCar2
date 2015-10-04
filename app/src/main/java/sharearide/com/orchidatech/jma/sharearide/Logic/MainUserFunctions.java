@@ -113,7 +113,6 @@ public class MainUserFunctions {
 
                 } catch (JSONException e) {
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
                 } catch (EmptyFieldException e) {
                     e.printStackTrace();
                 } catch (InvalidInputException e) {
@@ -123,7 +122,7 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-                Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -148,7 +147,7 @@ public class MainUserFunctions {
                             String state_to = mJsonObject.getString("state_to");
                             String country_from = mJsonObject.getString("country_from");
                             String country_to = mJsonObject.getString("country_to");
-                            long date_time = mJsonObject.getLong("date_time");
+                            long date_time = Long.parseLong(mJsonObject.getString("date_time"));
                             double price = Double.parseDouble(mJsonObject.getString("price"));
 
                             // Store in DB
@@ -167,10 +166,7 @@ public class MainUserFunctions {
                             Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                             RideDAO.addNewRide(ride);
                             newItems.add(ride);
-
-                            RideDAO.addNewRide(ride);
-                            newItems.add(ride);
-                        }
+                         }
                         ///To Ensure that max num of items in db is MAX_NUM_RIDES....
                         final ArrayList<Ride> allStoredRides = new ArrayList<>(RideDAO.getAllRides());
                         int numOfRemovedRides = allStoredRides.size() - MAX_NUM_RIDES;
@@ -297,7 +293,7 @@ public class MainUserFunctions {
                             long sender_id = Long.parseLong(mJsonObject.getString("sender_id"));
                             long receiver_id = Long.parseLong(mJsonObject.getString("receiver_id"));
                             String message = mJsonObject.getString("message");
-                            long date_time = mJsonObject.getLong("date_time");
+                            long date_time = Long.parseLong(mJsonObject.getString("date_time"));
 
                             //store in DB
                             ChatDAO.addNewChat(id, message, sender_id, receiver_id, date_time);
@@ -392,7 +388,7 @@ public class MainUserFunctions {
                         String password = mJsonObject.getString("password");
                         String image = mJsonObject.getString("img");
                         String address = mJsonObject.getString("address");
-                        long birthdate = mJsonObject.getLong("birthdate");
+                        long birthdate = Long.parseLong(mJsonObject.getString("birthdate"));
                         String gender = mJsonObject.getString("Gender");
                         String phone = mJsonObject.getString("phone");
                         String email = mJsonObject.getString("email");
@@ -488,7 +484,7 @@ public class MainUserFunctions {
                             String state_to = mJsonObject.getString("state_to");
                             String country_from = mJsonObject.getString("country_from");
                             String country_to = mJsonObject.getString("country_to");
-                            long date_time = mJsonObject.getLong("date_time");
+                            long date_time = Long.parseLong(mJsonObject.getString("date_time"));
                             double price = Double.parseDouble(mJsonObject.getString("price"));
                             Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                             allMatchedRides.add(ride);
@@ -584,7 +580,7 @@ public class MainUserFunctions {
                             long sender_id = Long.parseLong(mJsonObject.getString("sender_id"));
                             long receiver_id = Long.parseLong(mJsonObject.getString("receiver_id"));
                             String message = mJsonObject.getString("message");
-                            long date_time = mJsonObject.getLong("date_time");
+                            long date_time = Long.parseLong(mJsonObject.getString("date_time"));
 
                             if(sender_id != user_id && users_id.contains(sender_id))
                                 continue;
@@ -608,7 +604,7 @@ public class MainUserFunctions {
                             String sender_email = senderJsonObject.getString("email");
                             String sender_phone = senderJsonObject.getString("phone");
                             String sender_image = senderJsonObject.getString("img");
-                            Long sender_birthdate = senderJsonObject.getLong("birthdate");
+                            Long sender_birthdate = Long.parseLong(senderJsonObject.getString("birthdate"));
                             String sender_gender = senderJsonObject.getString("Gender");
 
                             JSONObject receiverJsonObject = mJsonObject.getJSONObject("receiver");
@@ -616,15 +612,17 @@ public class MainUserFunctions {
                             String receiver_email = receiverJsonObject.getString("email");
                             String receiver_phone = receiverJsonObject.getString("phone");
                             String receiver_image = receiverJsonObject.getString("img");
-                            Long receiver_birthdate = receiverJsonObject.getLong("birthdate");
+                            Long receiver_birthdate = Long.parseLong(receiverJsonObject.getString("birthdate"));
                             String receiver_gender = receiverJsonObject.getString("Gender");
 
                             if(UserDAO.getUserById(receiver_id) == null)
-                                UserDAO.addNewUser(Long.parseLong(params.get("id")), receiver_username, null, receiver_image, null, receiver_birthdate, receiver_gender, receiver_phone, receiver_email);
+                                UserDAO.addNewUser(receiver_id, receiver_username, null, receiver_image, null, receiver_birthdate, receiver_gender, receiver_phone, receiver_email);
                             if(UserDAO.getUserById(sender_id) == null)
-                                UserDAO.addNewUser(Long.parseLong(params.get("id")), sender_username, null, sender_image, null, sender_birthdate, sender_gender, sender_phone, sender_email);
+                                UserDAO.addNewUser(sender_id, sender_username, null, sender_image, null, sender_birthdate, sender_gender, sender_phone, sender_email);
 
-
+                            User sender_info = UserDAO.getUserById(sender_id);
+                            User receiver_info = UserDAO.getUserById(receiver_id);
+/*
                             User sender_info = new User();
                             sender_info.setRemoteId(sender_id);
                             sender_info.setUsername(sender_username);
@@ -642,7 +640,7 @@ public class MainUserFunctions {
                             receiver_info.setImage(receiver_image);
                             receiver_info.setBirthdate(receiver_birthdate);
                             receiver_info.setGender(receiver_gender);
-
+*/
                             ArrayList<User> persons = new ArrayList<User>();
                             persons.add(sender_info);
                             persons.add(receiver_info);

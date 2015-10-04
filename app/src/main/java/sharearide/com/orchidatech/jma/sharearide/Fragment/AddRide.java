@@ -73,7 +73,7 @@ private Button save,more_info;
                 dialog.show(getActivity().getFragmentManager(), "Date Dialog");*/
                 DatePickerDialog dialog = DatePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.setMinDate(calendar);
-                dialog.setCancelable(false);
+                dialog.setCancelable(true);
                 dialog.show(getActivity().getFragmentManager(), "datePicker");
             }
         });
@@ -86,13 +86,12 @@ private Button save,more_info;
 //                    dialog.showDateDialog();
                     DatePickerDialog dialog = DatePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                     dialog.setMinDate(calendar);
-                    dialog.setCancelable(false);
+                    dialog.setCancelable(true);
                     dialog.show(getActivity().getFragmentManager(), "datePicker");
 
                 }
             }
         });
-
         price=(EditText)v.findViewById(R.id.price);
         context = getActivity();
 

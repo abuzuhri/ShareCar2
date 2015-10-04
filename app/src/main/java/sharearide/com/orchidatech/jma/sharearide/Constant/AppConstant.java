@@ -54,7 +54,7 @@ public class AppConstant {
             // Create a calendar object that will convert the date and time value in milliseconds to date.
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(milliSeconds);
-            String fullDate = buildValueOf(calendar.get(Calendar.DAY_OF_MONTH)) + "/"+buildValueOf(calendar.get(Calendar.MONTH))+ "/" + calendar.get(Calendar.YEAR) + " "+
+            String fullDate = buildValueOf(calendar.get(Calendar.DAY_OF_MONTH)) + "/"+buildValueOf(calendar.get(Calendar.MONTH)+1)+ "/" + calendar.get(Calendar.YEAR) + " "+
                     buildValueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + buildValueOf(calendar.get(Calendar.MINUTE));
             return fullDate;
         }

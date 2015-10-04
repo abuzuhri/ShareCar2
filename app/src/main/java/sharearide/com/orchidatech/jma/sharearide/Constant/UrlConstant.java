@@ -24,4 +24,5 @@ public class UrlConstant {
          public static final String FORGET_PASSWORD_URL = SERVER_URL + WEB_SERVICES_PATH + "forget_password.php";
         public static final String SEARCH_ALL_URL =  SERVER_URL + WEB_SERVICES_PATH + "searchAllRide.php";//
 
+    public static final String CHECK_INTERNET_URL = SERVER_URL + WEB_SERVICES_PATH + "check_internet_access.php";
 }
