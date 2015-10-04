@@ -24,4 +24,6 @@
     <string name="title_activity_share_ride">ShareRide</string>
     <string name="title_activity_save_info">Save_info</string>
     <string name="title_activity_more_info">MoreInfo</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
 </resources>

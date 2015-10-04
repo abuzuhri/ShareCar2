@@ -345,8 +345,5 @@ public class UserDAO {
         new Delete().from(User.class).execute();
     }
     //</editor-fold>
-    public static User getUserByUserName(String username,String password) {
-        return new Select().from(User.class).where("Username = ? and Password = ?", username, password).executeSingle();
-    }
 
 }
