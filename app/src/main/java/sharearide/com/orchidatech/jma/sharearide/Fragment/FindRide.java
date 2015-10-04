@@ -28,7 +28,6 @@ import java.util.Map;
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.RseultAct;
 import sharearide.com.orchidatech.jma.sharearide.Activity.SearchResult;
-import sharearide.com.orchidatech.jma.sharearide.Activity.ShowRideByItem;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
@@ -61,9 +60,9 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(getActivity(), ShowRideByItem.class);
-                startActivity(intent);
-            }
+//                final Intent intent = new Intent(getActivity(), ShowRideByItem.class);
+//                startActivity(intent);
+  }
         });
         time.setOnClickListener(new View.OnClickListener() {
             @Override

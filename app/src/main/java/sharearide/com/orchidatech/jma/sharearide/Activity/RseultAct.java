@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import sharearide.com.orchidatech.jma.sharearide.Fragment.FindAllRide;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 public class RseultAct extends ActionBarActivity {
@@ -30,7 +29,7 @@ public class RseultAct extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_ride_by_item, menu);
+//        getMenuInflater().inflate(R.menu.menu_show_ride_by_item, menu);
       //  SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
       //  SearchView searchView =(SearchView) menu.findItem(R.id.menu_search).getActionView();
       //  searchView.setSearchableInfo( searchManager.getSearchableInfo(getComponentName()));

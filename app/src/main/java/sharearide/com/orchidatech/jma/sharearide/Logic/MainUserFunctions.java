@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.Login;
-import sharearide.com.orchidatech.jma.sharearide.Activity.Logout;
+import sharearide.com.orchidatech.jma.sharearide.Activity.ShareRide;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.ChatDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.CountryDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
@@ -40,7 +40,7 @@ public class MainUserFunctions {
     private MainUserFunctions(){}
     final static int MAX_NUM_RIDES = 200;
 
-    public static void login(final Context context,String username, final String password){
+    public static void login(final Context context, final String username, final String password){
 
 
         Map<String, String> params = new HashMap<>();
@@ -58,13 +58,36 @@ public class MainUserFunctions {
                         JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                         long id = mJsonObject.getLong("id");
 //                            Log.i("Success", id + "");
+                        if(UserDAO.getUserByUserName(username,password)==null){
+                            String username = mJsonObject.getString("username");
+                            String password = mJsonObject.getString("password");
+                            String image = mJsonObject.getString("img");
+                            String address = mJsonObject.getString("address");
+                            long birthdate = mJsonObject.getLong("birthdate");
+                            String gender = mJsonObject.getString("Gender");
+                            String phone = mJsonObject.getString("phone");
+                            String email = mJsonObject.getString("email");
+
+                            // Store in DB
+                            UserDAO.addNewUser(id, username, password, image, address, birthdate, gender, phone, email);
+
+                            //UserDAO.addNewUser();
+
+
+
+                        }
+
                         context.getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putLong("id", id).commit();
-                        context.startActivity(new Intent(context, Logout.class));
+                        context.startActivity(new Intent(context, ShareRide.class));
 
                     }else{
                         Toast.makeText(context  , jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (EmptyFieldException e) {
+                    e.printStackTrace();
+                } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
             }

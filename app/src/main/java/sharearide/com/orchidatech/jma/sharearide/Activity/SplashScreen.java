@@ -46,7 +46,7 @@ public class SplashScreen extends ActionBarActivity {
         if (user_id == -1)
             intent = new Intent(SplashScreen.this, Login.class);
         else
-            intent = new Intent(SplashScreen.this, Logout.class);
+            intent = new Intent(SplashScreen.this, ShareRide.class);
 
         setTimerForRefreshRideService();
 //         this.startService(new Intent(this, RefreshRideService.class));
