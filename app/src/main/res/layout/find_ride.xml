@@ -300,18 +300,6 @@
             android:textColor="@color/whiteText"
             />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SEARCH By Item"
-            android:id="@+id/sr"
-            android:background="#ff9d1e"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/vertical_margin"
-            android:layout_marginBottom="0dp"
-            android:textStyle="bold"
-            android:textColor="@color/whiteText"
-            />
 
 
     </LinearLayout>

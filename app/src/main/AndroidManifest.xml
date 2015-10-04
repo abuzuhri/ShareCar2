@@ -71,10 +71,10 @@
             android:name=".Activity.ShowRideByItem"
             android:label="">
           <!--  android:theme="@style/Theme.MyCompatTheme">
-
+-->
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=".Activity.RseultAct" />-->
+                android:value=".Activity.RseultAct" />
         </activity>
 
         <activity
