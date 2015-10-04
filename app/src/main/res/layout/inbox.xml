@@ -34,13 +34,11 @@
             android:layout_margin="16dp"
             android:src="@drawable/plus"
             app:layout_anchor="@id/inbox_rv"
-            app:layout_anchorGravity="bottom|right|end" />
+            app:layout_anchorGravity="bottom|right|end"
+            fab:backgroundTint="@color/Floatbtn"
+            fab:backgroundTintMode="src_atop"
+            fab:fab_shadow="false"/>
 
-        <!--
-        fab:backgroundTint="@color/Floatbtn"
-        fab:backgroundTintMode="src_atop"
-        fab:fab_shadow="false"
-        -->
 
 
     </android.support.design.widget.CoordinatorLayout>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -54,6 +55,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
       if(chats != null){
             String message_text = chats.get(position).getMessage();
+          Toast.makeText(activity,""+message_text,Toast.LENGTH_LONG).show();
           String contacted_person;
           long user_id = activity.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
             if(chats_data.get(chats.get(position)).get(0).getRemoteId() != user_id){

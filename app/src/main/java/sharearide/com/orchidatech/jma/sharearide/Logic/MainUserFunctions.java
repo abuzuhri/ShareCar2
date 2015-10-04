@@ -577,7 +577,7 @@ public class MainUserFunctions {
                             Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                             allMatchedRides.add(ride);
                             JSONObject userJsonObject = mJsonObject.getJSONObject("user");
-                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, userJsonObject.getLong("birthdate"), userJsonObject.getString("Gender"));
+                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, -1, userJsonObject.getString("Gender"));
                             matchedRidesData.put(ride, user);
 
 //                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
@@ -661,7 +661,10 @@ public class MainUserFunctions {
                 try {
                     boolean success = jsonObject.getBoolean("success");
                     if(success){
+
                         JSONArray mJsonArray = jsonObject.getJSONArray("messages");
+                        Toast.makeText(context, "dfgdg"+mJsonArray.length(), Toast.LENGTH_LONG).show();
+
                         for (int i = 0; i < mJsonArray.length(); i++) {
                             JSONObject mJsonObject = mJsonArray.getJSONObject(i);
                             long id = Long.parseLong(mJsonObject.getString("id"));
@@ -679,7 +682,7 @@ public class MainUserFunctions {
                             else
                                 users_id.add(receiver_id);
 
-                            ChatDAO.addNewChat(id, message, sender_id, receiver_id, date_time);
+                         //   ChatDAO.addNewChat(id, message, sender_id, receiver_id, date_time);
                             Chat chat = new Chat();
                             chat.setRemoteId(id);
                             chat.setSenderId(sender_id);
@@ -692,7 +695,7 @@ public class MainUserFunctions {
                             String sender_email = senderJsonObject.getString("email");
                             String sender_phone = senderJsonObject.getString("phone");
                             String sender_image = senderJsonObject.getString("img");
-                            Long sender_birthdate = Long.parseLong(senderJsonObject.getString("birthdate"));
+                          //  Long sender_birthdate = Long.parseLong(senderJsonObject.getString("birthdate"));
                             String sender_gender = senderJsonObject.getString("Gender");
 
                             JSONObject receiverJsonObject = mJsonObject.getJSONObject("receiver");
@@ -700,24 +703,24 @@ public class MainUserFunctions {
                             String receiver_email = receiverJsonObject.getString("email");
                             String receiver_phone = receiverJsonObject.getString("phone");
                             String receiver_image = receiverJsonObject.getString("img");
-                            Long receiver_birthdate = Long.parseLong(receiverJsonObject.getString("birthdate"));
+                          //  Long receiver_birthdate = Long.parseLong(receiverJsonObject.getString("birthdate"));
                             String receiver_gender = receiverJsonObject.getString("Gender");
+//
+//                            if(UserDAO.getUserById(receiver_id) == null)
+//                                UserDAO.addNewUser(receiver_id, receiver_username, null, receiver_image, null, receiver_birthdate, receiver_gender, receiver_phone, receiver_email);
+//                            if(UserDAO.getUserById(sender_id) == null)
+//                                UserDAO.addNewUser(sender_id, sender_username, null, sender_image, null, sender_birthdate, sender_gender, sender_phone, sender_email);
 
-                            if(UserDAO.getUserById(receiver_id) == null)
-                                UserDAO.addNewUser(receiver_id, receiver_username, null, receiver_image, null, receiver_birthdate, receiver_gender, receiver_phone, receiver_email);
-                            if(UserDAO.getUserById(sender_id) == null)
-                                UserDAO.addNewUser(sender_id, sender_username, null, sender_image, null, sender_birthdate, sender_gender, sender_phone, sender_email);
+//                            User sender_info = UserDAO.getUserById(sender_id);
+//                            User receiver_info = UserDAO.getUserById(receiver_id);
 
-                            User sender_info = UserDAO.getUserById(sender_id);
-                            User receiver_info = UserDAO.getUserById(receiver_id);
-/*
                             User sender_info = new User();
                             sender_info.setRemoteId(sender_id);
                             sender_info.setUsername(sender_username);
                             sender_info.setEmail(sender_email);
                             sender_info.setPhone(sender_phone);
                             sender_info.setImage(sender_image);
-                            sender_info.setBirthdate(sender_birthdate);
+                            //sender_info.setBirthdate(sender_birthdate);
                             sender_info.setGender(sender_gender);
 
                             User receiver_info = new User();
@@ -726,9 +729,9 @@ public class MainUserFunctions {
                             receiver_info.setEmail(receiver_email);
                             receiver_info.setPhone(receiver_phone);
                             receiver_info.setImage(receiver_image);
-                            receiver_info.setBirthdate(receiver_birthdate);
+                           // receiver_info.setBirthdate(receiver_birthdate);
                             receiver_info.setGender(receiver_gender);
-*/
+
                             ArrayList<User> persons = new ArrayList<User>();
                             persons.add(sender_info);
                             persons.add(receiver_info);
@@ -736,18 +739,18 @@ public class MainUserFunctions {
                             all_messages.add(chat);
                         }
                         listener.onFetchInboxSucceed(all_messages, messages_data);
-
+Toast.makeText(context,""+all_messages.size(),Toast.LENGTH_LONG).show();
 
                     }else{
                         String message = jsonObject.getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                         listener.onFetchInboxFailed(message);
+
                     }
                 }catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (EmptyFieldException e) {
-                    e.printStackTrace();
-                } catch (InvalidInputException e) {
+
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                    listener.onFetchInboxFailed(e.getMessage());
                     e.printStackTrace();
                 }
 

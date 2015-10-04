@@ -18,7 +18,7 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 public class NewUser extends AppCompatActivity {
 
     private Toolbar tool_bar;
-    private EditText username,password,re_password,email;
+    private EditText username,password,re_password,email,phone;
     private Button register;
 
     @Override
@@ -32,6 +32,7 @@ public class NewUser extends AppCompatActivity {
         password=(EditText)findViewById(R.id.password);
         re_password=(EditText)findViewById(R.id.re_password);
         email=(EditText)findViewById(R.id.email);
+        phone=(EditText)findViewById(R.id.phone);
 
 
 
@@ -48,9 +49,11 @@ public class NewUser extends AppCompatActivity {
                     re_password.setError(" Password doesn't match ");
                 else if (email.getText().toString().equals(""))
                     email.setError("Enter email ");
+                else if (phone.getText().toString().equals(""))
+                    email.setError("Enter Phone ");
 
                 else {
-                MainUserFunctions.signUp(getApplicationContext(), username.getText().toString(), password.getText().toString(), "", "", "0", "", "", email.getText().toString());
+                MainUserFunctions.signUp(getApplicationContext(), username.getText().toString(), password.getText().toString(), "", "",phone.getText().toString() , "", "", email.getText().toString());
                    /* Intent i = new Intent(NewUser.this, SearchResult.class);
                     startActivity(i);**/                }
 

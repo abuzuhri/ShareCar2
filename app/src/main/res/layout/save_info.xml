@@ -12,6 +12,8 @@
             android:orientation="vertical"
             android:background="#fff">
 
+            <include layout="@layout/toolbar"
+                android:id="@+id/tool_bar"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -53,6 +55,36 @@
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
                     />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginBottom="@dimen/date_marginTop"
+                >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imagaew6"
+                    android:background="@drawable/flagg"
+                    android:layout_gravity="left|center"/>
+
+                <EditText
+                    android:id="@+id/stateFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:layout_gravity="left|bottom"
+                    android:padding="10dp"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:textDirection="ltr"
+                    android:background="#fff"
+                    android:layout_marginRight="@dimen/horizontal_margin"                />
 
             </LinearLayout>
 
@@ -193,6 +225,35 @@
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
                     />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginBottom="@dimen/date_marginTop">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/flag"
+                    android:background="@drawable/flagg"
+                    android:layout_gravity="left|center"/>
+
+                <EditText
+                    android:id="@+id/stateTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:layout_gravity="left|bottom"
+                    android:padding="10dp"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:textDirection="ltr"
+                    android:background="#fff"
+                    android:layout_marginRight="@dimen/horizontal_margin"                />
 
             </LinearLayout>
             <LinearLayout

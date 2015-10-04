@@ -76,6 +76,8 @@ public class ShareRide extends ActionBarActivity {
         shareRid=new ShareRideFragment();
         getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRid).commit();
         getFragmentManager().executePendingTransactions();
+        final Inbox inbox=new Inbox();
+        final FindAllRide mainFragment = new FindAllRide();
 
         NAME= UserDAO.getUserById(getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1)).getUsername();
         EMAIL=UserDAO.getUserById(getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id",-1)).getEmail();
@@ -88,7 +90,8 @@ public class ShareRide extends ActionBarActivity {
                 switch (position) {
                     case 1:
                         Drawer.closeDrawers();
-                        if(!shareRid.isAdded()) {
+                        if(!shareRid.isInLayout()) {
+
                             getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRid).addToBackStack(null).commit();
                             getFragmentManager().executePendingTransactions();
 
@@ -102,30 +105,23 @@ public class ShareRide extends ActionBarActivity {
                     case 2:
                         Drawer.closeDrawers();
 
-                        if(!shareRid.isAdded()) {
+                        if(!shareRid.isInLayout()) {
                             getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRid).addToBackStack(null).commit();
                             getFragmentManager().executePendingTransactions();
                         }
-
                                 shareRid.selectTab(1);
-
 //                        ((ShareRideFragment) getFragmentManager().findFragmentById(R.id.fragment_place)).selectTab(1);
-
                     break;
                     case 3:
                         Drawer.closeDrawers();
-                        Inbox inbox=new Inbox();
                         getFragmentManager().beginTransaction().replace(R.id.fragment_place,inbox).addToBackStack(null).commit();
                         getFragmentManager().executePendingTransactions();
                         break;
                     case 4:
                         Drawer.closeDrawers();
-
-
-                        Fragment mainFragment = new FindAllRide();
-                        getSupportFragmentManager()
+                        getFragmentManager()
                                 .beginTransaction()
-                                .add(android.R.id.content, mainFragment).addToBackStack(null)
+                                .replace(R.id.fragment_place, mainFragment).addToBackStack(null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         break;
