@@ -51,6 +51,7 @@ public class Save_info extends Activity implements LoaderManager.LoaderCallbacks
     private Button quick_msg;
     private TextView email, phone, username, cityFrom, cityTo, countryFrom, countryTo, date, time, price;
     private ImageButton send_msg, send_mail, call;
+    private ArrayList<String> user_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +116,8 @@ public class Save_info extends Activity implements LoaderManager.LoaderCallbacks
                 Intent intent = new Intent(Save_info.this, ChatActivity.class);
                 intent.putExtra("ReceiverEmail", receiverEmail);
                 intent.putExtra("SenderEmail", senderEmail);
+                intent.putExtra("ReceiverId", user.getRemoteId());
+
                 intent.putExtra(Common.PROFILE_ID, String.valueOf(profileId));
                 startActivity(intent);
             }
@@ -125,7 +128,7 @@ public class Save_info extends Activity implements LoaderManager.LoaderCallbacks
         Bundle args = intent.getBundleExtra("ARGS");
         if (args != null) {
             ArrayList<String> ride_data = args.getStringArrayList("RIDE");
-            ArrayList<String> user_data = args.getStringArrayList("USER");
+                user_data= args.getStringArrayList("USER");
             ride = new Ride(Long.parseLong(ride_data.get(0)), Long.parseLong(ride_data.get(1)), ride_data.get(2), ride_data.get(3), ride_data.get(4), ride_data.get(5), ride_data.get(6), ride_data.get(7), Long.parseLong(ride_data.get(8)), Double.parseDouble(ride_data.get(9)));
             user = new User(Long.parseLong(user_data.get(0)), null, user_data.get(1), null, null, user_data.get(2), user_data.get(3), null, -1, null);
             email.setText(user.getEmail());

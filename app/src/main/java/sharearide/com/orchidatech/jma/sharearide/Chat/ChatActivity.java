@@ -31,6 +31,8 @@ import java.security.NoSuchAlgorithmException;
 
 import sharearide.com.orchidatech.jma.sharearide.Chat.client.GcmUtil;
 import sharearide.com.orchidatech.jma.sharearide.Chat.client.ServerUtilities;
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
+import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 /**
@@ -48,6 +50,7 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
     private GcmUtil gcmUtil;
 
     String receiverEmail;
+    long receiverId;
     //String senderEmail;
 
     @Override
@@ -60,6 +63,7 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
         // Get sender and receiver emails
         Intent intent = getIntent();
         receiverEmail = intent.getStringExtra("ReceiverEmail");
+        receiverId = intent.getLongExtra("ReceiverId", -1);
         profileEmail = intent.getStringExtra("SenderEmail");
 
         profileId = getIntent().getStringExtra(Common.PROFILE_ID);
@@ -162,6 +166,9 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
 
                     // TODO: store chat in DB
                     // ..
+                    long sender_id = getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1);
+
+                    saveMessage(txt, sender_id, receiverId, System.currentTimeMillis());
 
                 } catch (IOException ex) {
                     msg = "Message could not be sent";
@@ -176,6 +183,10 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
                 }
             }
         }.execute(null, null, null);
+    }
+
+    private void saveMessage(String message, long sender_id, long receiverId, long date_time) {
+        MainUserFunctions.add_message(getApplicationContext(),message, sender_id, receiverId, date_time);
     }
 
 
