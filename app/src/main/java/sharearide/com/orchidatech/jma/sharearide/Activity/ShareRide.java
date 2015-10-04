@@ -62,7 +62,7 @@ public class ShareRide extends ActionBarActivity {
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
     ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
     ShareRideFragment shareRid;
-
+    Inbox inbox=new Inbox();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +114,6 @@ public class ShareRide extends ActionBarActivity {
                     break;
                     case 3:
                         Drawer.closeDrawers();
-                        Inbox inbox=new Inbox();
                         getFragmentManager().beginTransaction().replace(R.id.fragment_place,inbox).addToBackStack(null).commit();
                         getFragmentManager().executePendingTransactions();
                         break;

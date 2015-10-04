@@ -45,9 +45,10 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
-public class Save_info extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class Save_info extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     Ride ride;
     User user;
+    private Toolbar tool_bar;
     private Button quick_msg;
     private TextView email, phone, username, cityFrom, cityTo, countryFrom, countryTo, date, time, price;
     private ImageButton send_msg, send_mail, call;
@@ -56,6 +57,8 @@ public class Save_info extends Activity implements LoaderManager.LoaderCallbacks
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.save_info);
+        tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        setSupportActionBar(tool_bar);
 
         getHash();
 
@@ -77,7 +80,7 @@ public class Save_info extends Activity implements LoaderManager.LoaderCallbacks
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri number = Uri.parse("tel:" + phone.getText().toString());
+                Uri number = Uri.parse("tel:"+phone.getText().toString());
                 Intent callIntent = new Intent(Intent.ACTION_CALL, number);
                 startActivity(callIntent);
             }
@@ -87,7 +90,7 @@ public class Save_info extends Activity implements LoaderManager.LoaderCallbacks
             @Override
             public void onClick(View view) {
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto", email.getText().toString(), null));
+                        "mailto",email.getText().toString(), null));
                 //          emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
                 //        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
@@ -121,9 +124,10 @@ public class Save_info extends Activity implements LoaderManager.LoaderCallbacks
         });
 
 
+
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("ARGS");
-        if (args != null) {
+        if(args != null) {
             ArrayList<String> ride_data = args.getStringArrayList("RIDE");
             ArrayList<String> user_data = args.getStringArrayList("USER");
             ride = new Ride(Long.parseLong(ride_data.get(0)), Long.parseLong(ride_data.get(1)), ride_data.get(2), ride_data.get(3), ride_data.get(4), ride_data.get(5), ride_data.get(6), ride_data.get(7), Long.parseLong(ride_data.get(8)), Double.parseDouble(ride_data.get(9)));
@@ -132,11 +136,11 @@ public class Save_info extends Activity implements LoaderManager.LoaderCallbacks
             username.setText(user.getUsername());
             cityFrom.setText(ride.getFromCity());
             cityTo.setText(ride.getToCity());
-            price.setText(ride.getCost() + "$");
+            price.setText(ride.getCost()+"$");
             countryFrom.setText(ride.getFromCountry());
             countryTo.setText(ride.getToCountry());
             phone.setText(user.getPhone());
-            Long date_time = ride.getDateTime();
+            Long  date_time=ride.getDateTime();
             String fullDate = AppConstant.DateConvertion.getDate(date_time);
             time.setText(fullDate.split(" ")[1]);
             date.setText(fullDate.split(" ")[0]);

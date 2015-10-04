@@ -66,6 +66,8 @@ public class Inbox extends Fragment {
 
             @Override
             public void onFetchInboxFailed(String error) {
+                Toast.makeText(getActivity().getApplicationContext(), error, Toast.LENGTH_LONG).show();
+                inbox_progress.setVisibility(View.GONE);
 
             }
         }, getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));

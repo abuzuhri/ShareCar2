@@ -32,18 +32,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
+            fab:backgroundTint="@color/Floatbtn"
+            fab:backgroundTintMode="src_atop"
+            fab:fab_shadow="false"
             android:src="@drawable/plus"
             app:layout_anchor="@id/inbox_rv"
             app:layout_anchorGravity="bottom|right|end" />
 
-        <!--
-        fab:backgroundTint="@color/Floatbtn"
-        fab:backgroundTintMode="src_atop"
-        fab:fab_shadow="false"
-        -->
-
-
-    </android.support.design.widget.CoordinatorLayout>
+       </android.support.design.widget.CoordinatorLayout>
 <ProgressBar
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

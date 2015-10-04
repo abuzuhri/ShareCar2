@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -66,7 +67,7 @@ public class FindAllRide extends Fragment {
                if ((t1.getText()).toString() != null) {
                    mProgressBar.setVisibility(View.VISIBLE);
 
-                    findAllRide((t1.getText()).toString() );
+                    findAllRide((t1.getText()).toString(), getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1) );
               //   Toast.makeText(getActivity(),"DONE",Toast.LENGTH_LONG).show();
 
 
@@ -116,7 +117,7 @@ public class FindAllRide extends Fragment {
 
 
 
-    private void findAllRide(final String s) {
+    private void findAllRide(final String s, long user_id) {
         MainUserFunctions.find_all_ride(new OnSearchListener() {
 
             @Override
@@ -145,7 +146,7 @@ public class FindAllRide extends Fragment {
             public void onSearchFailed(String error) {
      mProgressBar.setVisibility(View.GONE);
             }
-        }, getActivity(), s);
+        }, getActivity(), s, user_id);
 
 
     }

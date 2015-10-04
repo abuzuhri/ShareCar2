@@ -180,7 +180,7 @@ public class SearchResult extends ActionBarActivity {
                                           }
                                       }, SearchResult.this.getApplicationContext(), city_from, city_to, state_from,
                 state_to, country_from, country_to,
-                date_time);
+                date_time, getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1));
 
 
 

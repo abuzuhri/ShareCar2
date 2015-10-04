@@ -71,15 +71,21 @@
 
         <activity
             android:name=".Activity.NewUser"
-            android:label="@string/title_activity_signup" />
-
+            android:label="@string/title_activity_signup"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.Save_info"
-            android:label="Save_info" />
-
+            android:label="Save_info"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.Login"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" >
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".Activity.RseultAct" />
+        </activity>
 
         <activity
             android:name=".Activity.SearchResult"
@@ -87,39 +93,41 @@
 
         <activity
             android:name=".Activity.Logout"
-            android:label="@string/title_activity_logout" />
-
+            android:label="@string/title_activity_logout"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.ResetPassword"
-            android:label="@string/title_activity_reset_password" />
-
-
-
+            android:label="@string/title_activity_reset_password"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.Warning"
-            android:label="@string/title_activity_warning" />
-
+            android:label="@string/title_activity_warning"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.MapViewActivity"
-            android:label="@string/title_activity_map" />
+            android:label="@string/title_activity_map"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.ShareRide"
-            android:label="@string/title_activity_share_ride" />
+            android:label="@string/title_activity_share_ride"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.Main"
-            android:label="@string/title_activity_main" />
-
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Chat.SettingsActivity"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Chat.ChatActivity"
-            android:logo="@drawable/ic_contact_picture" />
+            android:logo="@drawable/ic_contact_picture"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name=".Chat.DataProvider"
             android:authorities="sharearide.com.orchidatech.jma.sharearide.provider"
-            android:exported="false"></provider>
+            android:exported="false" />
 
         <receiver
             android:name=".Chat.client.GcmBroadcastReceiver"
