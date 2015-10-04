@@ -1,5 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat;
+import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
@@ -24,9 +28,13 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     private final Map<Chat, ArrayList<User>> chats_data;
+    private final Activity activity;
+    private final OnRecycleViewItemClicked listener;
     ArrayList<Chat> chats;
 
-    public ChatAdapter(ArrayList<Chat> chats, Map<Chat, ArrayList<User>> chats_data) {
+    public ChatAdapter(Activity activity, ArrayList<Chat> chats, Map<Chat, ArrayList<User>> chats_data, OnRecycleViewItemClicked listener) {
+        this.activity = activity;
+        this.listener = listener;
         this.chats = chats;
         this.chats_data = chats_data;
     }
@@ -44,13 +52,22 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
+      if(chats != null){
+            String message_text = chats.get(position).getMessage();
+          String contacted_person;
+          long user_id = activity.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
+            if(chats_data.get(chats.get(position)).get(0).getRemoteId() != user_id){
+                contacted_person = chats_data.get(chats.get(position)).get(0).getUsername();
+            }else{
+                contacted_person = chats_data.get(chats.get(position)).get(1).getUsername();
+            }
+          String chat_date = AppConstant.DateConvertion.getDate(chats.get(position).getDateTime());
+          holder.date.setText(chat_date);
+          holder.lastChat.setText(message_text);
+          holder.name.setText(contacted_person);
+        }
 
-        // TODO: get from server
-        // holder.name.setText(chats.get(position).name);
-        // ..
-        // ..
+
     }
 
     @Override
@@ -64,13 +81,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         return chats.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
         CardView cv;
         ImageView image;
         TextView name;
         TextView lastChat;
-        TextView status;
+        TextView date;
 
         public ViewHolder(View v) {
             super(v);
@@ -78,7 +95,19 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             image = (ImageView) v.findViewById(R.id.chat_image);
             name = (TextView) v.findViewById(R.id.chat_name);
             lastChat = (TextView) v.findViewById(R.id.chat_lastChat);
-            status = (TextView) v.findViewById(R.id.chat_status);
+            date = (TextView) v.findViewById(R.id.chat_date);
+        v.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            listener.onItemClicked(chats.get(position), chats_data.get(chats.get(position)).get(0), chats_data.get(chats.get(position)).get(1));
+
+        }
+    }
+
+    public interface OnRecycleViewItemClicked{
+        public void onItemClicked(Chat selected_chat, User sender, User receiver);
     }
 }

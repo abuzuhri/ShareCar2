@@ -32,49 +32,58 @@ public class SplashScreen extends ActionBarActivity {
     private static final long INITIAL_SERVICE_DELAY = 120 * 1000L;//FOR ONE MINUTE
     private Timer mTimer;
     private long user_id;
+    Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
+
 //       UserDAO.deleteAllUsers();
 //       RideDAO.deleteAllRides();
         user_id = this.getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1);
-       setTimerForRefreshRideService();
+        if (user_id == -1)
+            intent = new Intent(SplashScreen.this, Login.class);
+        else
+            intent = new Intent(SplashScreen.this, ShareRide.class);
+
+        setTimerForRefreshRideService();
 //         this.startService(new Intent(this, RefreshRideService.class));
 
 
+        if (SplashScreen.this.getSharedPreferences("pref", MODE_PRIVATE).getBoolean("FIRST_TIME", true)) {
 
             InternetConnectionChecker.isConnectedToInternet(SplashScreen.this, new OnInternetConnectionListener() {
-            @Override
-            public void internetConnectionStatus(boolean status) {
-                final Intent intent;
-                if(user_id == -1)
-                         intent = new Intent(SplashScreen.this, Login.class);
-                else
-                        intent = new Intent(SplashScreen.this, Logout.class);
+                @Override
+                public void internetConnectionStatus(boolean status) {
 
 
-                if (status) {
-                    if (SplashScreen.this.getSharedPreferences("pref",MODE_PRIVATE).getBoolean("FIRST_TIME", true)) {
-                          Toast.makeText(SplashScreen.this, "Loading Data...", Toast.LENGTH_SHORT).show();
+                    if (status) {
+                        Toast.makeText(SplashScreen.this, "Loading Data...", Toast.LENGTH_SHORT).show();
                         loadNewRides(SplashScreen.this);
-                    }
 
-                } else
-                    Toast.makeText(SplashScreen.this, "No Internet Access", Toast.LENGTH_SHORT).show();
 
-                SplashScreen.this.getSharedPreferences("pref", MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(intent);
-                        finish();
-                    }
-                }, 2000);
+                    } else
+                        Toast.makeText(SplashScreen.this, "No Internet Access", Toast.LENGTH_SHORT).show();
+
+                    SplashScreen.this.getSharedPreferences("pref", MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
+                  goToTargetActivity();
+                  }
+            });
+        }else
+            goToTargetActivity();
+    }
+
+    private void goToTargetActivity() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent);
+                finish();
             }
-        });
+        }, 2000);
+
     }
 
     private void setTimerForRefreshRideService() {

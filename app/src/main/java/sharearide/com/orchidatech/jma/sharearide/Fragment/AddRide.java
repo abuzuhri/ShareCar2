@@ -6,11 +6,11 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +80,7 @@ private Button save,more_info;
                 dialog.show(getActivity().getFragmentManager(), "Date Dialog");*/
                 DatePickerDialog dialog = DatePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.setMinDate(calendar);
-                dialog.setCancelable(false);
+                dialog.setCancelable(true);
                 dialog.show(getActivity().getFragmentManager(), "datePicker");
             }
         });
@@ -93,7 +93,7 @@ private Button save,more_info;
 //                    dialog.showDateDialog();
                     DatePickerDialog dialog = DatePickerDialog.newInstance(AddRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                     dialog.setMinDate(calendar);
-                    dialog.setCancelable(false);
+                    dialog.setCancelable(true);
                     dialog.show(getActivity().getFragmentManager(), "datePicker");
 
                 }

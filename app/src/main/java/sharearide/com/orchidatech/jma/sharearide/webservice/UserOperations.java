@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import java.util.Map;
 
 import sharearide.com.orchidatech.jma.sharearide.Constant.UrlConstant;
+import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
 
 /**
@@ -32,7 +34,6 @@ public class UserOperations {
             instance = new UserOperations(context);
         return instance;
     }
-
     public void login(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.LOGIN_URL + "?username=" + params.get("username")+"&password="+params.get("password");
         Log.i("url", url);
@@ -231,6 +232,31 @@ public class UserOperations {
                 });
     }
 
+
+    public void getSearchAllResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        String url = UrlConstant.SEARCH_ALL_URL +"?item=" + params.get("item");
+
+       // Log.i("Ride", url);
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                });
+    }
+
     public void getSearchResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.SEARCH_URL +"?city_from=" + params.get("city_from")
                 +"&city_to=" + params.get("city_to")
@@ -327,10 +353,53 @@ public class UserOperations {
                     }
                 });
     }
+
+
+    public void addMessage(Map<String, String> params, final OnLoadFinished onLoadFinished){
+        String url = UrlConstant.ADD_MESSAGE_URL + "?message=" + params.get("message")+"&sender_id="+params.get("sender_id")+"&receiver_id="+params.get("receiver_id");
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                });
+    }
+
+
+    public void forgetPassword(Map<String, String> params, final OnLoadFinished onLoadFinished){
+        String url = UrlConstant.FORGET_PASSWORD_URL + "?email=" + params.get("email");
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                });
+    }
+    private static void isConnected(final Context context){
+
+    }
 /////////////////////////////////////////////////////////////////
 
-    private static class Submit {
-        public static final String LOGIN = "Log-In";
-        public static final String SIGNUP = "SIGN-UP";
-    }
 }

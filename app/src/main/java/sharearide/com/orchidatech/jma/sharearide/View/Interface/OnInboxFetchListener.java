@@ -9,7 +9,7 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 /**
  * Created by Bahaa on 15/9/2015.
  */
-public interface OnChattingListListener {
-    public void onChattingListRefreshed(ArrayList<Chat> allMessages, Map<Chat, ArrayList<User>> allMessagesData);
-
+public interface OnInboxFetchListener {
+    public void onFetchInboxSucceed(ArrayList<Chat> allMessages, Map<Chat, ArrayList<User>> allMessagesData);
+    public void onFetchInboxFailed(String error);
 }

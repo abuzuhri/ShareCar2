@@ -5,7 +5,7 @@ package sharearide.com.orchidatech.jma.sharearide.Chat.Model;
  */
 
 public class Chat {
-
+  Long  remoteId;
     public long id;
 
     public String message;
@@ -59,5 +59,9 @@ public class Chat {
 
     public void setDateTime(long dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public void setRemoteId(long remoteId) {
+        this.remoteId = remoteId;
     }
 }

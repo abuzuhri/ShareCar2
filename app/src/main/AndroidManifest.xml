@@ -6,9 +6,8 @@
     <permission
         android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <uses-permission android:name="sharearide.com.orchidatech.jma.sharearide.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -55,13 +54,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name=".Activity.ServicesScreen"
             android:label="Services Screen" />
@@ -107,29 +104,27 @@
         <activity
             android:name=".Activity.MapViewActivity"
             android:label="@string/title_activity_map" />
-
         <activity
             android:name=".Activity.ShareRide"
             android:label="@string/title_activity_share_ride" />
-
         <activity
             android:name=".Activity.Main"
             android:label="@string/title_activity_main" />
+        <activity
+            android:name=".Activity.MoreInfo"
+            android:label="@string/title_activity_more_info" />
 
         <activity
             android:name=".Chat.SettingsActivity"
             android:label="@string/title_activity_settings" />
-
         <activity
             android:name=".Chat.ChatActivity"
-            android:label="@string/title_activity_chat"
             android:logo="@drawable/ic_contact_picture" />
 
         <provider
             android:name=".Chat.DataProvider"
-            android:authorities="sharearide.com.orchidatech.jma.sharearide.Chat.provider"
-            android:exported="false">
-        </provider>
+            android:authorities="sharearide.com.orchidatech.jma.sharearide.provider"
+            android:exported="false"></provider>
 
         <receiver
             android:name=".Chat.client.GcmBroadcastReceiver"

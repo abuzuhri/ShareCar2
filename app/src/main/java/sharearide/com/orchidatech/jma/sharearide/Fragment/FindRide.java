@@ -4,10 +4,10 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
  * Created by Amal on 9/17/2015.
  */
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import sharearide.com.orchidatech.jma.sharearide.Activity.RseultAct;
 import sharearide.com.orchidatech.jma.sharearide.Activity.SearchResult;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
@@ -40,7 +41,7 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener
  */
 public class FindRide extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private EditText cityFrom, cityTo, countryFrom, countryTo, stateFrom, stateTo, time, date;
-    private Button search;
+    private Button search,b1;
     private Calendar calendar;
 
     @Override
@@ -55,6 +56,14 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
         stateTo = (EditText) v.findViewById(R.id.stateTo);
         time = (EditText) v.findViewById(R.id.time);
         date = (EditText) v.findViewById(R.id.date);
+       b1 = (Button) v.findViewById(R.id.sr);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                final Intent intent = new Intent(getActivity(), ShowRideByItem.class);
+//                startActivity(intent);
+  }
+        });
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +84,6 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
             public void onClick(View view) {
                 DatePickerDialog dialog = DatePickerDialog.newInstance(FindRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.setMinDate(calendar);
-                dialog.setCancelable(false);
                 dialog.show(getActivity().getFragmentManager(), "datePicker");
             }
         });
@@ -86,7 +94,6 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
                 if (b) {
                     DatePickerDialog dialog = DatePickerDialog.newInstance(FindRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                     dialog.setMinDate(calendar);
-                    dialog.setCancelable(false);
                     dialog.show(getActivity().getFragmentManager(), "datePicker");
                 }
             }
@@ -103,14 +110,14 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
                 params.add(stateTo.getText().toString());
                 params.add(countryFrom.getText().toString());
                 params.add(countryTo.getText().toString());
-                params.add(date_time_converter()+"");
+                params.add(date_time_converter() + "");
                 intent.putStringArrayListExtra("PARAMS", params);
                 InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
                     @Override
                     public void internetConnectionStatus(boolean status) {
-                        if(status){
+                        if (status) {
                             startActivity(intent);
-                        }else
+                        } else
                             Toast.makeText(getActivity(), "No Internet Access..", Toast.LENGTH_LONG).show();
 
                     }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -16,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.Login;
-import sharearide.com.orchidatech.jma.sharearide.Activity.Logout;
 import sharearide.com.orchidatech.jma.sharearide.Activity.ShareRide;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.ChatDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.CountryDAO;
@@ -27,10 +25,11 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
-import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnChattingListListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInboxFetchListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRidesListListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSendPasswordListener;
 import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperations;
 
 /**
@@ -56,9 +55,10 @@ public class MainUserFunctions {
                     boolean success = jsonObject.getBoolean("success");
                     if(success) {
                         JSONArray mJsonArray = jsonObject.getJSONArray("login");
-                            JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-                            long id = mJsonObject.getLong("id");
-                        if(UserDAO.getUserByUserName(username,password)==null) {
+                        JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                        long id = mJsonObject.getLong("id");
+//                            Log.i("Success", id + "");
+                        if(UserDAO.getUserByUserName(username,password)==null){
                             String username = mJsonObject.getString("username");
                             String password = mJsonObject.getString("password");
                             String image = mJsonObject.getString("img");
@@ -70,18 +70,22 @@ public class MainUserFunctions {
 
                             // Store in DB
                             UserDAO.addNewUser(id, username, password, image, address, birthdate, gender, phone, email);
+
+                            //UserDAO.addNewUser();
+
+
+
                         }
 
-//                            Log.i("Success", id + "");
-                            context.getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putLong("id", id).commit();
-                            context.startActivity(new Intent(context, Logout.class));
+                        context.getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putLong("id", id).commit();
+                        context.startActivity(new Intent(context, ShareRide.class));
 
                     }else{
                         Toast.makeText(context  , jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-               } catch (EmptyFieldException e) {
+                } catch (EmptyFieldException e) {
                     e.printStackTrace();
                 } catch (InvalidInputException e) {
                     e.printStackTrace();
@@ -113,26 +117,25 @@ public class MainUserFunctions {
                 try {
                     boolean success = jsonObject.getBoolean("success");
                     if(success) {
-                             JSONArray mJsonArray = jsonObject.getJSONArray("signup");
-                            JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-                            long user_id = Long.parseLong(mJsonObject.getString("id"));
-                            UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
-                            Toast.makeText(context, "Registered Succeeded, login to continue...", Toast.LENGTH_LONG).show();
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Intent intent = new Intent(context, Login.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    context.startActivity(intent);
-                                }
-                            }, 3000);
+                        JSONArray mJsonArray = jsonObject.getJSONArray("signup");
+                        JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                        long user_id = Long.parseLong(mJsonObject.getString("id"));
+                        UserDAO.addNewUser(user_id, username, password, image, address, Long.parseLong(birthdate), gender, phone, email);
+                        Toast.makeText(context, "Registered Succeeded, login to continue...", Toast.LENGTH_LONG).show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(context, Login.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
+                            }
+                        }, 3000);
                     }else{
                         Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e) {
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
                 } catch (EmptyFieldException e) {
                     e.printStackTrace();
                 } catch (InvalidInputException e) {
@@ -142,7 +145,7 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-                Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -157,20 +160,20 @@ public class MainUserFunctions {
                     boolean success = jsonObject.getBoolean("success");
                     if (success){
                         JSONArray mJsonArray = jsonObject.getJSONArray("rides");
-                    for (int i = 0; i < mJsonArray.length(); i++) {
-                        JSONObject mJsonObject = mJsonArray.getJSONObject(i);
-                        long remoteId = Long.parseLong(mJsonObject.getString("id"));
-                        long user_id = Long.parseLong(mJsonObject.getString("user_id"));
-                        String city_from = mJsonObject.getString("city_from");
-                        String city_to = mJsonObject.getString("city_to");
-                        String state_from = mJsonObject.getString("state_from");
-                        String state_to = mJsonObject.getString("state_to");
-                        String country_from = mJsonObject.getString("country_from");
-                        String country_to = mJsonObject.getString("country_to");
-                        long date_time = mJsonObject.getLong("date_time");
-                        double price = Double.parseDouble(mJsonObject.getString("price"));
+                        for (int i = 0; i < mJsonArray.length(); i++) {
+                            JSONObject mJsonObject = mJsonArray.getJSONObject(i);
+                            long remoteId = Long.parseLong(mJsonObject.getString("id"));
+                            long user_id = Long.parseLong(mJsonObject.getString("user_id"));
+                            String city_from = mJsonObject.getString("city_from");
+                            String city_to = mJsonObject.getString("city_to");
+                            String state_from = mJsonObject.getString("state_from");
+                            String state_to = mJsonObject.getString("state_to");
+                            String country_from = mJsonObject.getString("country_from");
+                            String country_to = mJsonObject.getString("country_to");
+                            long date_time = Long.parseLong(mJsonObject.getString("date_time"));
+                            double price = Double.parseDouble(mJsonObject.getString("price"));
 
-                        // Store in DB
+                            // Store in DB
               /*          Ride ride = null;
 
                         ride.remoteId = id;
@@ -183,22 +186,19 @@ public class MainUserFunctions {
                         ride.toCountry = country_to;
                         ride.dateTime = date_time;
                         ride.cost = price;*/
-                        Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
-                        RideDAO.addNewRide(ride);
-                        newItems.add(ride);
-
-                        RideDAO.addNewRide(ride);
-                        newItems.add(ride);
-                    }
+                            Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
+                            RideDAO.addNewRide(ride);
+                            newItems.add(ride);
+                         }
                         ///To Ensure that max num of items in db is MAX_NUM_RIDES....
                         final ArrayList<Ride> allStoredRides = new ArrayList<>(RideDAO.getAllRides());
                         int numOfRemovedRides = allStoredRides.size() - MAX_NUM_RIDES;
                         for (int delRideIndex = 0; delRideIndex < numOfRemovedRides; delRideIndex++)
-                             RideDAO.deleteRide(allStoredRides.get(delRideIndex).getId());
+                            RideDAO.deleteRide(allStoredRides.get(delRideIndex).getId());
                     }else{
                         String message = jsonObject.getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                }
+                    }
                     listener.onRidesRefresh(newItems);/// refresh listview
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -209,11 +209,11 @@ public class MainUserFunctions {
                     e.displayMessage();
                     e.printStackTrace();
                 }
-                          }
+            }
 
             @Override
             public void onFail(String error) {
-                    listener.onRidesRefreshFailed(error);
+                listener.onRidesRefreshFailed(error);
             }
         });
 
@@ -227,17 +227,17 @@ public class MainUserFunctions {
                 try {
                     boolean success = jsonObject.getBoolean("success");
                     if(success){
-                    JSONArray mJsonArray = jsonObject.getJSONArray("countries");
-                    for (int i = 0; i < mJsonArray.length(); i++) {
-                        JSONObject mJsonObject = mJsonArray.getJSONObject(i);
-                        long id = Long.parseLong(mJsonObject.getString("id"));
-                        String name = mJsonObject.getString("name");
-                        String alpha_2 = mJsonObject.getString("alpha_2");
-                        String alpha_3 = mJsonObject.getString("alpha_3");
+                        JSONArray mJsonArray = jsonObject.getJSONArray("countries");
+                        for (int i = 0; i < mJsonArray.length(); i++) {
+                            JSONObject mJsonObject = mJsonArray.getJSONObject(i);
+                            long id = Long.parseLong(mJsonObject.getString("id"));
+                            String name = mJsonObject.getString("name");
+                            String alpha_2 = mJsonObject.getString("alpha_2");
+                            String alpha_3 = mJsonObject.getString("alpha_3");
 
-                        // Store in DB
-                        CountryDAO.addNewCountry(id, name, alpha_2);
-                    }
+                            // Store in DB
+                            CountryDAO.addNewCountry(id, name, alpha_2);
+                        }
                     }
                     else{
                         String message = jsonObject.getString("message");
@@ -261,41 +261,41 @@ public class MainUserFunctions {
         });
     }
 
-/*
-    public void getAllApps(final Context context) {
-        UserOperations.getInstance(context).getAllApps(new OnLoadFinished() {
-            @Override
-            public void onSuccess(JSONObject jsonObject) {
-                try {
-                    boolean success = jsonObject.getBoolean("success");
-                    if(success){
-                    JSONArray mJsonArray = jsonObject.getJSONArray("apps");
-                    mJsonArray = jsonObject.getJSONArray("");
-                    for (int i = 0; i < mJsonArray.length(); i++) {
-                        JSONObject mJsonObject = mJsonArray.getJSONObject(i);
-                        long id = Long.parseLong(mJsonObject.getString("id"));
-                        String name = mJsonObject.getString("name");
-                        String description = mJsonObject.getString("description");
-                        String apple_link = mJsonObject.getString("app_link");
-                        String google_link = mJsonObject.getString("google_link");
-
-                        // Store in DB
+    /*
+        public void getAllApps(final Context context) {
+            UserOperations.getInstance(context).getAllApps(new OnLoadFinished() {
+                @Override
+                public void onSuccess(JSONObject jsonObject) {
+                    try {
+                        boolean success = jsonObject.getBoolean("success");
+                        if(success){
+                        JSONArray mJsonArray = jsonObject.getJSONArray("apps");
+                        mJsonArray = jsonObject.getJSONArray("");
+                        for (int i = 0; i < mJsonArray.length(); i++) {
+                            JSONObject mJsonObject = mJsonArray.getJSONObject(i);
+                            long id = Long.parseLong(mJsonObject.getString("id"));
+                            String name = mJsonObject.getString("name");
+                            String description = mJsonObject.getString("description");
+                            String apple_link = mJsonObject.getString("app_link");
+                            String google_link = mJsonObject.getString("google_link");
+    
+                            // Store in DB
+                        }
+                        }else{
+                            String message = jsonObject.getString("message");
+                            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    }else{
-                        String message = jsonObject.getString("message");
-                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-
-            @Override
-            public void onFail(String error) {
-            }
-        });
-    }
-*/
+    
+                @Override
+                public void onFail(String error) {
+                }
+            });
+        }
+    */
     public static void getAllMessages(final Context context, String username, String password) {
 
         Map<String, String> params = new HashMap<>();
@@ -316,7 +316,7 @@ public class MainUserFunctions {
                             long sender_id = Long.parseLong(mJsonObject.getString("sender_id"));
                             long receiver_id = Long.parseLong(mJsonObject.getString("receiver_id"));
                             String message = mJsonObject.getString("message");
-                            long date_time = mJsonObject.getLong("date_time");
+                            long date_time = Long.parseLong(mJsonObject.getString("date_time"));
 
                             //store in DB
                             ChatDAO.addNewChat(id, message, sender_id, receiver_id, date_time);
@@ -411,7 +411,7 @@ public class MainUserFunctions {
                         String password = mJsonObject.getString("password");
                         String image = mJsonObject.getString("img");
                         String address = mJsonObject.getString("address");
-                        long birthdate = mJsonObject.getLong("birthdate");
+                        long birthdate = Long.parseLong(mJsonObject.getString("birthdate"));
                         String gender = mJsonObject.getString("Gender");
                         String phone = mJsonObject.getString("phone");
                         String email = mJsonObject.getString("email");
@@ -473,7 +473,7 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -487,14 +487,14 @@ public class MainUserFunctions {
         params.put("country_to", country_to);
         params.put("date_time", String.valueOf(date_time));
         final ArrayList<Ride> allMatchedRides = new ArrayList<Ride>();
-      final  Map<Ride, User> matchedRidesData = new HashMap<Ride, User>();
+        final  Map<Ride, User> matchedRidesData = new HashMap<Ride, User>();
         UserOperations.getInstance(context).getSearchResult(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject){
 
                 JSONArray mJsonArray;
                 try {
-                       boolean success = jsonObject.getBoolean("success");
+                    boolean success = jsonObject.getBoolean("success");
                     if(success) {
                         mJsonArray = jsonObject.getJSONArray("rides");
                         for (int i = 0; i < mJsonArray.length(); i++) {
@@ -507,57 +507,18 @@ public class MainUserFunctions {
                             String state_to = mJsonObject.getString("state_to");
                             String country_from = mJsonObject.getString("country_from");
                             String country_to = mJsonObject.getString("country_to");
-                            long date_time = mJsonObject.getLong("date_time");
+                            long date_time = Long.parseLong(mJsonObject.getString("date_time"));
                             double price = Double.parseDouble(mJsonObject.getString("price"));
                             Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                             allMatchedRides.add(ride);
                             JSONObject userJsonObject = mJsonObject.getJSONObject("user");
-                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, 1, userJsonObject.getString("Gender"));
+                            User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, userJsonObject.getLong("birthdate"), userJsonObject.getString("Gender"));
                             matchedRidesData.put(ride, user);
 
 //                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
 
                         }
                         listener.onSearchSucceed(allMatchedRides, matchedRidesData);
-
-                        ///fetch user data for all matched rides
-//
-//                        for (final Ride ride : allMatchedRides) {
-//                            params.clear();
-//                            params.put("id", String.valueOf(ride.getUserId()));
-//
-//                            UserOperations.getInstance(context).getPublicUserInfo(params, new OnLoadFinished() {
-//                                @Override
-//                                public void onSuccess(JSONObject jsonObject) {
-//
-//                                    try {
-//                                        boolean success = jsonObject.getBoolean("success");
-//                                        if (success) {
-//                                            JSONArray mJsonArray = jsonObject.getJSONArray("user");
-//                                            JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-//                                            User user = new User(ride.getUserId(), null, mJsonObject.getString("username"), null, mJsonObject.getString("img"), mJsonObject.getString("phone"), null, null, mJsonObject.getLong("birthdate"), mJsonObject.getString("Gender"));
-//                                            matchedRidesData.put(ride, user);
-//                                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
-//                                            if (matchedRidesData.size() == allMatchedRides.size()) {
-//                                                listener.onSearchSucceed(allMatchedRides, matchedRidesData);
-//                                            }
-//                                        } else {
-////                                            Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-////                                            listener.onSearchSucceed(allMatchedRides, matchedRidesData);
-//                                        }
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//
-//                                }
-//
-//                                @Override
-//                                public void onFail(String error) {
-//
-//                                }
-//                            });
-//
-//                        }
                     }else{
                         Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                         listener.onSearchSucceed(allMatchedRides, matchedRidesData);
@@ -572,8 +533,8 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-                    Toast.makeText(context, error, Toast.LENGTH_LONG).show();
-listener.onSearchFailed(error);
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+                listener.onSearchFailed(error);
             }
         });
     }
@@ -596,13 +557,13 @@ listener.onSearchFailed(error);
                     boolean success = jsonObject.getBoolean("success");
                     if (success){
                         JSONArray mJsonArray = jsonObject.getJSONArray("ride");
-                    JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-                    long remoteId = Long.parseLong(mJsonObject.getString("id"));
+                        JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                        long remoteId = Long.parseLong(mJsonObject.getString("id"));
                    /* Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                     RideDAO.addNewRide(ride);*/
                         Toast.makeText(context, "Added Successfully", Toast.LENGTH_LONG).show();
 
-                }else{
+                    }else{
                         String message = jsonObject.getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     }
@@ -616,11 +577,11 @@ listener.onSearchFailed(error);
 
             @Override
             public void onFail(String error) {
-                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
             }
         });
     }
-    public static void last_chatting_users(final Context context, final OnChattingListListener listener, final long user_id, String username, String password) {
+    public static void getInbox(final Context context, final OnInboxFetchListener listener, final long user_id, String username, String password) {
 
         final Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -628,6 +589,7 @@ listener.onSearchFailed(error);
 
         final Map<Chat, ArrayList<User>> messages_data = new HashMap<>();
         final ArrayList<Chat> all_messages = new ArrayList<>();
+        final ArrayList<Long> users_id = new ArrayList<>();
         UserOperations.getInstance(context).getAllMessages(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
@@ -635,14 +597,22 @@ listener.onSearchFailed(error);
                     boolean success = jsonObject.getBoolean("success");
                     if(success){
                         JSONArray mJsonArray = jsonObject.getJSONArray("messages");
-                        final ArrayList<User> all_users = new ArrayList<User>();
                         for (int i = 0; i < mJsonArray.length(); i++) {
                             JSONObject mJsonObject = mJsonArray.getJSONObject(i);
                             long id = Long.parseLong(mJsonObject.getString("id"));
                             long sender_id = Long.parseLong(mJsonObject.getString("sender_id"));
                             long receiver_id = Long.parseLong(mJsonObject.getString("receiver_id"));
                             String message = mJsonObject.getString("message");
-                            long date_time = mJsonObject.getLong("date_time");
+                            long date_time = Long.parseLong(mJsonObject.getString("date_time"));
+
+                            if(sender_id != user_id && users_id.contains(sender_id))
+                                continue;
+                            else if(receiver_id != user_id && users_id.contains(receiver_id))
+                                continue;
+                            else if(sender_id != user_id)
+                                users_id.add(sender_id);
+                            else
+                                users_id.add(receiver_id);
 
                             ChatDAO.addNewChat(id, message, sender_id, receiver_id, date_time);
                             Chat chat = new Chat();
@@ -651,14 +621,13 @@ listener.onSearchFailed(error);
                             chat.setReceiverId(receiver_id);
                             chat.setDateTime(date_time);
                             chat.setMessage(message);
-                            all_messages.add(chat);
 
                             JSONObject senderJsonObject = mJsonObject.getJSONObject("sender");
                             String sender_username = senderJsonObject.getString("username");
                             String sender_email = senderJsonObject.getString("email");
                             String sender_phone = senderJsonObject.getString("phone");
                             String sender_image = senderJsonObject.getString("img");
-                            Long sender_birthdate = senderJsonObject.getLong("birthdate");
+                            Long sender_birthdate = Long.parseLong(senderJsonObject.getString("birthdate"));
                             String sender_gender = senderJsonObject.getString("Gender");
 
                             JSONObject receiverJsonObject = mJsonObject.getJSONObject("receiver");
@@ -666,15 +635,17 @@ listener.onSearchFailed(error);
                             String receiver_email = receiverJsonObject.getString("email");
                             String receiver_phone = receiverJsonObject.getString("phone");
                             String receiver_image = receiverJsonObject.getString("img");
-                            Long receiver_birthdate = receiverJsonObject.getLong("birthdate");
+                            Long receiver_birthdate = Long.parseLong(receiverJsonObject.getString("birthdate"));
                             String receiver_gender = receiverJsonObject.getString("Gender");
 
                             if(UserDAO.getUserById(receiver_id) == null)
-                                UserDAO.addNewUser(Long.parseLong(params.get("id")), receiver_username, null, receiver_image, null, receiver_birthdate, receiver_gender, receiver_phone, receiver_email);
+                                UserDAO.addNewUser(receiver_id, receiver_username, null, receiver_image, null, receiver_birthdate, receiver_gender, receiver_phone, receiver_email);
                             if(UserDAO.getUserById(sender_id) == null)
-                                UserDAO.addNewUser(Long.parseLong(params.get("id")), sender_username, null, sender_image, null, sender_birthdate, sender_gender, sender_phone, sender_email);
+                                UserDAO.addNewUser(sender_id, sender_username, null, sender_image, null, sender_birthdate, sender_gender, sender_phone, sender_email);
 
-
+                            User sender_info = UserDAO.getUserById(sender_id);
+                            User receiver_info = UserDAO.getUserById(receiver_id);
+/*
                             User sender_info = new User();
                             sender_info.setRemoteId(sender_id);
                             sender_info.setUsername(sender_username);
@@ -692,68 +663,20 @@ listener.onSearchFailed(error);
                             receiver_info.setImage(receiver_image);
                             receiver_info.setBirthdate(receiver_birthdate);
                             receiver_info.setGender(receiver_gender);
-
+*/
                             ArrayList<User> persons = new ArrayList<User>();
                             persons.add(sender_info);
                             persons.add(receiver_info);
                             messages_data.put(chat, persons);
-/*
-                        UserOperations.getInstance(context).getPublicUserInfo(params, new OnLoadFinished() {
-                            @Override
-                            public void onSuccess(JSONObject jsonObject) {
-                                try {
-                                    boolean success = jsonObject.getBoolean("success");
-                                    if(success) {
-                                        JSONArray mJsonArray = jsonObject.getJSONArray("user");
-                                        JSONObject mJsonObject = mJsonArray.getJSONObject(0);
-                                        String name = mJsonObject.getString("username");
-                                        String email = mJsonObject.getString("email");
-                                        String phone = mJsonObject.getString("phone");
-                                        String image = mJsonObject.getString("img");
-                                        Long birthdate = mJsonObject.getLong("birthdate");
-                                        String gender = mJsonObject.getString("Gender");
-                                        UserDAO.addNewUser(Long.parseLong(params.get("id")), name, null, image, null, birthdate, gender, phone, email);
-                                        User user = UserDAO.getUserById(Long.parseLong(params.get("id")));
-
-                                        if (user != null) {
-                                            boolean isAdded = false;
-                                            for (User storedUser : all_users) {
-                                                if (storedUser.getRemoteId() == Long.parseLong(params.get("id"))) {
-                                                    isAdded = true;
-                                                    break;
-                                                }
-                                            }
-                                            if (!isAdded)
-                                                all_users.add(user);
-                                        }
-                                    }else{
-                                      Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                } catch (InvalidInputException e) {
-                                    e.printStackTrace();
-                                } catch (EmptyFieldException e) {
-                                    e.printStackTrace();
-                                }
-
-
-                            }
-
-                            @Override
-                            public void onFail(String error) {
-
-                            }
-                        });
-                        */
-
+                            all_messages.add(chat);
                         }
-                        listener.onChattingListRefreshed(all_messages, messages_data);
+                        listener.onFetchInboxSucceed(all_messages, messages_data);
 
 
                     }else{
                         String message = jsonObject.getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                        listener.onFetchInboxFailed(message);
                     }
                 }catch (JSONException e) {
                     e.printStackTrace();
@@ -767,15 +690,52 @@ listener.onSearchFailed(error);
 
             @Override
             public void onFail(String error) {
-
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show();
             }
         });
     }
+    public static void add_message(final Context context, final OnInboxFetchListener listener, final String message, final long sender_id, final long receiver_id) {
+        final Map<String, String> params = new HashMap<>();
+        params.put("message", message);
+        params.put("sender_id", sender_id+"");
+        params.put("receiver_id", receiver_id+"");
+        UserOperations.getInstance(context).addMessage(params, new OnLoadFinished() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                try {
+                    boolean success = jsonObject.getBoolean("success");
 
-    private interface OnItemFetched{
-       public void itemFetched(User user);
-   }
-    private void fetchData(){
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
+            @Override
+            public void onFail(String error) {
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+    public static void forgetPassword(final Context context, final String email, final OnSendPasswordListener listener){
+        final Map<String, String> params = new HashMap<>();
+        params.put("email", email);
+        UserOperations.getInstance(context).forgetPassword(params, new OnLoadFinished() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) throws JSONException {
+                String message = jsonObject.getString("message");
+                boolean success = jsonObject.getBoolean("success");
+                if(success)
+                    listener.onSendingSuccess(message);
+                else
+                    listener.onSendingFails(message);
+            }
+
+            @Override
+            public void onFail(String error) {
+                listener.onSendingFails(error);
+            }
+        });
     }
 }
