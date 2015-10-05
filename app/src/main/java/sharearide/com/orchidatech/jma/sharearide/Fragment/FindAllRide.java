@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -21,8 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import sharearide.com.orchidatech.jma.sharearide.Activity.*;
-import sharearide.com.orchidatech.jma.sharearide.Activity.Save_info;
+import sharearide.com.orchidatech.jma.sharearide.Activity.ReviewRide;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
@@ -80,7 +78,7 @@ public class FindAllRide extends Fragment {
                 adapter = new MyAdapter(getActivity(), rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
                     @Override
                     public void onItemClicked(Ride selected_ride, User target_user) {
-                        Intent intent = new Intent(getActivity(), Save_info.class);
+                        Intent intent = new Intent(getActivity(), ReviewRide.class);
 
                         Bundle args = new Bundle();
                         ArrayList<String> selected_ride_data = new ArrayList<>();

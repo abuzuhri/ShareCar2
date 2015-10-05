@@ -3,33 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/darker_gray" >
+    android:background="#ddd" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/chat_activiy_header"
-        android:gravity="right" >
+        android:background="@color/ColorPrimary"
+        android:padding="15dp"
+
+        >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="0.79"
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
             android:text="Send Quick Message"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/holo_orange_dark" />
+            android:textColor="@color/whiteText" />
 
         <Button
             android:id="@+id/crosscancel"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="10dp"
-            android:background="@drawable/chatcross"
+            android:background="@drawable/close"
             android:onClick="onClick" />
     </LinearLayout>
 
@@ -55,7 +57,7 @@
             android:onClick="onClick"
             android:textStyle="bold"
             android:enabled="false"
-            android:background="@drawable/sendchat"
+            android:background="@drawable/send_icon"
             />
 
         <EditText

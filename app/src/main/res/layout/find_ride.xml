@@ -40,7 +40,11 @@
                 android:id="@+id/imageView6"
                 android:background="@drawable/city_icon"
                 android:layout_gravity="left|center"/>
-
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"></LinearLayout>
             <EditText
                 android:id="@+id/cityFrom"
                 android:layout_width="match_parent"
@@ -292,19 +296,6 @@
             android:layout_height="wrap_content"
             android:text="SEARCH"
             android:id="@+id/search"
-            android:background="#ff9d1e"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/vertical_margin"
-            android:layout_marginBottom="0dp"
-            android:textStyle="bold"
-            android:textColor="@color/whiteText"
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SEARCH By Item"
-            android:id="@+id/sr"
             android:background="#ff9d1e"
             android:gravity="center"
             android:layout_marginTop="@dimen/vertical_margin"

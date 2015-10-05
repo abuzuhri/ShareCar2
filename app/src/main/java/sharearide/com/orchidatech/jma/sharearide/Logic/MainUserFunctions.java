@@ -144,7 +144,7 @@ public class MainUserFunctions {
                         listener.onSearchSucceed(allMatchedRides, matchedRidesData);
                    /* Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                     RideDAO.addNewRide(ride);*/
-                        Toast.makeText(context, "Added Successfully", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(context, "Added Successfully", Toast.LENGTH_LONG).show();
 
                     } else {
                         String message = jsonObject.getString("message");
@@ -646,7 +646,7 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -743,7 +743,7 @@ public class MainUserFunctions {
                             all_messages.add(chat);
                         }
                         listener.onFetchInboxSucceed(all_messages, messages_data);
-Toast.makeText(context,""+all_messages.size(),Toast.LENGTH_LONG).show();
+//Toast.makeText(context,""+all_messages.size(),Toast.LENGTH_LONG).show();
 
                     }else{
                         String message = jsonObject.getString("message");

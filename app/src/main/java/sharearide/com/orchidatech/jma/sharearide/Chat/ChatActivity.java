@@ -64,7 +64,7 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
         Intent intent = getIntent();
         receiverEmail = intent.getStringExtra("ReceiverEmail");
         receiverId = intent.getLongExtra("ReceiverId", -1);
-        profileEmail = intent.getStringExtra("SenderEmail");
+        profileEmail = intent.getStringExtra("MyEmail");
 
         profileId = getIntent().getStringExtra(Common.PROFILE_ID);
         msgEdit = (EditText) findViewById(R.id.msg_edit);

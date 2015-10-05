@@ -24,7 +24,6 @@ import sharearide.com.orchidatech.jma.sharearide.Fragment.AddRide;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.FindAllRide;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.FindRide;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.Inbox;
-import sharearide.com.orchidatech.jma.sharearide.Fragment.SearchRideFragment;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.ShareRideFragment;
 
 import sharearide.com.orchidatech.jma.sharearide.R;
@@ -55,7 +54,9 @@ public class ShareRide extends ActionBarActivity {
     int PROFILE = R.drawable.emp;
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object
-
+    ShareRideFragment shareRideFragment;
+    Inbox inboxFragment;
+    FindAllRide findAllRideFragment;
     RecyclerView mRecyclerView;                           // Declaring RecyclerView
     DrawerAdapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
@@ -73,11 +74,12 @@ public class ShareRide extends ActionBarActivity {
               // Drawer object Assigned to the view
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
 
-        shareRid=new ShareRideFragment();
-        getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRid).commit();
+        shareRideFragment=new ShareRideFragment();
+        getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).commit();
         getFragmentManager().executePendingTransactions();
-        final Inbox inbox=new Inbox();
-        final FindAllRide mainFragment = new FindAllRide();
+
+        findAllRideFragment= new FindAllRide();
+
 
         NAME= UserDAO.getUserById(getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1)).getUsername();
         EMAIL=UserDAO.getUserById(getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id",-1)).getEmail();
@@ -87,60 +89,51 @@ public class ShareRide extends ActionBarActivity {
         mAdapter = new DrawerAdapter(TITLES,NAME,EMAIL,PROFILE, new DrawerAdapter.OnRecycleViewItemClicked() {
             @Override
             public void onItemClicked(int position) {
-                switch (position) {
-                    case 1:
-                        Drawer.closeDrawers();
-                        if(!shareRid.isInLayout()) {
 
-                            getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRid).addToBackStack(null).commit();
+                    switch (position) {
+                        case 1:
+                            Drawer.closeDrawers();
+                            shareRideFragment = new ShareRideFragment();
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).addToBackStack(null).commit();
                             getFragmentManager().executePendingTransactions();
-
-                        }
-
-                        shareRid.selectTab(0);
-//                            ((ShareRideFragment) getFragmentManager().findFragmentById(R.id.fragment_place)).selectTab(0);
-//                        if(!shareRide.isInLayout())
-//                            shareRide.selectTab(1);
-                        break;
-                    case 2:
-                        Drawer.closeDrawers();
-
-                        if(!shareRid.isInLayout()) {
-                            getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRid).addToBackStack(null).commit();
+                            shareRideFragment.selectTab(0);
+                            break;
+                        case 2:
+                            Drawer.closeDrawers();
+                            shareRideFragment = new ShareRideFragment();
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).addToBackStack(null).commit();
                             getFragmentManager().executePendingTransactions();
-                        }
-                                shareRid.selectTab(1);
-//                        ((ShareRideFragment) getFragmentManager().findFragmentById(R.id.fragment_place)).selectTab(1);
-                    break;
-                    case 3:
-                        Drawer.closeDrawers();
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_place,inbox).addToBackStack(null).commit();
-                        getFragmentManager().executePendingTransactions();
-                        break;
-                    case 4:
-                        Drawer.closeDrawers();
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_place, mainFragment).addToBackStack(null)
-                                .commit();
-                        getFragmentManager().executePendingTransactions();
-                        break;
-                    case 5:
-                        Drawer.closeDrawers();
+                            shareRideFragment.selectTab(1);
+                            break;
+                        case 3:
+                            Drawer.closeDrawers();
+                            inboxFragment = new Inbox();
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_place,inboxFragment).addToBackStack(null).commit();
+                            getFragmentManager().executePendingTransactions();
+                            toolbar.setTitle("Inbox");
+                            break;
+                        case 4:
+                            Drawer.closeDrawers();
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragment_place, findAllRideFragment).addToBackStack(null)
+                                    .commit();
+                            getFragmentManager().executePendingTransactions();
+                            toolbar.setTitle("Search Ride");
+                            break;
+                        case 5:
+                            Drawer.closeDrawers();
+                            startActivity(new Intent(ShareRide.this, Main.class));
+                            break;
+                        case 6:
+                            Drawer.closeDrawers();
+                            getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE).edit().remove("id").commit();
+                            Intent intent=new Intent(getApplicationContext(), Login.class);
+                            startActivity(intent);
+                            finish();
 
-                        Intent iaa = new Intent(ShareRide.this, Main.class);
-                        startActivity(iaa);
-                        break;
-                    case 6:
-                        Drawer.closeDrawers();
-                        getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE).edit().remove("id").commit();
-                        Intent intent=new Intent(getApplicationContext(), Login.class);
-                        startActivity(intent);
-                        finish();
 
-                    default:
-
-                }
+                    }
 
 
             }

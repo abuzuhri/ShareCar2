@@ -47,7 +47,8 @@
 
         <activity
             android:name=".Activity.SplashScreen"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -58,10 +59,12 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.ServicesScreen"
-            android:label="Services Screen" />
+            android:label="Services Screen"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".Services.RefreshRideService"
@@ -71,54 +74,66 @@
 
         <activity
             android:name=".Activity.NewUser"
-            android:label="@string/title_activity_signup" />
+            android:label="@string/title_activity_signup"
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".Activity.Save_info"
-            android:label="Save_info" />
+            android:name=".Activity.ReviewRide"
+            android:label="Save_info"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Activity.Login"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Activity.SearchResult"
-            android:label="@string/title_activity_search_result" />
+            android:label="@string/title_activity_search_result"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Activity.Logout"
-            android:label="@string/title_activity_logout" />
+            android:label="@string/title_activity_logout"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Activity.ResetPassword"
-            android:label="@string/title_activity_reset_password" />
+            android:label="@string/title_activity_reset_password"
+            android:screenOrientation="portrait"/>
 
 
 
         <activity
             android:name=".Activity.Warning"
-            android:label="@string/title_activity_warning" />
+            android:label="@string/title_activity_warning"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Activity.MapViewActivity"
-            android:label="@string/title_activity_map" />
+            android:label="@string/title_activity_map"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.ShareRide"
-            android:label="@string/title_activity_share_ride" />
+            android:label="@string/title_activity_share_ride"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.Main"
-            android:label="@string/title_activity_main" />
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Chat.SettingsActivity"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Chat.ChatActivity"
-            android:logo="@drawable/ic_contact_picture" />
+            android:logo="@drawable/ic_contact_picture"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name=".Chat.DataProvider"
-            android:authorities="sharearide.com.orchidatech.jma.sharearide.provider"
+            android:authorities="sharearide.com.orchidatech.jma.sharearide.Chat.provider"
             android:exported="false"></provider>
 
         <receiver

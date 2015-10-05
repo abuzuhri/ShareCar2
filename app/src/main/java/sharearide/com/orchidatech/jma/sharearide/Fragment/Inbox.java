@@ -2,9 +2,11 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import sharearide.com.orchidatech.jma.sharearide.Chat.ChatActivity;
+import sharearide.com.orchidatech.jma.sharearide.Chat.Common;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
@@ -37,6 +41,8 @@ public class Inbox extends Fragment {
       ChatAdapter adapter;
     RecyclerView inbox_rv;
     ProgressBar inbox_progress;
+    private LinearLayoutManager llm;
+
 
     @Nullable
     @Override
@@ -44,28 +50,59 @@ public class Inbox extends Fragment {
         View view = inflater.inflate(R.layout.inbox, null, false);
         inbox_rv = (RecyclerView) view.findViewById(R.id.inbox_rv);
         inbox_progress = (ProgressBar) view.findViewById(R.id.inbox_progress);
+        inbox_rv.setHasFixedSize(true);
+        llm = new LinearLayoutManager(getActivity());
+
         messages = new ArrayList<>();
         messagesData = new HashMap<>();
         adapter = new ChatAdapter(getActivity(), messages, messagesData, new ChatAdapter.OnRecycleViewItemClicked() {
 
             @Override
             public void onItemClicked(Chat selected_chat, User sender, User receiver) {
+                Intent intent=new Intent(getActivity(),ChatActivity.class);
+                String receiverEmail ;
+                String myEmail ;
+                Long receiverId;
+                long profileId = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
+
+
+                long id =getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
+                if(id==sender.getRemoteId()) {
+                    receiverId=receiver.getRemoteId();
+                    receiverEmail = receiver.getEmail();
+                    myEmail=sender.getEmail();
+                }
+                else {
+                    receiverId=sender.getRemoteId();
+                    receiverEmail = sender.getEmail();
+                    myEmail=receiver.getEmail();
+                }
+                Toast.makeText(getActivity(),""+receiverEmail+""+myEmail+""+receiverId,Toast.LENGTH_LONG).show();
+                intent.putExtra("ReceiverId",receiverId);
+                intent.putExtra("ReceiverEmail", receiverEmail);
+                intent.putExtra("MyEmail", myEmail);
+                intent.putExtra(Common.PROFILE_ID, String.valueOf(profileId));
+                startActivity(intent);
 
             }
         });
+        inbox_rv.setLayoutManager(llm);
+
         inbox_rv.setAdapter(adapter);
         last_chatting_users(getActivity(), new OnInboxFetchListener() {
 
             @Override
             public void onFetchInboxSucceed(ArrayList<Chat> allMessages, Map<Chat, ArrayList<User>> allMessagesData) {
-                messages = allMessages;
-                messagesData = allMessagesData;
+                messages.addAll(allMessages);
+                messagesData.putAll(allMessagesData);
                 inbox_progress.setVisibility(View.GONE);
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFetchInboxFailed(String error) {
+                inbox_progress.setVisibility(View.GONE);
+
 
             }
         }, getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));

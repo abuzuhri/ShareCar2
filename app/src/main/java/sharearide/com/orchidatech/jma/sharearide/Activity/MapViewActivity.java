@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -10,10 +11,15 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
+import org.osmdroid.DefaultResourceProxyImpl;
+import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.overlays.FolderOverlay;
+import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
+import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import org.osmdroid.bonuspack.overlays.Marker;
 import org.osmdroid.bonuspack.overlays.Polyline;
 import org.osmdroid.bonuspack.routing.MapQuestRoadManager;
@@ -24,6 +30,8 @@ import org.osmdroid.bonuspack.routing.RoadNode;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.Projection;
+import org.osmdroid.views.overlay.Overlay;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,14 +50,14 @@ public class MapViewActivity extends AppCompatActivity {
     private Toolbar tool_bar;
 
     private GeoPoint startPoint;
-    private GeoPoint endPoint;
+    private GeoPoint endPoint,loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Disable StrictMode.ThreadPolicy to perform network calls in the UI thread.
         //Yes, it's not the good practice, but this is just a tutorial!
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-      StrictMode.setThreadPolicy(policy);
+        StrictMode.setThreadPolicy(policy);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
@@ -59,10 +67,13 @@ public class MapViewActivity extends AppCompatActivity {
 
         map = (MapView) findViewById(R.id.mapview);
         map.setBuiltInZoomControls(true);
-        map.setMultiTouchControls(true); Intent intent=getIntent();
-        String cityFrom= intent.getStringExtra("CityFrom");
-        String cityTo=intent.getStringExtra("CityTo");
-        Toast.makeText(MapViewActivity.this,cityFrom+""+cityTo,Toast.LENGTH_LONG).show();
+        map.setMultiTouchControls(true);
+      
+        //e.onLongPress(onC)
+       // Intent intent = getIntent();
+//        String cityFrom = intent.getStringExtra("CityFrom");
+//        String cityTo = intent.getStringExtra("CityTo");
+//        Toast.makeText(MapViewActivity.this, cityFrom + "" + cityTo, Toast.LENGTH_LONG).show();
 //////////////////////////
 
 //      setStartPoint(31.52333, 34.44664);
@@ -70,11 +81,11 @@ public class MapViewActivity extends AppCompatActivity {
 //
 
 
-      setStartPoint(getLocationFromAddress(cityFrom + "").getLatitude(),getLocationFromAddress(cityFrom + "").getLongitude());
-        setEndPoint(getLocationFromAddress(cityTo + "").getLatitude(),getLocationFromAddress(cityTo + "").getLongitude());
-       initializeRoute();
+
+        // initializeRoute();
 //       Toast.makeText(this,getLocationFromAddress(cityFrom).getLongitude()+" , "+getLocationFromAddress(cityFrom).getLongitude(),Toast.LENGTH_LONG).show();
 //        Toast.makeText(this,getLocationFromAddress(cityTo).getLongitude()+" , "+getLocationFromAddress(cityTo).getLongitude(),Toast.LENGTH_LONG).show();
+
 
     }
 
@@ -143,14 +154,15 @@ public class MapViewActivity extends AppCompatActivity {
         }
 
     }
-    public GeoPoint getLocationFromAddress(String strAddress){
+
+    public GeoPoint getLocationFromAddress(String strAddress) {
 
         Geocoder coder = new Geocoder(this);
         List<Address> address;
         GeoPoint p1 = null;
 
         try {
-            address = coder.getFromLocationName(strAddress,5);
+            address = coder.getFromLocationName(strAddress, 5);
             if (address == null) {
                 return null;
             }
@@ -164,6 +176,90 @@ public class MapViewActivity extends AppCompatActivity {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }    return p1;
+        }
+        return p1;
     }
-}
+
+
+//    public boolean onSingleTapConfirmed(MotionEvent e, MapView mapView) {
+//
+//        Projection proj = mapView.getProjection();
+//        startPoint = (GeoPoint) proj.fromPixels((int) e.getX(), (int) e.getY());
+//        proj = mapView.getProjection();
+//         loc = (GeoPoint) proj.fromPixels((int) e.getX(), (int) e.getY());
+//        String longitude = Double
+//                .toString(((double) loc.getLongitudeE6()) / 1000000);
+//        String latitude = Double
+//                .toString(((double) loc.getLatitudeE6()) / 1000000);
+//        Toast toast = Toast.makeText(getApplicationContext(),
+//                "Longitude: "
+//                        + longitude + " Latitude: " + latitude, Toast.LENGTH_SHORT);
+//        toast.show();
+//        return true;
+//    }
+//
+//    private void addLocation(double lat, double lng) {
+//        // ---Add a location marker---
+//
+//        startPoint = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
+//
+//        Drawable marker = getResources().getDrawable(
+//                android.R.drawable.star_big_on);
+//
+//        int markerWidth = marker.getIntrinsicWidth();
+//        int markerHeight = marker.getIntrinsicHeight();
+//
+//        marker.setBounds(0, markerHeight, markerWidth, 0);
+//
+//        ResourceProxy resourceProxy = new DefaultResourceProxyImpl(
+//                getApplicationContext());
+//
+//
+//
+//        map.invalidate();
+//    }
+class myClass extends MapEventsOverlay {
+
+    public myClass(Context ctx, MapEventsReceiver receiver) {
+        super(ctx, receiver);
+    }
+
+    GeoPoint loc, startPoint;
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent e, MapView mapView) {
+        Projection proj = mapView.getProjection();
+        startPoint = (GeoPoint) proj.fromPixels((int) e.getX(), (int) e.getY());
+        proj = mapView.getProjection();
+        loc = (GeoPoint) proj.fromPixels((int) e.getX(), (int) e.getY());
+        String longitude = Double
+                .toString(((double) loc.getLongitudeE6()) / 1000000);
+        String latitude = Double
+                .toString(((double) loc.getLatitudeE6()) / 1000000);
+        Toast toast = Toast.makeText(MapViewActivity.this,
+                "Longitude: "
+                        + longitude + " Latitude: " + latitude, Toast.LENGTH_SHORT);
+        toast.show();
+        return true;
+    }
+
+    private void addLocation(double lat, double lng) {
+        // ---Add a location marker---
+
+        startPoint = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
+
+        Drawable marker = getResources().getDrawable(
+                android.R.drawable.star_big_on);
+
+        int markerWidth = marker.getIntrinsicWidth();
+        int markerHeight = marker.getIntrinsicHeight();
+
+        marker.setBounds(0, markerHeight, markerWidth, 0);
+
+        ResourceProxy resourceProxy = new DefaultResourceProxyImpl(
+                getApplicationContext());
+
+
+        map.invalidate();
+    }
+}}

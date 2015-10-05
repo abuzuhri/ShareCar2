@@ -23,10 +23,8 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
-import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
 import sharearide.com.orchidatech.jma.sharearide.View.Adapter.MyAdapter;
-import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
 
 
@@ -57,56 +55,6 @@ public class SearchResult extends ActionBarActivity {
         }else{
 
         }
-
-
-        /*
-        result_img = (ImageView) findViewById(R.id.result_img);
-        date = (ImageView) findViewById(R.id.date);
-        time = (ImageView) findViewById(R.id.time);
-
-
-
-        Display display = getWindowManager().getDefaultDisplay();
-        int height = display.getHeight();
-        int width = display.getWidth();
-        result_img.getLayoutParams().height = (int) (height * 0.09);
-        result_img.getLayoutParams().width = (int) (width * 0.09);
-
-        date.getLayoutParams().height = (int) (height * 0.04);
-        date.getLayoutParams().width = (int) (width * 0.05);
-
-        time.getLayoutParams().height = (int) (height * 0.04);
-        time.getLayoutParams().width = (int) (width * 0.05);
-
-        result_img2.getLayoutParams().height = (int) (height * 0.09);
-        result_img2.getLayoutParams().width = (int) (width * 0.09);
-
-        date2.getLayoutParams().height = (int) (height * 0.04);
-        date2.getLayoutParams().width = (int) (width * 0.05);
-
-        time2.getLayoutParams().height = (int) (height * 0.04);
-        time2.getLayoutParams().width = (int) (width * 0.05);
-
-        result_img3.getLayoutParams().height = (int) (height * 0.09);
-        result_img3.getLayoutParams().width = (int) (width * 0.09);
-
-        date3.getLayoutParams().height = (int) (height * 0.04);
-        date3.getLayoutParams().width = (int) (width * 0.05);
-
-        time3.getLayoutParams().height = (int) (height * 0.04);
-        time3.getLayoutParams().width = (int) (width * 0.05);
-
-        result_img4.getLayoutParams().height = (int) (height * 0.09);
-        result_img4.getLayoutParams().width = (int) (width * 0.09);
-
-        date4.getLayoutParams().height = (int) (height * 0.04);
-        date4.getLayoutParams().width = (int) (width * 0.05);
-
-        time4.getLayoutParams().height = (int) (height * 0.04);
-        time4.getLayoutParams().width = (int) (width * 0.05);
-         */
-
-
         rv = (RecyclerView) findViewById(R.id.rv);
         rv.setHasFixedSize(true);
         llm = new LinearLayoutManager(this);
@@ -117,7 +65,7 @@ public class SearchResult extends ActionBarActivity {
         adapter = new MyAdapter(SearchResult.this, rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
             @Override
             public void onItemClicked(Ride selected_ride, User target_user) {
-                Intent intent = new Intent(getApplicationContext(), Save_info.class);
+                Intent intent = new Intent(getApplicationContext(), ReviewRide.class);
                 Bundle args = new Bundle();
                 ArrayList<String> selected_ride_data = new ArrayList<>();
                 selected_ride_data.add(selected_ride.getRemoteId()+"");
