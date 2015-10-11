@@ -1,32 +1,48 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
+import sharearide.com.orchidatech.jma.sharearide.Logic.Validation;
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestListener;
 
 
 /**
  * Created by Shadow on 8/30/2015.
  */
 public class NewUser extends AppCompatActivity {
+    Validation validation;
+    private static final String DEFAULT_IMAGE = "http://orchidatech.com/sharearide/images/default_image.jpg";
 
     private Toolbar tool_bar;
     private EditText username,password,re_password,email,phone;
     private Button register;
-
+    private ProgressBar signup_progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
+        signup_progress=(ProgressBar)findViewById(R.id.signup_progress);
         register = (Button) findViewById(R.id.register);
         username = (EditText) findViewById(R.id.username);
         password=(EditText)findViewById(R.id.password);
@@ -34,41 +50,73 @@ public class NewUser extends AppCompatActivity {
         email=(EditText)findViewById(R.id.email);
         phone=(EditText)findViewById(R.id.phone);
 
-
-
-
-
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (username.getText().toString().equals("")) {
                     username.setError("Enter Username");
-                } else if (password.getText().toString().equals(""))
+                } else if (!validation.passwordcontainsNumber(password.getText().toString()))
                     password.setError("Enter Password");
                 else if (!re_password.getText().toString().equals(password.getText().toString()))
                     re_password.setError(" Password doesn't match ");
-                else if (email.getText().toString().equals(""))
-                    email.setError("Enter email ");
-                else if (phone.getText().toString().equals(""))
-                    email.setError("Enter Phone ");
+                else if (!validation.isValidEmailAddress(email.getText().toString()))
+                    email.setError("Enter correct email ");
+                else if (!validation.validatePhoneNumber(phone.getText().toString()))
+                    phone.setError("Enter correct Phone ");
+
 
                 else {
-                MainUserFunctions.signUp(getApplicationContext(), username.getText().toString(), password.getText().toString(), "", "",phone.getText().toString() , "", "", email.getText().toString());
-                   /* Intent i = new Intent(NewUser.this, SearchResult.class);
-                    startActivity(i);**/                }
+                    signup_progress.setVisibility(View.VISIBLE);
+                    register.setVisibility(View.GONE);
+                    InternetConnectionChecker.isConnectedToInternet(NewUser.this, new OnInternetConnectionListener() {
+                        @Override
+                        public void internetConnectionStatus(boolean status) {
+                            if (status) {
+                                MainUserFunctions.signUp(getApplicationContext(), username.getText().toString(), password.getText().toString(), DEFAULT_IMAGE, "",phone.getText().toString() , "", "", email.getText().toString(), new OnRequestListener() {
+                                    @Override
+                                    public void onFinished() {
+                                        signup_progress.setVisibility(View.GONE);
+                                        register.setVisibility(View.VISIBLE);
+                                    }
+
+                                });
+
+
+                            } else {
+                                signup_progress.setVisibility(View.GONE);
+                                register.setVisibility(View.VISIBLE);
+                                LayoutInflater li = LayoutInflater.from(NewUser.this);
+                                View v = li.inflate(R.layout.warning, null);
+
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(NewUser.this);
+
+                                // set more_info.xml to alertdialog builder
+                                alertDialogBuilder.setView(v);
+                                TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                                ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
+
+                                // create alert dialog
+                                final AlertDialog alertDialog = alertDialogBuilder.create();
+                                close_btn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                                // show it
+                                alertDialog.show();
+                            }
+
+                        }
+                    });
+                }
 
             }
         });
-        /*
-        setContentView(R.layout.new_user);
 
-        // components inflation
-        editText_username = (EditText) findViewById(R.id.editText_addUser_username);
-        editText_password = (EditText) findViewById(R.id.editText_addUser_password);
-        editText_repassword = (EditText) findViewById(R.id.editText_addUser_repassword);
-        editText_email = (EditText) findViewById(R.id.editText_addUser_email);
-        */
     }
+
 
     /**
      * this method called when add user button pressed

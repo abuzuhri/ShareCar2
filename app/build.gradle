@@ -43,7 +43,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22+'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     compile 'com.android.support:support-v4:21.0.3'
-    compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.android.support:design:22.2.0'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
     compile 'de.hdodenhof:circleimageview:1.2.1'
@@ -52,6 +51,8 @@ dependencies {
     compile 'org.osmdroid:osmdroid-android:4.3'
     compile 'org.slf4j:slf4j-android:1.6.1-RC1'
     compile 'com.github.citux:datetimepicker:0.1.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
     /*
         compile 'org.apache.commons:commons-lang3:3.3.2'
 

@@ -3,7 +3,6 @@ package sharearide.com.orchidatech.jma.sharearide.Chat;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.LoaderManager;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -26,8 +25,6 @@ import android.widget.Toast;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
 
 import sharearide.com.orchidatech.jma.sharearide.R;
 

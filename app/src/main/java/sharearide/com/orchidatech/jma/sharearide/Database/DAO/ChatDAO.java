@@ -142,6 +142,10 @@ public class ChatDAO {
                 .where("Sender = ? AND Receiver = ?", chat.senderId, chat.receiverId)
                 .execute();
     }
+
+    public static void addNewChat(Chat chat) {
+        chat.save();
+    }
     //</editor-fold>
 
 }

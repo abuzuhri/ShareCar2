@@ -9,8 +9,10 @@
     layout="@layout/toolbar" />
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,8 +45,9 @@
                 >
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/imageView6"
                     android:background="@drawable/city_icon"
                     android:layout_gravity="left|center"/>
@@ -54,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:text="   Ramallah"
                     android:textDirection="ltr"
                     android:background="#fff"
@@ -71,8 +74,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/imagaew6"
                     android:background="@drawable/flagg"
                     android:layout_gravity="left|center"/>
@@ -82,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:text="   State"
                     android:textDirection="ltr"
                     android:background="#fff"
@@ -98,8 +101,8 @@
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/imageVieew6"
                     android:background="@drawable/country_icon"
                     android:layout_gravity="left|center"/>
@@ -110,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:text="   Weast bank"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -127,8 +130,8 @@
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/imagew6"
                     android:background="@drawable/time_icon"
                     android:layout_gravity="left|center"/>
@@ -139,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:text="   08:10:00"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -155,8 +158,8 @@
                 android:layout_marginBottom="@dimen/vertical_margin">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/aa"
                     android:background="@drawable/date_icon"
                     android:layout_gravity="left|center"/>
@@ -167,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:text="   11/09/2015"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -211,8 +214,8 @@
 
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/imageVie5"
                     android:background="@drawable/city_icon"
                     android:layout_gravity="left|center"/>
@@ -223,7 +226,7 @@
                     android:layout_height="wrap_content"
                     android:text="   Gaza"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -239,8 +242,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/flag"
                     android:background="@drawable/flagg"
                     android:layout_gravity="left|center"/>
@@ -250,7 +253,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:text="   State"
                     android:textDirection="ltr"
                     android:background="#fff"
@@ -265,8 +268,8 @@
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/imageV6"
                     android:background="@drawable/country_icon"
                     android:layout_gravity="left|center"/>
@@ -277,7 +280,7 @@
                     android:layout_height="wrap_content"
                     android:text="   Gaza Strip"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -293,8 +296,8 @@
                 android:layout_marginLeft="@dimen/horizontal_marginLeft">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/ss"
                     android:background="@drawable/price"
                     android:layout_gravity="left|center"/>
@@ -305,7 +308,7 @@
                     android:layout_height="wrap_content"
                     android:text="   50"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -336,6 +339,7 @@
                 android:id="@+id/imageVdiews"
                 android:background="@drawable/line"
                 android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin"
                 android:layout_marginBottom="@dimen/vertical_margin"/>
 
             <TextView
@@ -361,8 +365,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/imageccVie5"
                     android:background="@drawable/user_icon"
                     android:layout_gravity="left|center"/>
@@ -373,7 +377,7 @@
                     android:layout_height="wrap_content"
                     android:text="   Ahmed abu Zuhree"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -388,10 +392,10 @@
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/imageddV6"
-                    android:background="@drawable/phone"
+                    android:background="@drawable/phoneblue"
                     android:layout_gravity="left|center"/>
 
                 <TextView
@@ -400,7 +404,7 @@
                     android:layout_height="wrap_content"
                     android:text="   05998751257"
                     android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -431,8 +435,8 @@
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/sss"
                     android:background="@drawable/email_icon"
                     android:layout_gravity="left|center"/>
@@ -452,26 +456,21 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/send_mail"
-                    android:background="@drawable/enter"
-                    />
-
-
+                    android:background="@drawable/enter" />
             </LinearLayout>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Quick Message"
-                android:id="@+id/quick_msg"
-                android:background="#ff9d1e"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/vertical_margin"
-                android:layout_marginBottom="0dp"
-                android:textStyle="bold"
-                android:textColor="@color/whiteText"
-                />
-
-
         </LinearLayout>
     </ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quick Message"
+        android:id="@+id/quick_msg"
+        android:background="#ff9d1e"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginBottom="0dp"
+        android:textStyle="bold"
+        android:textColor="@color/whiteText"
+        />
 </LinearLayout>
 

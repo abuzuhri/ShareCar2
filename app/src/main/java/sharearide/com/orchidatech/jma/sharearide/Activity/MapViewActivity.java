@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -43,7 +45,7 @@ import sharearide.com.orchidatech.jma.sharearide.R;
  * Created by sms-1 on 9/21/2015.
  */
 public class MapViewActivity extends AppCompatActivity {
-
+    double f,ff,t,tt;
     MapView map;
     //private MapController mapController;
 
@@ -64,28 +66,31 @@ public class MapViewActivity extends AppCompatActivity {
 
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
+        getSupportActionBar().setTitle("View Your Ride ");
 
+        Bundle b=new Bundle();
+        Bundle vv=getIntent().getExtras();
+
+        double FromCityLattitude= vv.getDouble("FromCityLattitude");
+        double   FromCityLongitude= vv.getDouble("FromCityLongitude");
+        double ToCityLattitude= vv.getDouble("ToCityLattitude");
+        double ToCityLongitude= vv.getDouble("ToCityLongitude");
+
+        //Toast.makeText(MapViewActivity.this,"  ,  "+FromCityLongitude
+           //     +"  ,  "+FromCityLattitude+"  ,  "+ToCityLongitude+"  ,   "+ToCityLattitude ,Toast.LENGTH_LONG).show();
         map = (MapView) findViewById(R.id.mapview);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
-      
-        //e.onLongPress(onC)
-       // Intent intent = getIntent();
-//        String cityFrom = intent.getStringExtra("CityFrom");
-//        String cityTo = intent.getStringExtra("CityTo");
-//        Toast.makeText(MapViewActivity.this, cityFrom + "" + cityTo, Toast.LENGTH_LONG).show();
-//////////////////////////
-
-//      setStartPoint(31.52333, 34.44664);
-//      setEndPoint(31.51381, 34.44193);
-//
+        f = FromCityLattitude;
+        ff = FromCityLongitude;
+        t = ToCityLattitude;
+        tt = ToCityLongitude;
 
 
-
-        // initializeRoute();
-//       Toast.makeText(this,getLocationFromAddress(cityFrom).getLongitude()+" , "+getLocationFromAddress(cityFrom).getLongitude(),Toast.LENGTH_LONG).show();
-//        Toast.makeText(this,getLocationFromAddress(cityTo).getLongitude()+" , "+getLocationFromAddress(cityTo).getLongitude(),Toast.LENGTH_LONG).show();
-
+// startPoint = new GeoPoint(f, ff);
+//endPoint = new GeoPoint(t, tt);
+        initializeRoute();
+//} else Toast.makeText(MapViewActivity.this,"null value",Toast.LENGTH_LONG).show();
 
     }
 
@@ -99,7 +104,7 @@ public class MapViewActivity extends AppCompatActivity {
 
     private void initializeRoute() {
 
-        //GeoPoint startPoint = new GeoPoint(31.52333, 34.44664);
+        GeoPoint startPoint = new GeoPoint(f, ff);
         IMapController mapController = map.getController();
         mapController.setZoom(10);
         mapController.setCenter(startPoint);
@@ -115,15 +120,11 @@ public class MapViewActivity extends AppCompatActivity {
         //startMarker.setDraggable(true);
         //startMarker.setOnMarkerDragListener(new OnMarkerDragListenerDrawer());
         map.getOverlays().add(startMarker);
-
+        GeoPoint endPoint = new GeoPoint(t, tt);
 
         RoadManager roadManager = new OSRMRoadManager();
-
-        //roadManager roadManager = new MapQuestRoadManager("YOUR_API_KEY");
-        //roadManager.addRequestOption("routeType=bicycle");
         ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
         waypoints.add(startPoint);
-        //GeoPoint endPoint = new GeoPoint(31.51381, 34.44193);
         waypoints.add(endPoint);
         Road road = roadManager.getRoad(waypoints);
         if (road.mStatus != Road.STATUS_OK)
@@ -155,111 +156,5 @@ public class MapViewActivity extends AppCompatActivity {
 
     }
 
-    public GeoPoint getLocationFromAddress(String strAddress) {
 
-        Geocoder coder = new Geocoder(this);
-        List<Address> address;
-        GeoPoint p1 = null;
-
-        try {
-            address = coder.getFromLocationName(strAddress, 5);
-            if (address == null) {
-                return null;
-            }
-            Address location = address.get(0);
-            location.getLatitude();
-            location.getLongitude();
-
-            p1 = new GeoPoint((int) (location.getLatitude() * 1E6),
-                    (int) (location.getLongitude() * 1E6));
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return p1;
-    }
-
-
-//    public boolean onSingleTapConfirmed(MotionEvent e, MapView mapView) {
-//
-//        Projection proj = mapView.getProjection();
-//        startPoint = (GeoPoint) proj.fromPixels((int) e.getX(), (int) e.getY());
-//        proj = mapView.getProjection();
-//         loc = (GeoPoint) proj.fromPixels((int) e.getX(), (int) e.getY());
-//        String longitude = Double
-//                .toString(((double) loc.getLongitudeE6()) / 1000000);
-//        String latitude = Double
-//                .toString(((double) loc.getLatitudeE6()) / 1000000);
-//        Toast toast = Toast.makeText(getApplicationContext(),
-//                "Longitude: "
-//                        + longitude + " Latitude: " + latitude, Toast.LENGTH_SHORT);
-//        toast.show();
-//        return true;
-//    }
-//
-//    private void addLocation(double lat, double lng) {
-//        // ---Add a location marker---
-//
-//        startPoint = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
-//
-//        Drawable marker = getResources().getDrawable(
-//                android.R.drawable.star_big_on);
-//
-//        int markerWidth = marker.getIntrinsicWidth();
-//        int markerHeight = marker.getIntrinsicHeight();
-//
-//        marker.setBounds(0, markerHeight, markerWidth, 0);
-//
-//        ResourceProxy resourceProxy = new DefaultResourceProxyImpl(
-//                getApplicationContext());
-//
-//
-//
-//        map.invalidate();
-//    }
-class myClass extends MapEventsOverlay {
-
-    public myClass(Context ctx, MapEventsReceiver receiver) {
-        super(ctx, receiver);
-    }
-
-    GeoPoint loc, startPoint;
-
-    @Override
-    public boolean onSingleTapConfirmed(MotionEvent e, MapView mapView) {
-        Projection proj = mapView.getProjection();
-        startPoint = (GeoPoint) proj.fromPixels((int) e.getX(), (int) e.getY());
-        proj = mapView.getProjection();
-        loc = (GeoPoint) proj.fromPixels((int) e.getX(), (int) e.getY());
-        String longitude = Double
-                .toString(((double) loc.getLongitudeE6()) / 1000000);
-        String latitude = Double
-                .toString(((double) loc.getLatitudeE6()) / 1000000);
-        Toast toast = Toast.makeText(MapViewActivity.this,
-                "Longitude: "
-                        + longitude + " Latitude: " + latitude, Toast.LENGTH_SHORT);
-        toast.show();
-        return true;
-    }
-
-    private void addLocation(double lat, double lng) {
-        // ---Add a location marker---
-
-        startPoint = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
-
-        Drawable marker = getResources().getDrawable(
-                android.R.drawable.star_big_on);
-
-        int markerWidth = marker.getIntrinsicWidth();
-        int markerHeight = marker.getIntrinsicHeight();
-
-        marker.setBounds(0, markerHeight, markerWidth, 0);
-
-        ResourceProxy resourceProxy = new DefaultResourceProxyImpl(
-                getApplicationContext());
-
-
-        map.invalidate();
-    }
-}}
+}

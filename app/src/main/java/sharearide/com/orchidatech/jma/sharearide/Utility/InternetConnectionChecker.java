@@ -1,26 +1,14 @@
 package sharearide.com.orchidatech.jma.sharearide.Utility;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
-import sharearide.com.orchidatech.jma.sharearide.Constant.Constant;
 import sharearide.com.orchidatech.jma.sharearide.Constant.UrlConstant;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.webservice.RequestQueueHandler;
@@ -37,6 +25,7 @@ public class InternetConnectionChecker {
         try {
             jsonObject.getBoolean("accessed");
             listener.internetConnectionStatus(true);
+
         } catch (JSONException e) {
             listener.internetConnectionStatus(false);
             return;

@@ -18,8 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +29,6 @@ import java.security.NoSuchAlgorithmException;
 
 import sharearide.com.orchidatech.jma.sharearide.Chat.client.GcmUtil;
 import sharearide.com.orchidatech.jma.sharearide.Chat.client.ServerUtilities;
-import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
@@ -186,7 +183,7 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
     }
 
     private void saveMessage(String message, long sender_id, long receiverId, long date_time) {
-        MainUserFunctions.add_message(getApplicationContext(),message, sender_id, receiverId, date_time);
+        MainUserFunctions.add_message(getApplicationContext(), message, sender_id, receiverId, date_time);
     }
 
 

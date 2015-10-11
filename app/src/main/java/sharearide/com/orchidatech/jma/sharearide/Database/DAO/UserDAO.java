@@ -22,60 +22,28 @@ public class UserDAO {
     public static final String NAME = "name";
 
     //<editor-fold defaultstate="collapsed" desc="addNewUser(long userId, String username, String password, String image, String address, long birthdate, String gender, String phone, String email){...}">
-   public static long addNewUser(User user) throws EmptyFieldException, InvalidInputException {
+   public static long addNewUser(User user) {
             if(checkUserExist(user.getRemoteId()) == -1)
                 return user.save();
         else
                 return user.getRemoteId();
    }
     public static long addNewUser(long userId, String username, String password, String image,
-                                  String address, long birthdate, String gender, String phone, String email)
-            throws EmptyFieldException, InvalidInputException {
-
+                                  String address, long birthdate, String gender, String phone, String email){
+    if(checkUserExist(userId) != -1)
+        return userId;
         User user = new User();
-        boolean isValid = true;
-
-        EmailValidator emailValidator = new EmailValidator();
-
-        if (userId != 0) {
-            user.remoteId = userId;
-        } else {
-            isValid = false;
-            throw new InvalidInputException("Invalid user id !");
-        }
-
-        if (!username.equals("")) {
-            user.username = username;
-        } else {
-            isValid = false;
-            throw new EmptyFieldException("Username field is empty !");
-        }
-
-        if (!password.equals("")) {
-            user.password = password;
-        } else {
-            isValid = false;
-            throw new EmptyFieldException("Password field is empty !");
-        }
-
-        // TODO: check for validation
+        user.remoteId = userId;
+        user.username = username;
+        user.password = password;
         user.image = image;
         user.address = address;
         user.birthdate = birthdate;
         user.gender = gender;
         user.phone = phone;
+        user.email = email;
+      return user.save();
 
-        if (emailValidator.isValidEmailAddress(email)) {
-            user.email = email;
-        } else {
-            isValid = false;
-            throw new EmptyFieldException("Email is invalid !");
-        }
-
-        if (isValid) {
-            return user.save();
-        }
-        return 0;
     }
     //</editor-fold>
 
@@ -275,6 +243,7 @@ public class UserDAO {
         user.email = socialUser.getEmail();
         user.image = socialUser.getAvatarURL();
         user.username = socialUser.getName();
+        user.remoteId = Long.parseLong(socialUser.getId());
         user.save();
     }
 
@@ -349,6 +318,12 @@ public class UserDAO {
         return new Select().from(User.class).where("Email = ?", email).executeSingle();
 
 
+    }
+
+    public static void updateUserPhoto(long user_id, String imageUrl) {
+        User user = getUserById(user_id);
+        user.image = imageUrl;
+        user.save();
     }
     //</editor-fold>
 

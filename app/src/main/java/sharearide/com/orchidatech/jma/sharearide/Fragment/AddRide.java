@@ -8,15 +8,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
@@ -26,25 +31,35 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
+import sharearide.com.orchidatech.jma.sharearide.Activity.AddLocation;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnAddressFetched;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestListener;
 
 public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
-private Button save,more_info;
+    private Button save,more_info;
     private Context context;
     private EditText cityFrom,cityTo,countryFrom,countryTo,stateFrom,stateTo,time,date;
     private EditText price;
     private Calendar calendar;
-
-
+    private  ImageButton firstlocation_lat_long,secondlocation_lat_long;
+    private String from_Lattitude,from_Longitude,to_Lattitude,to_Longitude;
+    private EditText info;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.add_ride,container,false);
+        progressBar=(ProgressBar)v.findViewById(R.id.progressBar);
+
         save=(Button)v.findViewById(R.id.save);
+        firstlocation_lat_long=(ImageButton)v.findViewById(R.id.firstlocation_lat_long);
+        secondlocation_lat_long=(ImageButton)v.findViewById(R.id.secondlocation_lat_long);
         more_info=(Button)v.findViewById(R.id.more_info);
         cityFrom=(EditText)v.findViewById(R.id.cityFrom);
         cityTo=(EditText)v.findViewById(R.id.cityTo);
@@ -55,6 +70,22 @@ private Button save,more_info;
         time=(EditText)v.findViewById(R.id.time);
         date=(EditText)v.findViewById(R.id.date);
 
+        firstlocation_lat_long.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), AddLocation.class);
+                intent.putExtra("Request",100);
+                startActivityForResult(intent, 100);
+            }
+        });
+        secondlocation_lat_long.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), AddLocation.class);
+                intent.putExtra("Request",101);
+                startActivityForResult(intent, 101);
+            }
+        });
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +133,18 @@ private Button save,more_info;
 
         price=(EditText)v.findViewById(R.id.price);
         context = getActivity();
+        LayoutInflater li = LayoutInflater.from(context);
+        View dialogView = li.inflate(R.layout.more_info, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+
+        // set more_info.xml to alertdialog builder
+        alertDialogBuilder.setView(dialogView);
+        TextView tittle = (TextView) dialogView.findViewById(R.id.tittle);
+        final ImageButton confirm_btn = (ImageButton) dialogView.findViewById(R.id.confirm_btn);
+        info = (EditText) dialogView.findViewById(R.id.info);
+        final AlertDialog alertDialog = alertDialogBuilder.create();
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,43 +154,42 @@ private Button save,more_info;
                 } else if (countryFrom.getText().toString().equals(""))
                     countryFrom.setError("Required Field");
                 else if (time.getText().toString().equals(""))
-                  time.setError("Required Field ");
-              else if (date.getText().toString().equals(""))
-                   date.setError("Required Field ");
+                    time.setError("Required Field ");
+                else if (date.getText().toString().equals(""))
+                    date.setError("Required Field ");
                 else if (cityTo.getText().toString().equals(""))
                     cityTo.setError("Required Field ");
                 else if (countryTo.getText().toString().equals(""))
                     countryTo.setError("Required Field ");
-                else{
+                else if(from_Lattitude!=null & to_Lattitude!=null){
+                    progressBar.setVisibility(View.VISIBLE);
+
                     offerRide(context.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1),
                             cityFrom.getText().toString(), cityTo.getText().toString(),
                             stateFrom.getText().toString(), stateTo.getText().toString(),
                             countryFrom.getText().toString(), countryTo.getText().toString(),
-                            date_time_converter(), Double.parseDouble(price.getText().toString())
-                            );
+                            date_time_converter(), price.getText().toString(),
+                            info.getText().toString(), from_Lattitude,from_Longitude,to_Lattitude,to_Longitude
+                    , new OnRequestListener() {
+                                @Override
+                                public void onFinished() {
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            });
 
-            }}
+                }
+                else
+                    Toast.makeText(getActivity(),"Please determine your Location",Toast.LENGTH_LONG).show();}
         });
 
+
+
+        // create alert dialog
         more_info.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                LayoutInflater li = LayoutInflater.from(context);
-                View v = li.inflate(R.layout.more_info, null);
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        context);
-
-                // set more_info.xml to alertdialog builder
-                alertDialogBuilder.setView(v);
-                TextView tittle = (TextView) v.findViewById(R.id.tittle);
-                ImageButton confirm_btn = (ImageButton) v.findViewById(R.id.confirm_btn);
-                EditText info = (EditText) v.findViewById(R.id.info);
-
-                // create alert dialog
-                final AlertDialog alertDialog = alertDialogBuilder.create();
                 confirm_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -156,7 +198,7 @@ private Button save,more_info;
                 });
                 // show it
                 alertDialog.show();
-}
+            }
         });
         return v;
     }
@@ -176,24 +218,59 @@ private Button save,more_info;
             Calendar calendar2 = Calendar.getInstance();
             calendar2.setTimeInMillis(timeInMilliseconds);
 
-            Toast.makeText(getActivity().getApplicationContext(), timeInMilliseconds+"\n"
-                    + calendar2.get(Calendar.DAY_OF_MONTH) + "/" + (calendar2.get(Calendar.MONTH)+1) + "/" + calendar2.get(Calendar.DAY_OF_MONTH) + "\n"
-                    + calendar2.get(Calendar.HOUR_OF_DAY) + ":" + calendar2.get(Calendar.MINUTE), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity().getApplicationContext(), timeInMilliseconds+"\n"
+//                    + calendar2.get(Calendar.DAY_OF_MONTH) + "/" + (calendar2.get(Calendar.MONTH)+1) + "/" + calendar2.get(Calendar.DAY_OF_MONTH) + "\n"
+//                    + calendar2.get(Calendar.HOUR_OF_DAY) + ":" + calendar2.get(Calendar.MINUTE), Toast.LENGTH_LONG).show();
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return timeInMilliseconds;
     }
 
-    public void offerRide( final long user_id,  final String city_from,  final String city_to,  final String state_from,  final String state_to,  final String country_from,  final String country_to,  final long date_time,  final double price)
+    public void offerRide( final long user_id,  final String city_from,  final String city_to,
+                           final String state_from,  final String state_to,
+                           final String country_from,  final String country_to,  final long date_time,
+                           final String price, final String more_info, final String from_latitude,final String from_longitude,
+                           final String to_latitude,final String to_longitude,final OnRequestListener listener)
     {
         InternetConnectionChecker.isConnectedToInternet(context, new OnInternetConnectionListener() {
             @Override
             public void internetConnectionStatus(boolean status) {
                 if (status)
-                    MainUserFunctions.offerRide(context, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
+                    MainUserFunctions.offerRide(context, user_id, city_from, city_to, state_from, state_to, country_from,
+                            country_to, date_time, price, more_info, from_latitude, from_longitude, to_latitude, to_longitude, new OnRequestListener() {
+                                @Override
+                                public void onFinished() {
+                                    progressBar.setVisibility(View.GONE);
+
+                                }
+                            });
                 else
-                    Toast.makeText(context, "No Internet Access..", Toast.LENGTH_LONG).show();
+                {
+                    progressBar.setVisibility(View.GONE);
+                    LayoutInflater li = LayoutInflater.from(getActivity());
+                    View v = li.inflate(R.layout.warning, null);
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+                    // set more_info.xml to alertdialog builder
+                    alertDialogBuilder.setView(v);
+                    TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                    ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
+
+                    // create alert dialog
+                    final AlertDialog alertDialog = alertDialogBuilder.create();
+                    close_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
+                    // show it
+                    alertDialog.show();
+                }
+
+                // Toast.makeText(context, "No Internet Access..", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -221,4 +298,64 @@ private Button save,more_info;
         // or
         // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==100){
+            from_Lattitude=data.getStringExtra("From_Lattitude") ;
+            from_Longitude=data.getStringExtra("From_Longittude");
+
+//            final String requestString = "http://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+//                    from_Lattitude + "&lon=" + from_Longitude + "&zoom=18&addressdetails=1";
+            MainUserFunctions.get_address(getActivity(), new OnAddressFetched() {
+                @Override
+                public void onFetched(Map<String, String> data) {
+                    countryFrom.setText(data.get("country"));
+                    stateFrom.setText(data.get("state"));
+                    if (data.get("road") != null)
+                        cityFrom.setText(data.get("road"));
+                    else if (data.get("city") != null)
+                        cityFrom.setText(data.get("city"));
+                    else if (data.get("village") != null)
+                        cityFrom.setText(data.get("village"));
+                    else
+                        cityFrom.setText(data.get("state"));
+                }
+
+                @Override
+                public void onFailed(String error) {
+
+                }
+            }, data.getStringExtra("From_Longittude"), data.getStringExtra("From_Lattitude"), "json");
+
+         //   Toast.makeText(getActivity(),data.getStringExtra("From_Lattitude")+" , "+data.getStringExtra("From_Longittude"),Toast.LENGTH_LONG).show();
+        }else  if(resultCode==101){
+            to_Lattitude=data.getStringExtra("From_Lattitude");
+            to_Longitude=data.getStringExtra("From_Longittude");
+            MainUserFunctions.get_address(getActivity(), new OnAddressFetched() {
+                @Override
+                public void onFetched(Map<String, String> data) {
+                    countryTo.setText(data.get("country"));
+                    stateTo.setText(data.get("state"));
+                    if (data.get("road") != null)
+                        cityTo.setText(data.get("road"));
+                    else if (data.get("city") != null)
+                        cityTo.setText(data.get("city"));
+                    else if (data.get("village") != null)
+                        cityTo.setText(data.get("village"));
+                    else
+                        cityTo.setText(data.get("state"));
+                }
+
+                @Override
+                public void onFailed(String error) {
+
+                }
+            }, data.getStringExtra("From_Longittude"), data.getStringExtra("From_Lattitude"), "json");
+          //  Toast.makeText(getActivity(),data.getStringExtra("From_Lattitude")+" , "+data.getStringExtra("From_Longittude"),Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 }

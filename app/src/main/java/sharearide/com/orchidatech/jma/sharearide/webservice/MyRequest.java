@@ -1,6 +1,5 @@
 package sharearide.com.orchidatech.jma.sharearide.webservice;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -10,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
 
 /**
  * Created by Bahaa on 8/9/2015.

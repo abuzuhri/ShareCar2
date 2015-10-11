@@ -1,5 +1,4 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
-
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
@@ -58,8 +57,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 //                Toast.makeText(activity, "" + name, Toast.LENGTH_LONG).show();
                 holder.textView_displayName.setText(name);
                 String date_time = AppConstant.DateConvertion.getDate(rides.get(position).getDateTime());
-                holder.textView_time.setText(date_time.split(" ")[1]);
-                holder.textView_date.setText(date_time.split(" ")[0]);
+                holder.textView_time.setText(date_time);
+
 
             }
         }catch (NullPointerException e) {
@@ -93,22 +92,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(v);
             textView_displayName = (TextView) v.findViewById(R.id.textView_displayName);
             textView_time = (TextView) v.findViewById(R.id.textView_time);
-            textView_date = (TextView) v.findViewById(R.id.textView_date);
             result_img = (ImageView) v.findViewById(R.id.result_img);
-            date = (ImageView) v.findViewById(R.id.date);
             time = (ImageView) v.findViewById(R.id.time);
 
             Display display = activity.getWindowManager().getDefaultDisplay();
             int height = display.getHeight();
             int width = display.getWidth();
-            result_img.getLayoutParams().height = (int) (height * 0.08);
-            result_img.getLayoutParams().width = (int) (width * 0.09);
+            result_img.getLayoutParams().height = (int) (height * 0.07);
+            result_img.getLayoutParams().width = (int) (width * 0.08);
 
-            date.getLayoutParams().height = (int) (height * 0.04);
-            date.getLayoutParams().width = (int) (width * 0.05);
 
-            time.getLayoutParams().height = (int) (height * 0.04);
-            time.getLayoutParams().width = (int) (width * 0.05);
+            time.getLayoutParams().height = (int) (height * 0.03);
+            time.getLayoutParams().width = (int) (width * 0.04);
 
             v.setOnClickListener(this);
         }

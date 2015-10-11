@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
@@ -86,7 +87,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
         CardView cv;
-        ImageView image;
+        CircleImageView image;
         TextView name;
         TextView lastChat;
         TextView date;
@@ -94,7 +95,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         public ViewHolder(View v) {
             super(v);
             cv = (CardView) v.findViewById(R.id.card_view);
-            image = (ImageView) v.findViewById(R.id.chat_image);
+            image = (CircleImageView) v.findViewById(R.id.chat_image);
             name = (TextView) v.findViewById(R.id.chat_name);
             lastChat = (TextView) v.findViewById(R.id.chat_lastChat);
             date = (TextView) v.findViewById(R.id.chat_date);

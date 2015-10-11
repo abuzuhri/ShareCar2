@@ -1,16 +1,19 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
-import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
+import com.squareup.picasso.Picasso;
+
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnPhotoClicked;
 
 /**
  * Created by hp1 on 28-12-2014.
@@ -21,12 +24,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
     // IF the view under inflation and population is header or Item
     private static final int TYPE_ITEM = 1;
     private final OnRecycleViewItemClicked listener;
+    private final String profileImage;
+    private final Context context;
+    private final OnPhotoClicked photoClickingListener;
 
     private String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
     private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
 
     private String name;        //String Resource for header View Name
-    private int profile;        //int Resource for header view profile picture
     private String email;       //String Resource for header view email
 
 
@@ -59,6 +64,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from header.xml for name
                 email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from header.xml for email
                 profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
+                profile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i("Photo", "pressed");
+                        photoClickingListener.onClicked(profile);
+                    }
+                });
+
                 Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type header view
             }
             itemView.setOnClickListener(this);
@@ -78,17 +91,16 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
 
 
-    public DrawerAdapter(String Titles[], String Name, String Email, int Profile,OnRecycleViewItemClicked listener){ // MyAdapter Constructor with titles and icons parameter
+    public DrawerAdapter(Context context, String Titles[], String Name, String Email, String profileImage,OnRecycleViewItemClicked listener, OnPhotoClicked photoClickingListener){ // MyAdapter Constructor with titles and icons parameter
         // titles, icons, name, email, profile pic are passed from the main activity as we
         mNavTitles = Titles;                //have seen earlier
         name = Name;
         email = Email;
-        profile = Profile;                     //here we assign those passed values to the values we declared here
         //in adapter
         this.listener = listener;
-
-
-
+        this.profileImage = profileImage;
+        this.context = context;
+        this.photoClickingListener = photoClickingListener;
     }
 
 
@@ -134,8 +146,12 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
             holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
         }
         else{
+if(profileImage.length()>0){
+            Picasso.with(context).load(Uri.parse(profileImage)).into(holder.profile);           // Similarly we set the resources for header view
 
-            holder.profile.setImageResource(profile);           // Similarly we set the resources for header view
+        }else{
+    holder.profile.setImageResource(R.drawable.ic_contact_picture);
+}
             holder.Name.setText(name);
             holder.email.setText(email);
         }

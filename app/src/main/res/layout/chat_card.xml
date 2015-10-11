@@ -20,44 +20,46 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/tool_bar"
             android:background="#fff"
-
+            android:padding="5dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/chat_image"
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/ic_contact_picture" />
+                android:src="@drawable/ic_contact_picture"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/chat_image"
+                android:padding="5dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/chat_lastChat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
                     android:text="Brunch this weekend?"
                     android:textColor="#000"
-                    android:textSize="@dimen/text_size" />
+                    android:textSize="@dimen/text_size"
+                    android:layout_marginLeft="10dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
 
                     <TextView
                         android:id="@+id/chat_name"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="Ali Connors "
+                        android:text="Ali Connors   "
                         android:textColor="#000"
-                        android:textSize="@dimen/text_size_smaller" />
+                        android:textSize="@dimen/text_size_smaller"
+                        android:layout_weight="0.01" />
 
                     <TextView
                         android:id="@+id/chat_date"

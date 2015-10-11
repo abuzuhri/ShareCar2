@@ -9,17 +9,11 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
-        android:padding="10dp"
-        android:textColor="#3ad8f1"
         android:textSize="@dimen/text_size"
         android:textAlignment="center"
         android:background="@color/ColorPrimary"/>
-    <!--  <samples.exoguru.materialtabs.SlidingTabLayout
-          android:id="@+id/tabs"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:elevation="2dp"
-          android:background="@color/ColorPrimary"/>-->
+
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

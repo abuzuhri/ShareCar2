@@ -4,6 +4,7 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
  * Created by Amal on 9/17/2015.
  */
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
@@ -24,17 +27,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 
-import sharearide.com.orchidatech.jma.sharearide.Activity.RseultAct;
 import sharearide.com.orchidatech.jma.sharearide.Activity.SearchResult;
-import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
-import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
-import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
-import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
 
 /**
  * Created by Edwin on 15/02/2015.
@@ -110,8 +107,29 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
                     public void internetConnectionStatus(boolean status) {
                         if (status) {
                             startActivity(intent);
-                        } else
-                            Toast.makeText(getActivity(), "No Internet Access..", Toast.LENGTH_LONG).show();
+                        } else {
+                            LayoutInflater li = LayoutInflater.from(getActivity());
+                            View v = li.inflate(R.layout.warning, null);
+
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+                            // set more_info.xml to alertdialog builder
+                            alertDialogBuilder.setView(v);
+                            TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                            ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
+
+                            // create alert dialog
+                            final AlertDialog alertDialog = alertDialogBuilder.create();
+                            close_btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    alertDialog.dismiss();
+                                }
+                            });
+                            // show it
+                            alertDialog.show();
+                        }
+                        //  Toast.makeText(getActivity(), "No Internet Access..", Toast.LENGTH_LONG).show();
 
                     }
                 });

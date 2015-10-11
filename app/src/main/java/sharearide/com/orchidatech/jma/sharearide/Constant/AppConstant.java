@@ -29,6 +29,7 @@ public class AppConstant {
 
 
     public static class DateConvertion {
+        final static String MONTHS[] = new String[]{"Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
         public static Date getCurrentDate() {
             Calendar calendar = Calendar.getInstance();
@@ -48,15 +49,25 @@ public class AppConstant {
 
         public static String getDate(long milliSeconds)
         {
-
-            // Create a DateFormatter object for displaying date in specified format.
-
-            // Create a calendar object that will convert the date and time value in milliseconds to date.
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(milliSeconds);
-            String fullDate = buildValueOf(calendar.get(Calendar.DAY_OF_MONTH)) + "/"+buildValueOf(calendar.get(Calendar.MONTH)+1)+ "/" + calendar.get(Calendar.YEAR) + " "+
-                    buildValueOf(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + buildValueOf(calendar.get(Calendar.MINUTE));
+            String fullDate = buildValueOf(calendar.get(Calendar.DAY_OF_MONTH)) + " "+MONTHS[calendar.get(Calendar.MONTH)]+ " " + calendar.get(Calendar.YEAR) + " at "+
+                    buildValueOf(getHour(calendar.get(Calendar.HOUR_OF_DAY))) + ":" + buildValueOf(calendar.get(Calendar.MINUTE)) + " " + time_type(calendar.get(Calendar.HOUR_OF_DAY));
             return fullDate;
+        }
+
+        private static String time_type(int i) {
+            if(i > 12)
+                return "PM";
+
+            return "AM";
+        }
+
+        private static int getHour(int hour) {
+            if(hour < 12)
+                return hour;
+            else
+                return hour-12;
         }
 
         private static String buildValueOf(int value) {

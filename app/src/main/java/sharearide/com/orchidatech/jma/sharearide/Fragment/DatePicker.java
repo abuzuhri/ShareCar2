@@ -1,9 +1,6 @@
 package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.os.Bundle;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 
@@ -14,7 +11,7 @@ import java.util.Locale;
 /**
  * Created by Bahaa on 21/9/2015.
  */
-public class DatePicker extends DatePickerDialog{
+public class DatePicker extends DatePickerDialog {
     private OnDateListener listener;
     public static DatePicker instance;
     private DateFormat dateFormat;
@@ -43,9 +40,9 @@ public class DatePicker extends DatePickerDialog{
         DatePickerDialog.newInstance(new OnDateSetListener() {
             @Override
             public void onDateSet(DatePickerDialog datePickerDialog, int year, int monthOfYear, int dayOfMonth) {
-                listener.onDateSet(year, (monthOfYear+1), dayOfMonth);
+                listener.onDateSet(year, (monthOfYear + 1), dayOfMonth);
             }
-        }, c.get(Calendar.YEAR),c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
     }
 
 

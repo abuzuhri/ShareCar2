@@ -7,8 +7,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
-import java.util.Map;
-
 /**
  * Created by Bahaa on 8/9/2015.
  */
