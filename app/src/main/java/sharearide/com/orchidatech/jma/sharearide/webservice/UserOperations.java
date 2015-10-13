@@ -2,10 +2,11 @@ package sharearide.com.orchidatech.jma.sharearide.webservice;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,8 +14,6 @@ import org.json.JSONObject;
 import java.util.Map;
 
 import sharearide.com.orchidatech.jma.sharearide.Constant.UrlConstant;
-import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
-import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
 
 /**
@@ -35,15 +34,15 @@ public class UserOperations {
         return instance;
     }
     public void login(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        String url = UrlConstant.LOGIN_URL + "?username=" + params.get("username")+"&password="+params.get("password");
-        Log.i("url", url);
+        String url = UrlConstant.LOGIN_URL + "?email=" + params.get("email")+"&password="+params.get("password");
+        url=url.replace(" ","%20");
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -56,19 +55,23 @@ public class UserOperations {
                 });
     }
 
-    public void signUp(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        String url = UrlConstant.SIGNUP_URL + "?username=" + params.get("username")+"&password="+params.get("password")
-               +"&img="+params.get("img") +"&address="+params.get("address")+"&brithdate="+params.get("birthdate")
+    public void signUp(String url, Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        url += "?username=" + params.get("username")+"&password="+params.get("password")
+                +"&img="+params.get("img") +"&address="+params.get("address")+"&brithdate="+params.get("birthdate")
                 +"&phone="+params.get("phone")+"&Gender="+params.get("Gender")+"&email="+params.get("email");
-        Log.i("Signup", url);
+        if(params.get("social_id") != null)
+            url +="&social_id="+params.get("social_id");
+        // String s=params.get("img");
+        url=  url.replace(" ","%20");//space between fname & lname
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject o) {
                         try {
                             onLoadFinished.onSuccess(o);
+
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -89,7 +92,7 @@ public class UserOperations {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -101,15 +104,16 @@ public class UserOperations {
                     }
                 });
     }
-
-     public void getAllCountries(final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ALL_COUNTRIES_URL, new Response.Listener<JSONObject>() {
+    public void get_my_rides(Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        String url = UrlConstant.GET_MY_RIDES_URL +"?user_id=" + params.get("user_id");
+        url=url.replace(" ","%20");
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            onLoadFinished.onFail(e.getMessage());
                         }
                     }
                 },
@@ -122,16 +126,60 @@ public class UserOperations {
                 });
     }
 
+    public  void uploadImage(final Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        ///  String url = UrlConstant.UPLOAD_IMAGE_URL + "?user_id=" + params.get("user_id") + "&image=" + params.get("image");
+        /// Log.i("Ride", url);
+        // url=url.replace(" ","%20");
+        StringRequest stringRequest =  new StringRequest(Request.Method.POST, UrlConstant.UPLOAD_IMAGE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
 
-    public void getAllApps(final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ALL_APPS_URL, new Response.Listener<JSONObject>() {
+                try {
+                    JSONObject json = new JSONObject(s);
+                    onLoadFinished.onSuccess(json);
+                } catch (JSONException e) {
+                    onLoadFinished.onFail("An error occurred, try again");
+                }
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                onLoadFinished.onFail(volleyError.getMessage());
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                return params;
+            }
+        };
+        RequestQueueHandler.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    public void updateRide(Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        String url = UrlConstant.UPDATE_RIDE_URL +"?ride_id=" + params.get("ride_id")
+                +"&city_from=" + params.get("city_from")
+                +"&city_to=" + params.get("city_to")
+                +"&state_from=" + params.get("state_from")
+                +"&state_to=" + params.get("state_to")
+                +"&country_from=" + params.get("country_from")
+                +"&country_to=" + params.get("country_to")
+                +"&price=" + params.get("price")
+                +"&date_time=" + params.get("date_time")
+                +"&from_latitude="+params.get("from_latitude")
+                +"&from_longitude=" +params.get("from_longitude")
+                +"&to_latitude="+params.get("to_latitude")
+                +"&to_longitude="+params.get("to_longitude")
+                +"&more_info="+params.get("more_info");
+        url=url.replace(" ","%20");
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -143,10 +191,34 @@ public class UserOperations {
                     }
                 });
     }
+    public void deleteRide(Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        String url = UrlConstant.DELETE_RIDE_URL +"?ride_id=" + params.get("ride_id");
+        url=url.replace(" ","%20");
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            onLoadFinished.onFail("An error occurred, try again");
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                });
+    }
+
 
 
     public void getAllMessages(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        String url = UrlConstant.ALL_MESSAGES_URL + "?username=" + params.get("username")+"&password="+params.get("password");
+        String url = UrlConstant.ALL_MESSAGES_URL + "?user_id=" + params.get("user_id");
+        url=url.replace(" ","%20");
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
@@ -154,6 +226,7 @@ public class UserOperations {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
+                            onLoadFinished.onFail("An error occurred, try again");
 
                         }
                     }
@@ -175,7 +248,7 @@ public class UserOperations {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -185,58 +258,14 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                });
-    }
-
-    public void getUserInfo(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.USER_INFO, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
-                    }
-                });
-    }
-
-    public void getUserName(Map<String,String> params, final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.USER_NAME_URL, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
-                    }
-
-
                 });
     }
 
 
     public void getSearchAllResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.SEARCH_ALL_URL +"?item=" + params.get("item") + "&user_id=" + params.get("user_id");
-
-       // Log.i("Ride", url);
+        url=url.replace(" ","%20");
+        // Log.i("Ride", url);
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
@@ -244,6 +273,7 @@ public class UserOperations {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
+                            onLoadFinished.onFail("An error occurred, try again");
 
                         }
                     }
@@ -264,9 +294,8 @@ public class UserOperations {
                 +"&state_to=" + params.get("state_to")
                 +"&country_from=" + params.get("country_from")
                 +"&country_to=" + params.get("country_to")
-                +"&date_time=" + params.get("date_time")
                 +"&user_id=" + params.get("user_id");
-        Log.i("Ride", url);
+        url=url.replace(" ","%20");
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
 
                     @Override
@@ -274,6 +303,8 @@ public class UserOperations {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
+                            onLoadFinished.onFail("An error occurred, try again");
+
 
                         }
                     }
@@ -284,47 +315,26 @@ public class UserOperations {
                     public void onErrorResponse(VolleyError volleyError) {
                         onLoadFinished.onFail(volleyError.getMessage());
                     }
-                });
-    }
-
-    public void getPublicUserInfo(Map<String,String> params, final OnLoadFinished onLoadFinished){
-        String url = UrlConstant.PUBLIC_USER_DATA + "?id="+params.get("id");
-        Log.i("getPublicUserInfo", url);
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
-                    }
-
-
                 });
     }
 
 
     public void offer_a_ride(Map<String, String> params, final OnLoadFinished onLoadFinished)    {
         String url = UrlConstant.ADD_RIDE_URL +"?user_id=" + params.get("user_id")
-                                            +"&city_from=" + params.get("city_from")
-                                            +"&city_to=" + params.get("city_to")
-                                            +"&state_from=" + params.get("state_from")
-                                            +"&state_to=" + params.get("state_to")
-                                            +"&country_from=" + params.get("country_from")
-                                            +"&country_to=" + params.get("country_to")
-                                            +"&price=" + params.get("price")
-                                            +"&date_time=" + params.get("date_time");
-        Log.i("Ride", url);
+                +"&city_from=" + params.get("city_from")
+                +"&city_to=" + params.get("city_to")
+                +"&state_from=" + params.get("state_from")
+                +"&state_to=" + params.get("state_to")
+                +"&country_from=" + params.get("country_from")
+                +"&country_to=" + params.get("country_to")
+                +"&price=" + params.get("price")
+                +"&date_time=" + params.get("date_time")
+                +"&from_latitude="+params.get("from_latitude")
+                +"&from_longitude=" +params.get("from_longitude")
+                +"&to_latitude="+params.get("to_latitude")
+                +"&to_longitude="+params.get("to_longitude")
+                +"&more_info="+params.get("more_info");
+        url=url.replace(" ","%20");
 
         /* params.put("user_id", String.valueOf(user_id));
         params.put("city_from", city_from);
@@ -342,7 +352,7 @@ public class UserOperations {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -358,13 +368,14 @@ public class UserOperations {
 
     public void addMessage(Map<String, String> params, final OnLoadFinished onLoadFinished){
         String url = UrlConstant.ADD_MESSAGE_URL + "?message=" + params.get("message")+"&sender_id="+params.get("sender_id")+"&receiver_id="+params.get("receiver_id") + "&date_time=" + params.get("date_time");
+        url=url.replace(" ","%20");
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -380,6 +391,34 @@ public class UserOperations {
 
     public void forgetPassword(Map<String, String> params, final OnLoadFinished onLoadFinished){
         String url = UrlConstant.FORGET_PASSWORD_URL + "?email=" + params.get("email");
+        url=url.replace(" ","%20");
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            onLoadFinished.onFail("An error occurred, try again");
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                });
+    }
+    private static void isConnected(final Context context){
+
+    }
+
+    public void getAddress(Map<String, String> params, final OnLoadFinished onLoadFinished) {
+        String url = UrlConstant.GET_ADDRESS_URL + "?format=" + params.get("format") + "&lat=" + params.get("lat") + "&lon=" + params.get("lon");
+        url=url.replace(" ","%20");
+
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
@@ -398,7 +437,28 @@ public class UserOperations {
                     }
                 });
     }
-    private static void isConnected(final Context context){
+
+    public void updateProfile(Map<String, String> params,final OnLoadFinished onLoadFinished) {
+        String url = UrlConstant.UPDATE_PROFILE_URL + "?user_id=" + params.get("user_id") + "&email=" + params.get("email") + "&phone=" + params.get("phone") + "&password=" + params.get("password") ;
+        url=url.replace(" ","%20");
+Log.i("updateProfile", url);
+        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        try {
+                            onLoadFinished.onSuccess(o);
+                        } catch (JSONException e) {
+                            onLoadFinished.onFail(e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        onLoadFinished.onFail(volleyError.getMessage());
+                    }
+                });
 
     }
 /////////////////////////////////////////////////////////////////

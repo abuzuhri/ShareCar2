@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,9 +19,9 @@ import java.util.TimerTask;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
+import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
-import sharearide.com.orchidatech.jma.sharearide.Services.RefreshRideService;
 import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
@@ -45,10 +46,16 @@ public class SplashScreen extends ActionBarActivity {
         user_id = this.getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1);
         if (user_id == -1)
             intent = new Intent(SplashScreen.this, Login.class);
-        else
-            intent = new Intent(SplashScreen.this, ShareRide.class);
+        else{
+            User user = UserDAO.getUserById(user_id);
+            if(TextUtils.isEmpty(user.getEmail()) || TextUtils.isEmpty(user.getPhone()))
+            intent = new Intent(SplashScreen.this, UserProfile.class);
+            else
+                intent = new Intent(SplashScreen.this, ShareRide.class);
 
-        setTimerForRefreshRideService();
+        }
+
+        // setTimerForRefreshRideService();
 //         this.startService(new Intent(this, RefreshRideService.class));
 
 
@@ -68,8 +75,8 @@ public class SplashScreen extends ActionBarActivity {
                         Toast.makeText(SplashScreen.this, "No Internet Access", Toast.LENGTH_SHORT).show();
 
                     SplashScreen.this.getSharedPreferences("pref", MODE_PRIVATE).edit().putBoolean("FIRST_TIME", false).commit();
-                  goToTargetActivity();
-                  }
+                    goToTargetActivity();
+                }
             });
         }else
             goToTargetActivity();
@@ -86,46 +93,38 @@ public class SplashScreen extends ActionBarActivity {
 
     }
 
-    private void setTimerForRefreshRideService() {
-        mTimer = new Timer();
-        TimerTask mTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                InternetConnectionChecker.isConnectedToInternet(SplashScreen.this, new OnInternetConnectionListener() {
-                    @Override
-                    public void internetConnectionStatus(boolean status) {
-                        if (status) {
-                            Intent intent = new Intent(SplashScreen.this, RefreshRideService.class);
-                            startService(intent);
-
-                        }
-                    }
-                });
-            }
-        };
-
-        mTimer.scheduleAtFixedRate(mTimerTask, new Date(System.currentTimeMillis() + INITIAL_SERVICE_DELAY), INITIAL_SERVICE_DELAY);
-       // mTimer.scheduleAtFixedRate(mTimerTask, INITIAL_SERVICE_DELAY, INITIAL_SERVICE_DELAY);
-        //timer.schedule(mTimerTask, new Date(System.currentTimeMillis() + INITIAL_SERVICE_DELAY));
-
-
-    }
-
+//    private void setTimerForRefreshRideService() {
+//        mTimer = new Timer();
+//        TimerTask mTimerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                InternetConnectionChecker.isConnectedToInternet(SplashScreen.this, new OnInternetConnectionListener() {
+//                    @Override
+//                    public void internetConnectionStatus(boolean status) {
+//                        if (status) {
+//                            Intent intent = new Intent(SplashScreen.this, RefreshRideService.class);
+//                            startService(intent);
+//
+//                        }
+//                    }
+//                });
+//            }
+//        };
+//
+//        mTimer.scheduleAtFixedRate(mTimerTask, new Date(System.currentTimeMillis() + INITIAL_SERVICE_DELAY), INITIAL_SERVICE_DELAY);
+//        // mTimer.scheduleAtFixedRate(mTimerTask, INITIAL_SERVICE_DELAY, INITIAL_SERVICE_DELAY);
+//        //timer.schedule(mTimerTask, new Date(System.currentTimeMillis() + INITIAL_SERVICE_DELAY));
+//
+//
+//    }
+//
 
     public void loadNewRides(Context context){
         MainUserFunctions.get_a_rides(context, new OnRidesListListener() {
             @Override
             public void onRidesRefresh(ArrayList<Ride> newItems) {
                 for(Ride ride:newItems)
-                    try {
-                        RideDAO.addNewRide(ride);
-
-                    } catch (EmptyFieldException e) {
-                        e.printStackTrace();
-                    } catch (InvalidInputException e) {
-                        e.printStackTrace();
-                    }
-
+                    RideDAO.addNewRide(ride);
             }
 
             @Override

@@ -9,6 +9,9 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
         card_view:cardCornerRadius="@dimen/card_corner_radius"
         card_view:cardElevation="@dimen/card_elevation">
 
@@ -16,33 +19,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+           >
 
-            <ImageView
-                android:id="@+id/result_img"
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/ic_contact_picture"
+                android:id="@+id/result_img"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin_left_image"
-                android:background="@drawable/sresult" />
+                android:layout_marginLeft="@dimen/margin_left_image"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_left_image"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/textView_displayName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#000" />
+                    android:textColor="#000"
+                    android:text="safsgsg"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/date_marginTop"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -50,6 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left|bottom"
+                        android:layout_marginRight="5dp"
                         android:background="@drawable/time" />
 
                     <TextView
@@ -63,21 +71,6 @@
                         android:text="08:20:00"
                         android:textColor="#b2b2b2" />
 
-                    <ImageView
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|bottom"
-                        android:background="@drawable/date" />
-
-                    <TextView
-                        android:id="@+id/textView_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center"
-                        android:layout_marginLeft="@dimen/date_marginLeft"
-                        android:text="Jun_22_2015"
-                        android:textColor="#b2b2b2" />
                 </LinearLayout>
 
             </LinearLayout>

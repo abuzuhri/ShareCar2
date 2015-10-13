@@ -8,6 +8,15 @@ public class SocialUser {
     public String email;
     public String name;
     public String id;
+    public String social_id;
+
+    public String getSocial_id() {
+        return social_id;
+    }
+
+    public void setSocial_id(String social_id) {
+        this.social_id = social_id;
+    }
 
     public String getAvatarURL() {
         return avatarURL;

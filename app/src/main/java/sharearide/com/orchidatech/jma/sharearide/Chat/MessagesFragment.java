@@ -35,8 +35,7 @@ public class MessagesFragment extends ListFragment implements LoaderManager.Load
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new ClassCastException(activity.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -53,14 +52,11 @@ public class MessagesFragment extends ListFragment implements LoaderManager.Load
         adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
 
             @Override
-            public boolean setViewValue(View view, Cursor cursor,
-                                        int columnIndex) {
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                 switch (view.getId()) {
                     case R.id.text1:
-                        LinearLayout root = (LinearLayout) view.getParent()
-                                .getParent();
-                        if (cursor.getString(cursor
-                                .getColumnIndex(DataProvider.COL_FROM)) == null) {
+                        LinearLayout root = (LinearLayout) view.getParent().getParent();
+                        if (cursor.getString(cursor.getColumnIndex(DataProvider.COL_FROM)) == null) {
                             root.setGravity(Gravity.RIGHT);
                             root.setPadding(50, 10, 10, 10);
                         } else {
@@ -125,7 +121,7 @@ public class MessagesFragment extends ListFragment implements LoaderManager.Load
                 DataProvider.CONTENT_URI_MESSAGES, null, DataProvider.COL_FROM
                 + " = ? or " + DataProvider.COL_TO + " = ?",
                 new String[]{profileEmail, profileEmail},
-                DataProvider.COL_AT + " DESC");
+                DataProvider.COL_AT + " ASC");
         return loader;
     }
 

@@ -25,4 +25,12 @@ public class UrlConstant {
         public static final String SEARCH_ALL_URL =  SERVER_URL + WEB_SERVICES_PATH + "searchAllRide.php";//
 
     public static final String CHECK_INTERNET_URL = SERVER_URL + WEB_SERVICES_PATH + "check_internet_access.php";
+        public static final String GET_ADDRESS_URL = "http://nominatim.openstreetmap.org/reverse";
+    public static final String UPDATE_RIDE_URL = SERVER_URL + WEB_SERVICES_PATH + "update_ride.php";
+    public static final String DELETE_RIDE_URL = SERVER_URL + WEB_SERVICES_PATH + "delete_ride.php";
+    public static final String GET_MY_RIDES_URL = SERVER_URL + WEB_SERVICES_PATH + "get_my_rides.php";
+    public static final String SOCIAL_SIGNUP = SERVER_URL + WEB_SERVICES_PATH + "social_sign_up.php";
+
+    public static final String UPLOAD_IMAGE_URL = SERVER_URL + WEB_SERVICES_PATH + "upload_image.php";
+    public static final String UPDATE_PROFILE_URL = SERVER_URL + WEB_SERVICES_PATH + "update_profile.php";
 }

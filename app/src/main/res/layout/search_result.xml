@@ -10,6 +10,35 @@
         android:id="@+id/tool_bar"
         layout="@layout/toolbar" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/search_bar"
+        android:visibility="gone"
+        android:background="@color/ColorPrimary"
+        android:layout_below="@+id/tool_bar">
+
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ed_search"
+            android:layout_weight="0.7"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="@dimen/horizontal_margin"
+            android:layout_marginRight="@dimen/horizontal_margin"
+            android:background="@drawable/white_roundrect"
+            android:padding="5dp"
+            android:imeOptions="actionGo"
+
+            />
+
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
@@ -17,7 +46,7 @@
         android:background="#f8f8f8"
         android:divider="@null"
         android:listSelector="@android:color/transparent"
-        android:layout_below="@+id/tool_bar"/>
+        android:layout_below="@+id/search_bar"/>
 
     <ProgressBar
         android:layout_width="wrap_content"

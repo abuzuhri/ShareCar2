@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
 
-import sharearide.com.orchidatech.jma.sharearide.Activity.QuickMessage;
 
 /**
  * Created by Shadow on 9/8/2015.
@@ -98,8 +97,8 @@ public class DriverInfo {
 
     public static void QuickMessageIntent(Context context) {
         // go to quick message activity..
-        Intent intent = new Intent(context, QuickMessage.class);
+        //Intent intent = new Intent(context, QuickMessage.class);
         //intent.setData();
-        context.startActivity(intent);
+       // context.startActivity(intent);
     }
 }

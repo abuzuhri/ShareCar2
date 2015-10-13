@@ -4,56 +4,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-  >
+    >
 
     <LinearLayout
-        android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:background="#25839d"
+        android:padding="10dp"
+        android:id="@+id/layout">
 
-        <include layout="@layout/toolbar"
-            android:id="@+id/tool_bar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Warning"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/tittle"
+            android:layout_weight="0.3"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="25dp"/>
+
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/close_btn"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/close"
+            />
+
 
     </LinearLayout>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
         android:id="@+id/warn"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/vertical_topWarningImgi"
-        android:background="@drawable/attention"
-        android:layout_marginBottom="@dimen/verticalbottomopWarningImgi"/>
+        android:layout_marginTop="40dp"
+        android:background="@drawable/noconnection"
+        android:layout_marginBottom="20dp"/>
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You have to login  "
+        android:text="Check Your Internet Connection"
         android:textStyle="bold"
-        android:textSize="@dimen/text_size"
+        android:textSize="15sp"
         android:id="@+id/textView7"
+        android:layout_marginBottom="50dp"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="to send a quick message"
-        android:textSize="@dimen/text_size"
-        android:id="@+id/textView8"
-        android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log in"
-        android:id="@+id/logbtn"
-        android:layout_marginTop="@dimen/vertical_margintopTextView"
-        android:layout_marginLeft="@dimen/horizontal_margin"
-        android:layout_marginRight="@dimen/horizontal_margin"
-        android:layout_gravity="center"
-        android:background="@drawable/cyan_roundrect"
-        android:textColor="#fff"
-        />
 </LinearLayout>

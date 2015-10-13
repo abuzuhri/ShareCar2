@@ -26,7 +26,7 @@
             android:listSelector="@android:color/transparent" />
 
 
-        <android.support.design.widget.FloatingActionButton
+     <!--   <android.support.design.widget.FloatingActionButton
             android:id="@+id/addMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             app:layout_anchorGravity="bottom|right|end"
             fab:backgroundTint="@color/Floatbtn"
             fab:backgroundTintMode="src_atop"
-            fab:fab_shadow="false"/>
+            fab:fab_shadow="false"/> -->
 
         <!--
         fab:backgroundTint="@color/Floatbtn"

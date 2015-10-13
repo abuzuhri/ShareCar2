@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/blue_roundedbtn"
-        android:padding="15dp"
+        android:background="#25839d"
+        android:padding="10dp"
     android:id="@+id/layout">
 
 
@@ -22,7 +22,6 @@
             android:text="More Information"
             android:id="@+id/tittle"
             android:layout_weight="0.3"
-            android:layout_marginTop="13dp"
             android:textColor="#fff"
             android:textStyle="bold"
             android:textSize="20dp"
@@ -32,7 +31,6 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:id="@+id/confirm_btn"
-            android:layout_marginTop="10dp"
             android:background="@drawable/check_icon"
             />
 
@@ -43,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:inputType="textMultiLine"
-        android:hint="wite more information..."
+        android:hint="write more information..."
         android:textColor="#c4c3c3"
         android:gravity="top"
         android:padding="40dp"

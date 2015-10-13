@@ -81,12 +81,12 @@ public final class ServerUtilities {
     /**
      * Send a message.
      */
-    public static void send(String msg, String to) throws IOException {
+    public static void send(String msg, String from, String to) throws IOException {
         //Log.i(TAG, "sending message (msg = " + msg + ")");
         String serverUrl = Common.getServerUrl() + "/send";
         Map<String, String> params = new HashMap<String, String>();
         params.put(Common.MSG, msg);
-        params.put(Common.FROM, Common.getPreferredEmail());
+        params.put(Common.FROM, from);
         params.put(Common.TO, to);
 
         post(serverUrl, params, MAX_ATTEMPTS);

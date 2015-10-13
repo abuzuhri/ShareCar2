@@ -2,42 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ddd" >
+    android:background="#ddd"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ColorPrimary"
-        android:padding="15dp"
-
-        >
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_weight="0.79"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="10dp"
-            android:text="Send Quick Message"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/whiteText" />
-
-        <Button
-            android:id="@+id/crosscancel"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/close"
-            android:onClick="onClick" />
-    </LinearLayout>
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar" />
 
     <fragment
-        android:name="sharearide.com.orchidatech.jma.sharearide.Chat.MessagesFragment"
         android:id="@+id/msg_list"
+        android:name="sharearide.com.orchidatech.jma.sharearide.Chat.MessagesFragment"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
@@ -46,7 +20,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white" >
+        android:background="@android:color/white">
 
         <Button
             android:id="@+id/send_btn"
@@ -54,11 +28,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:onClick="onClick"
-            android:textStyle="bold"
-            android:enabled="false"
             android:background="@drawable/send_icon"
-            />
+            android:enabled="false"
+            android:onClick="onClick"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/msg_edit"
@@ -67,9 +40,9 @@
             android:layout_alignBottom="@+id/send_btn"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/send_btn"
+            android:background="@drawable/inp_text"
             android:hint="Write new message"
-            android:paddingLeft="10dp"
-            android:background="@drawable/inp_text" >
+            android:paddingLeft="10dp">
 
         </EditText>
 

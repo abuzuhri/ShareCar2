@@ -38,10 +38,58 @@ public class Ride extends Model {
     @Column(name = "ToCountry")
     public String toCountry;
 
+    @Column(name = "More_Info")
+    public String more_info;
+
     @Column(name = "DateTime")
     public long dateTime;
 
-    public Ride(long remoteId, long userId, String fromCity, String toCity, String fromState, String toState, String fromCountry, String toCountry, long dateTime, double cost) {
+    @Column(name = "from_Lattitude")
+    public double from_Lattitude;
+
+    @Column(name = "from_Longitude")
+    public double from_Longitude;
+
+      @Column(name = "to_latitude")
+    public double to_latitude;
+
+    @Column(name = "to_longitude")
+    public double to_longitude;
+
+    public double getFrom_Lattitude() {
+        return from_Lattitude;
+    }
+
+    public void setFrom_Lattitude(double from_Lattitude) {
+        this.from_Lattitude = from_Lattitude;
+    }
+
+    public double getFrom_Longitude() {
+        return from_Longitude;
+    }
+
+    public void setFrom_Longitude(double from_Longitude) {
+        this.from_Longitude = from_Longitude;
+    }
+
+    public double getTo_latitude() {
+        return to_latitude;
+    }
+
+    public void setTo_latitude(double to_latitude) {
+        this.to_latitude = to_latitude;
+    }
+
+    public double getTo_longitude() {
+        return to_longitude;
+    }
+
+    public void setTo_longitude(double to_longitude) {
+        this.to_longitude = to_longitude;
+    }
+
+    public Ride(long remoteId, long userId, String fromCity, String toCity, String fromState, String toState, String fromCountry, String toCountry,
+                long dateTime, String cost, String more_info, double from_Lattitude,double from_Longitude,double to_latitude,double to_longitude ) {
         this.remoteId = remoteId;
         this.userId = userId;
         this.fromCity = fromCity;
@@ -52,24 +100,23 @@ public class Ride extends Model {
         this.toCountry = toCountry;
         this.dateTime = dateTime;
         this.cost = cost;
+        this.from_Lattitude=from_Lattitude;
+        this.from_Longitude=from_Longitude;
+        this.to_latitude=to_latitude;
+        this.to_longitude=to_longitude;
+        this.more_info = more_info;
+
     }
 
     @Column(name = "Cost")
-    public double cost;
+    public String cost;
 
-    public String getInfo() {
-        return info;
-    }
 
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public double getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
@@ -107,6 +154,14 @@ public class Ride extends Model {
 
     public String getFromState() {
         return fromState;
+    }
+
+    public String getMore_info() {
+        return more_info;
+    }
+
+    public void setMore_info(String more_info) {
+        this.more_info = more_info;
     }
 
     public void setFromState(String fromState) {

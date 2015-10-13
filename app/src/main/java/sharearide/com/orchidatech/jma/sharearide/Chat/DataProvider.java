@@ -194,7 +194,7 @@ public class DataProvider extends ContentProvider {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("create table messages (_id integer primary key autoincrement, msg text, email text, email2 text, at datetime default current_timestamp);");
-            db.execSQL("create table profile (_id integer primary key autoincrement, name text, email text, count integer default 0);");
+            db.execSQL("create table profile (_id integer primary key autoincrement, name text, email text unique, count integer default 0);");
         }
 
         @Override

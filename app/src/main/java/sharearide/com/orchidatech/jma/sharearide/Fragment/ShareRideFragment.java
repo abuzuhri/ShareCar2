@@ -1,24 +1,18 @@
 package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatCallback;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
-
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.ViewPagerAdapter;
 import sharearide.com.orchidatech.jma.sharearide.R;
@@ -46,7 +40,7 @@ public class ShareRideFragment extends Fragment {
 
         mFragments.add(tab2);
 
-
+      //  tabs.setIndicatorColor(getResources().getColor(R.color.tabsScrollColor));
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter = new ViewPagerAdapter(getFragmentManager(), Titles, Numboftabs, mFragments);
 

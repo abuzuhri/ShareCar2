@@ -4,6 +4,5 @@
     tools:context="com.amal.kronz.findaride.Signup">
 
     
-    <item android:id="@+id/action_settings" android:title="@string/title_activity_signup"
-        android:orderInCategory="100" app:showAsAction="never" />
+
 </menu>

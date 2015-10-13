@@ -1,10 +1,12 @@
 package sharearide.com.orchidatech.jma.sharearide.Logic;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -36,13 +38,18 @@ public class GooglePlusLogin implements SocialNetwork {
 
     private boolean mIntentInProgress;
     private boolean mSignInClicked;
-
+    private static GooglePlusLogin instance;
     private OnLoginListener lsnr;
     private static final int REQUEST_AUTH = UUID.randomUUID().hashCode() & 0xFFFF;
     private static final String SAVE_STATE_KEY_IS_CONNECTED = "GooglePlusSocialNetwork.SAVE_STATE_KEY_OAUTH_TOKEN";
 
-
-    public GooglePlusLogin(final Activity activity) {
+    public static GooglePlusLogin getInstance(Activity activity,Context context){
+        if(instance ==null){
+            instance = new GooglePlusLogin(activity);
+        }
+        return instance;
+    }
+    private GooglePlusLogin(final Activity activity) {
         this.activity = activity;
         mSharedPreferences = activity.getSharedPreferences(activity.getPackageName(), activity.MODE_PRIVATE);
         mGoogleApiClient = new GoogleApiClient.Builder(activity)
@@ -101,6 +108,10 @@ public class GooglePlusLogin implements SocialNetwork {
         if (mGoogleApiClient.isConnected()) {
             Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
             mGoogleApiClient.disconnect();
+            //     mGoogleApiClient.connect();
+
+            Toast.makeText(activity, "Logoutttttttt" , Toast.LENGTH_LONG).show();
+
         }
     }
 
@@ -116,6 +127,9 @@ public class GooglePlusLogin implements SocialNetwork {
             } catch (IntentSender.SendIntentException e) {
                 mIntentInProgress = false;
                 mGoogleApiClient.connect();
+            }
+            catch (NullPointerException e){
+                Toast.makeText(activity,"No Internet",Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -137,12 +151,13 @@ public class GooglePlusLogin implements SocialNetwork {
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         AppLog.i("onActivityResult ");
         if (requestCode == REQUEST_AUTH) {
             if (resultCode != Activity.RESULT_OK) {
                 mSignInClicked = false;
             }
-
+            Toast.makeText(activity,"on Activity result",Toast.LENGTH_LONG).show();
             mIntentInProgress = false;
 
             if (!mGoogleApiClient.isConnecting()) {
@@ -167,7 +182,7 @@ public class GooglePlusLogin implements SocialNetwork {
                 user.name = currentPerson.getDisplayName();
                 user.email = email;
                 user.id = currentPerson.getId();
-
+                Toast.makeText(activity,""+user.email,Toast.LENGTH_LONG).show();
                 Gson gson = new Gson();
                 String json = gson.toJson(user);
                 mSharedPreferences.edit().putString(AppConstant.SharedPreferenceNames.SocialUser, json).commit();

@@ -7,15 +7,16 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Patterns;
 
-
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Configuration;
+//import com.alexbbb.uploadservice.UploadService;
 import com.facebook.FacebookSdk;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import sharearide.com.orchidatech.jma.sharearide.Chat.client.Constants;
+import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 
 
 /**
@@ -38,16 +39,21 @@ public class Common extends Application {
 
     public static String[] email_arr;
 
-    private static SharedPreferences prefs;
+    private static SharedPreferences prefs, pref;
+
+    public static String myEmail;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //UploadService.NAMESPACE = "sharearide.com.orchidatech.jma.sharearide";
 
-        List<String> emailList = getEmailList();
-        email_arr = emailList.toArray(new String[emailList.size()]);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
+
+        //List<String> emailList = getEmailList();
+        //email_arr = emailList.toArray(new String[emailList.size()]);
 
 
         Configuration dbConfiguration = new Configuration.Builder(this).setDatabaseName("sharearide.db").create();
@@ -73,12 +79,25 @@ public class Common extends Application {
         return lst;
     }
 
+    /*
     public static String getPreferredEmail() {
-        return prefs.getString("chat_email_id", email_arr.length == 0 ? "abc@example.com" : email_arr[0]);
+        //return prefs.getString("chat_email_id", email_arr.length == 0 ? "abc@example.com" : email_arr[0]);
+        return prefs.getString("chat_email_id", );
+    }
+    */
+
+    /*
+    public static void setMyEmail() {
+        String myEmail = UserDAO.getUserById(pref.getLong("id", -1)).getEmail();
+    }
+    */
+
+    public static String getMyEmail() {
+        return UserDAO.getUserById(pref.getLong("id", -1)).getEmail();
     }
 
     public static String getDisplayName() {
-        String email = getPreferredEmail();
+        String email = getMyEmail();
         return prefs.getString("display_name", email.substring(0, email.indexOf('@')));
     }
 

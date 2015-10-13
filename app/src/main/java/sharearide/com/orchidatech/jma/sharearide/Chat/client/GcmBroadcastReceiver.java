@@ -8,18 +8,16 @@ import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.SQLException;
 import android.net.Uri;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.text.TextUtils;
 
-
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import sharearide.com.orchidatech.jma.sharearide.Chat.ChatActivity;
 import sharearide.com.orchidatech.jma.sharearide.Chat.Common;
 import sharearide.com.orchidatech.jma.sharearide.Chat.DataProvider;
-import sharearide.com.orchidatech.jma.sharearide.Chat.MainActivity;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 /**
@@ -53,6 +51,8 @@ public class GcmBroadcastReceiver extends BroadcastReceiver {
             } else {
                 String msg = intent.getStringExtra(DataProvider.COL_MSG);
                 email = intent.getStringExtra(DataProvider.COL_FROM);
+
+                /*
                 try {
                     ContentValues values = new ContentValues(2);
                     values.put(DataProvider.COL_NAME, email.substring(0, email.indexOf('@')));
@@ -60,12 +60,11 @@ public class GcmBroadcastReceiver extends BroadcastReceiver {
                     ctx.getContentResolver().insert(DataProvider.CONTENT_URI_PROFILE, values);
                 } catch (SQLException sqle) {
                 }
+                */
 
                 ContentValues values = new ContentValues(2);
                 values.put(DataProvider.COL_MSG, msg);
                 values.put(DataProvider.COL_FROM, email);
-
-                //Toast.makeText(ctx,email,Toast.LENGTH_LONG).show();
                 context.getContentResolver().insert(DataProvider.CONTENT_URI_MESSAGES, values);
 
                 if (Common.isNotify()) {
@@ -92,7 +91,7 @@ public class GcmBroadcastReceiver extends BroadcastReceiver {
         }
 
         if (launchApp) {
-            Intent intent = new Intent(ctx, MainActivity.class);
+            Intent intent = new Intent(ctx, ChatActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pi);

@@ -8,13 +8,12 @@ import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -31,61 +30,67 @@ import java.security.NoSuchAlgorithmException;
 
 import sharearide.com.orchidatech.jma.sharearide.Chat.client.GcmUtil;
 import sharearide.com.orchidatech.jma.sharearide.Chat.client.ServerUtilities;
-import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 
 /**
  * @author appsrox.com
  */
-public class ChatActivity extends AppCompatActivity implements MessagesFragment.OnFragmentInteractionListener {
+public class ChatActivity extends ActionBarActivity implements MessagesFragment.OnFragmentInteractionListener {
 
     private EditText msgEdit;
     private Button sendBtn, cancel;
-    private String profileId;
-    private String profileName;
-    private String profileEmail;
-    private String email;
+    //private String profileId;
+    private String receiverName;
+    //private String profileEmail;
 
     private GcmUtil gcmUtil;
 
-    String receiverEmail;
-    long receiverId;
-    //String senderEmail;
+    String receiverEmail, senderEmail;
+    long receiverId, senderId;
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        //getHash();
+        getHash();
 
         // Get sender and receiver emails
         Intent intent = getIntent();
         receiverEmail = intent.getStringExtra("ReceiverEmail");
         receiverId = intent.getLongExtra("ReceiverId", -1);
-        profileEmail = intent.getStringExtra("MyEmail");
-
-        profileId = getIntent().getStringExtra(Common.PROFILE_ID);
+        senderEmail = intent.getStringExtra("SenderEmail");
+        senderId = intent.getLongExtra("SenderId", -1);
+Toast.makeText(ChatActivity.this,""+receiverEmail+" , "+senderEmail,Toast.LENGTH_LONG).show();
+        //profileId = getIntent().getStringExtra(Common.PROFILE_ID);
         msgEdit = (EditText) findViewById(R.id.msg_edit);
         sendBtn = (Button) findViewById(R.id.send_btn);
-        cancel = (Button) findViewById(R.id.crosscancel);
+        //cancel = (Button) findViewById(R.id.crosscancel);
 
-        ActionBar actionBar = getSupportActionBar();
-        //actionBar.setHomeButtonEnabled(true);
-        //actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+
+        //   ActionBar actionBar = getSupportActionBar();
+//        toolbar.setHomeButtonEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
         //actionBar.setDisplayShowTitleEnabled(false);
 
         addContact(receiverEmail);
 
-        Cursor c = getContentResolver().query(Uri.withAppendedPath(DataProvider.CONTENT_URI_PROFILE, profileId), null, null, null, null);
+        /*
+        Cursor c = getContentResolver().query(Uri.withAppendedPath(DataProvider.CONTENT_URI_PROFILE, String.valueOf(receiverId)), null, null, null, null);
         if (c.moveToFirst()) {
-            profileName = c.getString(c.getColumnIndex(DataProvider.COL_NAME));
+            receiverName = c.getString(c.getColumnIndex(DataProvider.COL_NAME));
             receiverEmail = c.getString(c.getColumnIndex(DataProvider.COL_EMAIL));
-            //actionBar.setTitle(profileName);
+           // toolbar.setTitle(receiverName);
         }
+        */
 
-        //actionBar.setSubtitle("connecting ...");
+        toolbar.setTitle("Receiver Name");
+        toolbar.setSubtitle("connecting ...");
 
         registerReceiver(registrationStatusReceiver, new IntentFilter(Common.ACTION_REGISTER));
         gcmUtil = new GcmUtil(getApplicationContext());
@@ -105,38 +110,6 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
     }
 
 
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.chat, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_edit:
-                EditContactDialog dialog = new EditContactDialog();
-                Bundle args = new Bundle();
-                args.putString(Common.PROFILE_ID, profileId);
-                args.putString(DataProvider.COL_NAME, profileName);
-                dialog.setArguments(args);
-                dialog.show(getFragmentManager(), "EditContactDialog");
-                return true;
-
-            case android.R.id.home:
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    */
-
-
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.send_btn:
@@ -144,9 +117,6 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
                     send(msgEdit.getText().toString());
                     msgEdit.setText(null);
                 }
-                break;
-            case R.id.crosscancel:
-                finish();
                 break;
         }
     }
@@ -156,23 +126,24 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
             @Override
             protected String doInBackground(Void... params) {
                 String msg = "";
-                try {
-                    ServerUtilities.send(txt, profileEmail);
 
+                try {
+                    ServerUtilities.send(txt, senderEmail, receiverEmail);
+
+                    // store chat in local DB
                     ContentValues values = new ContentValues(2);
                     values.put(DataProvider.COL_MSG, txt);
                     values.put(DataProvider.COL_TO, receiverEmail);
                     getContentResolver().insert(DataProvider.CONTENT_URI_MESSAGES, values);
 
-                    // TODO: store chat in DB
-                    // ..
+                    // store chat in server DB
                     long sender_id = getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1);
-
                     saveMessage(txt, sender_id, receiverId, System.currentTimeMillis());
 
                 } catch (IOException ex) {
                     msg = "Message could not be sent";
                 }
+
                 return msg;
             }
 
@@ -186,7 +157,7 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
     }
 
     private void saveMessage(String message, long sender_id, long receiverId, long date_time) {
-        MainUserFunctions.add_message(getApplicationContext(),message, sender_id, receiverId, date_time);
+        MainUserFunctions.add_message(getApplicationContext(), message.trim(), sender_id, receiverId, date_time);
     }
 
 
@@ -200,7 +171,7 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
     protected void onPause() {
         ContentValues values = new ContentValues(1);
         values.put(DataProvider.COL_COUNT, 0);
-        getContentResolver().update(Uri.withAppendedPath(DataProvider.CONTENT_URI_PROFILE, profileId), values, null, null);
+        getContentResolver().update(Uri.withAppendedPath(DataProvider.CONTENT_URI_PROFILE, String.valueOf(receiverId)), values, null, null);
         super.onPause();
     }
 
@@ -209,6 +180,26 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
         unregisterReceiver(registrationStatusReceiver);
         gcmUtil.cleanup();
         super.onDestroy();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.chat, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.close:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -243,12 +234,13 @@ public class ChatActivity extends AppCompatActivity implements MessagesFragment.
             if (intent != null && Common.ACTION_REGISTER.equals(intent.getAction())) {
                 switch (intent.getIntExtra(Common.EXTRA_STATUS, 100)) {
                     case Common.STATUS_SUCCESS:
-                        //getActionBar().setSubtitle("online");
+                        toolbar.setSubtitle("online");
                         sendBtn.setEnabled(true);
                         break;
 
                     case Common.STATUS_FAILED:
-                        //getActionBar().setSubtitle("offline");
+                        //
+                        toolbar.setSubtitle("offline");
                         break;
                 }
             }

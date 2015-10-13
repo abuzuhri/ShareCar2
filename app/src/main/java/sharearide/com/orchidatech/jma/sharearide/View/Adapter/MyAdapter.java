@@ -1,7 +1,8 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
-
 import android.app.Activity;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
@@ -58,9 +64,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 //                Toast.makeText(activity, "" + name, Toast.LENGTH_LONG).show();
                 holder.textView_displayName.setText(name);
                 String date_time = AppConstant.DateConvertion.getDate(rides.get(position).getDateTime());
-                holder.textView_time.setText(date_time.split(" ")[1]);
-                holder.textView_date.setText(date_time.split(" ")[0]);
-
+                holder.textView_time.setText(date_time);
+               String imagUrl = ridesData.get(rides.get(position)).getImage();
+                if(TextUtils.isEmpty(imagUrl)){
+                    holder.result_img.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
+                }
+                else
+                    Picasso.with(activity).load(Uri.parse(imagUrl)).into(holder.result_img);
             }
         }catch (NullPointerException e) {
         }
@@ -88,26 +98,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView textView_displayName;
         TextView textView_time;
         TextView textView_date;
-        private ImageView  result_img,date,time;
+        private CircleImageView result_img;
+        private  ImageView time;
         public ViewHolder(View v) {
             super(v);
             textView_displayName = (TextView) v.findViewById(R.id.textView_displayName);
             textView_time = (TextView) v.findViewById(R.id.textView_time);
-            textView_date = (TextView) v.findViewById(R.id.textView_date);
-            result_img = (ImageView) v.findViewById(R.id.result_img);
-            date = (ImageView) v.findViewById(R.id.date);
+            result_img = (CircleImageView) v.findViewById(R.id.result_img);
             time = (ImageView) v.findViewById(R.id.time);
 
             Display display = activity.getWindowManager().getDefaultDisplay();
             int height = display.getHeight();
             int width = display.getWidth();
-            result_img.getLayoutParams().height = (int) (height * 0.08);
-            result_img.getLayoutParams().width = (int) (width * 0.09);
+            result_img.getLayoutParams().height = (int) (height * 0.09);
+            result_img.getLayoutParams().width = (int) (width * 0.15);
 
-            date.getLayoutParams().height = (int) (height * 0.04);
-            date.getLayoutParams().width = (int) (width * 0.05);
 
-            time.getLayoutParams().height = (int) (height * 0.04);
+            time.getLayoutParams().height = (int) (height * 0.03);
             time.getLayoutParams().width = (int) (width * 0.05);
 
             v.setOnClickListener(this);

@@ -1,9 +1,15 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="sharearide.com.orchidatech.jma.sharearide.Chat.ChatActivity">
 
     <item
-        android:id="@+id/action_edit"
-        android:showAsAction="always"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/action_edit"/>
+        android:id="@+id/close"
+        android:orderInCategory="100"
+        android:title="Search"
+        android:icon="@drawable/closee"
+        app:showAsAction="ifRoom"
+        ></item>
+
 
 </menu>

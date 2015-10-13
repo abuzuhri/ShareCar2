@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -8,12 +9,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,19 +30,21 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
-import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
-import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
+import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
 import sharearide.com.orchidatech.jma.sharearide.View.Adapter.MyAdapter;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
 
 public class FindAllRide extends Fragment {
  private ImageButton searchAll;
- private EditText t1;
+ private EditText ed_search;
     MyAdapter adapter;
     RecyclerView rv;
     private ProgressBar mProgressBar;
     ArrayList<Ride> rides;
+    ArrayList<Ride> orginal_rides;
     Map<Ride, User> ridesData;
+    Map<Ride, User> orginal_ridesData;
     private LinearLayoutManager llm;
 
 
@@ -48,91 +53,91 @@ public class FindAllRide extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_ride, container, false);
 
-     t1 = (EditText) v.findViewById(R.id.ed_search);
+        ed_search = (EditText) v.findViewById(R.id.ed_search);
     searchAll = (ImageButton) v.findViewById(R.id.search);
     mProgressBar = (ProgressBar) v.findViewById(R.id.search_progress);
         mProgressBar.setVisibility(View.GONE);
 
         rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);
-        //  llm = new LinearLayoutManager(getActivity());
          llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
       searchAll.setOnClickListener(new View.OnClickListener() {
-           @Override
+          @Override
           public void onClick(View v) {
-              //  if (getArguments().getString("message") != null) {
-               if ((t1.getText()).toString() != null) {
-                   mProgressBar.setVisibility(View.VISIBLE);
+              if (TextUtils.isEmpty(ed_search.getText())) {
+                  //  ed_search.setError("Enter Email ");
+              } else {
 
-                    findAllRide((t1.getText()).toString() );
-              //   Toast.makeText(getActivity(),"DONE",Toast.LENGTH_LONG).show();
+                  InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
+                      @Override
+                      public void internetConnectionStatus(boolean status) {
+                          if (status) {
+                               //mProgressDialog.show();
+                              mProgressBar.setVisibility(View.VISIBLE);
+                              findAllRide((ed_search.getText()).toString(), getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
+                              //   Toast.makeText(getActivity(),"DONE",Toast.LENGTH_LONG).show();
 
+                              rides = new ArrayList<>();
+                              ridesData = new HashMap<>();
+                              adapter = new MyAdapter(getActivity(), rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
+                                  @Override
+                                  public void onItemClicked(Ride selected_ride, User target_user) {
+                                      Intent intent = new Intent(getActivity(), ReviewRide.class);
+                                      intent.putExtra("ride_id", selected_ride.getRemoteId());
+                                      intent.putExtra("user_id", target_user.getRemoteId());
+                                      startActivity(intent);
 
-                }
+                                  }
+                              });
+                              rv.setLayoutManager(llm);
+                              rv.setAdapter(adapter);
 
+                          } else {
+                              LayoutInflater li = LayoutInflater.from(getActivity());
+                              View v = li.inflate(R.layout.warning, null);
 
+                              AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 
-                rides = new ArrayList<>();
-                ridesData = new HashMap<>();
-                adapter = new MyAdapter(getActivity(), rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
-                    @Override
-                    public void onItemClicked(Ride selected_ride, User target_user) {
-                        Intent intent = new Intent(getActivity(), ReviewRide.class);
+                              // set more_info.xml to alertdialog builder
+                              alertDialogBuilder.setView(v);
+                              TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                              ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
 
-                        Bundle args = new Bundle();
-                        ArrayList<String> selected_ride_data = new ArrayList<>();
-                        selected_ride_data.add(selected_ride.getRemoteId() + "");
-                        selected_ride_data.add(selected_ride.getUserId() + "");
-                        selected_ride_data.add(selected_ride.getFromCity());
-                        selected_ride_data.add(selected_ride.getToCity());
-                        selected_ride_data.add(selected_ride.getFromState());
-                        selected_ride_data.add(selected_ride.getToState());
-                        selected_ride_data.add(selected_ride.getFromCountry());
-                        selected_ride_data.add(selected_ride.getToCountry());
-                        selected_ride_data.add(selected_ride.getDateTime() + "");
-                        selected_ride_data.add(selected_ride.getCost() + "");
-////////////////////////////////////////
-                        ArrayList<String> target_user_data = new ArrayList<>();
-                        target_user_data.add(target_user.getRemoteId() + "");
-                        target_user_data.add(target_user.getUsername());
-                        target_user_data.add(target_user.getPhone());
-                        target_user_data.add(target_user.getEmail());
-                        args.putStringArrayList("RIDE", selected_ride_data);
-                        args.putStringArrayList("USER", target_user_data);
-                        intent.putExtra("ARGS", args);
-                        startActivity(intent);
+                              // create alert dialog
+                              final AlertDialog alertDialog = alertDialogBuilder.create();
+                              close_btn.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View v) {
+                                      alertDialog.dismiss();
+                                  }
+                              });
+                              // show it
+                              alertDialog.show();
+                          }
+                      }
+                  });
+              }
 
-                    }
-                });
-             rv.setLayoutManager(llm);
-                rv.setAdapter(adapter);
+          }
+      });
 
+        return v;
     }
-      });        return v;
-    }
 
-
-
-
-    private void findAllRide(final String s) {
+    private void findAllRide(final String s, long user_id) {
         MainUserFunctions.find_all_ride(new OnSearchListener() {
 
             @Override
-            public void onSearchSucceed(ArrayList<sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride> matchedRides, Map<Ride, User> matchedRidesData) {
-         Toast.makeText(getActivity(), matchedRides.size() + ", " + matchedRidesData.size(), Toast.LENGTH_LONG).show();
+            public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData) {
                 for (Ride ride : matchedRides) {
-                    try {
-                        RideDAO.addNewRide(ride);
-                        UserDAO.addNewUser(matchedRidesData.get(ride));
-                    } catch (EmptyFieldException e) {
-                        e.printStackTrace();
-                    } catch (InvalidInputException e) {
-                        e.printStackTrace();
-                    }
+
+                    RideDAO.addNewRide(ride);
+                    UserDAO.addNewUser(matchedRidesData.get(ride));
+
                 }
 
-       mProgressBar.setVisibility(View.GONE);
+                mProgressBar.setVisibility(View.GONE);
                 rides.addAll(matchedRides);
                 ridesData.putAll(matchedRidesData);
                 adapter.notifyDataSetChanged();
@@ -142,10 +147,15 @@ public class FindAllRide extends Fragment {
 
             @Override
             public void onSearchFailed(String error) {
-     mProgressBar.setVisibility(View.GONE);
+                mProgressBar.setVisibility(View.GONE);
             }
-        }, getActivity(), s, getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
+        }, getActivity(), s, user_id);
 
 
     }
+
 }
+
+
+
+

@@ -126,7 +126,7 @@ public class GcmUtil {
 	/**
 	 * Registers the application with GCM servers asynchronously.
 	 * <p>
-	 * Stores the registration id, app versionCode, and expiration time in the 
+	 * Stores the registration id, app versionCode, and expiration time in the
 	 * application's shared preferences.
 	 */
 	private void registerBackground() {
@@ -144,7 +144,7 @@ public class GcmUtil {
 
 						// You should send the registration ID to your server over HTTP,
 						// so it can use GCM/HTTP or CCS to send messages to your app.
-						ServerUtilities.register(Common.getPreferredEmail(), regid);
+						ServerUtilities.register(Common.getMyEmail(), regid);
 
 						// Save the regid - no need to register again.
 						setRegistrationId(regid);

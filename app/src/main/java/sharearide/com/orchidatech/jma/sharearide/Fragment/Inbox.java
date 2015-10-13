@@ -59,30 +59,31 @@ public class Inbox extends Fragment {
 
             @Override
             public void onItemClicked(Chat selected_chat, User sender, User receiver) {
-                Intent intent=new Intent(getActivity(),ChatActivity.class);
-                String receiverEmail ;
-                String myEmail ;
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                String receiverEmail;
+                String senderEmail;
                 Long receiverId;
-                long profileId = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
+                long senderId = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
 
 
-                long id =getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
-                if(id==sender.getRemoteId()) {
-                    receiverId=receiver.getRemoteId();
+                long id = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
+                if (id == sender.getRemoteId()) {
+                    receiverId = receiver.getRemoteId();
                     receiverEmail = receiver.getEmail();
-                    myEmail=sender.getEmail();
-                }
-                else {
-                    receiverId=sender.getRemoteId();
+                    senderEmail = sender.getEmail();
+                } else {
+                    receiverId = sender.getRemoteId();
                     receiverEmail = sender.getEmail();
-                    myEmail=receiver.getEmail();
+                    senderEmail = receiver.getEmail();
                 }
-                Toast.makeText(getActivity(),""+receiverEmail+""+myEmail+""+receiverId,Toast.LENGTH_LONG).show();
-                intent.putExtra("ReceiverId",receiverId);
+
                 intent.putExtra("ReceiverEmail", receiverEmail);
-                intent.putExtra("MyEmail", myEmail);
-                intent.putExtra(Common.PROFILE_ID, String.valueOf(profileId));
+                intent.putExtra("ReceiverId", receiverId);
+                intent.putExtra("SenderEmail", senderEmail);
+                intent.putExtra("SenderId", senderId);
+                //intent.putExtra(Common.PROFILE_ID, String.valueOf(myId));
                 startActivity(intent);
+
 
             }
         });
@@ -118,7 +119,7 @@ public class Inbox extends Fragment {
                     if (user != null) {
                         String username = user.getUsername();
                         String password = user.getPassword();
-                        MainUserFunctions.getInbox(context, listener, id, username, password);
+                        MainUserFunctions.getInbox(context, listener, id);
                     }else{
                         Toast.makeText(context, "This User Not Stored In Local DB", Toast.LENGTH_LONG).show();
                     }

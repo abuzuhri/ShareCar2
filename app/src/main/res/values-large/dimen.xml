@@ -6,10 +6,10 @@
     <dimen name="horizontal_margin">90dp</dimen>
     <dimen name="vertical_margintopPage">160dp</dimen>
     <dimen name="vertical_margintopTextView">90dp</dimen>
-    <dimen name="vertical_margin_btwn_view">20dp</dimen>
+    <dimen name="vertical_margin_btwn_view">30dp</dimen>
     <dimen name="horizontal_BTW_Btn">150dp</dimen>
 
-    <dimen name="vertical_logoTop">80dp</dimen>
+    <dimen name="vertical_logoTop">100dp</dimen>
     <dimen name="vertical_logoBottom">40dp</dimen>
     <dimen name="vertical_topBtn">20dp</dimen>
 

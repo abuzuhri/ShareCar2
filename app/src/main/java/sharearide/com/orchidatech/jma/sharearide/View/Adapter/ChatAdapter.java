@@ -2,8 +2,10 @@ package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +13,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
@@ -55,18 +62,28 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
       if(chats != null){
             String message_text = chats.get(position).getMessage();
-          Toast.makeText(activity,""+message_text,Toast.LENGTH_LONG).show();
+      //    Toast.makeText(activity,""+message_text,Toast.LENGTH_LONG).show();
           String contacted_person;
           long user_id = activity.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
-            if(chats_data.get(chats.get(position)).get(0).getRemoteId() != user_id){
+           String imagUrl;
+
+          if(chats_data.get(chats.get(position)).get(0).getRemoteId() != user_id){
                 contacted_person = chats_data.get(chats.get(position)).get(0).getUsername();
+                imagUrl =  chats_data.get(chats.get(position)).get(0).getImage();
             }else{
                 contacted_person = chats_data.get(chats.get(position)).get(1).getUsername();
+                imagUrl =  chats_data.get(chats.get(position)).get(1).getImage();
+
             }
           String chat_date = AppConstant.DateConvertion.getDate(chats.get(position).getDateTime());
           holder.date.setText(chat_date);
           holder.lastChat.setText(message_text);
           holder.name.setText(contacted_person);
+          if(TextUtils.isEmpty(imagUrl)){
+              holder.image.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
+          }
+        else
+              Picasso.with(activity).load(Uri.parse(imagUrl)).into(holder.image);
         }
 
 
@@ -86,7 +103,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
         CardView cv;
-        ImageView image;
+        CircleImageView image;
         TextView name;
         TextView lastChat;
         TextView date;
@@ -94,7 +111,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         public ViewHolder(View v) {
             super(v);
             cv = (CardView) v.findViewById(R.id.card_view);
-            image = (ImageView) v.findViewById(R.id.chat_image);
+            image = (CircleImageView) v.findViewById(R.id.chat_image);
             name = (TextView) v.findViewById(R.id.chat_name);
             lastChat = (TextView) v.findViewById(R.id.chat_lastChat);
             date = (TextView) v.findViewById(R.id.chat_date);

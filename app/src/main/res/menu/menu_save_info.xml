@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="sharearide.com.orchidatech.jma.sharearide.Activity.ReviewRide">
 
-    <item android:id="@+id/action_settings"
-        android:title="@string/title_activity_save_info"
+
+    <item
+        android:id="@+id/action_search"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:title="Search"
+        android:icon="@drawable/location"
+        app:showAsAction="ifRoom"
+        ></item>
 </menu>
