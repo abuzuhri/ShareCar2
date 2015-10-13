@@ -12,7 +12,7 @@
     <string name="title_activity_main">Main</string>
     <string name="title_activity_logout">Logout</string>
     <string name="title_activity_reset_password">Reset Password</string>
-    <string name="title_activity_signup">Signup</string>
+    <string name="title_activity_signup">Sign Up</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_warning">Warning</string>
 
