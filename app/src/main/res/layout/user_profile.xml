@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/tool_bar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/scrollView"
+        android:fillViewport="false">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#fff">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/image_Layout"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/tool_bar">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/emp"
+                    android:id="@+id/circleView"
+                    android:layout_centerInParent="true"/>
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/update_progress"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textSize="@dimen/text_size"
+                android:id="@+id/username"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/image_Layout"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ed_invisible"
+                android:inputType="none"
+                >
+            </EditText>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/email"
+                android:hint="Email"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:imeOptions="actionGo"
+                android:inputType="textEmailAddress"
+                android:drawableLeft="@drawable/symbol"
+                android:textColorHint="#989898"
+                android:drawablePadding="10dip"
+                android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+                android:background="@drawable/lightgray_roundrect"
+                android:layout_below="@+id/username"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phone"
+                android:hint="xxx-xxx-xxxx"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:textColorHint="#989898"
+                android:imeOptions="actionGo"
+                android:layout_below="@+id/email"
+                android:inputType="phone"
+                android:drawableLeft="@drawable/phoneblue"
+                android:drawablePadding="10dip"
+                android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+                android:background="@drawable/lightgray_roundrect"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_changePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:src="@drawable/padlock"
+                app:layout_anchorGravity="bottom|right|end"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                fab:backgroundTint="#ff9d1e"
+                fab:backgroundTintMode="src_atop"
+                fab:fab_shadow="false"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ll_changePassword"
+                android:visibility="gone"
+                android:layout_below="@+id/btn_changePassword">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/current_password"
+                    android:hint=" Current Password"
+                    android:padding="10dp"
+                    android:textDirection="ltr"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionGo"
+                    android:textColorHint="#989898"
+                    android:drawableLeft="@drawable/padlocknav"
+                    android:drawablePadding="10dip"
+                    android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+                    android:background="@drawable/lightgray_roundrect"
+                    android:layout_marginRight="@dimen/horizontal_margin"
+                    android:layout_marginLeft="@dimen/horizontal_margin"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/password"
+                    android:hint="New Password"
+                    android:padding="10dp"
+                    android:textDirection="ltr"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionGo"
+                    android:textColorHint="#989898"
+                    android:drawableLeft="@drawable/padlocknav"
+                    android:drawablePadding="10dip"
+                    android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+                    android:background="@drawable/lightgray_roundrect"
+                    android:layout_marginRight="@dimen/horizontal_margin"
+                    android:layout_marginLeft="@dimen/horizontal_margin"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/re_password"
+                    android:hint="Re_Password"
+                    android:padding="10dp"
+                    android:textDirection="ltr"
+                    android:inputType="textPassword"
+                    android:textColorHint="#989898"
+                    android:imeOptions="actionGo"
+                    android:drawableLeft="@drawable/padlocknav"
+                    android:drawablePadding="10dip"
+                    android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+                    android:background="@drawable/lightgray_roundrect"
+                    android:layout_marginRight="@dimen/horizontal_margin"
+                    android:layout_marginLeft="@dimen/horizontal_margin"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+        </ScrollView>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Change"
+        android:id="@+id/save"
+        android:background="#ff9d1e"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginBottom="0dp"
+        android:textStyle="bold"
+        android:textColor="@color/whiteText"
+        android:layout_alignParentBottom="true"
+        />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/update_save_progress"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
