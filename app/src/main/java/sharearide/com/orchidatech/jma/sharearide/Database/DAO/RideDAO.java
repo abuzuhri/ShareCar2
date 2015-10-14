@@ -21,28 +21,32 @@ public class RideDAO {
         return -1;
     }
 
-    public static long addNewRide(Ride r) {
+    public static long addNewRide(long remote_id, long userId, String fromCity, String toCity, String fromCountry,
+                                  String toCountry, String fromState, String toState, long dateTime, String cost,
+                                  String more_info, double from_Longitude, double to_longitude, double from_Lattitude, double to_latitude) {
 //    if(checkRideExist(r.getRemoteId()) != -1)
 //        return r.getRemoteId();
 
-        Ride ride = new Ride();
-        ride.remoteId = r.getRemoteId();
-        ride.userId = r.userId;
+        Ride ride = getRideByRemoteId(remote_id);
+        if(ride == null){
+            ride = new Ride();
+            ride.remoteId = remote_id;
+        }
 
-        ride.fromCity = r.fromCity;
-
-        ride.fromState = r.fromState;
-        ride.fromCountry = r.fromCountry;
-        ride.toCity = r.toCity;
-        ride.toState = r.toState;
-        ride.toCountry = r.toCountry;
-        ride.dateTime = r.dateTime;
-        ride.cost = r.cost;
-        ride.to_longitude=r.getTo_longitude();
-        ride.to_latitude=r.getTo_latitude();
-        ride.from_Lattitude=r.getFrom_Lattitude();
-        ride.from_Longitude=r.getFrom_Longitude();
-        ride.more_info = r.more_info;
+        ride.userId = userId;
+        ride.fromCity = fromCity;
+        ride.fromState = fromState;
+        ride.fromCountry = fromCountry;
+        ride.toCity = toCity;
+        ride.toState = toState;
+        ride.toCountry = toCountry;
+        ride.dateTime = dateTime;
+        ride.cost = cost;
+        ride.to_longitude= to_longitude;
+        ride.to_latitude= to_latitude;
+        ride.from_Lattitude=from_Lattitude;
+        ride.from_Longitude=from_Longitude;
+        ride.more_info = more_info;
         return ride.save();
     }
 
@@ -143,12 +147,12 @@ public class RideDAO {
     }
 
     public static Ride getRideById(long rideId) {
-        return new Select().from(Ride.class).where("remote_id = ?", rideId).executeSingle();
-//        return Ride.load(Ride.class, rideId);
+//        return new Select().from(Ride.class).where("remote_id = ?", rideId).executeSingle();
+        return Ride.load(Ride.class, rideId);
     }
 
     public static Ride getRideByRemoteId(long rideRemoteId) {
-        return new Select().from(Ride.class).where("remoteId = ?", rideRemoteId).executeSingle();
+        return new Select().from(Ride.class).where("remote_id = ?", rideRemoteId).executeSingle();
     }
 
     public static List<Ride> getAllRides() {
@@ -167,11 +171,9 @@ public class RideDAO {
     }
 
     public static void deleteRide(long rideId) {
-        //  load an Item object by Id and delete it.
-        if(checkRideExist(rideId) == -1)
-            return;
-        Ride ride = Ride.load(Ride.class, rideId);
-        ride.delete();
+    Ride ride = getRideByRemoteId(rideId);
+        if(ride != null)
+            ride.delete();
 
         // delete it statically
         //User.delete(User.class, id);
@@ -187,7 +189,5 @@ public class RideDAO {
     public static void updateRide(Ride _ride) {
         Ride ride = _ride;
         ride.save();
-
-
     }
 }

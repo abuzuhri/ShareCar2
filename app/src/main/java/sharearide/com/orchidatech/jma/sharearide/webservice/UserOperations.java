@@ -50,7 +50,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -79,7 +79,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -100,7 +100,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -113,7 +113,7 @@ public class UserOperations {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            onLoadFinished.onFail(e.getMessage());
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -121,7 +121,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -145,7 +145,7 @@ public class UserOperations {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                onLoadFinished.onFail(volleyError.getMessage());
+                onLoadFinished.onFail("Can not connect server");
 
             }
         }){
@@ -187,7 +187,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -209,7 +209,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -235,7 +235,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -256,7 +256,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -282,7 +282,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -313,7 +313,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -360,7 +360,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -383,7 +383,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -407,7 +407,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -425,7 +425,7 @@ public class UserOperations {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -433,7 +433,7 @@ public class UserOperations {
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
     }
@@ -441,14 +441,14 @@ public class UserOperations {
     public void updateProfile(Map<String, String> params,final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.UPDATE_PROFILE_URL + "?user_id=" + params.get("user_id") + "&email=" + params.get("email") + "&phone=" + params.get("phone") + "&password=" + params.get("password") ;
         url=url.replace(" ","%20");
-Log.i("updateProfile", url);
+        Log.i("updateProfile", url);
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
                         try {
                             onLoadFinished.onSuccess(o);
                         } catch (JSONException e) {
-                            onLoadFinished.onFail(e.getMessage());
+                            onLoadFinished.onFail("An error occurred, try again");
                         }
                     }
                 },
@@ -456,7 +456,7 @@ Log.i("updateProfile", url);
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail(volleyError.getMessage());
+                        onLoadFinished.onFail("Can not connect server");
                     }
                 });
 

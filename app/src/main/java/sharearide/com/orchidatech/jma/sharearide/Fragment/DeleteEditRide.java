@@ -75,7 +75,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
         View view = inflater.inflate(R.layout.add_edit_ride_fragment, null, false);
         setHasOptionsMenu(true);
 
-        ride = RideDAO.getRideById(getArguments().getLong("id", -1));
+        ride = RideDAO.getRideByRemoteId(getArguments().getLong("id", -1));
         origin_ride = ride;
         allEditText = new ArrayList<>();
         cityFrom = (EditText) view.findViewById(R.id.cityFrom);

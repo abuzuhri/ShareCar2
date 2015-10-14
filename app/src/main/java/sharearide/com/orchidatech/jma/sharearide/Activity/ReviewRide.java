@@ -194,7 +194,7 @@ Typeface font;
 
         long ride_id = intent.getLongExtra("ride_id", -1);
         long user_id = intent.getLongExtra("user_id", -1);
-        ride = RideDAO.getRideById(ride_id);
+        ride = RideDAO.getRideByRemoteId(ride_id);
         user = UserDAO.getUserById(user_id);
         email.setText(user.getEmail());
         username.setText(user.getUsername());

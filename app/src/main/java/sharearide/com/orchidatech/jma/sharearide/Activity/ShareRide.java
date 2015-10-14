@@ -189,6 +189,7 @@ public class ShareRide extends ActionBarActivity {
                         }
                         getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE).edit().remove("id").commit();
                         Intent intent=new Intent(getApplicationContext(), Login.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
 

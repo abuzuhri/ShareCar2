@@ -89,9 +89,6 @@ public class ChatActivity extends ActionBarActivity implements MessagesFragment.
         }
         */
 
-        toolbar.setTitle("Receiver Name");
-        toolbar.setSubtitle("connecting ...");
-
         registerReceiver(registrationStatusReceiver, new IntentFilter(Common.ACTION_REGISTER));
         gcmUtil = new GcmUtil(getApplicationContext());
     }
@@ -234,13 +231,13 @@ public class ChatActivity extends ActionBarActivity implements MessagesFragment.
             if (intent != null && Common.ACTION_REGISTER.equals(intent.getAction())) {
                 switch (intent.getIntExtra(Common.EXTRA_STATUS, 100)) {
                     case Common.STATUS_SUCCESS:
-                        toolbar.setSubtitle("online");
+//                        toolbar.setSubtitle("online");
                         sendBtn.setEnabled(true);
                         break;
 
                     case Common.STATUS_FAILED:
                         //
-                        toolbar.setSubtitle("offline");
+//                        toolbar.setSubtitle("offline");
                         break;
                 }
             }
