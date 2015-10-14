@@ -49,7 +49,7 @@ public class SplashScreen extends ActionBarActivity {
             intent = new Intent(SplashScreen.this, Login.class);
         else{
             User user = UserDAO.getUserById(user_id);
-            if(TextUtils.isEmpty(user.getEmail()) || TextUtils.isEmpty(user.getPhone()))
+            if(user.getEmail() == null || user.getPhone() == null)
                 intent = new Intent(SplashScreen.this, UserProfile.class);
             else
                 intent = new Intent(SplashScreen.this, ShareRide.class);
