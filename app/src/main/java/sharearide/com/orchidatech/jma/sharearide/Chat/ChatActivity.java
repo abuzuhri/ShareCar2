@@ -64,7 +64,7 @@ public class ChatActivity extends ActionBarActivity implements MessagesFragment.
         receiverId = intent.getLongExtra("ReceiverId", -1);
         senderEmail = intent.getStringExtra("SenderEmail");
         senderId = intent.getLongExtra("SenderId", -1);
-Toast.makeText(ChatActivity.this,""+receiverEmail+" , "+senderEmail,Toast.LENGTH_LONG).show();
+//Toast.makeText(ChatActivity.this,""+receiverEmail+" , "+senderEmail,Toast.LENGTH_LONG).show();
         //profileId = getIntent().getStringExtra(Common.PROFILE_ID);
         msgEdit = (EditText) findViewById(R.id.msg_edit);
         sendBtn = (Button) findViewById(R.id.send_btn);

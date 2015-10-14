@@ -2,6 +2,7 @@ package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,6 +39,7 @@ public class NewUser extends AppCompatActivity {
     private EditText username,password,re_password,email,phone;
     private Button register;
     private ProgressBar signup_progress;
+    Typeface font;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +55,12 @@ public class NewUser extends AppCompatActivity {
         re_password=(EditText)findViewById(R.id.re_password);
         email=(EditText)findViewById(R.id.email);
         phone=(EditText)findViewById(R.id.phone);
-
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
+        username.setTypeface(font);
+        password.setTypeface(font);
+        re_password.setTypeface(font);
+        email.setTypeface(font);
+        phone.setTypeface(font);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

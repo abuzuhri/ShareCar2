@@ -1,5 +1,6 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -30,7 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private final Map<Ride, User> ridesData;
     private final OnRecycleViewItemClicked listener;
     private  Activity activity;
-
+Typeface font;
     // private String[] mDataset;
 
     ArrayList<Ride> rides;
@@ -106,6 +107,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             textView_time = (TextView) v.findViewById(R.id.textView_time);
             result_img = (CircleImageView) v.findViewById(R.id.result_img);
             time = (ImageView) v.findViewById(R.id.time);
+            font= Typeface.createFromAsset(activity.getAssets(), "fonts/roboto_regular.ttf");
+            textView_displayName.setTypeface(font);
+            textView_time.setTypeface(font);
+
 
             Display display = activity.getWindowManager().getDefaultDisplay();
             int height = display.getHeight();

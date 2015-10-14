@@ -3,6 +3,7 @@ package sharearide.com.orchidatech.jma.sharearide.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -31,6 +32,7 @@ public class ResetPassword extends ActionBarActivity {
     private Toolbar tool_bar;
     private EditText ed_email;
     ProgressDialog mProgressDialog;
+    Typeface font;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,8 @@ public class ResetPassword extends ActionBarActivity {
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage("Please Wait...");
         ed_email=(EditText)findViewById(R.id.ed_email);
-
+        font=Typeface.createFromAsset(getAssets(),"fonts/roboto_regular.ttf");
+        ed_email.setTypeface(font);
 
         SendBtn=(Button)findViewById(R.id.SendBtn);
         SendBtn.setOnClickListener(new View.OnClickListener() {

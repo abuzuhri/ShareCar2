@@ -10,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -50,7 +51,7 @@ public class ReviewRide extends ActionBarActivity {
     private  Toolbar tool_bar;
     private EditText info;
     String more_Info;
-
+Typeface font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,21 @@ public class ReviewRide extends ActionBarActivity {
         more_info = (Button) findViewById(R.id.more_info);
         send_mail = (ImageButton) findViewById(R.id.send_mail);
         send_msg = (ImageButton) findViewById(R.id.send_msg);
+
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
+        cityFrom.setTypeface(font);
+        cityTo.setTypeface(font);
+        countryTo.setTypeface(font);
+        countryFrom.setTypeface(font);
+        date.setTypeface(font);
+        time.setTypeface(font);
+        stateFrom.setTypeface(font);
+        stateTo.setTypeface(font);
+        phone.setTypeface(font);
+        username.setTypeface(font);
+        price.setTypeface(font);
+        email.setTypeface(font);
+
         call = (ImageButton) findViewById(R.id.call);
         call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,21 +132,28 @@ public class ReviewRide extends ActionBarActivity {
         alertDialogBuilder.setView(dialogView);
         TextView tittle = (TextView) dialogView.findViewById(R.id.tittle);
         final ImageButton confirm_btn = (ImageButton) dialogView.findViewById(R.id.confirm_btn);
+        final ImageButton close_btn = (ImageButton) dialogView.findViewById(R.id.close_btn);
+        confirm_btn.setVisibility(View.GONE);
+        close_btn.setVisibility(View.VISIBLE);
         info = (EditText) dialogView.findViewById(R.id.info);
+        info.setTypeface(font);
         final AlertDialog alertDialog = alertDialogBuilder.create();
 
         more_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                confirm_btn.setOnClickListener(new View.OnClickListener() {
+                close_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         more_Info = info.getText().toString();
                         alertDialog.dismiss();
                     }
                 });
+
+
                 info.setText(more_Info);
+                info.setEnabled(false);
 
                 // show it
                 alertDialog.show();
@@ -261,7 +284,7 @@ public class ReviewRide extends ActionBarActivity {
         }
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
+        if (id == R.id.action_location) {
             Intent intent =new Intent(ReviewRide.this,MapViewActivity.class);
             Bundle b=new Bundle();
             b.putDouble("FromCityLattitude", ride.getFrom_Lattitude());

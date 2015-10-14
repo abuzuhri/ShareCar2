@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,7 +38,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
     private String name;        //String Resource for header View Name
     private String email;       //String Resource for header view email
-
+Typeface font;
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
     // ViewHolder are used to to store the inflated views in order to recycle them
@@ -70,7 +71,9 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from header.xml for email
                 profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
                 uploadingImageProgress = (ProgressBar) itemView.findViewById(R.id.uploadingImageProgress);
-
+                font= Typeface.createFromAsset(context.getAssets(), "fonts/roboto_regular.ttf");
+                Name.setTypeface(font);
+                email.setTypeface(font);
                 profile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

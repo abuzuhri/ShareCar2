@@ -7,6 +7,7 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
     private EditText cityFrom, cityTo, countryFrom, countryTo, stateFrom, stateTo;
     private Button search;
     private Calendar calendar;
+    Typeface font;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,7 +54,13 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
         stateFrom = (EditText) v.findViewById(R.id.stateFrom);
         stateTo = (EditText) v.findViewById(R.id.stateTo);
 
-
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_regular.ttf");
+        cityFrom.setTypeface(font);
+        cityTo.setTypeface(font);
+        countryTo.setTypeface(font);
+        countryFrom.setTypeface(font);
+        stateFrom.setTypeface(font);
+        stateTo.setTypeface(font);
 
         search = (Button) v.findViewById(R.id.search);
         search.setOnClickListener(new View.OnClickListener() {

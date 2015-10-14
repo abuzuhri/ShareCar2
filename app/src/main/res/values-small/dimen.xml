@@ -26,7 +26,7 @@
     <dimen name="CardView_marginTop">10dp</dimen>
 
 
-    <dimen name="vertical_margin">15dp</dimen>
+    <dimen name="vertical_margin">25dp</dimen>
     <dimen name="horizontal_marginLeft">30dp</dimen>
 
     <dimen name="tab_height">40dp</dimen>

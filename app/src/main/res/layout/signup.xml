@@ -9,100 +9,107 @@
         android:id="@+id/tool_bar"/>
 
 
-
-    <EditText
-        android:id="@+id/username"
+    <ScrollView
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="User Name"
-        android:padding="10dp"
-        android:textDirection="ltr"
-        android:inputType="text"
-        android:imeOptions="actionGo"
-        android:drawableLeft="@drawable/profile"
-        android:textColorHint="#989898"
-        android:drawablePadding="10dip"
-        android:layout_marginTop="@dimen/vertical_margintopPage"
         android:layout_below="@+id/tool_bar"
-        android:background="@drawable/lightgray_roundrect"
-        android:layout_marginRight="@dimen/horizontal_margin"
-        android:layout_marginLeft="@dimen/horizontal_margin"/>
-    
+        android:id="@id/scrollView"
+        android:paddingBottom="60dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Name"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:inputType="text"
+                android:imeOptions="actionGo"
+                android:drawableLeft="@drawable/profile"
+                android:textColorHint="#989898"
+                android:drawablePadding="10dip"
+                android:layout_marginTop="@dimen/vertical_margintopPage"
+                android:background="@drawable/lightgray_roundrect"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginLeft="@dimen/horizontal_margin"/>
 
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:hint="Password"
-        android:padding="10dp"
-        android:textDirection="ltr"
-        android:layout_below="@+id/username"
-        android:inputType="textPassword"
-        android:imeOptions="actionGo"
-        android:textColorHint="#989898"
-        android:drawableLeft="@drawable/padlocknav"
-        android:drawablePadding="10dip"
-        android:layout_marginTop="@dimen/vertical_margin_btwn_view"
-        android:background="@drawable/lightgray_roundrect"
-        android:layout_marginRight="@dimen/horizontal_margin"
-        android:layout_marginLeft="@dimen/horizontal_margin"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/re_password"
-        android:hint="Retype Password"
-        android:padding="10dp"
-        android:textDirection="ltr"
-        android:inputType="textPassword"
-        android:textColorHint="#989898"
-        android:imeOptions="actionGo"
-        android:drawableLeft="@drawable/padlocknav"
-        android:layout_below="@+id/password"
-        android:drawablePadding="10dip"
-        android:layout_marginTop="@dimen/vertical_margin_btwn_view"
-        android:background="@drawable/lightgray_roundrect"
-        android:layout_marginRight="@dimen/horizontal_margin"
-        android:layout_marginLeft="@dimen/horizontal_margin"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/password"
+                android:hint="Password"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:inputType="textPassword"
+                android:imeOptions="actionGo"
+                android:textColorHint="#989898"
+                android:drawableLeft="@drawable/padlocknav"
+                android:drawablePadding="10dip"
+                android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+                android:background="@drawable/lightgray_roundrect"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginLeft="@dimen/horizontal_margin"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/email"
-        android:layout_below="@+id/re_password"
-        android:hint="Email"
-        android:padding="10dp"
-        android:textDirection="ltr"
-        android:imeOptions="actionGo"
-        android:inputType="textEmailAddress"
-        android:drawableLeft="@drawable/symbol"
-        android:textColorHint="#989898"
-        android:drawablePadding="10dip"
-        android:layout_marginTop="@dimen/vertical_margin_btwn_view"
-        android:background="@drawable/lightgray_roundrect"
-        android:layout_marginRight="@dimen/horizontal_margin"
-        android:layout_marginLeft="@dimen/horizontal_margin"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/re_password"
+                android:hint="Retype Password"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:inputType="textPassword"
+                android:textColorHint="#989898"
+                android:imeOptions="actionGo"
+                android:drawableLeft="@drawable/padlocknav"
+                android:drawablePadding="10dip"
+                android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+                android:background="@drawable/lightgray_roundrect"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginLeft="@dimen/horizontal_margin"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/phone"
-        android:hint="Phone"
-        android:padding="10dp"
-        android:textDirection="ltr"
-        android:textColorHint="#989898"
-        android:imeOptions="actionGo"
-        android:layout_below="@+id/email"
-        android:inputType="phone"
-        android:drawableLeft="@drawable/phoneblue"
-        android:drawablePadding="10dip"
-        android:layout_marginTop="@dimen/vertical_margin_btwn_view"
-        android:background="@drawable/lightgray_roundrect"
-        android:layout_marginRight="@dimen/horizontal_margin"
-        android:layout_marginLeft="@dimen/horizontal_margin"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/email"
+                android:hint="Email"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:imeOptions="actionGo"
+                android:inputType="textEmailAddress"
+                android:drawableLeft="@drawable/symbol"
+                android:textColorHint="#989898"
+                android:drawablePadding="10dip"
+                android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+                android:background="@drawable/lightgray_roundrect"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginLeft="@dimen/horizontal_margin"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phone"
+                android:hint="Phone"
+                android:padding="10dp"
+                android:textDirection="ltr"
+                android:textColorHint="#989898"
+                android:imeOptions="actionGo"
+                android:inputType="phone"
+                android:drawableLeft="@drawable/phoneblue"
+                android:drawablePadding="10dip"
+                android:layout_marginTop="@dimen/vertical_margin_btwn_view"
+                android:background="@drawable/lightgray_roundrect"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginLeft="@dimen/horizontal_margin"/>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:layout_width="match_parent"

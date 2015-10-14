@@ -2,6 +2,7 @@ package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,15 +44,18 @@ public class SearchResult extends ActionBarActivity {
     MyAdapter adapter;
     RecyclerView rv;
     private LinearLayoutManager llm;
-    EditText t1;
+    EditText ed_search;
     ImageView search;
-
+Typeface font;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result);
-        t1=(EditText)findViewById(R.id.ed_search);
+        ed_search=(EditText)findViewById(R.id.ed_search);
         search_bar=(LinearLayout)findViewById(R.id.search_bar);
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
+        ed_search.setTypeface(font);
+
         // search=(ImageView)findViewById(R.id.search);
         mProgressBar = (ProgressBar) this.findViewById(R.id.search_progress);
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
@@ -75,7 +79,7 @@ public class SearchResult extends ActionBarActivity {
 //        });
 
 
-        t1.addTextChangedListener(new TextWatcher() {
+       ed_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 searchLocal(s.toString());

@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/send_icon"
+            android:background="@drawable/send_msg"
             android:enabled="false"
             android:onClick="onClick"
             android:textStyle="bold" />
@@ -41,8 +41,9 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/send_btn"
             android:background="@drawable/inp_text"
+            android:padding="15dp"
             android:hint="Write new message"
-            android:paddingLeft="10dp">
+            >
 
         </EditText>
 

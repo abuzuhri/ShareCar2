@@ -7,7 +7,7 @@
         android:id="@+id/close"
         android:orderInCategory="100"
         android:title="Search"
-        android:icon="@drawable/closee"
+        android:icon="@drawable/ic_close"
         app:showAsAction="ifRoom"
         ></item>
 

@@ -31,8 +31,17 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:id="@+id/confirm_btn"
+            android:visibility="visible"
+
             android:background="@drawable/check_icon"
             />
+    <ImageButton
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/close_btn"
+        android:visibility="gone"
+        android:background="@drawable/close"
+        />
 
 
     </LinearLayout>

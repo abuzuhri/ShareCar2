@@ -24,7 +24,7 @@
     <dimen name="date_marginTop">20dp</dimen>
     <dimen name="CardView_marginTop">20dp</dimen>
 
-    <dimen name="vertical_margin">40dp</dimen>
+    <dimen name="vertical_margin">50dp</dimen>
     <dimen name="horizontal_marginLeft">60dp</dimen>
 
     <dimen name="tab_height">50dp</dimen>

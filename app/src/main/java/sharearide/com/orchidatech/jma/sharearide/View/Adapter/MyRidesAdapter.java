@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
     ArrayList<Ride> my_rides;
     OnRecycleViewItemClicked listener;
     Activity activity;
-
+    Typeface font;
     public MyRidesAdapter(Activity activity, ArrayList<Ride> my_rides, User user, OnRecycleViewItemClicked listener) {
         this.activity = activity;
         this.my_rides = my_rides;
@@ -76,6 +77,9 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
             textView_time = (TextView) v.findViewById(R.id.textView_time);
             result_img = (ImageView) v.findViewById(R.id.result_img);
             time = (ImageView) v.findViewById(R.id.time);
+            font= Typeface.createFromAsset(activity.getAssets(), "fonts/roboto_regular.ttf");
+            textView_displayName.setTypeface(font);
+            textView_time.setTypeface(font);
 
             Display display = activity.getWindowManager().getDefaultDisplay();
             int height = display.getHeight();

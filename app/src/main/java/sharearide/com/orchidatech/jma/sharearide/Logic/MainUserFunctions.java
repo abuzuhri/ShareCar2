@@ -492,7 +492,7 @@ public class MainUserFunctions {
                                  final String country_from, final String country_to,
                                  final long date_time, final String price, final String more_info,
                                  final String from_latitude,final String from_longitude,
-                                 final String to_latitude,final String to_longitude,final OnRequestListener listener){
+                                 final String to_latitude,final String to_longitude,final OnRequestFinished listener){
         Map<String, String> params = new HashMap<>();
         params.put("user_id", String.valueOf(user_id));
         params.put("city_from", city_from);
@@ -516,7 +516,7 @@ public class MainUserFunctions {
                 try {
                     boolean success = jsonObject.getBoolean("success");
                     if (success) {
-                        listener.onFinished();
+                        listener.onFinished("success");
 
                         JSONArray mJsonArray = jsonObject.getJSONArray("ride");
                         JSONObject mJsonObject = mJsonArray.getJSONObject(0);
@@ -529,13 +529,15 @@ public class MainUserFunctions {
                         String message = jsonObject.getString("message");
 
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                        listener.onFinished();
+                        listener.onFailed();
 
                     }
 
 
                 } catch (JSONException e) {
-                    listener.onFinished();
+                    listener.onFailed();
+                   // Toast.makeText(context, "An error occures", Toast.LENGTH_LONG).show();
+
                     e.printStackTrace();
 
                 }
@@ -543,7 +545,7 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-                listener.onFinished();
+                listener.onFailed();
 
                 Toast.makeText(context, error, Toast.LENGTH_LONG).show();
             }

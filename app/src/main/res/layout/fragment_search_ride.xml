@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
@@ -14,19 +15,19 @@
 
 
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ed_search"
-        android:layout_weight="0.7"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="30dp"
-        android:background="@drawable/white_roundrect"
+        android:hint="Search"
+        android:layout_marginLeft="@dimen/horizontal_margin"
+        android:layout_marginRight="@dimen/horizontal_margin"
         android:padding="5dp"
-        android:imeOptions="actionGo"
+        app:met_baseColor="#fff"
+        app:met_primaryColor="?colorAccent"
+        android:layout_margin="15dp"
+        app:met_floatingLabel="normal"
+        android:layout_weight="0.7"/>
 
-        />
 
     <ImageButton
         android:layout_width="20dp"

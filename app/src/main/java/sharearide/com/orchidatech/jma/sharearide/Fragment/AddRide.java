@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.InputType;
@@ -39,11 +40,13 @@ import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnAddressFetched;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestFinished;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestListener;
 
 public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     private Button save,more_info;
     private Context context;
+    Typeface font;
     private EditText cityFrom,cityTo,countryFrom,countryTo,stateFrom,stateTo,time,date;
     private EditText price;
     private Calendar calendar;
@@ -69,7 +72,18 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
         stateTo=(EditText)v.findViewById(R.id.stateTo);
         time=(EditText)v.findViewById(R.id.time);
         date=(EditText)v.findViewById(R.id.date);
+        price=(EditText)v.findViewById(R.id.price);
 
+        font= Typeface.createFromAsset(context.getAssets(), "fonts/roboto_regular.ttf");
+        cityFrom.setTypeface(font);
+        cityTo.setTypeface(font);
+        countryTo.setTypeface(font);
+        countryFrom.setTypeface(font);
+        date.setTypeface(font);
+        time.setTypeface(font);
+        stateFrom.setTypeface(font);
+        stateTo.setTypeface(font);
+        price.setTypeface(font);
         firstlocation_lat_long.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,7 +208,6 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
             }
         });
 
-        price=(EditText)v.findViewById(R.id.price);
         context = getActivity();
         LayoutInflater li = LayoutInflater.from(context);
         View dialogView = li.inflate(R.layout.more_info, null);
@@ -206,7 +219,10 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
         alertDialogBuilder.setView(dialogView);
         TextView tittle = (TextView) dialogView.findViewById(R.id.tittle);
         final ImageButton confirm_btn = (ImageButton) dialogView.findViewById(R.id.confirm_btn);
+        final ImageButton close_btn = (ImageButton) dialogView.findViewById(R.id.close_btn);
+        close_btn.setVisibility(View.GONE);
         info = (EditText) dialogView.findViewById(R.id.info);
+        info.setTypeface(font);
         final AlertDialog alertDialog = alertDialogBuilder.create();
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -327,20 +343,26 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
         InternetConnectionChecker.isConnectedToInternet(context, new OnInternetConnectionListener() {
             @Override
             public void internetConnectionStatus(boolean status) {
-                if (status)
+                if (status) {
                     MainUserFunctions.offerRide(context, user_id, city_from, city_to, state_from, state_to, country_from,
-                            country_to, date_time, price, more_info, from_latitude, from_longitude, to_latitude, to_longitude, new OnRequestListener() {
+                            country_to, date_time, price, more_info, from_latitude, from_longitude, to_latitude, to_longitude, new OnRequestFinished() {
                                 @Override
-                                public void onFinished() {
+                                public void onFinished(String message) {
                                     progressBar.setVisibility(View.GONE);
                                     // context.startActivity(new Intent(context, MyRides.class));
-                                    MyRides  myRidesFragment = new MyRides();
+                                    MyRides myRidesFragment = new MyRides();
                                     getFragmentManager().beginTransaction().replace(R.id.fragment_place, myRidesFragment).addToBackStack(null).commit();
                                     getFragmentManager().executePendingTransactions();
                                     // toolbar.setTitle("My Rides");
 
                                 }
+
+                                @Override
+                                public void onFailed() {
+
+                                }
                             });
+                }
                 else
                 {
                     progressBar.setVisibility(View.GONE);

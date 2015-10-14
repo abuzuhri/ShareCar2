@@ -40,28 +40,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginTop="@dimen/vertical_margin"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
 
                 <ImageView
 
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageView6"
-                    android:background="@drawable/city_icon"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_city"
+                   />
 
                 <TextView
                     android:id="@+id/cityFrom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
                     android:text="   Ramallah"
+                    android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     />
 
             </LinearLayout>
@@ -70,26 +70,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imagaew6"
-                    android:background="@drawable/flagg"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_flag"
+                    />
 
                 <TextView
                     android:id="@+id/stateFrom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
                     android:text="   State"
+                    android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     />
             </LinearLayout>
 
@@ -98,25 +98,25 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageVieew6"
-                    android:background="@drawable/country_icon"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_country"
+                    />
 
                 <TextView
                     android:id="@+id/countryFrom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="   Weast bank"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
+                    android:textColorHint="#bbbbbb"
                     />
 
             </LinearLayout>
@@ -127,25 +127,25 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imagew6"
-                    android:background="@drawable/time_icon"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_time"
+                  />
 
                 <TextView
                     android:id="@+id/time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="   08:10:00"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
+                    android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     />
 
             </LinearLayout>
@@ -154,26 +154,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/vertical_margin">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/aa"
-                    android:background="@drawable/date_icon"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_date"
+                    />
 
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="   11/09/2015"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
+                    android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     />
 
             </LinearLayout>
@@ -187,6 +187,7 @@
                 android:id="@+id/imageViews"
                 android:background="@drawable/line"
                 android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin"
                 android:layout_marginBottom="@dimen/vertical_margin"/>
 
 
@@ -209,27 +210,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
 
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageVie5"
                     android:background="@drawable/city_icon"
-                    android:layout_gravity="left|center"/>
+                   />
 
                 <TextView
                     android:id="@+id/cityTo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="   Gaza"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="10dp"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     />
 
             </LinearLayout>
@@ -237,53 +238,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/flag"
-                    android:background="@drawable/flagg"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_flag"
+                   />
 
                 <TextView
                     android:id="@+id/stateTo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
+                    android:textColorHint="#bbbbbb"
                     android:text="   State"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageV6"
-                    android:background="@drawable/country_icon"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_country" />
 
                 <TextView
                     android:id="@+id/countryTo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="   Gaza Strip"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
+                    android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     />
 
             </LinearLayout>
@@ -296,22 +296,21 @@
                 android:layout_marginLeft="@dimen/horizontal_marginLeft">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/ss"
-                    android:background="@drawable/price"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_price"
+                    />
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="   50"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
+                    android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     />
 
 
@@ -361,26 +360,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/vertical_margintopTextView"
+                android:layout_marginRight="@dimen/vertical_margintopTextView"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageccVie5"
-                    android:background="@drawable/user_icon"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_profile"
+                  />
 
                 <TextView
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="   Ahmed abu Zuhree"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
+                    android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     />
 
             </LinearLayout>
@@ -393,35 +392,35 @@
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageddV6"
-                    android:background="@drawable/phone"
-                    android:layout_gravity="left|center"/>
+                    android:background="@drawable/ic_tel"
+                  />
 
                 <TextView
                     android:id="@+id/phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="   05998751257"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:padding="10dp"
+                    android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_weight="0.1"
                     />
                 <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/call"
                     android:background="@drawable/call"
                     android:layout_marginRight="10dp"/>
 
                 <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/send_msg"
-                    android:background="@drawable/send_mail"/>
+                    android:background="@drawable/sms"/>
 
 
             </LinearLayout>
@@ -433,15 +432,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginRight="@dimen/horizontal_margin"
-
                 android:layout_marginLeft="@dimen/vertical_margintopTextView"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/sss"
-                    android:background="@drawable/email_icon"
+                    android:background="@drawable/ic_email"
                     android:layout_gravity="left|center"/>
 
                 <TextView
@@ -453,13 +451,15 @@
                     android:padding="10dp"
                     android:textDirection="ltr"
                     android:background="#fff"
+                    android:textColorHint="#bbbbbb"
+
                     android:layout_weight="0.1"
                     />
                 <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/send_mail"
-                    android:background="@drawable/enter" />
+                    android:background="@drawable/msg" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

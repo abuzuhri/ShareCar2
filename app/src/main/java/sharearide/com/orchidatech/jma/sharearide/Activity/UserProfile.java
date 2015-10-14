@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -52,12 +53,12 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestListene
 
 public class UserProfile extends ActionBarActivity {
     private EditText email,phone;
-    private TextView username;
-
+    private TextView username,tv_completeProfile;
+Typeface font;
     private EditText password,re_password,current_password,ed_invisible;
     private ImageButton edit_email,edit_phone;
     private Button save;
-    private FloatingActionButton btn_changePassword;
+    private Button btn_changePassword;
     private LinearLayout ll_changePassword;
     private ProgressBar update_progress,update_save_progress;
     Validation validation;
@@ -86,13 +87,21 @@ public class UserProfile extends ActionBarActivity {
         current_password=(EditText)findViewById(R.id.current_password );
         re_password=(EditText)findViewById(R.id.re_password);
         username=(TextView)findViewById(R.id.username);
+        tv_completeProfile=(TextView)findViewById(R.id.tv_completeProfile);
         // edit_email=(ImageButton)findViewById(R.id.edit_email);
         // edit_phone=(ImageButton)findViewById(R.id.edit_phone);
         save=(Button)findViewById(R.id.save);
         save.setVisibility(View.GONE);
-
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
+        email.setTypeface(font);
+        phone.setTypeface(font);
+        current_password.setTypeface(font);
+        re_password.setTypeface(font);
+        password.setTypeface(font);
+        if(UserDAO.getUserById(id).getEmail()==null || UserDAO.getUserById(id).getPhone()==null)
+tv_completeProfile.setVisibility(View.VISIBLE);
         update_save_progress= (ProgressBar) findViewById(R.id.update_save_progress);
-        btn_changePassword= (FloatingActionButton) findViewById(R.id.btn_changePassword);
+        btn_changePassword= (Button) findViewById(R.id.btn_changePassword);
         if(getSharedPreferences("pref", Context.MODE_PRIVATE).getInt("network", -1) == -1)
             btn_changePassword.setVisibility(View.VISIBLE);
         circleView= (CircleImageView) findViewById(R.id.circleView);
@@ -144,7 +153,6 @@ public class UserProfile extends ActionBarActivity {
 
         username.setText(UserDAO.getUserById(id).getUsername());
         phone.setText(UserDAO.getUserById(id).getPhone());
-
         email.setText(UserDAO.getUserById(id).getEmail());
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -286,7 +294,7 @@ public class UserProfile extends ActionBarActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-            final Bitmap  bitmap = ShrinkBitmap(picturePath, 100, 100);
+            final Bitmap  bitmap = ShrinkBitmap(picturePath, 360, 360);
 
             if(bitmap == null){
                 Toast.makeText(getApplicationContext(), "please choose valid image", Toast.LENGTH_LONG).show();

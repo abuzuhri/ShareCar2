@@ -1,5 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Constant;
 
+import android.graphics.Typeface;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,6 +11,8 @@ public class AppConstant {
 
     public static long User_ID = 0;
     public static boolean isInSetting = false;
+
+
 
     public enum AppDrawer {
         Home(10),

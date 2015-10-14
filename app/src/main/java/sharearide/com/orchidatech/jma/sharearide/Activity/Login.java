@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -80,8 +81,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
     private ImageButton fBbtn,gplusbtn,Gobtnx;
     private Toolbar tool_bar;
     private EditText ed_email,ed_password;
-
     CallbackManager callbackManager;
+    Typeface font;
 
      ProgressDialog mProgressDialog ;
 
@@ -101,6 +102,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage("Please Wait...");
 //        mProgressDialog.dismiss();
+        font=Typeface.createFromAsset(getAssets(),"fonts/roboto_regular.ttf");
+        ed_email.setTypeface(font);
+        ed_password.setTypeface(font);
+
 
         logo=(ImageView)findViewById(R.id.logo);
         fBbtn=(ImageButton)findViewById(R.id.fBbtn);

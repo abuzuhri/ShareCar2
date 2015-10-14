@@ -36,17 +36,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginTop="@dimen/vertical_margin"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/imageView6"
-                    android:background="@drawable/city_icon"
-                    android:layout_gravity="left|center"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/im1"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_city"
+                    />
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -57,8 +59,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="City"
-                    android:layout_gravity="left|bottom"
-                    android:padding="10dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textDirection="ltr"
@@ -67,12 +69,14 @@
                     android:imeOptions="actionNext"
                     android:layout_weight="0.8" />
 
+
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/firstlocation_lat_long"
-                    android:layout_marginRight="@dimen/horizontal_margin"
-                    android:background="@drawable/marker_kml_point"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_location"/>
 
             </LinearLayout>
 
@@ -80,28 +84,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageVieew6"
-                    android:background="@drawable/country_icon"
-                    android:layout_gravity="left|center"/>
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_country"
+                  />
 
                 <EditText
                     android:id="@+id/countryFrom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Country"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textDirection="ltr"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     android:inputType="text"
                     android:imeOptions="actionNext"
                     />
@@ -112,23 +118,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/statefgg"
-                    android:background="@drawable/flagg"
-                    android:layout_gravity="left|center"/>
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_flag"
+                   />
 
                 <EditText
                     android:id="@+id/stateFrom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="State"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
                     android:textDirection="ltr"
                     android:singleLine="true"
                     android:ellipsize="end"
@@ -144,22 +153,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imagew6"
-                    android:background="@drawable/time_icon"
-                    android:layout_gravity="left|center"/>
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_time"
+                 />
 
                 <EditText
                     android:id="@+id/time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Time"
-                    android:padding="8dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
                     android:imeOptions="actionNext"
@@ -171,15 +184,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/vertical_margin">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/aa"
-                    android:background="@drawable/date_icon"
-                    android:layout_gravity="left|center"/>
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_date"
+                  />
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -190,7 +205,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Date"
-                    android:padding="8dp"
+                    android:padding="5dp"
+                    android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -227,24 +243,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageVie5"
-                    android:background="@drawable/city_icon"
-                    android:layout_gravity="left|center"/>
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_city"
+                  />
 
                 <EditText
                     android:id="@+id/cityTo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="City"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
                     android:textDirection="ltr"
                     android:singleLine="true"
                     android:ellipsize="end"
@@ -258,36 +277,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/secondlocation_lat_long"
-                    android:layout_marginRight="@dimen/horizontal_margin"
-                    android:background="@drawable/marker_kml_point"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_location"/>
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imageV6"
-                    android:background="@drawable/country_icon"
-                    android:layout_gravity="left|center"/>
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_country"
+                   />
 
                 <EditText
                     android:id="@+id/countryTo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Country"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     android:inputType="text"
                     android:imeOptions="actionNext"
                     />
@@ -298,28 +321,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/dfd"
+                    android:layout_gravity="center_vertical"
+
                     android:background="@drawable/flagg"
-                    android:layout_gravity="left|center"/>
+                    />
 
                 <EditText
                     android:id="@+id/stateTo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="State"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     android:inputType="text"
                     android:imeOptions="actionNext"
                     />
@@ -331,28 +356,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/ss"
-                    android:background="@drawable/price"
-                    android:layout_gravity="left|center"/>
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_price"
+                    />
 
                 <EditText
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Price"
-                    android:layout_gravity="left|bottom"
-                    android:padding="8dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
                     android:textDirection="ltr"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:background="#fff"
-                    android:layout_marginRight="@dimen/horizontal_margin"
                     android:inputType="number"
                     android:imeOptions="actionNext"
                     />

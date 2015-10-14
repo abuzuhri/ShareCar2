@@ -2,6 +2,7 @@ package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +40,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private final Activity activity;
     private final OnRecycleViewItemClicked listener;
     ArrayList<Chat> chats;
-
+Typeface font;
     public ChatAdapter(Activity activity, ArrayList<Chat> chats, Map<Chat, ArrayList<User>> chats_data, OnRecycleViewItemClicked listener) {
         this.activity = activity;
         this.listener = listener;
@@ -79,6 +80,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             holder.date.setText(chat_date);
             holder.lastChat.setText(message_text);
             holder.name.setText(contacted_person);
+            font= Typeface.createFromAsset(activity.getAssets(), "fonts/roboto_regular.ttf");
+            holder.date.setTypeface(font);
+            holder.lastChat.setTypeface(font);
+            holder.name.setTypeface(font);
+
             if(TextUtils.isEmpty(imagUrl)){
                 holder.image.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
             }

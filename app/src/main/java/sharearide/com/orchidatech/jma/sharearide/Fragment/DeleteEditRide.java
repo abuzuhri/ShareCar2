@@ -54,7 +54,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
     EditText stateTo;
     EditText price;
     EditText info;
-
+    ImageButton confirm_btn,close_btn;
     Button more_info;
     Button save;
     Ride ride;
@@ -62,7 +62,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
     private  ImageButton firstlocation_lat_long,secondlocation_lat_long;
     private String from_Lattitude,from_Longitude,to_Lattitude,to_Longitude;
     private Calendar calendar;
-
+     AlertDialog alertDialog;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,18 +165,22 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
         firstlocation_lat_long.setEnabled(false);
         secondlocation_lat_long.setEnabled(false);
         alertDialogBuilder.setView(dialog_view);
-        final ImageButton confirm_btn = (ImageButton) dialog_view.findViewById(R.id.confirm_btn);
+          confirm_btn = (ImageButton) dialog_view.findViewById(R.id.confirm_btn);
+          close_btn = (ImageButton) dialog_view.findViewById(R.id.close_btn);
         info = (EditText) dialog_view.findViewById(R.id.info);
         info.setEnabled(false);
         allEditText.add(info);
 
-        final AlertDialog alertDialog = alertDialogBuilder.create();
+         alertDialog = alertDialogBuilder.create();
 
         more_info.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                confirm_btn.setOnClickListener(new View.OnClickListener() {
+                confirm_btn.setVisibility(View.GONE);
+                close_btn.setVisibility(View.VISIBLE);
+
+                close_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ride.more_info = info.getText().toString();
@@ -186,7 +190,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
                     }
                 });
                 info.setText(ride.more_info);
-
+                info.setEnabled(false);
                 alertDialog.show();
 
             }
@@ -303,6 +307,28 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
                 save.setVisibility(View.VISIBLE);
                 firstlocation_lat_long.setEnabled(true);
                 secondlocation_lat_long.setEnabled(true);
+
+                more_info.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View arg0) {
+                        close_btn.setVisibility(View.GONE);
+                        confirm_btn.setVisibility(View.VISIBLE);
+                        confirm_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ride.more_info = info.getText().toString();
+
+                                alertDialog.dismiss();
+
+                            }
+                        });
+                        info.setText(ride.more_info);
+                        alertDialog.show();
+
+                    }
+                });
+
                 break;
             case R.id.delete_ride:
                 final AlertDialog.Builder builder = new AlertDialog.Builder(
