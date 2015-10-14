@@ -16,12 +16,10 @@
 
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search"
-        android:layout_marginLeft="@dimen/horizontal_margin"
-        android:layout_marginRight="@dimen/horizontal_margin"
-        android:padding="5dp"
+        android:padding="10dp"
         app:met_baseColor="#fff"
         app:met_primaryColor="?colorAccent"
         android:layout_margin="15dp"
@@ -30,13 +28,13 @@
 
 
     <ImageButton
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/search"
-        android:layout_marginTop="15dp"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/search"/>
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:background="@drawable/ic_search"/>
 </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
