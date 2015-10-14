@@ -49,7 +49,7 @@ public class SplashScreen extends ActionBarActivity {
             intent = new Intent(SplashScreen.this, Login.class);
         else{
             User user = UserDAO.getUserById(user_id);
-            if(TextUtils.isEmpty(user.getEmail()) || TextUtils.isEmpty(user.getPhone()))
+            if(user.getEmail() == null || user.getPhone() == null)
                 intent = new Intent(SplashScreen.this, UserProfile.class);
             else
                 intent = new Intent(SplashScreen.this, ShareRide.class);
@@ -125,7 +125,8 @@ public class SplashScreen extends ActionBarActivity {
             @Override
             public void onRidesRefresh(ArrayList<Ride> newItems) {
                 for(Ride ride:newItems)
-                    RideDAO.addNewRide(ride);
+                    RideDAO.addNewRide(ride.getRemoteId(), ride.getUserId(), ride.getFromCity(), ride.getToCity(), ride.getFromCountry(), ride.getToCountry(), ride.getFromState(), ride.getToState(),
+                            ride.getDateTime(), ride.getCost(), ride.getMore_info(),ride.getFrom_Longitude(), ride.getTo_longitude(), ride.getFrom_Lattitude(), ride.getTo_latitude());
             }
 
             @Override
