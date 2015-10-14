@@ -74,8 +74,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 profile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       // Log.i("Photo", "pressed");
-                  //      photoClickingListener.onClicked(profile, uploadingImageProgress);
+                        // Log.i("Photo", "pressed");
+                        //      photoClickingListener.onClicked(profile, uploadingImageProgress);
                     }
                 });
 
@@ -153,7 +153,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
             holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
         }
         else{
-holder.uploadingImageProgress.setVisibility(View.VISIBLE);
+            holder.uploadingImageProgress.setVisibility(View.VISIBLE);
             Picasso.with(context).load(Uri.parse(profileImage)).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(holder.profile, new Callback() {
                 @Override
                 public void onSuccess() {

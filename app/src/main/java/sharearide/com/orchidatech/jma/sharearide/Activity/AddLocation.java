@@ -87,6 +87,7 @@ public class AddLocation extends ActionBarActivity implements MapEventsReceiver 
         map.setMultiTouchControls(true);
         map.setClickable(true);
         map.setUseDataConnection(false);
+        Toast.makeText(AddLocation.this,"Long Press To Save Location  ",Toast.LENGTH_LONG).show();
 
         // map.setTileSource(TileSourceFactory.MAPNIK);
    /* location manager */
@@ -144,7 +145,7 @@ public class AddLocation extends ActionBarActivity implements MapEventsReceiver 
         Toast.makeText(this, " Location Fetched ...", Toast.LENGTH_SHORT).show();
         lattitude=geoPoint.getLatitude()+"";
         longittude=geoPoint.getLongitude()+"";
-      //  Toast.makeText(this, " Location Fetched ..."+lattitude+longittude, Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(this, " Location Fetched ..."+lattitude+longittude, Toast.LENGTH_SHORT).show();
 //        Intent intent=new Intent();
 //        if(lattitude!=null &longittude!=null ){
 //            intent.putExtra("From_Lattitude",lattitude);
@@ -200,12 +201,12 @@ public class AddLocation extends ActionBarActivity implements MapEventsReceiver 
                 locationManager.requestLocationUpdates(
                         LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES,
                         MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-              //  Log.d("GPS : ", "Enabled!");
+                //  Log.d("GPS : ", "Enabled!");
                 if (locationManager != null) {
                     location = locationManager
                             .getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     if (location != null) {
-                     //   Log.d("GGG", "Location not null!");
+                        //   Log.d("GGG", "Location not null!");
                         lat = location.getLatitude();
                         lng = location.getLongitude();
 
@@ -231,7 +232,7 @@ public class AddLocation extends ActionBarActivity implements MapEventsReceiver 
                     location = locationManager
                             .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     if (location != null) {
-                      //  Log.d("GGG", "Location not null!");
+                        //  Log.d("GGG", "Location not null!");
                         lat = location.getLatitude();
                         lng = location.getLongitude();
                         startPoint=new GeoPoint(lat, lng);

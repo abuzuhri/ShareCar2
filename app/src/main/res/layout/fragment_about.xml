@@ -103,15 +103,8 @@
                     android:layout_alignBottom="@+id/textView9"
                     android:layout_toEndOf="@+id/textView9"
                     android:layout_toRightOf="@+id/textView9"
+                  android:layout_marginTop="5dp"
                     android:text="Orchidatech@gmail.com"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/about_feedback"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:text="Send Feedback"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
             </LinearLayout>

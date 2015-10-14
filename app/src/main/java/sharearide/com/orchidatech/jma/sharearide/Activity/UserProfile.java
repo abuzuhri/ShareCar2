@@ -51,8 +51,8 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestFinishe
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestListener;
 
 public class UserProfile extends ActionBarActivity {
-private EditText email,phone;
-        private TextView username;
+    private EditText email,phone;
+    private TextView username;
 
     private EditText password,re_password,current_password,ed_invisible;
     private ImageButton edit_email,edit_phone;
@@ -78,23 +78,23 @@ private EditText email,phone;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         email=(EditText)findViewById(R.id.email);
         phone=(EditText)findViewById(R.id.phone);
-        ed_invisible=(EditText)findViewById(R.id.ed_invisible);
-        ed_invisible.setVisibility(View.GONE);
-        ed_invisible.requestFocus();
+        // ed_invisible=(EditText)findViewById(R.id.ed_invisible);
+        //    ed_invisible.setVisibility(View.GONE);
+        //   ed_invisible.requestFocus();
         ll_changePassword=(LinearLayout)findViewById(R.id.ll_changePassword);
         password=(EditText)findViewById(R.id.password);
         current_password=(EditText)findViewById(R.id.current_password );
         re_password=(EditText)findViewById(R.id.re_password);
         username=(TextView)findViewById(R.id.username);
-       // edit_email=(ImageButton)findViewById(R.id.edit_email);
-       // edit_phone=(ImageButton)findViewById(R.id.edit_phone);
+        // edit_email=(ImageButton)findViewById(R.id.edit_email);
+        // edit_phone=(ImageButton)findViewById(R.id.edit_phone);
         save=(Button)findViewById(R.id.save);
         save.setVisibility(View.GONE);
 
         update_save_progress= (ProgressBar) findViewById(R.id.update_save_progress);
         btn_changePassword= (FloatingActionButton) findViewById(R.id.btn_changePassword);
-            if(getSharedPreferences("pref", Context.MODE_PRIVATE).getInt("network", -1) == -1)
-                btn_changePassword.setVisibility(View.VISIBLE);
+        if(getSharedPreferences("pref", Context.MODE_PRIVATE).getInt("network", -1) == -1)
+            btn_changePassword.setVisibility(View.VISIBLE);
         circleView= (CircleImageView) findViewById(R.id.circleView);
 
         circleView.setOnClickListener(new View.OnClickListener() {
@@ -125,13 +125,13 @@ private EditText email,phone;
                     }
                 });
 
-    email.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            save.setVisibility(View.VISIBLE);
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                save.setVisibility(View.VISIBLE);
 
-        }
-    });
+            }
+        });
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,8 +144,7 @@ private EditText email,phone;
 
         username.setText(UserDAO.getUserById(id).getUsername());
         phone.setText(UserDAO.getUserById(id).getPhone());
-        int i = getSharedPreferences("pref", MODE_PRIVATE).getInt("network", -1);
-if(i==-1)
+
         email.setText(UserDAO.getUserById(id).getEmail());
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +183,7 @@ if(i==-1)
                             if (ifAllValid) {
                                 save.setVisibility(View.GONE);
                                 update_save_progress.setVisibility(View.VISIBLE);
-                               final String _password= password.getText().toString().length()> 0?password.getText().toString() : UserDAO.getUserById(id).getPassword();
+                                final String _password= password.getText().toString().length()> 0?password.getText().toString() : UserDAO.getUserById(id).getPassword();
                                 MainUserFunctions.updateProfile(UserProfile.this, id, email.getText().toString(), phone.getText().toString(), _password, new OnRequestFinished() {
 
                                     @Override
@@ -268,7 +267,7 @@ if(i==-1)
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
 
-       finish();
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

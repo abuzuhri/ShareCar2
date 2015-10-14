@@ -65,8 +65,8 @@ public class ResetPassword extends ActionBarActivity {
                                         if (mProgressDialog.isShowing())
                                             mProgressDialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Password Send Successfully to your Email :) ", Toast.LENGTH_LONG).show();
-
-                                        startActivity(new Intent(ResetPassword.this, Login.class));
+                                        ResetPassword.this.finish();
+                                        //            startActivity(new Intent(ResetPassword.this, Login.class));
                                         //  Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                     }
 

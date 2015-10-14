@@ -73,40 +73,40 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
         firstlocation_lat_long.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
-                   @Override
-                   public void internetConnectionStatus(boolean status) {
-                       if (status) {
-                           Intent intent = new Intent(getActivity(), AddLocation.class);
-                           intent.putExtra("Request", 100);
-                           startActivityForResult(intent, 100);
-                       } else {
-                           {
+                InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
+                    @Override
+                    public void internetConnectionStatus(boolean status) {
+                        if (status) {
+                            Intent intent = new Intent(getActivity(), AddLocation.class);
+                            intent.putExtra("Request", 100);
+                            startActivityForResult(intent, 100);
+                        } else {
+                            {
 
-                               LayoutInflater li = LayoutInflater.from(getActivity());
-                               View v = li.inflate(R.layout.warning, null);
+                                LayoutInflater li = LayoutInflater.from(getActivity());
+                                View v = li.inflate(R.layout.warning, null);
 
-                               AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 
-                               // set more_info.xml to alertdialog builder
-                               alertDialogBuilder.setView(v);
-                               TextView tittle = (TextView) v.findViewById(R.id.tittle);
-                               ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
+                                // set more_info.xml to alertdialog builder
+                                alertDialogBuilder.setView(v);
+                                TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                                ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
 
-                               // create alert dialog
-                               final AlertDialog alertDialog = alertDialogBuilder.create();
-                               close_btn.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
-                                       alertDialog.dismiss();
-                                   }
-                               });
-                               // show it
-                               alertDialog.show();
-                           }
-                       }
-                   }
-               });
+                                // create alert dialog
+                                final AlertDialog alertDialog = alertDialogBuilder.create();
+                                close_btn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                                // show it
+                                alertDialog.show();
+                            }
+                        }
+                    }
+                });
 
             }
         });
@@ -333,11 +333,11 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                                 @Override
                                 public void onFinished() {
                                     progressBar.setVisibility(View.GONE);
-                                   // context.startActivity(new Intent(context, MyRides.class));
+                                    // context.startActivity(new Intent(context, MyRides.class));
                                     MyRides  myRidesFragment = new MyRides();
                                     getFragmentManager().beginTransaction().replace(R.id.fragment_place, myRidesFragment).addToBackStack(null).commit();
                                     getFragmentManager().executePendingTransactions();
-                                   // toolbar.setTitle("My Rides");
+                                    // toolbar.setTitle("My Rides");
 
                                 }
                             });
@@ -425,7 +425,7 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                 }
             }, data.getStringExtra("From_Longittude"), data.getStringExtra("From_Lattitude"), "json");
 
-         //   Toast.makeText(getActivity(),data.getStringExtra("From_Lattitude")+" , "+data.getStringExtra("From_Longittude"),Toast.LENGTH_LONG).show();
+            //   Toast.makeText(getActivity(),data.getStringExtra("From_Lattitude")+" , "+data.getStringExtra("From_Longittude"),Toast.LENGTH_LONG).show();
         }else  if(resultCode==101){
             to_Lattitude=data.getStringExtra("From_Lattitude");
             to_Longitude=data.getStringExtra("From_Longittude");
@@ -449,7 +449,7 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
 
                 }
             }, data.getStringExtra("From_Longittude"), data.getStringExtra("From_Lattitude"), "json");
-          //  Toast.makeText(getActivity(),data.getStringExtra("From_Lattitude")+" , "+data.getStringExtra("From_Longittude"),Toast.LENGTH_LONG).show();
+            //  Toast.makeText(getActivity(),data.getStringExtra("From_Lattitude")+" , "+data.getStringExtra("From_Longittude"),Toast.LENGTH_LONG).show();
         }
 
     }

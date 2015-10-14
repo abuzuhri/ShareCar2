@@ -52,7 +52,7 @@ public class SearchResult extends ActionBarActivity {
         setContentView(R.layout.search_result);
         t1=(EditText)findViewById(R.id.ed_search);
         search_bar=(LinearLayout)findViewById(R.id.search_bar);
-       // search=(ImageView)findViewById(R.id.search);
+        // search=(ImageView)findViewById(R.id.search);
         mProgressBar = (ProgressBar) this.findViewById(R.id.search_progress);
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
@@ -105,7 +105,7 @@ public class SearchResult extends ActionBarActivity {
                 Intent intent = new Intent(getApplicationContext(), ReviewRide.class);
                 intent.putExtra("ride_id", selected_ride.getRemoteId());
                 intent.putExtra("user_id", target_user.getRemoteId());
-               startActivity(intent);
+                startActivity(intent);
             }
         });
         rv.setLayoutManager(llm);
@@ -141,7 +141,7 @@ public class SearchResult extends ActionBarActivity {
                                           }
                                       }, SearchResult.this.getApplicationContext(), city_from, city_to, state_from,
                 state_to, country_from, country_to,
-                 getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1));
+                getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1));
 
 
 
@@ -188,7 +188,7 @@ public class SearchResult extends ActionBarActivity {
 
         if (id == R.id.action_search) {
             search_bar.setVisibility(View.VISIBLE);
-           // searchLocal(t1.getText().toString());
+            // searchLocal(t1.getText().toString());
             return true;
         }
 

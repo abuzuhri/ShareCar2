@@ -43,13 +43,14 @@ public class SplashScreen extends ActionBarActivity {
 
 //       UserDAO.deleteAllUsers();
 //       RideDAO.deleteAllRides();
-        user_id = this.getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1);
+        user_id =  getSharedPreferences("pref", MODE_PRIVATE).getLong("id",-1);
+
         if (user_id == -1)
             intent = new Intent(SplashScreen.this, Login.class);
         else{
             User user = UserDAO.getUserById(user_id);
             if(TextUtils.isEmpty(user.getEmail()) || TextUtils.isEmpty(user.getPhone()))
-            intent = new Intent(SplashScreen.this, UserProfile.class);
+                intent = new Intent(SplashScreen.this, UserProfile.class);
             else
                 intent = new Intent(SplashScreen.this, ShareRide.class);
 

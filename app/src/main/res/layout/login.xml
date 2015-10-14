@@ -33,9 +33,9 @@
         android:textColor="#30d5e8"
         android:textSize="@dimen/text_size"
         android:textDirection="ltr"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:imeOptions="actionNext"
-        android:drawableLeft="@drawable/profile"
+        android:drawableLeft="@drawable/symbol"
         android:drawablePadding="10dip"
         android:background="@drawable/lightgray_roundrect"
         android:layout_marginRight="@dimen/horizontal_margin"
@@ -75,14 +75,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fBbtn"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/facebook"
             />
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/gplusbtn"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
 
             android:background="@drawable/googlepluse"/>
 

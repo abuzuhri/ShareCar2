@@ -561,6 +561,7 @@ public class MainUserFunctions {
         params.put("phone", "");
         params.put("email", user.getEmail());
         params.put("social_id", user.getSocial_id());
+        Toast.makeText(context, user.getSocial_id() + "", Toast.LENGTH_LONG).show();
 
         UserOperations.getInstance(context).signUp(UrlConstant.SOCIAL_SIGNUP, params, new OnLoadFinished() {
             @Override
@@ -581,7 +582,13 @@ public class MainUserFunctions {
                         context.getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putLong("id", user_id).commit();
                         context.getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putInt("network", user.getNetwork()).commit();
                         if (user_id > 0) {
-                            Intent intent = new Intent(context, UserProfile.class);
+                            Intent intent;
+                            User user = UserDAO.getUserById(user_id);
+                            if(user.getEmail() == null || user.getPhone()==null)
+                                intent = new Intent(context, UserProfile.class);
+                            else
+                                intent = new Intent(context, ShareRide.class);
+
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intent);
                         }

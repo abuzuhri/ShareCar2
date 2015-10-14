@@ -60,14 +60,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-      if(chats != null){
+        if(chats != null){
             String message_text = chats.get(position).getMessage();
-      //    Toast.makeText(activity,""+message_text,Toast.LENGTH_LONG).show();
-          String contacted_person;
-          long user_id = activity.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
-           String imagUrl;
+            //    Toast.makeText(activity,""+message_text,Toast.LENGTH_LONG).show();
+            String contacted_person;
+            long user_id = activity.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1);
+            String imagUrl;
 
-          if(chats_data.get(chats.get(position)).get(0).getRemoteId() != user_id){
+            if(chats_data.get(chats.get(position)).get(0).getRemoteId() != user_id){
                 contacted_person = chats_data.get(chats.get(position)).get(0).getUsername();
                 imagUrl =  chats_data.get(chats.get(position)).get(0).getImage();
             }else{
@@ -75,15 +75,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 imagUrl =  chats_data.get(chats.get(position)).get(1).getImage();
 
             }
-          String chat_date = AppConstant.DateConvertion.getDate(chats.get(position).getDateTime());
-          holder.date.setText(chat_date);
-          holder.lastChat.setText(message_text);
-          holder.name.setText(contacted_person);
-          if(TextUtils.isEmpty(imagUrl)){
-              holder.image.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
-          }
-        else
-              Picasso.with(activity).load(Uri.parse(imagUrl)).into(holder.image);
+            String chat_date = AppConstant.DateConvertion.getDate(chats.get(position).getDateTime());
+            holder.date.setText(chat_date);
+            holder.lastChat.setText(message_text);
+            holder.name.setText(contacted_person);
+            if(TextUtils.isEmpty(imagUrl)){
+                holder.image.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
+            }
+            else
+                Picasso.with(activity).load(Uri.parse(imagUrl)).into(holder.image);
         }
 
 
@@ -115,7 +115,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             name = (TextView) v.findViewById(R.id.chat_name);
             lastChat = (TextView) v.findViewById(R.id.chat_lastChat);
             date = (TextView) v.findViewById(R.id.chat_date);
-        v.setOnClickListener(this);
+            v.setOnClickListener(this);
         }
 
         @Override

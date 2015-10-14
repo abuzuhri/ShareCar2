@@ -41,7 +41,7 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnUpdateRideList
 /**
  * Created by Bahaa on 7/10/2015.
  */
-public class AddEditRide extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     private ArrayList<EditText> allEditText;
 
     EditText cityFrom;
@@ -139,7 +139,7 @@ public class AddEditRide extends Fragment implements DatePickerDialog.OnDateSetL
 //
 //                                RideDAO.addNewRide(ride);
 
-//                            getFragmentManager().beginTransaction().remove(AddEditRide.this).commit();
+//                            getFragmentManager().beginTransaction().remove(DeleteEditRide.this).commit();
                                     getFragmentManager().popBackStack();
                                     getFragmentManager().beginTransaction().replace(R.id.fragment_place, new MyRides()).commit();
                                     getFragmentManager().executePendingTransactions();
@@ -228,7 +228,7 @@ public class AddEditRide extends Fragment implements DatePickerDialog.OnDateSetL
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog.newInstance(AddEditRide.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
+                TimePickerDialog.newInstance(DeleteEditRide.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
 
             }
         });
@@ -237,7 +237,7 @@ public class AddEditRide extends Fragment implements DatePickerDialog.OnDateSetL
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (b) {
-                    TimePickerDialog.newInstance(AddEditRide.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
+                    TimePickerDialog.newInstance(DeleteEditRide.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
                 }
             }
         });
@@ -247,7 +247,7 @@ public class AddEditRide extends Fragment implements DatePickerDialog.OnDateSetL
             public void onClick(View view) {
                /* DatePicker dialog = new DatePicker();
                 dialog.show(getActivity().getFragmentManager(), "Date Dialog");*/
-                DatePickerDialog dialog = DatePickerDialog.newInstance(AddEditRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                DatePickerDialog dialog = DatePickerDialog.newInstance(DeleteEditRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.setMinDate(calendar);
                 dialog.show(getActivity().getFragmentManager(), "datePicker");
             }
@@ -259,7 +259,7 @@ public class AddEditRide extends Fragment implements DatePickerDialog.OnDateSetL
                 if (b) {
 //                    DatePicker dialog = DatePicker.getInstance();
 //                    dialog.showDateDialog();
-                    DatePickerDialog dialog = DatePickerDialog.newInstance(AddEditRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                    DatePickerDialog dialog = DatePickerDialog.newInstance(DeleteEditRide.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                     dialog.setMinDate(calendar);
                     dialog.show(getActivity().getFragmentManager(), "datePicker");
                 }
@@ -320,7 +320,7 @@ public class AddEditRide extends Fragment implements DatePickerDialog.OnDateSetL
                                         if (pd.isShowing())
                                             pd.dismiss();
                                         Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
-                                        getFragmentManager().beginTransaction().remove(AddEditRide.this).commit();
+                                        getFragmentManager().beginTransaction().remove(DeleteEditRide.this).commit();
                                         getFragmentManager().popBackStack();
                                         getFragmentManager().beginTransaction().replace(R.id.fragment_place, new MyRides()).commit();
                                         getFragmentManager().executePendingTransactions();

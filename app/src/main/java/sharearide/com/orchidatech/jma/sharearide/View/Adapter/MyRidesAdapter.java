@@ -44,13 +44,13 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(MyRidesAdapter.ViewHolder holder, int position) {
-  if (my_rides != null) {
-                String name = user.getUsername();
-                holder.textView_displayName.setText(name);
-                String date_time = AppConstant.DateConvertion.getDate(my_rides.get(position).getDateTime());
-                holder.textView_time.setText(date_time);
+        if (my_rides != null) {
+            String name = user.getUsername();
+            holder.textView_displayName.setText(name);
+            String date_time = AppConstant.DateConvertion.getDate(my_rides.get(position).getDateTime());
+            holder.textView_time.setText(date_time);
 
-            }
+        }
     }
 
     @Override

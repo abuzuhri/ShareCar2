@@ -38,7 +38,7 @@ public class Inbox extends Fragment {
     private Toolbar tool_bar;
     private ArrayList<Chat> messages;
     Map<Chat, ArrayList<User>> messagesData;
-      ChatAdapter adapter;
+    ChatAdapter adapter;
     RecyclerView inbox_rv;
     ProgressBar inbox_progress;
     private LinearLayoutManager llm;
@@ -114,15 +114,15 @@ public class Inbox extends Fragment {
     public void last_chatting_users(final Context context, final OnInboxFetchListener listener, final long id){
         if(id == -1)
             return;
-                    User user = UserDAO.getUserById(id);
+        User user = UserDAO.getUserById(id);
 
-                    if (user != null) {
-                        String username = user.getUsername();
-                        String password = user.getPassword();
-                        MainUserFunctions.getInbox(context, listener, id);
-                    }else{
-                        Toast.makeText(context, "This User Not Stored In Local DB", Toast.LENGTH_LONG).show();
-                    }
+        if (user != null) {
+            String username = user.getUsername();
+            String password = user.getPassword();
+            MainUserFunctions.getInbox(context, listener, id);
+        }else{
+            Toast.makeText(context, "This User Not Stored In Local DB", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

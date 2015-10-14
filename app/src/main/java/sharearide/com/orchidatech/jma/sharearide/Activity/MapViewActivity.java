@@ -47,7 +47,7 @@ import sharearide.com.orchidatech.jma.sharearide.R;
  * Created by sms-1 on 9/21/2015.
  */
 public class MapViewActivity extends AppCompatActivity {
-    double FromCityLattitude,FromCityLongitude,ToCityLattitude,ToCityLongitude;
+    double f,ff,t,tt;
     MapView map;
     //private MapController mapController;
     private Toolbar tool_bar;
@@ -80,12 +80,16 @@ public class MapViewActivity extends AppCompatActivity {
         double ToCityLongitude= vv.getDouble("ToCityLongitude");
 
         //Toast.makeText(MapViewActivity.this,"  ,  "+FromCityLongitude
-           //     +"  ,  "+FromCityLattitude+"  ,  "+ToCityLongitude+"  ,   "+ToCityLattitude ,Toast.LENGTH_LONG).show();
+        //     +"  ,  "+FromCityLattitude+"  ,  "+ToCityLongitude+"  ,   "+ToCityLattitude ,Toast.LENGTH_LONG).show();
         map = (MapView) findViewById(R.id.mapview);
         ok=(FloatingActionButton)findViewById(R.id.ok);
         ok.setVisibility(View.GONE);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
+        f = FromCityLattitude;
+        ff = FromCityLongitude;
+        t = ToCityLattitude;
+        tt = ToCityLongitude;
 
 
 
@@ -106,7 +110,7 @@ public class MapViewActivity extends AppCompatActivity {
 
     private void initializeRoute() {
 
-        GeoPoint startPoint = new GeoPoint(FromCityLattitude, FromCityLongitude);
+        GeoPoint startPoint = new GeoPoint(f, ff);
         IMapController mapController = map.getController();
         mapController.setZoom(10);
         mapController.setCenter(startPoint);
@@ -116,8 +120,13 @@ public class MapViewActivity extends AppCompatActivity {
         startMarker.setPosition(startPoint);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         startMarker.setTitle("Start point");
+        //startMarker.setIcon(getResources().getDrawable(R.drawable.marker_kml_point).mutate());
+        //startMarker.setImage(getResources().getDrawable(R.drawable.ic_launcher));
+        //startMarker.setInfoWindow(new MarkerInfoWindow(R.layout.bonuspack_bubble_black, map));
+        //startMarker.setDraggable(true);
+        //startMarker.setOnMarkerDragListener(new OnMarkerDragListenerDrawer());
         map.getOverlays().add(startMarker);
-        GeoPoint endPoint = new GeoPoint(ToCityLattitude, ToCityLongitude);
+        GeoPoint endPoint = new GeoPoint(t, tt);
 
         RoadManager roadManager = new OSRMRoadManager();
         ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();

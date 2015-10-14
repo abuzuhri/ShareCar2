@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,12 +25,14 @@ import java.util.HashMap;
 
 import sharearide.com.orchidatech.jma.sharearide.Logic.ServiceHandler;
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.webservice.RequestQueueHandler;
+import sharearide.com.orchidatech.jma.sharearide.webservice.UserOperationsProcessor;
 
 
 public class About extends Fragment {
 
     // URL to get contacts JSON
-    private static String url = "http://api.androidhive.info/contacts/";
+    private static String url = "http://orchidatech.com/sharearide/web-services/get_about_data.php";
 
     // JSON Node names
     private static final String TAG_CONTACTS = "contacts";
@@ -62,10 +68,15 @@ public class About extends Fragment {
         // Inflate the layout for this fragment
         myFragmentView = inflater.inflate(R.layout.fragment_about, container, false);
 
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
         addressView = (TextView) myFragmentView.findViewById(R.id.about_address);
         phoneView = (TextView) myFragmentView.findViewById(R.id.about_phone);
         emailView = (TextView) myFragmentView.findViewById(R.id.about_email);
-logo=(ImageView)myFragmentView.findViewById(R.id.logo);
+        logo=(ImageView)myFragmentView.findViewById(R.id.logo);
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int height = display.getHeight();
@@ -74,14 +85,43 @@ logo=(ImageView)myFragmentView.findViewById(R.id.logo);
         logo.getLayoutParams().width = (int) (width * 0.3);
 
         // Calling async task to get json
-        new GetAbout().execute();
+        JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                try {
+                    JSONArray aboutArray = jsonObject.getJSONArray("about");
+                    JSONObject about = aboutArray.getJSONObject(0);
+                    String fb_account = about.getString("facebook_account");
+                    String google_account = about.getString("google_account");
+                    String address = about.getString("address");
+                    addressView.setText(address);
+                    emailView.setText(google_account);
+
+                    if (pDialog.isShowing())
+                        pDialog.dismiss();
+
+                } catch (JSONException e) {
+                    if (pDialog.isShowing())
+                        pDialog.dismiss();
+
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                if (pDialog.isShowing())
+                    pDialog.dismiss();
+
+            }
+        });
+        RequestQueueHandler.getInstance(getActivity()).addToRequestQueue(request);
+        ///  new GetAbout().execute();
 
         return myFragmentView;
     }
 
-    /**
-     * Async task class to get json by making HTTP call
-     */
+
     private class GetAbout extends AsyncTask<Void, Void, Void> {
 
         @Override

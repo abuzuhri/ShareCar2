@@ -65,7 +65,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 holder.textView_displayName.setText(name);
                 String date_time = AppConstant.DateConvertion.getDate(rides.get(position).getDateTime());
                 holder.textView_time.setText(date_time);
-               String imagUrl = ridesData.get(rides.get(position)).getImage();
+                String imagUrl = ridesData.get(rides.get(position)).getImage();
                 if(TextUtils.isEmpty(imagUrl)){
                     holder.result_img.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
                 }

@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,9 +51,9 @@ public class MyRides extends Fragment {
         adapter = new MyRidesAdapter(getActivity(), my_rides, user, new MyRidesAdapter.OnRecycleViewItemClicked() {
             @Override
             public void onItemClicked(Ride selected_ride) {
-               Bundle args =  new Bundle();
+                Bundle args =  new Bundle();
                 args.putLong("id", selected_ride.getRemoteId());
-                AddEditRide addEditRide = new AddEditRide();
+                DeleteEditRide addEditRide = new DeleteEditRide();
                 addEditRide.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_place, addEditRide).addToBackStack(null).commit();
                 getFragmentManager().executePendingTransactions();
@@ -111,7 +110,7 @@ public class MyRides extends Fragment {
             @Override
             public void onFailed(String error) {
                 my_rides_progress.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+                //   Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
 
             }
         }, user.getRemoteId());

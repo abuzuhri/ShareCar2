@@ -153,8 +153,8 @@ public class ReviewRide extends ActionBarActivity {
                 String senderEmail = UserDAO.getUserById(getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1)).getEmail();
                 long senderId = getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1);
 
-                Toast.makeText(ReviewRide.this, "Sender: " + senderEmail + " " + senderId +
-                        "\nReceiver: " + receiverEmail + " " + receiverId, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ReviewRide.this, "Sender: " + senderEmail + " " + senderId +
+//                        "\nReceiver: " + receiverEmail + " " + receiverId, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(ReviewRide.this, ChatActivity.class);
                 intent.putExtra("ReceiverEmail", receiverEmail);
@@ -187,7 +187,7 @@ public class ReviewRide extends ActionBarActivity {
         String fullDate = AppConstant.DateConvertion.getDate(date_time);
         time.setText(fullDate);
         more_Info=ride.getMore_info();
-        Toast.makeText(ReviewRide.this,""+ride.getMore_info(),Toast.LENGTH_LONG).show();
+        //    Toast.makeText(ReviewRide.this,""+ride.getMore_info(),Toast.LENGTH_LONG).show();
 
 //        Toast.makeText(ReviewRide.this,""+ride.getTo_latitude()+" , "+ride.getTo_longitude(),Toast.LENGTH_LONG).show();
 
@@ -256,7 +256,7 @@ public class ReviewRide extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == android.R.id.home) {
-         finish();
+            finish();
             return true;
         }
 
@@ -268,7 +268,7 @@ public class ReviewRide extends ActionBarActivity {
             b.putDouble("FromCityLongitude", ride.getFrom_Longitude() );
             b.putDouble("ToCityLattitude", ride.getTo_latitude() );
             b.putDouble("ToCityLongitude", ride.getTo_longitude() );
-            //   Toast.makeText(ReviewRide.this,ride.getFrom_Lattitude()+"",Toast.LENGTH_LONG).show();
+            //  Toast.makeText(ReviewRide.this,ride.getFrom_Lattitude()+"",Toast.LENGTH_LONG).show();
             intent.putExtras(b);
             startActivity(intent);
             return true;

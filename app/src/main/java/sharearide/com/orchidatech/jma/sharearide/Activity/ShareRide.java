@@ -51,7 +51,7 @@ public class ShareRide extends ActionBarActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
 
     // Declaring Your View and Variables
-private ProgressBar  uploadImageProgress;
+    private ProgressBar  uploadImageProgress;
     ViewPager pager;
     ViewPagerAdapter adapter;
     //   SlidingTabLayout tabs;
@@ -146,11 +146,11 @@ private ProgressBar  uploadImageProgress;
                         break;
                     case 6:
                         Drawer.closeDrawers();
-                       startActivity(new Intent(ShareRide.this, UserSettings.class));
+                        startActivity(new Intent(ShareRide.this, UserSettings.class));
                         break;
                     case 7:
                         Drawer.closeDrawers();
-                      startActivity(new Intent(ShareRide.this,UserProfile.class));
+                        startActivity(new Intent(ShareRide.this,UserProfile.class));
                         break;
                     case 8:
                         Drawer.closeDrawers();

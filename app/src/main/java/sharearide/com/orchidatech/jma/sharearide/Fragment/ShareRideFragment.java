@@ -40,7 +40,7 @@ public class ShareRideFragment extends Fragment {
 
         mFragments.add(tab2);
 
-      //  tabs.setIndicatorColor(getResources().getColor(R.color.tabsScrollColor));
+        //  tabs.setIndicatorColor(getResources().getColor(R.color.tabsScrollColor));
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter = new ViewPagerAdapter(getFragmentManager(), Titles, Numboftabs, mFragments);
 
@@ -66,7 +66,7 @@ public class ShareRideFragment extends Fragment {
 
     public void selectTab(int i) {
         if(pager.getCurrentItem() != i)
-          pager.setCurrentItem(i);
+            pager.setCurrentItem(i);
         Log.i("current tab", pager.getCurrentItem()+"");
     }
 

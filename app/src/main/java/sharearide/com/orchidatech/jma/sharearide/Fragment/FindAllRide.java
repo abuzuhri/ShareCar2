@@ -36,8 +36,8 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnec
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
 
 public class FindAllRide extends Fragment {
- private ImageButton searchAll;
- private EditText ed_search;
+    private ImageButton searchAll;
+    private EditText ed_search;
     MyAdapter adapter;
     RecyclerView rv;
     private ProgressBar mProgressBar;
@@ -54,73 +54,73 @@ public class FindAllRide extends Fragment {
         View v = inflater.inflate(R.layout.fragment_search_ride, container, false);
 
         ed_search = (EditText) v.findViewById(R.id.ed_search);
-    searchAll = (ImageButton) v.findViewById(R.id.search);
-    mProgressBar = (ProgressBar) v.findViewById(R.id.search_progress);
+        searchAll = (ImageButton) v.findViewById(R.id.search);
+        mProgressBar = (ProgressBar) v.findViewById(R.id.search_progress);
         mProgressBar.setVisibility(View.GONE);
 
         rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);
-         llm = new LinearLayoutManager(getActivity());
+        llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
-      searchAll.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              if (TextUtils.isEmpty(ed_search.getText())) {
-                  //  ed_search.setError("Enter Email ");
-              } else {
+        searchAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(ed_search.getText())) {
+                    //  ed_search.setError("Enter Email ");
+                } else {
 
-                  InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
-                      @Override
-                      public void internetConnectionStatus(boolean status) {
-                          if (status) {
-                               //mProgressDialog.show();
-                              mProgressBar.setVisibility(View.VISIBLE);
-                              findAllRide((ed_search.getText()).toString(), getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
-                              //   Toast.makeText(getActivity(),"DONE",Toast.LENGTH_LONG).show();
+                    InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
+                        @Override
+                        public void internetConnectionStatus(boolean status) {
+                            if (status) {
+                                //mProgressDialog.show();
+                                mProgressBar.setVisibility(View.VISIBLE);
+                                findAllRide((ed_search.getText()).toString(), getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
+                                //   Toast.makeText(getActivity(),"DONE",Toast.LENGTH_LONG).show();
 
-                              rides = new ArrayList<>();
-                              ridesData = new HashMap<>();
-                              adapter = new MyAdapter(getActivity(), rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
-                                  @Override
-                                  public void onItemClicked(Ride selected_ride, User target_user) {
-                                      Intent intent = new Intent(getActivity(), ReviewRide.class);
-                                      intent.putExtra("ride_id", selected_ride.getRemoteId());
-                                      intent.putExtra("user_id", target_user.getRemoteId());
-                                      startActivity(intent);
+                                rides = new ArrayList<>();
+                                ridesData = new HashMap<>();
+                                adapter = new MyAdapter(getActivity(), rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
+                                    @Override
+                                    public void onItemClicked(Ride selected_ride, User target_user) {
+                                        Intent intent = new Intent(getActivity(), ReviewRide.class);
+                                        intent.putExtra("ride_id", selected_ride.getRemoteId());
+                                        intent.putExtra("user_id", target_user.getRemoteId());
+                                        startActivity(intent);
 
-                                  }
-                              });
-                              rv.setLayoutManager(llm);
-                              rv.setAdapter(adapter);
+                                    }
+                                });
+                                rv.setLayoutManager(llm);
+                                rv.setAdapter(adapter);
 
-                          } else {
-                              LayoutInflater li = LayoutInflater.from(getActivity());
-                              View v = li.inflate(R.layout.warning, null);
+                            } else {
+                                LayoutInflater li = LayoutInflater.from(getActivity());
+                                View v = li.inflate(R.layout.warning, null);
 
-                              AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 
-                              // set more_info.xml to alertdialog builder
-                              alertDialogBuilder.setView(v);
-                              TextView tittle = (TextView) v.findViewById(R.id.tittle);
-                              ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
+                                // set more_info.xml to alertdialog builder
+                                alertDialogBuilder.setView(v);
+                                TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                                ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
 
-                              // create alert dialog
-                              final AlertDialog alertDialog = alertDialogBuilder.create();
-                              close_btn.setOnClickListener(new View.OnClickListener() {
-                                  @Override
-                                  public void onClick(View v) {
-                                      alertDialog.dismiss();
-                                  }
-                              });
-                              // show it
-                              alertDialog.show();
-                          }
-                      }
-                  });
-              }
+                                // create alert dialog
+                                final AlertDialog alertDialog = alertDialogBuilder.create();
+                                close_btn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                                // show it
+                                alertDialog.show();
+                            }
+                        }
+                    });
+                }
 
-          }
-      });
+            }
+        });
 
         return v;
     }

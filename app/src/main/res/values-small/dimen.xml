@@ -13,7 +13,7 @@
     <dimen name="vertical_logoBottom">20dp</dimen>
     <dimen name="vertical_topBtn">20dp</dimen>
 
-    <dimen name="horizontal_BTW_Btn">70dp</dimen>
+    <dimen name="horizontal_BTW_Btn">50dp</dimen>
 
     <dimen name="vertical_topWarningImgi">30dp</dimen>
     <dimen name="verticalbottomopWarningImgi">4dp</dimen>
