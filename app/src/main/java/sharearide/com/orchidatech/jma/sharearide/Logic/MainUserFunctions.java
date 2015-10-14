@@ -284,14 +284,14 @@ public class MainUserFunctions {
                         ride.cost = price;*/
                             Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to,
                                     date_time, price, more_info, from_Lattitude, from_Longitude, to_latitude, to_longitude);
-                            RideDAO.addNewRide(ride);
-                            newItems.add(ride);
+                            RideDAO.addNewRide(remoteId, user_id, city_from, city_to, country_from, country_to, state_from, state_to,
+                                    date_time, price, more_info,from_Longitude, to_longitude, from_Lattitude, to_latitude);                            newItems.add(ride);
                         }
                         ///To Ensure that max num of items in db is MAX_NUM_RIDES....
                         final ArrayList<Ride> allStoredRides = new ArrayList<>(RideDAO.getAllRides());
                         int numOfRemovedRides = allStoredRides.size() - MAX_NUM_RIDES;
                         for (int delRideIndex = 0; delRideIndex < numOfRemovedRides; delRideIndex++)
-                            RideDAO.deleteRide(allStoredRides.get(delRideIndex).getId());
+                            RideDAO.deleteRide(allStoredRides.get(delRideIndex).getRemoteId());
                     } else {
                         String message = jsonObject.getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
@@ -455,8 +455,11 @@ public class MainUserFunctions {
                             allMatchedRides.add(ride);
                             JSONObject userJsonObject = mJsonObject.getJSONObject("user");
                             User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, -1, userJsonObject.getString("Gender"));
-                            UserDAO.addNewUser(user);
-                            RideDAO.addNewRide(ride);
+                            //UserDAO.addNewUser(receiver_id, receiver_username, null, receiver_image, null, 1, null, receiver_phone, receiver_email);
+
+                            UserDAO.addNewUser(ride.getUserId(), userJsonObject.getString("username"), null, userJsonObject.getString("img"), null, 1, null, userJsonObject.getString("phone"),  userJsonObject.getString("email"));
+                            RideDAO.addNewRide(remoteId, user_id, city_from, city_to, country_from, country_to, state_from, state_to,
+                                    date_time, price, more_info,from_Longitude, to_longitude, from_Lattitude, to_latitude);
                             matchedRidesData.put(ride, user);
 
 //                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
@@ -643,6 +646,7 @@ public class MainUserFunctions {
         });
     }
 
+
     public static void getInbox(final Context context, final OnInboxFetchListener listener, final long user_id) {
 
         final Map<String, String> params = new HashMap<>();
@@ -707,7 +711,7 @@ public class MainUserFunctions {
                             sender_info.setEmail(sender_email);
                             sender_info.setPhone(sender_phone);
                             sender_info.setImage(sender_image);
-                            //sender_info.setBirthdate(sender_birthdate);
+                            sender_info.setBirthdate(1);
                             sender_info.setGender(sender_gender);
 
                             User receiver_info = new User();
@@ -716,15 +720,19 @@ public class MainUserFunctions {
                             receiver_info.setEmail(receiver_email);
                             receiver_info.setPhone(receiver_phone);
                             receiver_info.setImage(receiver_image);
-                            // receiver_info.setBirthdate(receiver_birthdate);
+                            receiver_info.setBirthdate(1);
                             receiver_info.setGender(receiver_gender);
+
 
                             ArrayList<User> persons = new ArrayList<User>();
                             persons.add(sender_info);
                             persons.add(receiver_info);
 
-                            UserDAO.addNewUser(sender_info);
-                            UserDAO.addNewUser(receiver_info);
+//                            UserDAO.addNewUser(sender_info);
+//                            UserDAO.addNewUser(receiver_info);
+
+                            UserDAO.addNewUser(receiver_id, receiver_username, null, receiver_image, null, 1, null, receiver_phone, receiver_email);
+                            UserDAO.addNewUser(sender_id, sender_username, null, sender_image, null, 1, null, sender_phone, sender_email);
                             ChatDAO.addNewChat(chat);
                             messages_data.put(chat, persons);
                             all_messages.add(chat);
@@ -881,7 +889,8 @@ public class MainUserFunctions {
                         String more_info = mJsonObject.getString("more_info");
                         Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to,
                                 date_time, price, more_info, from_Lattitude, from_Longitude, to_latitude, to_longitude);
-                        RideDAO.updateRide(ride);
+                        RideDAO.addNewRide(remoteId, user_id, city_from, city_to, country_from, country_to, state_from, state_to,
+                                date_time, price, more_info, from_Longitude, to_longitude, from_Lattitude, to_latitude);
                         listener.onFinished(ride);
 
                     } else {
@@ -936,37 +945,51 @@ public class MainUserFunctions {
         UserOperations.getInstance(context).get_my_rides(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) throws JSONException {
-                JSONArray mJsonArray = jsonObject.getJSONArray("rides");
-                for (int i = 0; i < mJsonArray.length(); i++) {
-                    JSONObject mJsonObject = mJsonArray.getJSONObject(i);
-                    long remoteId = Long.parseLong(mJsonObject.getString("id"));
-                    long user_id = Long.parseLong(mJsonObject.getString("user_id"));
-                    String city_from = mJsonObject.getString("city_from");
-                    String city_to = mJsonObject.getString("city_to");
-                    String state_from = mJsonObject.getString("state_from");
-                    String state_to = mJsonObject.getString("state_to");
-                    String country_from = mJsonObject.getString("country_from");
-                    String country_to = mJsonObject.getString("country_to");
-                    long date_time = Long.parseLong(mJsonObject.getString("date_time"));
-                    String price = mJsonObject.getString("price");
-                    double from_Lattitude = Double.parseDouble(mJsonObject.getString("from_latitude"));
-                    double from_Longitude = Double.parseDouble(mJsonObject.getString("from_longitude"));
-                    double to_latitude = Double.parseDouble(mJsonObject.getString("to_latitude"));
-                    double to_longitude = Double.parseDouble(mJsonObject.getString("to_longitude"));
-                    String more_info = mJsonObject.getString("more_info");
-                    Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to,
-                            date_time, price, more_info, from_Lattitude, from_Longitude, to_latitude, to_longitude);
+                try{
+                    boolean success = jsonObject.getBoolean("success");
+                    if(success) {
 
-                    RideDAO.addNewRide(ride);
-                    all_my_rides.add(ride);
+                        JSONArray mJsonArray = jsonObject.getJSONArray("rides");
+
+                        for (int i = 0; i < mJsonArray.length(); i++) {
+                            JSONObject mJsonObject = mJsonArray.getJSONObject(i);
+                            long remoteId = Long.parseLong(mJsonObject.getString("id"));
+                            long user_id = Long.parseLong(mJsonObject.getString("user_id"));
+                            String city_from = mJsonObject.getString("city_from");
+                            String city_to = mJsonObject.getString("city_to");
+                            String state_from = mJsonObject.getString("state_from");
+                            String state_to = mJsonObject.getString("state_to");
+                            String country_from = mJsonObject.getString("country_from");
+                            String country_to = mJsonObject.getString("country_to");
+                            long date_time = Long.parseLong(mJsonObject.getString("date_time"));
+                            String price = mJsonObject.getString("price");
+                            double from_Lattitude = Double.parseDouble(mJsonObject.getString("from_latitude"));
+                            double from_Longitude = Double.parseDouble(mJsonObject.getString("from_longitude"));
+                            double to_latitude = Double.parseDouble(mJsonObject.getString("to_latitude"));
+                            double to_longitude = Double.parseDouble(mJsonObject.getString("to_longitude"));
+                            String more_info = mJsonObject.getString("more_info");
+                            Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to,
+                                    date_time, price, more_info, from_Lattitude, from_Longitude, to_latitude, to_longitude);
+
+                            RideDAO.addNewRide(remoteId, user_id, city_from, city_to, country_from, country_to, state_from, state_to,
+                                    date_time, price, more_info, from_Longitude, to_longitude, from_Lattitude, to_latitude);
+
+                            all_my_rides.add(ride);
+                        }
+                        // Toast.makeText(context, all_my_rides.size()+"", Toast.LENGTH_LONG).show();
+                        listener.onFetched(all_my_rides);
+                    }else{
+                        listener.onFailed(jsonObject.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(context, "An error occurred, try again", Toast.LENGTH_LONG).show();
                 }
-                listener.onFetched(all_my_rides);
             }
 
             @Override
             public void onFail(String error) {
-                ;
-                listener.onFailed(error);
+
+                listener.onFailed("Can not connect server");
             }
         });
 

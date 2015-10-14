@@ -125,7 +125,8 @@ public class SplashScreen extends ActionBarActivity {
             @Override
             public void onRidesRefresh(ArrayList<Ride> newItems) {
                 for(Ride ride:newItems)
-                    RideDAO.addNewRide(ride);
+                    RideDAO.addNewRide(ride.getRemoteId(), ride.getUserId(), ride.getFromCity(), ride.getToCity(), ride.getFromCountry(), ride.getToCountry(), ride.getFromState(), ride.getToState(),
+                            ride.getDateTime(), ride.getCost(), ride.getMore_info(),ride.getFrom_Longitude(), ride.getTo_longitude(), ride.getFrom_Lattitude(), ride.getTo_latitude());
             }
 
             @Override

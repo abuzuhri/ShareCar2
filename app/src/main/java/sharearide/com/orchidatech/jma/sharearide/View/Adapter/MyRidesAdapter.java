@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -9,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import sharearide.com.orchidatech.jma.sharearide.Constant.AppConstant;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
@@ -49,7 +53,7 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
             holder.textView_displayName.setText(name);
             String date_time = AppConstant.DateConvertion.getDate(my_rides.get(position).getDateTime());
             holder.textView_time.setText(date_time);
-
+            Picasso.with(activity).load(Uri.parse(user.getImage())).into(holder.result_img);
         }
     }
 
@@ -68,13 +72,14 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
         // each data item is just a string in this case
         TextView textView_displayName;
         TextView textView_time;
-        private ImageView result_img, date, time;
+        private ImageView  date, time;
+        private CircleImageView result_img;
 
         public ViewHolder(View v) {
             super(v);
             textView_displayName = (TextView) v.findViewById(R.id.textView_displayName);
             textView_time = (TextView) v.findViewById(R.id.textView_time);
-            result_img = (ImageView) v.findViewById(R.id.result_img);
+            result_img = (CircleImageView) v.findViewById(R.id.result_img);
             time = (ImageView) v.findViewById(R.id.time);
 
             Display display = activity.getWindowManager().getDefaultDisplay();

@@ -64,7 +64,7 @@ public class ChatActivity extends ActionBarActivity implements MessagesFragment.
         receiverId = intent.getLongExtra("ReceiverId", -1);
         senderEmail = intent.getStringExtra("SenderEmail");
         senderId = intent.getLongExtra("SenderId", -1);
-Toast.makeText(ChatActivity.this,""+receiverEmail+" , "+senderEmail,Toast.LENGTH_LONG).show();
+//Toast.makeText(ChatActivity.this,""+receiverEmail+" , "+senderEmail,Toast.LENGTH_LONG).show();
         //profileId = getIntent().getStringExtra(Common.PROFILE_ID);
         msgEdit = (EditText) findViewById(R.id.msg_edit);
         sendBtn = (Button) findViewById(R.id.send_btn);
@@ -88,9 +88,6 @@ Toast.makeText(ChatActivity.this,""+receiverEmail+" , "+senderEmail,Toast.LENGTH
            // toolbar.setTitle(receiverName);
         }
         */
-
-        toolbar.setTitle("Receiver Name");
-        toolbar.setSubtitle("connecting ...");
 
         registerReceiver(registrationStatusReceiver, new IntentFilter(Common.ACTION_REGISTER));
         gcmUtil = new GcmUtil(getApplicationContext());
@@ -234,13 +231,13 @@ Toast.makeText(ChatActivity.this,""+receiverEmail+" , "+senderEmail,Toast.LENGTH
             if (intent != null && Common.ACTION_REGISTER.equals(intent.getAction())) {
                 switch (intent.getIntExtra(Common.EXTRA_STATUS, 100)) {
                     case Common.STATUS_SUCCESS:
-                        toolbar.setSubtitle("online");
+//                        toolbar.setSubtitle("online");
                         sendBtn.setEnabled(true);
                         break;
 
                     case Common.STATUS_FAILED:
                         //
-                        toolbar.setSubtitle("offline");
+//                        toolbar.setSubtitle("offline");
                         break;
                 }
             }

@@ -286,7 +286,7 @@ public class UserProfile extends ActionBarActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-            final Bitmap  bitmap = ShrinkBitmap(picturePath, 100, 100);
+            final Bitmap  bitmap = ShrinkBitmap(picturePath, 360, 360);
 
             if(bitmap == null){
                 Toast.makeText(getApplicationContext(), "please choose valid image", Toast.LENGTH_LONG).show();

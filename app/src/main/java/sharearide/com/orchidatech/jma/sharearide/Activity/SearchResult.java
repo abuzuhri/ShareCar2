@@ -119,8 +119,11 @@ public class SearchResult extends ActionBarActivity {
                                           @Override
                                           public void onSearchSucceed(ArrayList<sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride> matchedRides, Map<sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride, User> matchedRidesData) {
                                               for (Ride ride : matchedRides) {
-                                                  RideDAO.addNewRide(ride);
-                                                  UserDAO.addNewUser(matchedRidesData.get(ride));
+                                                  RideDAO.addNewRide(ride.getRemoteId(), ride.getUserId(), ride.getFromCity(), ride.getToCity(), ride.getFromCountry(), ride.getToCountry(), ride.getFromState(), ride.getToState(),
+                                                          ride.getDateTime(), ride.getCost(), ride.getMore_info(),ride.getFrom_Longitude(), ride.getTo_longitude(), ride.getFrom_Lattitude(), ride.getTo_latitude());
+                                                User user = matchedRidesData.get(ride);
+                                                UserDAO.addNewUser(user.getRemoteId(), user.getUsername(), user.getPassword(), user.getImage(), user.getAddress(), user.getBirthdate(), user.getGender(), user.getPhone(), user.getEmail());
+//                                                  UserDAO.addNewUser(matchedRidesData.get(ride));
 
                                               }
 

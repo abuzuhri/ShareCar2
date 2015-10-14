@@ -5,10 +5,11 @@
     android:background="#fff"
     >
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_rides_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#f8f8f8"
         android:divider="@null"
         android:listSelector="@android:color/transparent" />
@@ -19,6 +20,7 @@
         android:id="@+id/my_rides_progress"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
 
 
 </RelativeLayout>

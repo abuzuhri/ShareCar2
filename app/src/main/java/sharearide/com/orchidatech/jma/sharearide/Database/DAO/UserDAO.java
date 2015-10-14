@@ -20,20 +20,23 @@ public class UserDAO {
     public static final String TABLE_NAME = "Users";
 
     public static final String NAME = "name";
-
-    //<editor-fold defaultstate="collapsed" desc="addNewUser(long userId, String username, String password, String image, String address, long birthdate, String gender, String phone, String email){...}">
-   public static long addNewUser(User user) {
-            if(checkUserExist(user.getRemoteId()) == -1)
-                return user.save();
-        else
-                return user.getRemoteId();
-   }
-    public static long addNewUser(long userId, String username, String password, String image,
+    //
+//    //<editor-fold defaultstate="collapsed" desc="addNewUser(long userId, String username, String password, String image, String address, long birthdate, String gender, String phone, String email){...}">
+//    public static long addNewUser(User user) {
+//        if(checkUserExist(user.getRemoteId()) == -1)
+//            return user.save();
+//        else
+//            return user.getRemoteId();
+//    }
+    public static long addNewUser(long remoteUserId, String username, String password, String image,
                                   String address, long birthdate, String gender, String phone, String email){
-//    if(checkUserExist(userId) != -1)
-//        return userId;
-        User user = new User();
-        user.remoteId = userId;
+
+        User user = getUserById(remoteUserId);
+        if(user == null){
+            user = new User();
+            user.remoteId = remoteUserId;
+        }
+
         user.username = username;
         user.password = password;
         user.image = image;
@@ -42,7 +45,7 @@ public class UserDAO {
         user.gender = gender;
         user.phone = phone;
         user.email = email;
-      return user.save();
+        return user.save();
 
     }
     //</editor-fold>
@@ -52,7 +55,7 @@ public class UserDAO {
     public static long checkUserExist(long userId) {
         User user = new Select().from(User.class).where("remote_id = ?", userId).executeSingle();
         if(user != null)
-             return user.getId();
+            return user.getId();
         else
             return -1;
     }
@@ -80,7 +83,7 @@ public class UserDAO {
     public static String retreivePassword(String email) {
         User user = new Select("Password").from(User.class).where("Email = ?", email).executeSingle();
         if(user!=null)
-        return user.password;
+            return user.password;
         else
             return null;
     }
@@ -239,11 +242,14 @@ public class UserDAO {
 
 
     public static void addNewSocialUser(SocialUser socialUser){
-        User user = new User();
+        User user = getUserById(Long.parseLong(socialUser.getId()));
+        if(user == null) {
+            user = new User();
+            user.remoteId = Long.parseLong(socialUser.getId());
+        }
         user.email = socialUser.getEmail();
         user.image = socialUser.getAvatarURL();
         user.username = socialUser.getName();
-        user.remoteId = Long.parseLong(socialUser.getId());
         user.save();
     }
 
