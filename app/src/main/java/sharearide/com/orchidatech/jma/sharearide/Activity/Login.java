@@ -384,7 +384,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
                                     fbUser.avatarURL = "https://graph.facebook.com/" + user.optString("id") + "/picture?width=300&height=300";
                                     fbUser.network = SocialUser.NetworkType.FACEBOOK;
                                     listener.onSuccess(fbUser);
-                                    Toast.makeText(getApplicationContext(), user.optString("name"), Toast.LENGTH_LONG).show();
+                                //    Toast.makeText(getApplicationContext(), user.optString("name"), Toast.LENGTH_LONG).show();
 
 
                                 }
