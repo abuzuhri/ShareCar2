@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -128,6 +129,16 @@ public class MyRides extends Fragment {
                 my_rides_progress.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
                 //   Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getFragmentManager().popBackStack();
+                ShareRideFragment shareRideFragment = new ShareRideFragment();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).addToBackStack(null).commit();
+                getFragmentManager().executePendingTransactions();
+//                shareRideFragment.selectTab(0);
+                    }
+                }, 2000);
 
             }
         }, user.getRemoteId());
