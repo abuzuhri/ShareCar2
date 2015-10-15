@@ -116,12 +116,11 @@ public class MyRides extends Fragment {
         MainUserFunctions.get_my_rides(getActivity(), new OnFetchMyRides() {
             @Override
             public void onFetched(ArrayList<Ride> all_my_rides) {
-
+                my_rides_progress.setVisibility(View.GONE);
                     my_rides.addAll(all_my_rides);
                     adapter.notifyDataSetChanged();
 
 
-                    my_rides_progress.setVisibility(View.GONE);
             }
 
             @Override
