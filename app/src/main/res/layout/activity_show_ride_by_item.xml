@@ -9,8 +9,10 @@
     tools:context=".MainActivity"
     android:background="#ff3dc0ff">
 
+    <!--
     <include layout="@layout/mytoolbar"
         android:id="@+id/tool_bar"/>
+        -->
 
 </RelativeLayout>
 
