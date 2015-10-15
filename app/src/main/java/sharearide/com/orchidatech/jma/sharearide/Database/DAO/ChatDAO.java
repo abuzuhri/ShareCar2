@@ -25,7 +25,7 @@ public class ChatDAO {
 
     //<editor-fold defaultstate="collapsed" desc="addNewChat(long msgId, String message, long senderId, long receiverId, long dateTime){...}">
     public static long addNewChat(long msgId, String message, long senderId, long receiverId, long dateTime)
-            throws EmptyFieldException, InvalidInputException {
+             {
 
         Chat chat = new Chat();
         boolean isValid = true;
@@ -34,28 +34,24 @@ public class ChatDAO {
             chat.message = message;
         } else {
             isValid = false;
-            throw new EmptyFieldException("Empty message field !");
         }
 
         if (senderId == 0) {
             chat.senderId = senderId;
         } else {
             isValid = false;
-            throw new InvalidInputException("Invalid sender id !");
         }
 
         if (receiverId == 0) {
             chat.receiverId = receiverId;
         } else {
             isValid = false;
-            throw new InvalidInputException("Invalid receiver id !");
         }
 
         if (dateTime == 0) {
             chat.dateTime = dateTime;
         } else {
             isValid = false;
-            throw new InvalidInputException("Invalid dateTime value");
         }
 
         if (isValid) {
