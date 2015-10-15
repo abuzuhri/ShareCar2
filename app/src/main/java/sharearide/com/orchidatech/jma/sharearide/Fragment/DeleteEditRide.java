@@ -59,6 +59,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
     Button save;
     Ride ride;
     Ride origin_ride;
+    Typeface font;
     private  ImageButton firstlocation_lat_long,secondlocation_lat_long;
     private String from_Lattitude,from_Longitude,to_Lattitude,to_Longitude;
     private Calendar calendar;
@@ -99,6 +100,17 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
         more_info = (Button) view.findViewById(R.id.more_info);
         save = (Button) view.findViewById(R.id.save);
         save.setVisibility(View.GONE);
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_regular.ttf");
+        cityFrom.setTypeface(font);
+        cityTo.setTypeface(font);
+        countryTo.setTypeface(font);
+        countryFrom.setTypeface(font);
+        date.setTypeface(font);
+        time.setTypeface(font);
+        stateFrom.setTypeface(font);
+        stateTo.setTypeface(font);
+        price.setTypeface(font);
+        info.setTypeface(font);
         calendar = Calendar.getInstance();
         save.setOnClickListener(new View.OnClickListener() {
             @Override
