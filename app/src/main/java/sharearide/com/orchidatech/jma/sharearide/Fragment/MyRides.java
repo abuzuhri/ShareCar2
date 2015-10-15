@@ -132,9 +132,9 @@ public class MyRides extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getFragmentManager().popBackStack();
+//                        getFragmentManager().popBackStack();
                 ShareRideFragment shareRideFragment = new ShareRideFragment();
-                getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).commit();
                 getFragmentManager().executePendingTransactions();
 //                shareRideFragment.selectTab(0);
                     }
