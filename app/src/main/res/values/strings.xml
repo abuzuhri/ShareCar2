@@ -28,6 +28,8 @@
     <string name="drawer_close">drawer_close</string>
 
 
+    <string name="bottom_fragment">Bottom Fragment</string>
+
     <!-- map_menu-->
     <string name="menu_departure">Set Departure</string>
     <string name="menu_destination">Set Destination</string>

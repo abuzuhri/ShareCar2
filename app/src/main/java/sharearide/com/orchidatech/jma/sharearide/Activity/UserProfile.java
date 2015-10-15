@@ -259,13 +259,6 @@ Typeface font;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user_profile, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -274,12 +267,23 @@ Typeface font;
 
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-
             finish();
+            //overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+            //closing transition animations
+            overridePendingTransition(R.anim.activity_open_scale, R.anim.activity_close_translate);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //closing transition animations
+        overridePendingTransition(R.anim.activity_open_scale, R.anim.activity_close_translate);
+    }
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

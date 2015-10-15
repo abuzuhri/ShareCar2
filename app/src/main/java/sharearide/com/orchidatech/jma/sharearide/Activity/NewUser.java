@@ -23,6 +23,7 @@ import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.Logic.Validation;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
+import sharearide.com.orchidatech.jma.sharearide.View.Animation.ViewAnimation;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestListener;
@@ -67,17 +68,21 @@ public class NewUser extends AppCompatActivity {
 
                 if (username.getText().toString().equals("")) {
                     username.setError("Enter Username");
-                } else if (!validation.passwordcontainsNumber(password.getText().toString()))
+                    ViewAnimation.blink(NewUser.this, username);
+                } else if (!validation.passwordcontainsNumber(password.getText().toString())) {
                     password.setError("Password must be at least 8 character containing numbers");
-                else if (!re_password.getText().toString().equals(password.getText().toString()))
+                    ViewAnimation.blink(NewUser.this, password);
+                } else if (!re_password.getText().toString().equals(password.getText().toString())) {
                     re_password.setError(" Password doesn't match ");
-                else if (!validation.isValidEmailAddress(email.getText().toString()))
+                    ViewAnimation.blink(NewUser.this, re_password);
+                } else if (!validation.isValidEmailAddress(email.getText().toString())) {
                     email.setError("Enter correct email ");
-                else if (!validation.validatePhoneNumber(phone.getText().toString()))
+                    ViewAnimation.blink(NewUser.this, email);
+                } else if (!validation.validatePhoneNumber(phone.getText().toString())) {
                     phone.setError("Enter correct Phone ");
+                    ViewAnimation.blink(NewUser.this, phone);
 
-
-                else {
+                }else {
                     signup_progress.setVisibility(View.VISIBLE);
                     register.setVisibility(View.GONE);
                     InternetConnectionChecker.isConnectedToInternet(NewUser.this, new OnInternetConnectionListener() {
@@ -194,8 +199,17 @@ public class NewUser extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();
+            //push from top to bottom
+            overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //push from top to bottom
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
     }
 }

@@ -38,6 +38,7 @@ import sharearide.com.orchidatech.jma.sharearide.Activity.AddLocation;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
+import sharearide.com.orchidatech.jma.sharearide.View.Animation.ViewAnimation;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnAddressFetched;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestFinished;
@@ -93,7 +94,9 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                         if (status) {
                             Intent intent = new Intent(getActivity(), AddLocation.class);
                             intent.putExtra("Request", 100);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivityForResult(intent, 100);
+                            getActivity().overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                         } else {
                             {
 
@@ -133,7 +136,9 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                         if (status) {
                             Intent intent = new Intent(getActivity(), AddLocation.class);
                             intent.putExtra("Request", 101);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivityForResult(intent, 101);
+                            getActivity().overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                         } else {
                             {
 
@@ -212,8 +217,7 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
         LayoutInflater li = LayoutInflater.from(context);
         View dialogView = li.inflate(R.layout.more_info, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                context);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context, R.style.DialogSlideAnim);
 
         // set more_info.xml to alertdialog builder
         alertDialogBuilder.setView(dialogView);
@@ -230,17 +234,23 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
             public void onClick(View v) {
                 if (cityFrom.getText().toString().equals("")) {
                     cityFrom.setError("Required Field");
-                } else if (countryFrom.getText().toString().equals(""))
+                    ViewAnimation.bounce(getActivity(), cityFrom);
+                } else if (countryFrom.getText().toString().equals("")) {
                     countryFrom.setError("Required Field");
-                else if (time.getText().toString().equals(""))
+                    ViewAnimation.bounce(getActivity(), countryFrom);
+                } else if (time.getText().toString().equals("")) {
                     time.setError("Required Field ");
-                else if (date.getText().toString().equals(""))
+                    ViewAnimation.bounce(getActivity(), time);
+                } else if (date.getText().toString().equals("")) {
                     date.setError("Required Field ");
-                else if (cityTo.getText().toString().equals(""))
+                    ViewAnimation.bounce(getActivity(), date);
+                } else if (cityTo.getText().toString().equals("")) {
                     cityTo.setError("Required Field ");
-                else if (countryTo.getText().toString().equals(""))
+                    ViewAnimation.bounce(getActivity(), cityTo);
+                } else if (countryTo.getText().toString().equals("")) {
                     countryTo.setError("Required Field ");
-                else if(from_Lattitude!=null & to_Lattitude!=null){
+                    ViewAnimation.bounce(getActivity(), countryTo);
+                }else if(from_Lattitude!=null & to_Lattitude!=null){
                     InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
                         @Override
                         public void internetConnectionStatus(boolean status) {
