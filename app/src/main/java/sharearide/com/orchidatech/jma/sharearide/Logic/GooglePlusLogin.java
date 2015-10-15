@@ -13,7 +13,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 import java.util.UUID;
 
@@ -183,9 +183,9 @@ public class GooglePlusLogin implements SocialNetwork {
                 user.email = email;
                 user.id = currentPerson.getId();
                 Toast.makeText(activity,""+user.email,Toast.LENGTH_LONG).show();
-                Gson gson = new Gson();
-                String json = gson.toJson(user);
-                mSharedPreferences.edit().putString(AppConstant.SharedPreferenceNames.SocialUser, json).commit();
+//                Gson gson = new Gson();
+//                String json = gson.toJson(user);
+//                mSharedPreferences.edit().putString(AppConstant.SharedPreferenceNames.SocialUser, json).commit();
 
                 lsnr.onSuccess(user);
             }

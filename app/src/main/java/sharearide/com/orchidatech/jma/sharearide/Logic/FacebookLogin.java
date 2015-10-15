@@ -21,7 +21,7 @@ import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -87,9 +87,9 @@ public class FacebookLogin implements SocialNetwork {
                                     fbUser.avatarURL = "https://graph.facebook.com/" + fbUser.id + "/picture?width=300&height=300";
                                     fbUser.network = SocialUser.NetworkType.FACEBOOK;
 
-                                    Gson gson = new Gson();
-                                    String json = gson.toJson(fbUser);
-                                    mSharedPreferences.edit().putString(AppConstant.SharedPreferenceNames.SocialUser, json).commit();
+//                                    Gson gson = new Gson();
+//                                    String json = gson.toJson(fbUser);
+//                                    mSharedPreferences.edit().putString(AppConstant.SharedPreferenceNames.SocialUser, json).commit();
 
                                     lsnr.onSuccess(fbUser);
                                 }
