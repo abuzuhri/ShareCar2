@@ -134,7 +134,7 @@
                 android:orientation="vertical"
                 android:id="@+id/ll_changePassword"
                 android:visibility="gone"
-                android:paddingBottom="50dp"
+                android:paddingBottom="40dp"
                 android:layout_below="@+id/btn_changePassword">
 
                 <EditText
@@ -143,6 +143,7 @@
                     android:id="@+id/current_password"
                     android:hint="Current Password"
                     android:padding="10dp"
+                    android:layout_marginTop="5dp"
                     android:textDirection="ltr"
                     android:inputType="textPassword"
                     android:singleLine="true"

@@ -49,11 +49,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/ic_city"
                     />
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"></LinearLayout>
+
                 <EditText
                     android:id="@+id/cityFrom"
                     android:layout_width="wrap_content"
@@ -67,12 +63,14 @@
                     android:background="#fff"
                     android:inputType="text"
                     android:imeOptions="actionNext"
-                    android:layout_weight="0.8" />
+                    android:layout_weight="0.8" >
+                    <requestFocus/>
+                </EditText>
 
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="18dp"
+                    android:layout_height="25dp"
                     android:id="@+id/firstlocation_lat_long"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"
@@ -274,8 +272,8 @@
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="18dp"
+                    android:layout_height="25dp"
                     android:id="@+id/secondlocation_lat_long"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"

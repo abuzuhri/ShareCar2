@@ -97,7 +97,7 @@ public class ChatActivity extends ActionBarActivity implements MessagesFragment.
 
         try {
             ContentValues values = new ContentValues(2);
-            values.put(DataProvider.COL_NAME, email.substring(0, email.indexOf('@')));
+           values.put(DataProvider.COL_NAME, email.substring(0, email.indexOf('@')));
             values.put(DataProvider.COL_EMAIL, email);
             this.getContentResolver().insert(DataProvider.CONTENT_URI_PROFILE, values);
 

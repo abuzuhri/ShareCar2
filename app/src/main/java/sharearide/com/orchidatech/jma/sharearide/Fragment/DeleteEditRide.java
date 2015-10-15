@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -110,7 +111,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
         stateFrom.setTypeface(font);
         stateTo.setTypeface(font);
         price.setTypeface(font);
-        info.setTypeface(font);
+      //  info.setTypeface(font);
         calendar = Calendar.getInstance();
         save.setOnClickListener(new View.OnClickListener() {
             @Override

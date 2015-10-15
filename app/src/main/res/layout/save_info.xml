@@ -425,16 +425,16 @@
                     android:layout_weight="0.1"
                     />
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/call"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/call"
                     android:layout_marginRight="10dp"/>
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/send_msg"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/sms"/>
@@ -474,8 +474,8 @@
                     android:layout_weight="0.1"
                     />
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/send_mail"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/msg" />

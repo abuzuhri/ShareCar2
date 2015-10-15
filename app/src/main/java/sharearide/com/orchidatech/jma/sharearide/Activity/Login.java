@@ -44,6 +44,7 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import android.graphics.Typeface;
 
 import sharearide.com.orchidatech.jma.sharearide.Constant.AppLog;
 import sharearide.com.orchidatech.jma.sharearide.Constant.UrlConstant;

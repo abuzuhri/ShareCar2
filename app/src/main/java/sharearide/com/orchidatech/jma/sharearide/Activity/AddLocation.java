@@ -122,7 +122,8 @@ public class AddLocation extends ActionBarActivity implements MapEventsReceiver 
                         setResult(101, intent);
                         finish();
                     }
-                }
+                }else
+                    Toast.makeText(AddLocation.this,"Please Determine Your Ride ",Toast.LENGTH_LONG).show();
             }
         });
         map = (MapView) findViewById(R.id.mapview);

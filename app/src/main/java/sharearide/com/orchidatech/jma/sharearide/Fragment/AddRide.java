@@ -74,7 +74,7 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
         date=(EditText)v.findViewById(R.id.date);
         price=(EditText)v.findViewById(R.id.price);
 
-        font= Typeface.createFromAsset(context.getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_regular.ttf");
         cityFrom.setTypeface(font);
         cityTo.setTypeface(font);
         countryTo.setTypeface(font);

@@ -73,8 +73,8 @@
 
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="18dp"
+                android:layout_height="25dp"
                 android:id="@+id/firstlocation_lat_long"
                 android:layout_marginLeft="5dp"
                 android:layout_gravity="center_vertical"
@@ -286,14 +286,12 @@
                 android:imeOptions="actionNext"
                 android:layout_weight="0.8"
                 />
-
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="18dp"
+                android:layout_height="25dp"
                 android:id="@+id/secondlocation_lat_long"
                 android:layout_marginLeft="5dp"
                 android:layout_gravity="center_vertical"
-
                 android:background="@drawable/ic_location"/>
 
         </LinearLayout>
