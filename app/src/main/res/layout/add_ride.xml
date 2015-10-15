@@ -56,7 +56,6 @@
                     android:layout_height="wrap_content"
                     android:hint="City"
                     android:layout_marginLeft="10dp"
-
                     android:textColorHint="#bbbbbb"
                     android:padding="5dp"
                     android:singleLine="true"
@@ -71,8 +70,8 @@
 
 
                 <ImageButton
-                    android:layout_width="18dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="28dp"
                     android:id="@+id/firstlocation_lat_long"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"
@@ -285,8 +284,8 @@
                     />
 
                 <ImageButton
-                    android:layout_width="18dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="28dp"
                     android:id="@+id/secondlocation_lat_long"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"

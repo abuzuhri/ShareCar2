@@ -73,8 +73,8 @@
 
 
             <ImageButton
-                android:layout_width="18dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="28dp"
                 android:id="@+id/firstlocation_lat_long"
                 android:layout_marginLeft="5dp"
                 android:layout_gravity="center_vertical"
@@ -292,8 +292,8 @@
                 android:layout_weight="0.8"
                 />
             <ImageButton
-                android:layout_width="18dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="28dp"
                 android:id="@+id/secondlocation_lat_long"
                 android:layout_marginLeft="5dp"
                 android:layout_gravity="center_vertical"
