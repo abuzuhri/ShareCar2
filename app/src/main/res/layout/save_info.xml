@@ -60,7 +60,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="   Ramallah"
+                    android:text="Ramallah"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
@@ -89,7 +92,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="   State"
+                    android:text="State"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
@@ -116,9 +122,12 @@
                     android:id="@+id/countryFrom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="   Weast bank"
+                    android:text="Weast bank"
                     android:padding="5dp"
                     android:textDirection="ltr"
+                    android:layout_marginLeft="10dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:background="#fff"
                     android:textColorHint="#bbbbbb"
                     />
@@ -146,8 +155,11 @@
                     android:id="@+id/time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="   08:10:00"
+                    android:text="08:10:00"
                     android:padding="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
@@ -168,7 +180,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/aa"
                     android:layout_gravity="center_vertical"
-
                     android:background="@drawable/ic_date"
                     />
 
@@ -176,9 +187,12 @@
                     android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="   11/09/2015"
+                    android:text="11/09/2015"
                     android:padding="5dp"
+                    android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -234,9 +248,12 @@
                     android:id="@+id/cityTo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="   Gaza"
+                    android:text="Gaza"
+                    android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
                     android:padding="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -266,7 +283,10 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:textColorHint="#bbbbbb"
-                    android:text="   State"
+                    android:text="State"
+                    android:layout_marginLeft="10dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -291,13 +311,15 @@
                     android:id="@+id/countryTo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="   Gaza Strip"
+                    android:text="Gaza Strip"
+                    android:layout_marginLeft="10dp"
                     android:padding="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
-
             </LinearLayout>
 
 
@@ -319,8 +341,11 @@
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="   50"
+                    android:text="50"
                     android:padding="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
@@ -372,8 +397,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/vertical_margintopTextView"
-                android:layout_marginRight="@dimen/vertical_margintopTextView"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
 
@@ -389,8 +414,11 @@
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="   Ahmed abu Zuhree"
+                    android:text="Ahmed abu Zuhree"
                     android:padding="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
@@ -401,8 +429,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginRight="@dimen/horizontal_margin"
-                android:layout_marginLeft="@dimen/vertical_margintopTextView"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
@@ -410,23 +438,25 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageddV6"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/ic_tell"
-                  />
+                    android:background="@drawable/ic_tell" />
 
                 <TextView
                     android:id="@+id/phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="   05998751257"
+                    android:text="05998751257"
                     android:padding="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_weight="0.1"
                     />
                 <ImageButton
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/call"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/call"
@@ -448,8 +478,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginRight="@dimen/horizontal_margin"
-                android:layout_marginLeft="@dimen/vertical_margintopTextView"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop">
 
                 <ImageView
@@ -464,18 +494,20 @@
                     android:id="@+id/email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="   Juist@gmail.com"
+                    android:text="Juist@gmail.com"
                     android:layout_gravity="left|bottom"
                     android:padding="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="10dp"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:textColorHint="#bbbbbb"
-
                     android:layout_weight="0.1"
                     />
                 <ImageButton
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/send_mail"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/msg" />

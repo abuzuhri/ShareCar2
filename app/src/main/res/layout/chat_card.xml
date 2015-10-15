@@ -10,8 +10,8 @@
         android:id="@+id/chat_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/card_horizentalmargin"
+        android:layout_marginLeft="@dimen/card_horizentalmargin"
         android:layout_marginTop="3dp">
 
 

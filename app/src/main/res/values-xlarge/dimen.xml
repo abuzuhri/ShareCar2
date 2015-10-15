@@ -16,6 +16,8 @@
     <dimen name="vertical_topWarningImgi">80dp</dimen>
     <dimen name="verticalbottomopWarningImgi">50dp</dimen>
 
+    <dimen name="card_horizentalmargin">25dp</dimen>
+
 
     <dimen name="margin_left_image">15dp</dimen>
     <dimen name="layout_marginLeft">10dp</dimen>
