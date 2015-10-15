@@ -20,16 +20,16 @@ public class UserDAO {
     public static final String NAME = "name";
 
     //<editor-fold defaultstate="collapsed" desc="addNewUser(long userId, String username, String password, String image, String address, long birthdate, String gender, String phone, String email){...}">
-   public static long addNewUser(User user) {
-            if(checkUserExist(user.getRemoteId()) == -1)
-                return user.save();
+    public static long addNewUser(User user) {
+        if(checkUserExist(user.getRemoteId()) == -1)
+            return user.save();
         else
-                return user.getRemoteId();
-   }
+            return user.getRemoteId();
+    }
     public static long addNewUser(long userId, String username, String password, String image,
                                   String address, long birthdate, String gender, String phone, String email){
-    if(checkUserExist(userId) != -1)
-        return userId;
+        if(checkUserExist(userId) != -1)
+            return userId;
         User user = new User();
         user.remoteId = userId;
         user.username = username;
@@ -40,7 +40,7 @@ public class UserDAO {
         user.gender = gender;
         user.phone = phone;
         user.email = email;
-      return user.save();
+        return user.save();
 
     }
     //</editor-fold>
@@ -50,7 +50,7 @@ public class UserDAO {
     public static long checkUserExist(long userId) {
         User user = new Select().from(User.class).where("remote_id = ?", userId).executeSingle();
         if(user != null)
-             return user.getId();
+            return user.getId();
         else
             return -1;
     }
@@ -78,7 +78,7 @@ public class UserDAO {
     public static String retreivePassword(String email) {
         User user = new Select("Password").from(User.class).where("Email = ?", email).executeSingle();
         if(user!=null)
-        return user.password;
+            return user.password;
         else
             return null;
     }

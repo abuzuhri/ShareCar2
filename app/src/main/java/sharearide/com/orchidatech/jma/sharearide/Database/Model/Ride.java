@@ -50,7 +50,7 @@ public class Ride extends Model {
     @Column(name = "from_Longitude")
     public double from_Longitude;
 
-      @Column(name = "to_latitude")
+    @Column(name = "to_latitude")
     public double to_latitude;
 
     @Column(name = "to_longitude")

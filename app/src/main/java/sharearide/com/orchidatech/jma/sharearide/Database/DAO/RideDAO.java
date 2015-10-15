@@ -171,7 +171,7 @@ public class RideDAO {
     }
 
     public static void deleteRide(long rideId) {
-    Ride ride = getRideByRemoteId(rideId);
+        Ride ride = getRideByRemoteId(rideId);
         if(ride != null)
             ride.delete();
 

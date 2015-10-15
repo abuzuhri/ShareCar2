@@ -14,27 +14,27 @@ public class RideDAO {
     public static long checkRideExist(long rideId) {
         Ride ride = new Select().from(Ride.class).where("remote_id = ?", rideId).executeSingle();
         if(ride != null)
-        return ride.getId();
+            return ride.getId();
         return -1;
     }
 
     public static long addNewRide(Ride r) {
-    if(checkRideExist(r.getRemoteId()) != -1)
-        return r.getRemoteId();
+        if(checkRideExist(r.getRemoteId()) != -1)
+            return r.getRemoteId();
 
         Ride ride = new Ride();
- ride.remoteId = r.getRemoteId();
-            ride.userId = r.userId;
+        ride.remoteId = r.getRemoteId();
+        ride.userId = r.userId;
 
-            ride.fromCity = r.fromCity;
+        ride.fromCity = r.fromCity;
 
-            ride.fromState = r.fromState;
-            ride.fromCountry = r.fromCountry;
-            ride.toCity = r.toCity;
-            ride.toState = r.toState;
-            ride.toCountry = r.toCountry;
-            ride.dateTime = r.dateTime;
-            ride.cost = r.cost;
+        ride.fromState = r.fromState;
+        ride.fromCountry = r.fromCountry;
+        ride.toCity = r.toCity;
+        ride.toState = r.toState;
+        ride.toCountry = r.toCountry;
+        ride.dateTime = r.dateTime;
+        ride.cost = r.cost;
         ride.to_longitude=r.getTo_longitude();
         ride.to_latitude=r.getTo_latitude();
         ride.from_Lattitude=r.getFrom_Lattitude();
@@ -42,7 +42,7 @@ public class RideDAO {
 
 
         ride.info = r.info;
-      return ride.save();
+        return ride.save();
     }
 
 //
@@ -142,7 +142,7 @@ public class RideDAO {
     }
 
     public static Ride getRideById(long rideId) {
-          return new Select().from(Ride.class).where("remote_id = ?", rideId).executeSingle();
+        return new Select().from(Ride.class).where("remote_id = ?", rideId).executeSingle();
 //        return Ride.load(Ride.class, rideId);
     }
 
@@ -184,7 +184,7 @@ public class RideDAO {
     }
 
     public static void updateRide(Ride _ride) {
-       Ride ride = _ride;
+        Ride ride = _ride;
         ride.save();
 
 

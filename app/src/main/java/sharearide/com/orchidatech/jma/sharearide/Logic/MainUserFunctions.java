@@ -284,7 +284,7 @@ public class MainUserFunctions {
                         ride.cost = price;*/
                             Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to,
                                     date_time, price, more_info, from_Lattitude, from_Longitude, to_latitude, to_longitude);
-                            RideDAO.addNewRide(ride);
+//                            RideDAO.addNewRide(ride);
                             newItems.add(ride);
                         }
                         ///To Ensure that max num of items in db is MAX_NUM_RIDES....
@@ -341,12 +341,6 @@ public class MainUserFunctions {
                         Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (EmptyFieldException e) {
-                    e.displayMessage();
-                    e.printStackTrace();
-                } catch (InvalidInputException e) {
-                    e.displayMessage();
                     e.printStackTrace();
                 }
             }
@@ -455,8 +449,8 @@ public class MainUserFunctions {
                             allMatchedRides.add(ride);
                             JSONObject userJsonObject = mJsonObject.getJSONObject("user");
                             User user = new User(ride.getUserId(), null, userJsonObject.getString("username"), null, userJsonObject.getString("img"), userJsonObject.getString("phone"), userJsonObject.getString("email"), null, -1, userJsonObject.getString("Gender"));
-                            UserDAO.addNewUser(user);
-                            RideDAO.addNewRide(ride);
+//                            UserDAO.addNewUser(user);
+//                            RideDAO.addNewRide(ride);
                             matchedRidesData.put(ride, user);
 
 //                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
@@ -486,13 +480,14 @@ public class MainUserFunctions {
     }
 
 
+
     public static void offerRide(final Context context, final long user_id,
                                  final String city_from, final String city_to,
                                  final String state_from, final String state_to,
                                  final String country_from, final String country_to,
                                  final long date_time, final String price, final String more_info,
                                  final String from_latitude,final String from_longitude,
-                                 final String to_latitude,final String to_longitude,final OnRequestListener listener){
+                                 final String to_latitude,final String to_longitude,final OnRequestFinished listener){
         Map<String, String> params = new HashMap<>();
         params.put("user_id", String.valueOf(user_id));
         params.put("city_from", city_from);
@@ -516,7 +511,7 @@ public class MainUserFunctions {
                 try {
                     boolean success = jsonObject.getBoolean("success");
                     if (success) {
-                        listener.onFinished();
+                        listener.onFinished("success");
 
                         JSONArray mJsonArray = jsonObject.getJSONArray("ride");
                         JSONObject mJsonObject = mJsonArray.getJSONObject(0);
@@ -529,13 +524,13 @@ public class MainUserFunctions {
                         String message = jsonObject.getString("message");
 
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                        listener.onFinished();
+                        listener.onFinished("success");
 
                     }
 
 
                 } catch (JSONException e) {
-                    listener.onFinished();
+                    listener.onFinished("success");
                     e.printStackTrace();
 
                 }
@@ -543,12 +538,13 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
-                listener.onFinished();
+                listener.onFinished("success");
 
                 Toast.makeText(context, error, Toast.LENGTH_LONG).show();
             }
         });
     }
+
 
     public static void socialSignUp(final Context context, final SocialUser user) {
         Map<String,String> params = new HashMap<>();
@@ -723,8 +719,8 @@ public class MainUserFunctions {
                             persons.add(sender_info);
                             persons.add(receiver_info);
 
-                            UserDAO.addNewUser(sender_info);
-                            UserDAO.addNewUser(receiver_info);
+//                          UserDAO.addNewUser(sender_info);
+//                            UserDAO.addNewUser(receiver_info);
                             ChatDAO.addNewChat(chat);
                             messages_data.put(chat, persons);
                             all_messages.add(chat);
@@ -957,7 +953,7 @@ public class MainUserFunctions {
                     Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to,
                             date_time, price, more_info, from_Lattitude, from_Longitude, to_latitude, to_longitude);
 
-                    RideDAO.addNewRide(ride);
+                  // RideDAO.addNewRide(ride);
                     all_my_rides.add(ride);
                 }
                 listener.onFetched(all_my_rides);
