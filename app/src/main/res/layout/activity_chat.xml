@@ -42,6 +42,7 @@
             android:layout_toLeftOf="@+id/send_btn"
             android:background="#fff"
             android:padding="15dp"
+            android:textSize="@dimen/text_size"
             android:hint="Write new message"
             >
 

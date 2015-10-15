@@ -55,6 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="City"
+                    android:textSize="@dimen/text_size"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
                     android:padding="5dp"
@@ -102,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Country"
                     android:layout_marginLeft="10dp"
-
+                    android:textSize="@dimen/text_size"
                     android:textColorHint="#bbbbbb"
                     android:padding="5dp"
                     android:singleLine="true"
@@ -144,7 +145,7 @@
                     android:ellipsize="end"
                     android:background="#fff"
                     android:layout_marginLeft="10dp"
-
+                    android:textSize="@dimen/text_size"
                     android:layout_marginRight="@dimen/horizontal_margin"
                     android:inputType="text"
                     android:imeOptions="actionNext"
@@ -179,7 +180,7 @@
                     android:background="#fff"
                     android:layout_marginRight="@dimen/horizontal_margin"
                     android:layout_marginLeft="10dp"
-
+                    android:textSize="@dimen/text_size"
                     android:imeOptions="actionNext"
                     />
 
@@ -215,6 +216,7 @@
                     android:focusableInTouchMode="false"
                     android:textColorHint="#bbbbbb"
                     android:textDirection="ltr"
+                    android:textSize="@dimen/text_size"
                     android:background="#fff"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="@dimen/horizontal_margin"
@@ -279,6 +281,7 @@
                     android:ellipsize="end"
                     android:background="#fff"
                     android:inputType="text"
+                    android:textSize="@dimen/text_size"
                     android:imeOptions="actionNext"
                     android:layout_weight="0.8"
                     />
@@ -318,7 +321,7 @@
                     android:textColorHint="#bbbbbb"
                     android:padding="5dp"
                     android:layout_marginLeft="10dp"
-
+                    android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:singleLine="true"
@@ -355,7 +358,7 @@
                     android:padding="5dp"
                     android:textDirection="ltr"
                     android:layout_marginLeft="10dp"
-
+                    android:textSize="@dimen/text_size"
                     android:background="#fff"
                     android:singleLine="true"
                     android:ellipsize="end"
@@ -394,7 +397,7 @@
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
-
+                    android:textSize="@dimen/text_size"
                     android:background="#fff"
                     android:inputType="number"
                     android:imeOptions="actionNext"
