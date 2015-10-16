@@ -40,7 +40,7 @@
             android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginBottom="@dimen/date_marginTop"
-            android:padding="1dp"
+            android:padding="2dp"
 
             >
 
@@ -266,7 +266,7 @@
             android:layout_marginRight="@dimen/horizontal_marginLeft"
             android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop"
-            android:padding="1dp"
+            android:padding="2dp"
 
             >
 
