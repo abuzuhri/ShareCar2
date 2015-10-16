@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 import android.annotation.TargetApi;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -108,63 +109,109 @@ public class ShareRide extends ActionBarActivity {
                     case 1:
                         Drawer.closeDrawers();
                         shareRideFragment = new ShareRideFragment();
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).addToBackStack(null).commit();
+                        getFragmentManager().beginTransaction()
+                                .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
+                                .replace(R.id.fragment_place, shareRideFragment)
+                                .addToBackStack(null)
+                                .commit();
                         getFragmentManager().executePendingTransactions();
                         shareRideFragment.selectTab(0);
                         break;
+
                     case 2:
                         Drawer.closeDrawers();
                         shareRideFragment = new ShareRideFragment();
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).addToBackStack(null).commit();
+                        getFragmentManager().beginTransaction()
+                                .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
+                                .replace(R.id.fragment_place, shareRideFragment)
+                                .addToBackStack(null)
+                                .commit();
                         getFragmentManager().executePendingTransactions();
                         shareRideFragment.selectTab(1);
                         break;
+
                     case 3:
                         Drawer.closeDrawers();
                         myRidesFragment = new MyRides();
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_place, myRidesFragment).addToBackStack(null).commit();
+                        getFragmentManager().beginTransaction()
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                .replace(R.id.fragment_place, myRidesFragment)
+                                .addToBackStack(null)
+                                .commit();
                         getFragmentManager().executePendingTransactions();
                         toolbar.setTitle("My Rides");
-
-
                         break;
+
                     case 4:
                         Drawer.closeDrawers();
                         inboxFragment = new Inbox();
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_place,inboxFragment).addToBackStack(null).commit();
+                        getFragmentManager().beginTransaction()
+                                .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
+                                .replace(R.id.fragment_place, inboxFragment)
+                                .addToBackStack(null)
+                                .commit();
                         getFragmentManager().executePendingTransactions();
                         toolbar.setTitle("Inbox");
                         break;
+
                     case 5:
                         Drawer.closeDrawers();
                         getFragmentManager()
                                 .beginTransaction()
+                                        //.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down)
+                                .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right, 0, 0)
                                 .replace(R.id.fragment_place, findAllRideFragment).addToBackStack(null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         toolbar.setTitle("Search Ride");
                         break;
+
                     case 6:
                         Drawer.closeDrawers();
-                        startActivity(new Intent(ShareRide.this, UserSettings.class));
+                        Intent i1 = new Intent(ShareRide.this, UserSettings.class);
+                        i1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(i1);
+                        //opening transition animations
+                        overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
+
+                        //push from bottom to top
+                        //overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+                        //slide from right to left
+                        //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                        //push from top to bottom
+                        //overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+                        //slide from left to right
+                        //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
                         break;
+
                     case 7:
                         Drawer.closeDrawers();
-                        startActivity(new Intent(ShareRide.this,UserProfile.class));
+                        Intent i2 = new Intent(ShareRide.this, UserProfile.class);
+                        i2.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(i2);
+                        //overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+                        //opening transition animations
+                        overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                         break;
+
                     case 8:
                         Drawer.closeDrawers();
                         getFragmentManager()
                                 .beginTransaction()
+                                .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
                                 .replace(R.id.fragment_place, about).addToBackStack(null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         toolbar.setTitle("About");
                         break;
+
                     case 9:
                         Drawer.closeDrawers();
                         getFragmentManager()
                                 .beginTransaction()
+                                .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
                                 .replace(R.id.fragment_place, termsOfUse).addToBackStack(null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();

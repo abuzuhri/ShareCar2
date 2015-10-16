@@ -44,6 +44,7 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import android.graphics.Typeface;
 
 import sharearide.com.orchidatech.jma.sharearide.Constant.AppLog;
 import sharearide.com.orchidatech.jma.sharearide.Constant.UrlConstant;
@@ -55,6 +56,7 @@ import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.Model.SocialUser;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
+import sharearide.com.orchidatech.jma.sharearide.View.Animation.ViewAnimation;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoadFinished;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnLoginListener;
@@ -118,6 +120,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         fBbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ViewAnimation.bounce(Login.this, fBbtn);
+
                 InternetConnectionChecker.isConnectedToInternet(Login.this, new OnInternetConnectionListener() {
                     @Override
                     public void internetConnectionStatus(boolean status) {
@@ -161,6 +165,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         gplusbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ViewAnimation.bounce(Login.this, gplusbtn);
+
                 InternetConnectionChecker.isConnectedToInternet(Login.this, new OnInternetConnectionListener() {
                     @Override
                     public void internetConnectionStatus(boolean status) {
@@ -205,11 +211,18 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         Gobtnx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ViewAnimation.clockwise(Login.this, Gobtnx);
+
                 if (ed_email.getText().toString().equals("")) {
                     ed_email.setError("Enter Email");
-                } else if (ed_password.getText().toString().equals(""))
+                    ViewAnimation.blink(Login.this, ed_email);
+                    ViewAnimation.bounce(Login.this, Gobtnx);
+
+                } else if (ed_password.getText().toString().equals("")) {
                     ed_password.setError("Enter Password");
-                else {
+                    ViewAnimation.blink(Login.this, ed_password);
+                    ViewAnimation.bounce(Login.this, Gobtnx);
+                }else {
                     InternetConnectionChecker.isConnectedToInternet(Login.this,new OnInternetConnectionListener() {
                         @Override
                         public void internetConnectionStatus(boolean status) {
@@ -252,19 +265,20 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         signUpbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent i=new Intent(Login.this, NewUser.class);
+                Intent i = new Intent(Login.this, NewUser.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(i);
-
+                overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
             }
         });
 
         resetPwbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent i=new Intent(Login.this, ResetPassword.class);
+                Intent i = new Intent(Login.this, ResetPassword.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(i);
+                overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
             }
         });
 

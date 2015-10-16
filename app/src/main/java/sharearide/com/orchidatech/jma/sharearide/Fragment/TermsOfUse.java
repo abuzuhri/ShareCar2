@@ -51,9 +51,8 @@ public class TermsOfUse extends Fragment {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int height = display.getHeight();
         int width = display.getWidth();
-        logo.getLayoutParams().height = (int) (height * 0.35);
-        logo.getLayoutParams().width = (int) (width * 0.3);
-
+        logo.getLayoutParams().height = (int) (height * 0.3);
+        logo.getLayoutParams().width = (int) (width * 0.25);
         // Calling async task to get json
         new GetTermsOfUse().execute();
 

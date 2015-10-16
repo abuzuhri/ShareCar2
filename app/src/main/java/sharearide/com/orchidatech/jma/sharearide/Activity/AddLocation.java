@@ -122,7 +122,8 @@ public class AddLocation extends ActionBarActivity implements MapEventsReceiver 
                         setResult(101, intent);
                         finish();
                     }
-                }
+                }else
+                    Toast.makeText(AddLocation.this,"Please Determine Your Ride ",Toast.LENGTH_LONG).show();
             }
         });
         map = (MapView) findViewById(R.id.mapview);
@@ -298,7 +299,6 @@ public class AddLocation extends ActionBarActivity implements MapEventsReceiver 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_map, menu);
-
         return true;
     }
 
@@ -310,9 +310,20 @@ public class AddLocation extends ActionBarActivity implements MapEventsReceiver 
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();
+            //push from bottom to top
+            overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
             return true;
         }
-
+        if (id == R.id.action_search) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //push from bottom to top
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
     }
 }

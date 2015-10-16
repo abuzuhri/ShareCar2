@@ -9,48 +9,36 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        card_view:cardCornerRadius="@dimen/card_corner_radius"
-        card_view:cardElevation="@dimen/card_elevation">
+        android:layout_marginRight="@dimen/card_horizentalmargin"
+        android:layout_marginLeft="@dimen/card_horizentalmargin"
+        android:layout_marginTop="5dp">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tool_bar"
             android:background="#fff"
-            android:orientation="horizontal"
-           >
+            android:padding="5dp"
+            android:orientation="horizontal">
 
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
-    android:layout_marginLeft="20dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_contact_picture"
-        android:id="@+id/result_img"
-        />
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:id="@+id/load_image_progress" />
-
-</RelativeLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_contact_picture"
+                android:id="@+id/result_img"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/textView_displayName"

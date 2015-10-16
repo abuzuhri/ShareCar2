@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="sharearide.com.orchidatech.jma.sharearide.Activity.Login"
-    android:background="@drawable/backgro">
+    android:background="@drawable/ic_background">
 
 
 
@@ -27,7 +27,7 @@
         android:layout_height="40dp"
         android:id="@+id/ed_email"
         android:hint="Enter Email"
-        android:textColorHint="#989898"
+        android:textColorHint="#bbbbbb"
         android:layout_below="@+id/logo"
         android:padding="5dp"
         android:textColor="#30d5e8"
@@ -47,7 +47,7 @@
         android:id="@+id/ed_password"
         android:inputType="textPassword"
         android:hint="Password"
-        android:textColorHint="#989898"
+        android:textColorHint="#bbbbbb"
         android:textColor="#30d5e8"
         android:padding="5dp"
         android:layout_below="@+id/ed_email"

@@ -66,7 +66,8 @@
         <activity
             android:name=".Activity.NewUser"
             android:label="@string/title_activity_signup"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Activity.ReviewRide"
             android:label="Display Ride Details"
@@ -74,15 +75,18 @@
         <activity
             android:name=".Activity.Login"
             android:label="@string/title_activity_login"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Activity.SearchResult"
             android:label="@string/title_activity_search_result"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Activity.ResetPassword"
             android:label="@string/title_activity_reset_password"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Activity.MapViewActivity"
             android:label="@string/title_activity_map"
@@ -90,11 +94,13 @@
         <activity
             android:name=".Activity.ShareRide"
             android:label="@string/title_activity_share_ride"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Activity.UserSettings"
             android:label="@string/title_activity_settings"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Chat.ChatActivity"
             android:logo="@drawable/ic_contact_picture"
@@ -124,7 +130,8 @@
             android:name=".Activity.UserProfile"
             android:label="@string/title_activity_user_profile"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
+
+            >
         </activity>
     </application>
 

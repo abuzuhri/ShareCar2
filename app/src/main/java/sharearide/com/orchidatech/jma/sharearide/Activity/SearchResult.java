@@ -54,7 +54,7 @@ Typeface font;
         ed_search=(EditText)findViewById(R.id.ed_search);
         search_bar=(LinearLayout)findViewById(R.id.search_bar);
         font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
-        ed_search.setTypeface(font);
+//        ed_search.setTypeface(font);
 
         // search=(ImageView)findViewById(R.id.search);
         mProgressBar = (ProgressBar) this.findViewById(R.id.search_progress);
@@ -195,6 +195,8 @@ Typeface font;
 
         if (id == R.id.action_search) {
             search_bar.setVisibility(View.VISIBLE);
+            ed_search.setTypeface(font);
+
             // searchLocal(t1.getText().toString());
             return true;
         }

@@ -85,8 +85,8 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
             Display display = activity.getWindowManager().getDefaultDisplay();
             int height = display.getHeight();
             int width = display.getWidth();
-            result_img.getLayoutParams().height = (int) (height * 0.08);
-            result_img.getLayoutParams().width = (int) (width * 0.14);
+//            result_img.getLayoutParams().height = (int) (height * 0.08);
+//            result_img.getLayoutParams().width = (int) (width * 0.14);
 
 
             time.getLayoutParams().height = (int) (height * 0.03);

@@ -12,7 +12,7 @@
         <LinearLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="250dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:background="@color/ColorPrimary"
@@ -39,7 +39,7 @@
             <LinearLayout
                 android:id="@+id/company"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="130dp"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
@@ -51,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="About Share a Ride"
+                    android:layout_marginBottom="10dp"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -60,6 +61,7 @@
                     android:layout_below="@id/textView11"
                     android:layout_centerHorizontal="true"
                     android:text="Version 1.0"
+                    android:layout_marginBottom="10dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -84,6 +86,7 @@
                     android:id="@+id/about_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:text="Abdulaziz St, Al-Yazji Building"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -93,6 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="28-12345"
+                    android:layout_marginBottom="10dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 

@@ -54,6 +54,9 @@
                 android:layout_height="wrap_content"
                 android:hint="City"
                 android:padding="5dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/text_size"
+                android:textColorHint="#bbbbbb"
                 android:textDirection="ltr"
                 android:background="#fff"
                 android:inputType="text"
@@ -88,6 +91,9 @@
                 android:layout_height="wrap_content"
                 android:hint="State"
                 android:padding="5dp"
+                android:textSize="@dimen/text_size"
+                android:layout_marginLeft="10dp"
+                android:textColorHint="#bbbbbb"
                 android:inputType="text"
                 android:imeOptions="actionNext"
                 android:textDirection="ltr"
@@ -100,6 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginRight="@dimen/horizontal_margin"
             android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop">
 
@@ -117,10 +124,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Country"
+                android:layout_marginLeft="10dp"
                 android:padding="5dp"
                 android:textDirection="ltr"
                 android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
+                android:textSize="@dimen/text_size"
+                android:textColorHint="#bbbbbb"
                 android:inputType="text"
                 android:imeOptions="actionNext"
                 />
@@ -155,6 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginRight="@dimen/horizontal_margin"
             android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop"
             >
@@ -173,9 +183,11 @@
                 android:layout_height="wrap_content"
                 android:hint="City"
                 android:padding="5dp"
+                android:layout_marginLeft="10dp"
                 android:textDirection="ltr"
                 android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
+                android:textSize="@dimen/text_size"
+                android:textColorHint="#bbbbbb"
                 android:inputType="text"
                 android:imeOptions="actionNext"
                 />
@@ -186,6 +198,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginRight="@dimen/horizontal_margin"
             android:layout_marginLeft="@dimen/horizontal_marginLeft"
             android:layout_marginBottom="@dimen/date_marginTop">
 
@@ -205,8 +218,10 @@
                 android:layout_gravity="left|bottom"
                 android:padding="5dp"
                 android:textDirection="ltr"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/text_size"
                 android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
+                android:textColorHint="#bbbbbb"
                 android:inputType="text"
                 android:imeOptions="actionNext"
                 />
@@ -217,6 +232,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:layout_marginRight="@dimen/horizontal_margin"
+
             android:layout_marginBottom="@dimen/date_marginTop">
 
             <ImageView
@@ -234,9 +251,11 @@
                 android:layout_height="wrap_content"
                 android:hint="Country"
                 android:padding="5dp"
+                android:textColorHint="#bbbbbb"
                 android:textDirection="ltr"
                 android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/text_size"
                 android:inputType="text"
                 android:imeOptions="actionNext"
                 />

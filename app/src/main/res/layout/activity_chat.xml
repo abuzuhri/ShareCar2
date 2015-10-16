@@ -40,8 +40,9 @@
             android:layout_alignBottom="@+id/send_btn"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/send_btn"
-            android:background="@drawable/inp_text"
+            android:background="#fff"
             android:padding="15dp"
+            android:textSize="@dimen/text_size"
             android:hint="Write new message"
             >
 

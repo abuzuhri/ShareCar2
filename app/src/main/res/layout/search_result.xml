@@ -28,9 +28,8 @@
             android:layout_marginRight="@dimen/horizontal_margin"
             android:padding="5dp"
             android:id="@+id/ed_search"
-            app:met_baseColor="#fff"
-            app:met_primaryColor="?colorAccent"
-            android:layout_margin="15dp"
+            app:met_baseColor="@color/ColorPrimary"
+            app:met_primaryColor="@color/ColorPrimary"
             app:met_floatingLabel="normal" />
 
 

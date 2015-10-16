@@ -23,6 +23,7 @@ import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
+import sharearide.com.orchidatech.jma.sharearide.View.Animation.ViewAnimation;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSendPasswordListener;
 
@@ -54,6 +55,7 @@ public class ResetPassword extends ActionBarActivity {
             public void onClick(View view) {
                 if(TextUtils.isEmpty(ed_email.getText())) {
                     ed_email.setError("Enter Email ");
+                    ViewAnimation.blink(ResetPassword.this, ed_email);
                 }else{
 
                     InternetConnectionChecker.isConnectedToInternet(ResetPassword.this, new OnInternetConnectionListener() {
@@ -146,8 +148,17 @@ public class ResetPassword extends ActionBarActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();
+            //push from top to bottom
+            overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //push from top to bottom
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
     }
 }

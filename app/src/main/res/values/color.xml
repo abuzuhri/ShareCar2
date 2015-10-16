@@ -14,4 +14,8 @@
     <color name="btn">#25859e</color>
     <color name="white_btn">#fff</color>
 
+    <color name="swarm_red">#e6522e</color>
+    <color name="swarm_blue">#00b5cf</color>
+    <color name="swarm_cream">#fcf5e6</color>
+
 </resources>

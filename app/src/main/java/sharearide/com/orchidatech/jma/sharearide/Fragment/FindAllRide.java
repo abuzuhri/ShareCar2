@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
+
+import java.lang.annotation.AnnotationFormatError;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +41,7 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener
 
 public class FindAllRide extends Fragment {
     private ImageButton searchAll;
-    private EditText ed_search;
+    private MaterialEditText ed_search;
     MyAdapter adapter;
     RecyclerView rv;
     private ProgressBar mProgressBar;
@@ -46,18 +50,19 @@ public class FindAllRide extends Fragment {
     Map<Ride, User> ridesData;
     Map<Ride, User> orginal_ridesData;
     private LinearLayoutManager llm;
-
+Typeface font;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_ride, container, false);
 
-        ed_search = (EditText) v.findViewById(R.id.ed_search);
+        ed_search = (MaterialEditText) v.findViewById(R.id.ed_search);
         searchAll = (ImageButton) v.findViewById(R.id.search);
         mProgressBar = (ProgressBar) v.findViewById(R.id.search_progress);
         mProgressBar.setVisibility(View.GONE);
-
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_regular.ttf");
+//       ed_search.setTypeface(font);
         rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);
         llm = new LinearLayoutManager(getActivity());
@@ -65,8 +70,8 @@ public class FindAllRide extends Fragment {
         searchAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(ed_search.getText())) {
-                    //  ed_search.setError("Enter Email ");
+                if (TextUtils.isEmpty(ed_search.getText().toString())) {
+                  //  ed_search.setError("Nothing to search for");
                 } else {
 
                     InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {

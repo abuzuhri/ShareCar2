@@ -13,6 +13,8 @@
     <dimen name="vertical_logoBottom">40dp</dimen>
     <dimen name="vertical_topBtn">20dp</dimen>
 
+    <dimen name="card_horizentalmargin">20dp</dimen>
+
     <dimen name="vertical_topWarningImgi">160dp</dimen>
     <dimen name="verticalbottomopWarningImgi">80dp</dimen>
 

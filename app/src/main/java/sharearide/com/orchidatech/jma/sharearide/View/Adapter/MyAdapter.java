@@ -134,8 +134,8 @@ Typeface font;
             Display display = activity.getWindowManager().getDefaultDisplay();
             int height = display.getHeight();
             int width = display.getWidth();
-            result_img.getLayoutParams().height = (int) (height * 0.09);
-            result_img.getLayoutParams().width = (int) (width * 0.15);
+//            result_img.getLayoutParams().height = (int) (height * 0.09);
+//            result_img.getLayoutParams().width = (int) (width * 0.15);
 
 
             time.getLayoutParams().height = (int) (height * 0.03);
