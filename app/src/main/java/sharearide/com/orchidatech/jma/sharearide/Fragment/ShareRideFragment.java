@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import sharearide.com.orchidatech.jma.sharearide.Activity.ViewPagerAdapter;
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.View.Animation.ZoomOutPageTransformer;
 
 public class ShareRideFragment extends Fragment {
     private AppCompatDelegate mDelegate;
@@ -46,6 +47,16 @@ public class ShareRideFragment extends Fragment {
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) v.findViewById(R.id.pager);
+        pager.setPageTransformer(true, new ZoomOutPageTransformer());
+        /*
+        pager.setPageTransformer(false, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                // do transformation here
+
+            }
+        });
+        */
         pager.setAdapter(adapter);
 
         // Assiging the Sliding Tab Layout View
