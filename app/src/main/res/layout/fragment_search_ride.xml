@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search"
+        android:id="@+id/ed_search"
         app:met_baseColor="#fff"
         app:met_primaryColor="#fff"
         android:layout_marginLeft="@dimen/horizontal_margin"

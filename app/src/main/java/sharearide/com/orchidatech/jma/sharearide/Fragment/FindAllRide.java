@@ -67,6 +67,20 @@ Typeface font;
         rv.setHasFixedSize(true);
         llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
+        rides = new ArrayList<>();
+        ridesData = new HashMap<>();
+        adapter = new MyAdapter(getActivity(), rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
+            @Override
+            public void onItemClicked(Ride selected_ride, User target_user) {
+                Intent intent = new Intent(getActivity(), ReviewRide.class);
+                intent.putExtra("ride_id", selected_ride.getRemoteId());
+                intent.putExtra("user_id", target_user.getRemoteId());
+                startActivity(intent);
+
+            }
+        });
+        rv.setAdapter(adapter);
+
         searchAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,23 +94,9 @@ Typeface font;
                             if (status) {
                                 //mProgressDialog.show();
                                 mProgressBar.setVisibility(View.VISIBLE);
-                                findAllRide((ed_search.getText()).toString(), getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
+                                findAllRide(ed_search.getText().toString(), getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
                                 //   Toast.makeText(getActivity(),"DONE",Toast.LENGTH_LONG).show();
 
-                                rides = new ArrayList<>();
-                                ridesData = new HashMap<>();
-                                adapter = new MyAdapter(getActivity(), rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
-                                    @Override
-                                    public void onItemClicked(Ride selected_ride, User target_user) {
-                                        Intent intent = new Intent(getActivity(), ReviewRide.class);
-                                        intent.putExtra("ride_id", selected_ride.getRemoteId());
-                                        intent.putExtra("user_id", target_user.getRemoteId());
-                                        startActivity(intent);
-
-                                    }
-                                });
-                                rv.setLayoutManager(llm);
-                                rv.setAdapter(adapter);
 
                             } else {
                                 LayoutInflater li = LayoutInflater.from(getActivity());
