@@ -559,14 +559,14 @@ public class MainUserFunctions {
         params.put("phone", "");
         params.put("email", user.getEmail());
         params.put("social_id", user.getSocial_id());
-        Toast.makeText(context, user.getSocial_id() + "", Toast.LENGTH_LONG).show();
+      //  Toast.makeText(context, user.getSocial_id() + "", Toast.LENGTH_LONG).show();
 
         UserOperations.getInstance(context).signUp(UrlConstant.SOCIAL_SIGNUP, params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 try {
                     boolean success = jsonObject.getBoolean("success");
-                    Toast.makeText(context, success + "", Toast.LENGTH_LONG).show();
+        //            Toast.makeText(context, success + "", Toast.LENGTH_LONG).show();
 
                     if (success) {
 
