@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -56,7 +58,7 @@ Typeface font;
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         try {
@@ -70,8 +72,23 @@ Typeface font;
                 if(TextUtils.isEmpty(imagUrl)){
                     holder.result_img.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
                 }
-                else
-                    Picasso.with(activity).load(Uri.parse(imagUrl)).into(holder.result_img);
+                else{
+                    holder.load_progress.setVisibility(View.VISIBLE);
+                    Picasso.with(activity).load(Uri.parse(imagUrl)).into(holder.result_img, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.load_progress.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            holder.load_progress.setVisibility(View.GONE);
+                            holder.result_img.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
+                        }
+                    });
+                }
+
+//                    Picasso.with(activity).load(Uri.parse(imagUrl)).into(holder.result_img);
             }
         }catch (NullPointerException e) {
         }
@@ -99,14 +116,16 @@ Typeface font;
         TextView textView_displayName;
         TextView textView_time;
         TextView textView_date;
-        private CircleImageView result_img;
-        private  ImageView time;
+         CircleImageView result_img;
+          ImageView time;
+         ProgressBar load_progress;
         public ViewHolder(View v) {
             super(v);
             textView_displayName = (TextView) v.findViewById(R.id.textView_displayName);
             textView_time = (TextView) v.findViewById(R.id.textView_time);
             result_img = (CircleImageView) v.findViewById(R.id.result_img);
             time = (ImageView) v.findViewById(R.id.time);
+            load_progress = (ProgressBar) v.findViewById(R.id.load_image_progress);
             font= Typeface.createFromAsset(activity.getAssets(), "fonts/roboto_regular.ttf");
             textView_displayName.setTypeface(font);
             textView_time.setTypeface(font);

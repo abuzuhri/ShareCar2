@@ -99,11 +99,11 @@ Typeface font;
         re_password.setTypeface(font);
         password.setTypeface(font);
         if(UserDAO.getUserById(id).getEmail()==null || UserDAO.getUserById(id).getPhone()==null)
-                        tv_completeProfile.setVisibility(View.VISIBLE);
+            tv_completeProfile.setVisibility(View.VISIBLE);
         update_save_progress= (ProgressBar) findViewById(R.id.update_save_progress);
         btn_changePassword= (Button) findViewById(R.id.btn_changePassword);
-        if(getSharedPreferences("pref", Context.MODE_PRIVATE).getInt("network", -1) == -1)
-            btn_changePassword.setVisibility(View.VISIBLE);
+        if(getSharedPreferences("pref", Context.MODE_PRIVATE).getInt("network", -1) != -1)
+            btn_changePassword.setVisibility(View.GONE);
         circleView= (CircleImageView) findViewById(R.id.circleView);
 
         circleView.setOnClickListener(new View.OnClickListener() {

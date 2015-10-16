@@ -22,15 +22,28 @@
             android:orientation="horizontal"
            >
 
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="20dp">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_contact_picture"
+        android:id="@+id/result_img"
+        />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_contact_picture"
-                android:id="@+id/result_img"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"/>
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/load_image_progress" />
+
+</RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
