@@ -24,11 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/location"
+        android:src="@drawable/ic_mapshow"
         app:layout_anchorGravity="bottom|right|end"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-
         fab:backgroundTint="#22a5bf"
         fab:backgroundTintMode="src_atop"
         fab:fab_shadow="false"/>
