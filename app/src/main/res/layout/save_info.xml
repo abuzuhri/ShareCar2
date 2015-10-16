@@ -65,6 +65,7 @@
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -96,7 +97,8 @@
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
-                    android:textColorHint="#bbbbbb"
+                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -130,6 +132,7 @@
                     android:ellipsize="end"
                     android:background="#fff"
                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     />
 
             </LinearLayout>
@@ -160,7 +163,8 @@
                     android:layout_marginLeft="10dp"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:textColorHint="#bbbbbb"
+                   android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -190,7 +194,8 @@
                     android:text="11/09/2015"
                     android:padding="5dp"
                     android:layout_marginLeft="10dp"
-                    android:textColorHint="#bbbbbb"
+                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textDirection="ltr"
@@ -250,7 +255,8 @@
                     android:layout_height="wrap_content"
                     android:text="Gaza"
                     android:layout_marginLeft="10dp"
-                    android:textColorHint="#bbbbbb"
+                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:padding="5dp"
                     android:singleLine="true"
                     android:ellipsize="end"
@@ -273,7 +279,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/flag"
                     android:layout_gravity="center_vertical"
-
                     android:background="@drawable/ic_flag"
                    />
 
@@ -282,7 +287,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:textColorHint="#bbbbbb"
+                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:text="State"
                     android:layout_marginLeft="10dp"
                     android:singleLine="true"
@@ -304,7 +310,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageV6"
                     android:layout_gravity="center_vertical"
-
                     android:background="@drawable/ic_country" />
 
                 <TextView
@@ -317,6 +322,7 @@
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -347,6 +353,7 @@
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -420,6 +427,7 @@
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -450,6 +458,7 @@
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_weight="0.1"
@@ -503,6 +512,7 @@
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:textColorHint="#bbbbbb"
+                     android:textSize="@dimen/text_size"
                     android:layout_weight="0.1"
                     />
                 <ImageButton
