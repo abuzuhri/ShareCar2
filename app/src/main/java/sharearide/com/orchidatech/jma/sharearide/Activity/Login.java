@@ -86,7 +86,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
     CallbackManager callbackManager;
     Typeface font;
 
-     ProgressDialog mProgressDialog ;
+    ProgressDialog mProgressDialog ;
 
     /////////////////////////////////////////////////////
     private GraphRequestAsyncTask mAsyncRunner;
@@ -227,9 +227,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
                         @Override
                         public void internetConnectionStatus(boolean status) {
                             if (status) {
-                                mProgressDialog.show();
-                                MainUserFunctions.login(Login.this, ed_email.getText().toString(), ed_password.getText().toString());
-                                mProgressDialog.dismiss();
+                                MainUserFunctions.login(Login.this, ed_email.getText().toString(), ed_password.getText().toString(), mProgressDialog);
 
                             } else {
 
@@ -302,11 +300,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
 
 
         /*
-
         // components inflation goes here..
          editText_username = (EditText) findViewById(R.id.editText_username);
          editText_password = (EditText) findViewById(R.id.editText_password);
-
          editText_retreivePassword = (EditText) findViewById(R.id.editText_retreivePassword);
          */
     }
@@ -397,7 +393,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
                                     fbUser.avatarURL = "https://graph.facebook.com/" + user.optString("id") + "/picture?width=300&height=300";
                                     fbUser.network = SocialUser.NetworkType.FACEBOOK;
                                     listener.onSuccess(fbUser);
-                                //    Toast.makeText(getApplicationContext(), user.optString("name"), Toast.LENGTH_LONG).show();
+                                    //    Toast.makeText(getApplicationContext(), user.optString("name"), Toast.LENGTH_LONG).show();
 
 
                                 }
@@ -454,7 +450,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         signedInUser = false;
 
         mProgressDialog.dismiss();
-       // Toast.makeText(this, "Connected ...", Toast.LENGTH_LONG).show();
+        // Toast.makeText(this, "Connected ...", Toast.LENGTH_LONG).show();
         getProfileInformation();
     }
 

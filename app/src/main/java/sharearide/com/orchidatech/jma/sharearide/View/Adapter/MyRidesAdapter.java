@@ -3,13 +3,16 @@ package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 import android.app.Activity;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -47,13 +50,31 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyRidesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final MyRidesAdapter.ViewHolder holder, int position) {
         if (my_rides != null) {
             String name = user.getUsername();
             holder.textView_displayName.setText(name);
             String date_time = AppConstant.DateConvertion.getDate(my_rides.get(position).getDateTime());
             holder.textView_time.setText(date_time);
-            Picasso.with(activity).load(Uri.parse(user.getImage())).into(holder.result_img);
+            if(TextUtils.isEmpty(user.getImage())){
+                holder.result_img.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
+            }
+            else{
+                holder.load_progress.setVisibility(View.VISIBLE);
+                Picasso.with(activity).load(Uri.parse(user.getImage())).into(holder.result_img, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.load_progress.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        holder.load_progress.setVisibility(View.GONE);
+                        holder.result_img.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_contact_picture));
+                    }
+                });
+            }
+//            Picasso.with(activity).load(Uri.parse(user.getImage())).into(holder.result_img);
         }
     }
 
@@ -74,12 +95,15 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
         TextView textView_time;
         private ImageView  date, time;
         private CircleImageView result_img;
+        ProgressBar load_progress;
+
 
         public ViewHolder(View v) {
             super(v);
             textView_displayName = (TextView) v.findViewById(R.id.textView_displayName);
             textView_time = (TextView) v.findViewById(R.id.textView_time);
             result_img = (CircleImageView) v.findViewById(R.id.result_img);
+            load_progress = (ProgressBar) v.findViewById(R.id.load_image_progress);
             time = (ImageView) v.findViewById(R.id.time);
 
             Display display = activity.getWindowManager().getDefaultDisplay();
