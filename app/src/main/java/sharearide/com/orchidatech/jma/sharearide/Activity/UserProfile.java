@@ -33,6 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.design.widget.FloatingActionButton;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.plus.Plus;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -134,11 +136,10 @@ Typeface font;
                     }
                 });
 
-        email.setOnClickListener(new View.OnClickListener() {
+        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onFocusChange(View view, boolean b) {
                 save.setVisibility(View.VISIBLE);
-
             }
         });
         phone.setOnClickListener(new View.OnClickListener() {
@@ -267,14 +268,35 @@ Typeface font;
 
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-            finish();
-            //overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
-            //closing transition animations
-            overridePendingTransition(R.anim.activity_open_scale, R.anim.activity_close_translate);
-            return true;
+            if (TextUtils.isEmpty(email.getText().toString())|| TextUtils.isEmpty(phone.getText().toString())) {
+                if (getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE).getInt("network", -1) == 2) {
+                    LoginManager.getInstance().logOut();
+                    getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE).edit().remove("network").commit();
+
+                } else if (getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE).getInt("network", -1) == 1) {
+                    if (Login.mGoogleApiClient.isConnected()) {
+                        Plus.AccountApi.clearDefaultAccount(Login.mGoogleApiClient);
+                        Login.mGoogleApiClient.disconnect();
+                        Login.mGoogleApiClient.connect();
+                    }
+                    getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE).edit().remove("network").commit();
+                }
+                getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE).edit().remove("id").commit();
+
+                Intent intent = new Intent(UserProfile.this, Login.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+               } else
+
+                    finish();
+                //overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+                //closing transition animations
+                overridePendingTransition(R.anim.activity_open_scale, R.anim.activity_close_translate);
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
-    }
 
 
     @Override

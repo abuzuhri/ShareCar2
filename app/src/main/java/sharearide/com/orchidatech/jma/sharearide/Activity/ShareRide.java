@@ -85,6 +85,8 @@ public class ShareRide extends ActionBarActivity {
         setContentView(R.layout.share_ride);
         toolbar = (Toolbar)findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Share A Ride");
+
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
         // Drawer object Assigned to the view
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
@@ -116,6 +118,8 @@ public class ShareRide extends ActionBarActivity {
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         shareRideFragment.selectTab(0);
+                        toolbar.setTitle("Share A Ride");
+
                         break;
 
                     case 2:
@@ -128,6 +132,8 @@ public class ShareRide extends ActionBarActivity {
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         shareRideFragment.selectTab(1);
+                        toolbar.setTitle("Share A Ride");
+
                         break;
 
                     case 3:

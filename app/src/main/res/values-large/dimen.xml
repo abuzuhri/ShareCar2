@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_size">20dp</dimen>
-    <dimen name="text_size_smaller">18dp</dimen>
+    <dimen name="text_size">17dp</dimen>
+    <dimen name="text_size_smaller">15dp</dimen>
 
     <dimen name="horizontal_margin">90dp</dimen>
     <dimen name="vertical_margintopPage">160dp</dimen>
