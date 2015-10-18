@@ -36,23 +36,25 @@ public class UserOperations {
     public void login(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.LOGIN_URL + "?email=" + params.get("email")+"&password="+params.get("password");
         url=url.replace(" ","%20");
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
+        sendRequest(url, onLoadFinished);
 
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
     public void signUp(String url, Map<String, String> params, final OnLoadFinished onLoadFinished) {
@@ -63,67 +65,73 @@ public class UserOperations {
             url +="&social_id="+params.get("social_id");
         // String s=params.get("img");
         url=  url.replace(" ","%20");//space between fname & lname
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+        sendRequest(url, onLoadFinished);
 
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
     public void getAllRides(final OnLoadFinished onLoadFinished){
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ALL_RIDES_URL, new Response.Listener<JSONObject>() {
+        sendRequest(UrlConstant.ALL_RIDES_URL, onLoadFinished);
 
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ALL_RIDES_URL, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
     public void get_my_rides(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.GET_MY_RIDES_URL +"?user_id=" + params.get("user_id");
         url=url.replace(" ","%20");
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
+        sendRequest(url, onLoadFinished);
 
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
     public  void uploadImage(final Map<String, String> params, final OnLoadFinished onLoadFinished) {
@@ -173,45 +181,49 @@ public class UserOperations {
                 +"&to_longitude="+params.get("to_longitude")
                 +"&more_info="+params.get("more_info");
         url=url.replace(" ","%20");
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
+        sendRequest(url, onLoadFinished);
 
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
     public void deleteRide(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.DELETE_RIDE_URL +"?ride_id=" + params.get("ride_id");
         url=url.replace(" ","%20");
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
+        sendRequest(url, onLoadFinished);
 
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
 
@@ -219,46 +231,50 @@ public class UserOperations {
     public void getAllMessages(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.ALL_MESSAGES_URL + "?user_id=" + params.get("user_id");
         url=url.replace(" ","%20");
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+        sendRequest(url, onLoadFinished);
 
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
     public void getAbout(final OnLoadFinished onLoadFinished) {
-        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ABOUT_URL, new Response.Listener<JSONObject>() {
+        sendRequest(UrlConstant.ABOUT_URL, onLoadFinished);
 
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(UrlConstant.ABOUT_URL, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
 
@@ -266,25 +282,27 @@ public class UserOperations {
         String url = UrlConstant.SEARCH_ALL_URL +"?item=" + params.get("item") + "&user_id=" + params.get("user_id");
         url=url.replace(" ","%20");
         // Log.i("Ride", url);
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+        sendRequest(url, onLoadFinished);
 
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
     public void getSearchResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
@@ -296,26 +314,28 @@ public class UserOperations {
                 +"&country_to=" + params.get("country_to")
                 +"&user_id=" + params.get("user_id");
         url=url.replace(" ","%20");
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+        sendRequest(url, onLoadFinished);
 
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//
+//
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
 
@@ -336,112 +356,115 @@ public class UserOperations {
                 +"&more_info="+params.get("more_info");
         url=url.replace(" ","%20");
 
-        /* params.put("user_id", String.valueOf(user_id));
-        params.put("city_from", city_from);
-        params.put("city_to", city_to);
-        params.put("state_from", state_from);
-        params.put("state_to", state_to);
-        params.put("country_from", country_from);
-        params.put("country_to", country_to);
-        params.put("date_time", String.valueOf(date_time));
-        params.put("price", String.valueOf(price));*/
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+        sendRequest(url, onLoadFinished);
 
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
 
     public void addMessage(Map<String, String> params, final OnLoadFinished onLoadFinished){
         String url = UrlConstant.ADD_MESSAGE_URL + "?message=" + params.get("message")+"&sender_id="+params.get("sender_id")+"&receiver_id="+params.get("receiver_id") + "&date_time=" + params.get("date_time");
         url=url.replace(" ","%20");
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
+        sendRequest(url, onLoadFinished);
 
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
 
     public void forgetPassword(Map<String, String> params, final OnLoadFinished onLoadFinished){
         String url = UrlConstant.FORGET_PASSWORD_URL + "?email=" + params.get("email");
         url=url.replace(" ","%20");
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
+        sendRequest(url, onLoadFinished);
 
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
-    private static void isConnected(final Context context){
 
-    }
 
     public void getAddress(Map<String, String> params, final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.GET_ADDRESS_URL + "?format=" + params.get("format") + "&lat=" + params.get("lat") + "&lon=" + params.get("lon");
         url=url.replace(" ","%20");
+        sendRequest(url, onLoadFinished);
 
-        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        try {
-                            onLoadFinished.onSuccess(o);
-                        } catch (JSONException e) {
-                            onLoadFinished.onFail("An error occurred, try again");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
 
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        onLoadFinished.onFail("Can not connect server");
-                    }
-                });
+//        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject o) {
+//                        try {
+//                            onLoadFinished.onSuccess(o);
+//                        } catch (JSONException e) {
+//                            onLoadFinished.onFail("An error occurred, try again");
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        onLoadFinished.onFail("Can not connect server");
+//                    }
+//                });
     }
 
     public void updateProfile(Map<String, String> params,final OnLoadFinished onLoadFinished) {
         String url = UrlConstant.UPDATE_PROFILE_URL + "?user_id=" + params.get("user_id") + "&email=" + params.get("email") + "&phone=" + params.get("phone") + "&password=" + params.get("password") ;
         url=url.replace(" ","%20");
-        Log.i("updateProfile", url);
+       // Log.i("updateProfile", url);
+    sendRequest(url, onLoadFinished);
+
+    }
+
+
+    private void sendRequest(final String url, final OnLoadFinished onLoadFinished){
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject o) {
@@ -459,8 +482,6 @@ public class UserOperations {
                         onLoadFinished.onFail("Can not connect server");
                     }
                 });
-
     }
-/////////////////////////////////////////////////////////////////
 
 }

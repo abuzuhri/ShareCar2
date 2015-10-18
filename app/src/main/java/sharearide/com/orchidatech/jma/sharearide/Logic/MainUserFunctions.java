@@ -53,7 +53,7 @@ public class MainUserFunctions {
     private MainUserFunctions(){}
     final static int MAX_NUM_RIDES = 200;
 
-    public static void login(final Context context, final String email, final String password){
+    public static void login(final Context context, final String email, final String password, final ProgressDialog mProgressDialog){
 
         ///on success
 //        if(mProgressDialog.isShowing())
@@ -68,14 +68,16 @@ public class MainUserFunctions {
         params.put("email", email);
         params.put("password", password);
 //        Log.i("Login ", "Processing");
-
+        mProgressDialog.show();
         UserOperations.getInstance(context).login(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
+                if(mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
+
                 try {
                     boolean success = jsonObject.getBoolean("success");
                     if (success) {
-
                         JSONArray mJsonArray = jsonObject.getJSONArray("login");
                         JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                         long id = mJsonObject.getLong("id");
@@ -112,6 +114,8 @@ public class MainUserFunctions {
 
             @Override
             public void onFail(String error) {
+                if(mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
 
                 Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
             }
