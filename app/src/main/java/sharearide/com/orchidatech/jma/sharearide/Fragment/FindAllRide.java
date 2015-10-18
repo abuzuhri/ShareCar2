@@ -14,15 +14,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import java.lang.annotation.AnnotationFormatError;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -134,7 +131,7 @@ Typeface font;
         MainUserFunctions.find_all_ride(new OnSearchListener() {
 
             @Override
-            public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData) {
+            public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count) {
                 for (Ride ride : matchedRides) {
 
 //                    RideDAO.addNewRide(ride);

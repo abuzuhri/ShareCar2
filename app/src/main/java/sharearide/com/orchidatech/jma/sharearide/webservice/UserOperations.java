@@ -312,8 +312,11 @@ public class UserOperations {
                 +"&state_to=" + params.get("state_to")
                 +"&country_from=" + params.get("country_from")
                 +"&country_to=" + params.get("country_to")
-                +"&user_id=" + params.get("user_id");
+                +"&user_id=" + params.get("user_id")
+                +"&last_id=" + params.get("last_id")
+                +"&offset=" + params.get("offset");
         url=url.replace(" ","%20");
+        Log.i("urrl", url);
         sendRequest(url, onLoadFinished);
 
 //        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
@@ -462,7 +465,13 @@ public class UserOperations {
     sendRequest(url, onLoadFinished);
 
     }
+    public void getLastRecord(Map<String, String> params,final OnLoadFinished onLoadFinished) {
+        String url = UrlConstant.GET_LAST_RIDE + "?user_id=" + params.get("user_id");
+        url=url.replace(" ","%20");
+        // Log.i("updateProfile", url);
+        sendRequest(url, onLoadFinished);
 
+    }
 
     private void sendRequest(final String url, final OnLoadFinished onLoadFinished){
         UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {

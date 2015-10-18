@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,12 +46,41 @@ public class SearchResult extends ActionBarActivity {
     RecyclerView rv;
     private LinearLayoutManager llm;
     EditText ed_search;
+    private Button load_more;
     ImageView search;
+    ArrayList<String> params;
+    long last_id_server = -1;
 Typeface font;
+    private int rides_count_in_server=-1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result);
+        Intent intent = getIntent();
+        params = intent.getStringArrayListExtra("PARAMS");
+//        getLastRecord();
+
+
+        rv = (RecyclerView) findViewById(R.id.rv);
+        rv.setHasFixedSize(true);
+        llm = new LinearLayoutManager(this);
+
+        rides = new ArrayList<>();
+        ridesData = new HashMap<>();
+        orginal_rides = new ArrayList<>();
+        orginal_ridesData = new HashMap<>();
+        adapter = new MyAdapter(SearchResult.this, rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
+            @Override
+            public void onItemClicked(Ride selected_ride, User target_user) {
+                Intent intent = new Intent(getApplicationContext(), ReviewRide.class);
+                intent.putExtra("ride_id", selected_ride.getRemoteId());
+                intent.putExtra("user_id", target_user.getRemoteId());
+                startActivity(intent);
+            }
+        });
+        rv.setLayoutManager(llm);
+        rv.setAdapter(adapter);
         ed_search=(EditText)findViewById(R.id.ed_search);
         search_bar=(LinearLayout)findViewById(R.id.search_bar);
         font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
@@ -58,12 +88,22 @@ Typeface font;
 
         // search=(ImageView)findViewById(R.id.search);
         mProgressBar = (ProgressBar) this.findViewById(R.id.search_progress);
+
+        load_more = (Button) findViewById(R.id.btn_load_more);
+        load_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                findRide(params.get(0), params.get(1), params.get(2), params.get(3),
+                        params.get(4), params.get(5));
+            }
+        });
+
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Intent intent = getIntent();
-        ArrayList<String> params = intent.getStringArrayListExtra("PARAMS");
+
 
         if(params != null){
             findRide(params.get(0), params.get(1), params.get(2), params.get(3),
@@ -95,48 +135,82 @@ Typeface font;
 
             }
         });
-        rv = (RecyclerView) findViewById(R.id.rv);
-        rv.setHasFixedSize(true);
-        llm = new LinearLayoutManager(this);
 
-        rides = new ArrayList<>();
-        ridesData = new HashMap<>();
-        orginal_rides = new ArrayList<>();
-        orginal_ridesData = new HashMap<>();
-        adapter = new MyAdapter(SearchResult.this, rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
-            @Override
-            public void onItemClicked(Ride selected_ride, User target_user) {
-                Intent intent = new Intent(getApplicationContext(), ReviewRide.class);
-                intent.putExtra("ride_id", selected_ride.getRemoteId());
-                intent.putExtra("user_id", target_user.getRemoteId());
-                startActivity(intent);
-            }
-        });
-        rv.setLayoutManager(llm);
-        rv.setAdapter(adapter);
-
+//rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//    @Override
+//    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//        super.onScrollStateChanged(recyclerView, newState);
+//    }
+//
+//    @Override
+//    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//        if ((llm.getChildCount() + llm.findFirstVisibleItemPosition()) >= llm.getItemCount()) {
+//                    load_more.setVisibility(View.VISIBLE);
+//
+////            if (!isLoading) {
+////                if (previousTotal != llm.getItemCount()){
+////
+////                }else
+////                     previousTotal = -1;
+////
+////            }
+//        }
+//    }
+//});
 
     }
-
+//
+//    private void getLastRecord() {
+//
+//        MainUserFunctions.get_last_record(this, getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1), new OnLoadFinished() {
+//            @Override
+//            public void onSuccess(JSONObject jsonObject) throws JSONException {
+//                boolean success = jsonObject.getBoolean("success");
+//                if (success) {
+//                    last_id_server = Long.parseLong(jsonObject.getString("id"));
+//                    rides_count_in_server = jsonObject.getInt("count");
+//                    Toast.makeText(getApplicationContext(), last_id_server+", "+rides_count_in_server, Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(String error) {
+//                getLastRecord();
+//            }
+//        });
+//    }
+/**/
     private void findRide(final String city_from, final String city_to, final String state_from, final String state_to, final String country_from, final String country_to) {
+
+
+
+        mProgressBar.setVisibility(View.VISIBLE);
+        load_more.setVisibility(View.GONE);
         MainUserFunctions.find_a_ride(new OnSearchListener() {
                                           @Override
-                                          public void onSearchSucceed(ArrayList<sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride> matchedRides, Map<sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride, User> matchedRidesData) {
+                                          public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count) {
                                               for (Ride ride : matchedRides) {
                                                   RideDAO.addNewRide(ride.getRemoteId(), ride.getUserId(), ride.getFromCity(), ride.getToCity(), ride.getFromCountry(), ride.getToCountry(), ride.getFromState(), ride.getToState(),
                                                           ride.getDateTime(), ride.getCost(), ride.getMore_info(),ride.getFrom_Longitude(), ride.getTo_longitude(), ride.getFrom_Lattitude(), ride.getTo_latitude());
                                                 User user = matchedRidesData.get(ride);
                                                 UserDAO.addNewUser(user.getRemoteId(), user.getUsername(), user.getPassword(), user.getImage(), user.getAddress(), user.getBirthdate(), user.getGender(), user.getPhone(), user.getEmail());
 //                                                  UserDAO.addNewUser(matchedRidesData.get(ride));
+                                                  if(rides_count_in_server == -1)
+                                                      rides_count_in_server = count;
 
                                               }
 
                                               mProgressBar.setVisibility(View.GONE);
+                                              load_more.setVisibility(View.VISIBLE);
                                               rides.addAll(matchedRides);
                                               ridesData.putAll(matchedRidesData);
                                               orginal_rides.addAll(rides);
                                               orginal_ridesData.putAll(matchedRidesData);
                                               adapter.notifyDataSetChanged();
+                                              if(rides.size() > 0 && rides_count_in_server == rides.size()) {
+                                                  load_more.setVisibility(View.GONE);
+                                                  mProgressBar.setVisibility(View.GONE);
+                                              }
 
 //                                                     Toast.makeText(SearchResult.this.getApplicationContext(), matchedRidesData.get(matchedRides.get(0)).getUsername()+"" + matchedRidesData.size(), Toast.LENGTH_LONG).show();
 
@@ -145,12 +219,15 @@ Typeface font;
                                           @Override
                                           public void onSearchFailed(String error) {
                                               mProgressBar.setVisibility(View.GONE);
+                                              load_more.setVisibility(View.VISIBLE);
                                           }
                                       }, SearchResult.this.getApplicationContext(), city_from, city_to, state_from,
                 state_to, country_from, country_to,
-                getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1));
+                getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1), llm.getItemCount(), last_id_server);
 
 
+//        if(rides.size() > 0)
+//            Toast.makeText(this, rides.size() + ", " + rides_count_in_server, Toast.LENGTH_LONG).show();
 
     }
     public void searchLocal(String s){

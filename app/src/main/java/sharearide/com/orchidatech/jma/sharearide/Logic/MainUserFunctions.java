@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
@@ -23,16 +22,12 @@ import sharearide.com.orchidatech.jma.sharearide.Activity.ShareRide;
 import sharearide.com.orchidatech.jma.sharearide.Activity.UserProfile;
 import sharearide.com.orchidatech.jma.sharearide.Constant.UrlConstant;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.ChatDAO;
-import sharearide.com.orchidatech.jma.sharearide.Database.DAO.CountryDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Chat;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
-import sharearide.com.orchidatech.jma.sharearide.Fragment.MyRides;
 import sharearide.com.orchidatech.jma.sharearide.Model.SocialUser;
-import sharearide.com.orchidatech.jma.sharearide.Utility.EmptyFieldException;
-import sharearide.com.orchidatech.jma.sharearide.Utility.InvalidInputException;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnAddressFetched;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnFetchMyRides;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInboxFetchListener;
@@ -170,7 +165,8 @@ public class MainUserFunctions {
 //                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
 
                         }
-                        listener.onSearchSucceed(allMatchedRides, matchedRidesData);
+                        int count = jsonObject.getInt("count");
+                        listener.onSearchSucceed(allMatchedRides, matchedRidesData, count);
                    /* Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                     RideDAO.addNewRide(ride);*/
                         //  Toast.makeText(context, "Added Successfully", Toast.LENGTH_LONG).show();
@@ -412,7 +408,7 @@ public class MainUserFunctions {
 
     public static void find_a_ride(final OnSearchListener listener, final Context context, final String city_from, final String city_to, final String state_from,
                                    final String state_to, final String country_from,
-                                   final String country_to,final long user_id){
+                                   final String country_to, final long user_id, final int offset, long last_id_server){
         final Map<String, String> params = new HashMap<>();
         params.put("city_from", city_from);
         params.put("city_to", city_to);
@@ -420,8 +416,9 @@ public class MainUserFunctions {
         params.put("state_to", state_to);
         params.put("country_from", country_from);
         params.put("country_to", country_to);
-
         params.put("user_id", String.valueOf(user_id));
+        params.put("offset", String.valueOf(offset));
+        params.put("last_id", String.valueOf(last_id_server));
         final ArrayList<Ride> allMatchedRides = new ArrayList<Ride>();
         final  Map<Ride, User> matchedRidesData = new HashMap<Ride, User>();
         UserOperations.getInstance(context).getSearchResult(params, new OnLoadFinished() {
@@ -465,10 +462,11 @@ public class MainUserFunctions {
 //                            Toast.makeText(context, matchedRidesData.size() + ", "  + allMatchedRides.size(), Toast.LENGTH_LONG).show();
 
                         }
-                        listener.onSearchSucceed(allMatchedRides, matchedRidesData);
+                        int count = jsonObject.getInt("count");
+                        listener.onSearchSucceed(allMatchedRides, matchedRidesData, count);
                     } else {
                         Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-                        listener.onSearchSucceed(allMatchedRides, matchedRidesData);
+                        listener.onSearchFailed(jsonObject.getString("message"));
                     }
                 } catch (JSONException e) {
                     Toast.makeText(context, "An error occurred, try again", Toast.LENGTH_LONG).show();
@@ -1053,5 +1051,11 @@ public class MainUserFunctions {
                 listener.onFailed();
             }
         });
+    }
+    public static void get_last_record(final Context context, final long user_id, final OnLoadFinished loadFinished) {
+        Map<String, String> params = new HashMap<>();
+        params.put("user_id", String.valueOf(user_id));
+        UserOperations.getInstance(context).getLastRecord(params, loadFinished);
+
     }
 }

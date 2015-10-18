@@ -33,4 +33,5 @@ public class UrlConstant {
 
     public static final String UPLOAD_IMAGE_URL = SERVER_URL + WEB_SERVICES_PATH + "upload_image.php";
     public static final String UPDATE_PROFILE_URL = SERVER_URL + WEB_SERVICES_PATH + "update_profile.php";
+    public static final String GET_LAST_RIDE = SERVER_URL + WEB_SERVICES_PATH + "get_last_record.php";
 }
