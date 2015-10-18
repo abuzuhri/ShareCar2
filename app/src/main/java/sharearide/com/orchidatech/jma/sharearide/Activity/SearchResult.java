@@ -83,11 +83,12 @@ Typeface font;
         rv.setAdapter(adapter);
         ed_search=(EditText)findViewById(R.id.ed_search);
         search_bar=(LinearLayout)findViewById(R.id.search_bar);
-        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
 //        ed_search.setTypeface(font);
 
         // search=(ImageView)findViewById(R.id.search);
         mProgressBar = (ProgressBar) this.findViewById(R.id.search_progress);
+        tool_bar = (Toolbar) findViewById(R.id.toolbar_2); // Attaching the layout to the toolbar object
 
         load_more = (Button) findViewById(R.id.btn_load_more);
         load_more.setOnClickListener(new View.OnClickListener() {
@@ -135,28 +136,25 @@ Typeface font;
 
             }
         });
+        rv = (RecyclerView) findViewById(R.id.rv);
+        rv.setHasFixedSize(true);
+        llm = new LinearLayoutManager(this);
 
-//rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//    @Override
-//    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//        super.onScrollStateChanged(recyclerView, newState);
-//    }
-//
-//    @Override
-//    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//        if ((llm.getChildCount() + llm.findFirstVisibleItemPosition()) >= llm.getItemCount()) {
-//                    load_more.setVisibility(View.VISIBLE);
-//
-////            if (!isLoading) {
-////                if (previousTotal != llm.getItemCount()){
-////
-////                }else
-////                     previousTotal = -1;
-////
-////            }
-//        }
-//    }
-//});
+        rides = new ArrayList<>();
+        ridesData = new HashMap<>();
+        orginal_rides = new ArrayList<>();
+        orginal_ridesData = new HashMap<>();
+        adapter = new MyAdapter(SearchResult.this, rides, ridesData, new MyAdapter.OnRecycleViewItemClicked() {
+            @Override
+            public void onItemClicked(Ride selected_ride, User target_user) {
+                Intent intent = new Intent(getApplicationContext(), ReviewRide.class);
+                intent.putExtra("ride_id", selected_ride.getRemoteId());
+                intent.putExtra("user_id", target_user.getRemoteId());
+                startActivity(intent);
+            }
+        });
+        rv.setLayoutManager(llm);
+        rv.setAdapter(adapter);
 
     }
 //
@@ -226,8 +224,6 @@ Typeface font;
                 getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1), llm.getItemCount(), last_id_server);
 
 
-//        if(rides.size() > 0)
-//            Toast.makeText(this, rides.size() + ", " + rides_count_in_server, Toast.LENGTH_LONG).show();
 
     }
     public void searchLocal(String s){
@@ -271,7 +267,8 @@ Typeface font;
         }
 
         if (id == R.id.action_search) {
-            search_bar.setVisibility(View.VISIBLE);
+            ed_search.setVisibility(View.VISIBLE);
+            getSupportActionBar().setTitle("");
             ed_search.setTypeface(font);
 
             // searchLocal(t1.getText().toString());

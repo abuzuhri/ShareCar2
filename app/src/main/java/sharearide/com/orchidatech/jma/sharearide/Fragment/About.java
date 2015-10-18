@@ -2,6 +2,7 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,7 +47,7 @@ public class About extends Fragment {
     private static final String TAG_PHONE_HOME = "home";
     private static final String TAG_PHONE_OFFICE = "office";
 
-
+Typeface font;
     // contacts JSONArray
     JSONArray contacts = null;
 
@@ -77,13 +78,16 @@ public class About extends Fragment {
         phoneView = (TextView) myFragmentView.findViewById(R.id.about_phone);
         emailView = (TextView) myFragmentView.findViewById(R.id.about_email);
         logo=(ImageView)myFragmentView.findViewById(R.id.logo);
-
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
+        addressView.setTypeface(font);
+        phoneView.setTypeface(font);
+        emailView.setTypeface(font);
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int height = display.getHeight();
         int width = display.getWidth();
-        logo.getLayoutParams().height = (int) (height * 0.3);
-        logo.getLayoutParams().width = (int) (width * 0.25);
 
+        logo.getLayoutParams().height=(int)(height*0.31);
+        logo.getLayoutParams().width =(int)(height*0.26);
         // Calling async task to get json
         JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override

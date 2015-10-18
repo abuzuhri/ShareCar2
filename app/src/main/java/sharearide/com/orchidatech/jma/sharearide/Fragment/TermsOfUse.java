@@ -2,6 +2,7 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,7 +37,7 @@ public class TermsOfUse extends Fragment {
     private ProgressDialog pDialog;
 
     private View myFragmentView;
-
+Typeface font;
     TextView termsView;
     String terms;
     private  ImageView logo;
@@ -47,13 +48,14 @@ public class TermsOfUse extends Fragment {
 
         termsView = (TextView) myFragmentView.findViewById(R.id.terms);
         logo=(ImageView)myFragmentView.findViewById(R.id.logo);
-
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
+        termsView.setTypeface(font);
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int height = display.getHeight();
         int width = display.getWidth();
-        logo.getLayoutParams().height = (int) (height * 0.3);
-        logo.getLayoutParams().width = (int) (width * 0.25);
-        // Calling async task to get json
+
+        logo.getLayoutParams().height=(int)(height*0.31);
+        logo.getLayoutParams().width =(int)(height*0.26); // Calling async task to get json
         new GetTermsOfUse().execute();
 
         return myFragmentView;

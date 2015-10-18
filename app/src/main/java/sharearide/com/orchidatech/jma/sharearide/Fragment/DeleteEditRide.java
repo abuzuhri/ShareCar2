@@ -35,6 +35,7 @@ import sharearide.com.orchidatech.jma.sharearide.Database.DAO.RideDAO;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.View.Animation.ViewAnimation;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnAddressFetched;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnRequestFinished;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnUpdateRideListener;
@@ -101,7 +102,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
         more_info = (Button) view.findViewById(R.id.more_info);
         save = (Button) view.findViewById(R.id.save);
         save.setVisibility(View.GONE);
-        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
         cityFrom.setTypeface(font);
         cityTo.setTypeface(font);
         countryTo.setTypeface(font);
@@ -126,17 +127,28 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
 
                 if (cityFrom.getText().toString().equals("")) {
                     cityFrom.setError("Required Field");
-                } else if (countryFrom.getText().toString().equals(""))
+                    ViewAnimation.bounce(getActivity(), cityFrom);
+
+                } else if (countryFrom.getText().toString().equals("")){
                     countryFrom.setError("Required Field");
-                else if (time.getText().toString().equals(""))
+                ViewAnimation.bounce(getActivity(), countryFrom);
+
+            } else if (time.getText().toString().equals("")) {
                     time.setError("Required Field ");
-                else if (date.getText().toString().equals(""))
+                    ViewAnimation.bounce(getActivity(), time);
+                } else if (date.getText().toString().equals("")) {
                     date.setError("Required Field ");
-                else if (cityTo.getText().toString().equals(""))
+                    ViewAnimation.bounce(getActivity(), date);
+
+                } else if (cityTo.getText().toString().equals("")) {
                     cityTo.setError("Required Field ");
-                else if (countryTo.getText().toString().equals(""))
+                    ViewAnimation.bounce(getActivity(), cityTo);
+
+                }else if (countryTo.getText().toString().equals("")) {
                     countryTo.setError("Required Field ");
-                else {
+                    ViewAnimation.bounce(getActivity(), countryTo);
+
+                } else {
                     pd.show();
 
                     MainUserFunctions.update_ride(getActivity(), ride.getRemoteId(), cityFrom.getText().toString(), cityTo.getText().toString(),

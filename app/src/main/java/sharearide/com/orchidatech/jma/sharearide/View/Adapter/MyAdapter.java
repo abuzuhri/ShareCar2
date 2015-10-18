@@ -126,7 +126,7 @@ Typeface font;
             result_img = (CircleImageView) v.findViewById(R.id.result_img);
             time = (ImageView) v.findViewById(R.id.time);
             load_progress = (ProgressBar) v.findViewById(R.id.load_image_progress);
-            font= Typeface.createFromAsset(activity.getAssets(), "fonts/roboto_regular.ttf");
+            font= Typeface.createFromAsset(activity.getAssets(), "fonts/roboto_light.ttf");
             textView_displayName.setTypeface(font);
             textView_time.setTypeface(font);
 
@@ -139,7 +139,7 @@ Typeface font;
 
 
             time.getLayoutParams().height = (int) (height * 0.03);
-            time.getLayoutParams().width = (int) (width * 0.05);
+            time.getLayoutParams().width = (int) (height * 0.03);
 
             v.setOnClickListener(this);
         }

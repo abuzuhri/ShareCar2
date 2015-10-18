@@ -44,4 +44,5 @@
     <string name="viapoint">Via-Point</string>
     <string name="itinerary_markers_title">Route Via-Points</string>
     <string name="title_activity_user_profile">My Profile</string>
+    <string name="title_activity_search_all">Search </string>
 </resources>

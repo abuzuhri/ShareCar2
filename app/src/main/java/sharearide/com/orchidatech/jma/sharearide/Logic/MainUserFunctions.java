@@ -174,11 +174,15 @@ public class MainUserFunctions {
                     } else {
                         String message = jsonObject.getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                        listener.onSearchFailed(message);
+
                     }
 
 
                 } catch (JSONException e) {
                     Toast.makeText(context,"An error occurred, try again", Toast.LENGTH_LONG).show();
+
+                    listener.onSearchFailed("An error occurred, try again");
 
 
                 }
@@ -187,6 +191,8 @@ public class MainUserFunctions {
             @Override
             public void onFail(String error) {
                 Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+                listener.onSearchFailed(error);
+
             }
         });
     }

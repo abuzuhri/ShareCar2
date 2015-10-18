@@ -56,7 +56,7 @@ public class NewUser extends AppCompatActivity {
         re_password=(EditText)findViewById(R.id.re_password);
         email=(EditText)findViewById(R.id.email);
         phone=(EditText)findViewById(R.id.phone);
-        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
         username.setTypeface(font);
         password.setTypeface(font);
         re_password.setTypeface(font);
@@ -69,18 +69,28 @@ public class NewUser extends AppCompatActivity {
                 if (username.getText().toString().equals("")) {
                     username.setError("Enter Username");
                     ViewAnimation.blink(NewUser.this, username);
+                    ViewAnimation.bounce(NewUser.this, username);
+
                 } else if (!validation.passwordcontainsNumber(password.getText().toString())) {
                     password.setError("Password must be at least 8 character containing numbers");
                     ViewAnimation.blink(NewUser.this, password);
+                    ViewAnimation.bounce(NewUser.this, password);
+
                 } else if (!re_password.getText().toString().equals(password.getText().toString())) {
                     re_password.setError(" Password doesn't match ");
                     ViewAnimation.blink(NewUser.this, re_password);
+                    ViewAnimation.bounce(NewUser.this, re_password);
+
                 } else if (!validation.isValidEmailAddress(email.getText().toString())) {
                     email.setError("Enter correct email ");
                     ViewAnimation.blink(NewUser.this, email);
+                    ViewAnimation.bounce(NewUser.this, email);
+
                 } else if (!validation.validatePhoneNumber(phone.getText().toString())) {
                     phone.setError("Enter correct Phone ");
                     ViewAnimation.blink(NewUser.this, phone);
+                    ViewAnimation.bounce(NewUser.this, phone);
+
 
                 }else {
                     signup_progress.setVisibility(View.VISIBLE);

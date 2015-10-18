@@ -75,7 +75,7 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
         date=(EditText)v.findViewById(R.id.date);
         price=(EditText)v.findViewById(R.id.price);
 
-        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
         cityFrom.setTypeface(font);
         cityTo.setTypeface(font);
         countryTo.setTypeface(font);
@@ -296,7 +296,9 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                     });
                 }
                 else
-                    Toast.makeText(getActivity(),"Please determine your Location",Toast.LENGTH_LONG).show();}
+                    Toast.makeText(getActivity(),"Please determine your Location",Toast.LENGTH_LONG).show();
+                ViewAnimation.bounce(getActivity(), firstlocation_lat_long);
+            }
         });
 
 

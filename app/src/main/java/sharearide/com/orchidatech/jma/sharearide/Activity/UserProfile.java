@@ -94,7 +94,7 @@ Typeface font;
         // edit_phone=(ImageButton)findViewById(R.id.edit_phone);
         save=(Button)findViewById(R.id.save);
         save.setVisibility(View.GONE);
-        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
         email.setTypeface(font);
         phone.setTypeface(font);
         current_password.setTypeface(font);

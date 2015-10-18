@@ -80,7 +80,7 @@ Typeface font;
         send_mail = (ImageButton) findViewById(R.id.send_mail);
         send_msg = (ImageButton) findViewById(R.id.send_msg);
 
-        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
         cityFrom.setTypeface(font);
         cityTo.setTypeface(font);
         countryTo.setTypeface(font);

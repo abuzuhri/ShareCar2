@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.View.Adapter;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -31,7 +32,7 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
     ArrayList<Ride> my_rides;
     OnRecycleViewItemClicked listener;
     Activity activity;
-
+    Typeface font;
     public MyRidesAdapter(Activity activity, ArrayList<Ride> my_rides, User user, OnRecycleViewItemClicked listener) {
         this.activity = activity;
         this.my_rides = my_rides;
@@ -105,6 +106,9 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
             result_img = (CircleImageView) v.findViewById(R.id.result_img);
             load_progress = (ProgressBar) v.findViewById(R.id.load_image_progress);
             time = (ImageView) v.findViewById(R.id.time);
+            font= Typeface.createFromAsset(activity.getAssets(), "fonts/roboto_light.ttf");
+            textView_displayName.setTypeface(font);
+            textView_time.setTypeface(font);
 
             Display display = activity.getWindowManager().getDefaultDisplay();
             int height = display.getHeight();
@@ -114,7 +118,7 @@ public class MyRidesAdapter extends RecyclerView.Adapter<MyRidesAdapter.ViewHold
 
 
             time.getLayoutParams().height = (int) (height * 0.03);
-            time.getLayoutParams().width = (int) (width * 0.05);
+            time.getLayoutParams().width = (int) (height * 0.03);
             v.setOnClickListener(this);
         }
 

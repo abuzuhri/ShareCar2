@@ -28,16 +28,15 @@
             android:layout_marginLeft="20dp"/>
 
         <ImageButton
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/confirm_btn"
             android:visibility="visible"
-
-            android:background="@drawable/check_icon"
+            android:background="@drawable/ic_done"
             />
     <ImageButton
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/close_btn"
         android:visibility="gone"
         android:background="@drawable/close"
