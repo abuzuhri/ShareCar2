@@ -114,7 +114,6 @@ public class ShareRide extends ActionBarActivity {
                         getFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
                                 .replace(R.id.fragment_place, shareRideFragment)
-                                .addToBackStack(null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         shareRideFragment.selectTab(0);
@@ -128,7 +127,6 @@ public class ShareRide extends ActionBarActivity {
                         getFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
                                 .replace(R.id.fragment_place, shareRideFragment)
-                                .addToBackStack(null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         shareRideFragment.selectTab(1);
@@ -142,7 +140,6 @@ public class ShareRide extends ActionBarActivity {
                         getFragmentManager().beginTransaction()
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                                 .replace(R.id.fragment_place, myRidesFragment)
-                                .addToBackStack(null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         toolbar.setTitle("My Rides");
@@ -154,7 +151,6 @@ public class ShareRide extends ActionBarActivity {
                         getFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
                                 .replace(R.id.fragment_place, inboxFragment)
-                                .addToBackStack(null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         toolbar.setTitle("Inbox");
@@ -162,14 +158,7 @@ public class ShareRide extends ActionBarActivity {
 
                     case 5:
                         Drawer.closeDrawers();
-                        getFragmentManager()
-                                .beginTransaction()
-                                        //.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down)
-                                .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right, 0, 0)
-                                .replace(R.id.fragment_place, findAllRideFragment).addToBackStack(null)
-                                .commit();
-                        getFragmentManager().executePendingTransactions();
-                        toolbar.setTitle("Search Ride");
+                       startActivity(new Intent(ShareRide.this,SearchAll.class));
                         break;
 
                     case 6:
@@ -218,7 +207,7 @@ public class ShareRide extends ActionBarActivity {
                         getFragmentManager()
                                 .beginTransaction()
                                 .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
-                                .replace(R.id.fragment_place, termsOfUse).addToBackStack(null)
+                                .replace(R.id.fragment_place, termsOfUse)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
                         toolbar.setTitle("Terms Of Use");

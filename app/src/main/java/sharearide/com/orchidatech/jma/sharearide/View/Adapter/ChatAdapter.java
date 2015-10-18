@@ -80,7 +80,7 @@ Typeface font;
             holder.date.setText(chat_date);
             holder.lastChat.setText(message_text);
             holder.name.setText(contacted_person);
-            font= Typeface.createFromAsset(activity.getAssets(), "fonts/roboto_regular.ttf");
+            font= Typeface.createFromAsset(activity.getAssets(), "fonts/roboto_light.ttf");
             holder.date.setTypeface(font);
             holder.lastChat.setTypeface(font);
             holder.name.setTypeface(font);

@@ -53,12 +53,12 @@ Typeface font;
         setContentView(R.layout.search_result);
         ed_search=(EditText)findViewById(R.id.ed_search);
         search_bar=(LinearLayout)findViewById(R.id.search_bar);
-        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
 //        ed_search.setTypeface(font);
 
         // search=(ImageView)findViewById(R.id.search);
         mProgressBar = (ProgressBar) this.findViewById(R.id.search_progress);
-        tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        tool_bar = (Toolbar) findViewById(R.id.toolbar_2); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -194,7 +194,8 @@ Typeface font;
         }
 
         if (id == R.id.action_search) {
-            search_bar.setVisibility(View.VISIBLE);
+            ed_search.setVisibility(View.VISIBLE);
+            getSupportActionBar().setTitle("");
             ed_search.setTypeface(font);
 
             // searchLocal(t1.getText().toString());

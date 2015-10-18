@@ -61,7 +61,7 @@ Typeface font;
         searchAll = (ImageButton) v.findViewById(R.id.search);
         mProgressBar = (ProgressBar) v.findViewById(R.id.search_progress);
         mProgressBar.setVisibility(View.GONE);
-        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
 //       ed_search.setTypeface(font);
         rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);

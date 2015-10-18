@@ -71,7 +71,7 @@ Typeface font;
                 email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from header.xml for email
                 profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
                 uploadingImageProgress = (ProgressBar) itemView.findViewById(R.id.uploadingImageProgress);
-                font= Typeface.createFromAsset(context.getAssets(), "fonts/roboto_regular.ttf");
+                font= Typeface.createFromAsset(context.getAssets(), "fonts/roboto_light.ttf");
                 Name.setTypeface(font);
                 email.setTypeface(font);
                 profile.setOnClickListener(new View.OnClickListener() {

@@ -46,7 +46,7 @@ public class ResetPassword extends ActionBarActivity {
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage("Please Wait...");
         ed_email=(EditText)findViewById(R.id.ed_email);
-        font=Typeface.createFromAsset(getAssets(),"fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
         ed_email.setTypeface(font);
 
         SendBtn=(Button)findViewById(R.id.SendBtn);

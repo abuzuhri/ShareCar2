@@ -104,7 +104,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage("Please Wait...");
 //        mProgressDialog.dismiss();
-        font=Typeface.createFromAsset(getAssets(),"fonts/roboto_regular.ttf");
+       // font= Typeface.createFromAsset(getAssets(), "fonts/roboto_medium.ttf");
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
+
         ed_email.setTypeface(font);
         ed_password.setTypeface(font);
 
@@ -288,17 +290,17 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         Display display=getWindowManager().getDefaultDisplay();
         int height=display.getHeight();
         int width=display.getWidth();
-        logo.getLayoutParams().height=(int)(height*0.3);
-        logo.getLayoutParams().width =(int)(width*0.4);
+        logo.getLayoutParams().height=(int)(height*0.31);
+        logo.getLayoutParams().width =(int)(height*0.26);
 
         fBbtn.getLayoutParams().height=(int)(height*0.09);
-        fBbtn.getLayoutParams().width =(int)(width*0.15);
+        fBbtn.getLayoutParams().width =(int)(height*0.09);
 
         gplusbtn.getLayoutParams().height=(int)(height*0.09);
-        gplusbtn.getLayoutParams().width =(int)(width*0.15);
+        gplusbtn.getLayoutParams().width =(int)(height*0.09);
 
         Gobtnx.getLayoutParams().height=(int)(height*0.12);
-        Gobtnx.getLayoutParams().width =(int)(width*0.2);
+        Gobtnx.getLayoutParams().width =(int)(height*0.12);
 
 
         /*

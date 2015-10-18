@@ -54,7 +54,7 @@ public class FindRide extends Fragment implements DatePickerDialog.OnDateSetList
         stateFrom = (EditText) v.findViewById(R.id.stateFrom);
         stateTo = (EditText) v.findViewById(R.id.stateTo);
 
-        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_regular.ttf");
+        font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
         cityFrom.setTypeface(font);
         cityTo.setTypeface(font);
         countryTo.setTypeface(font);
