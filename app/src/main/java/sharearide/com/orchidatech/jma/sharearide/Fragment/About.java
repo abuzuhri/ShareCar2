@@ -47,7 +47,7 @@ public class About extends Fragment {
     private static final String TAG_PHONE_HOME = "home";
     private static final String TAG_PHONE_OFFICE = "office";
 
-Typeface font;
+    Typeface font;
     // contacts JSONArray
     JSONArray contacts = null;
 
@@ -57,7 +57,7 @@ Typeface font;
     private ProgressDialog pDialog;
 
     private View myFragmentView;
-    TextView addressView, phoneView, emailView;
+    TextView addressView, about_facebook,about_gmail,about_twitter,countryView,cityView,comma,about_phone,about_fax;
 
     private ImageView logo;
 
@@ -75,13 +75,27 @@ Typeface font;
         pDialog.show();
 
         addressView = (TextView) myFragmentView.findViewById(R.id.about_address);
-        phoneView = (TextView) myFragmentView.findViewById(R.id.about_phone);
-        emailView = (TextView) myFragmentView.findViewById(R.id.about_email);
+        about_phone = (TextView) myFragmentView.findViewById(R.id.about_phone);
+        about_fax = (TextView) myFragmentView.findViewById(R.id.about_fax);
+        about_facebook = (TextView) myFragmentView.findViewById(R.id.about_facebook);
+        about_twitter = (TextView) myFragmentView.findViewById(R.id.about_twitter);
+        about_gmail = (TextView) myFragmentView.findViewById(R.id.about_gmail);
+        cityView = (TextView) myFragmentView.findViewById(R.id.city);
+        countryView = (TextView) myFragmentView.findViewById(R.id.country);
+        comma = (TextView) myFragmentView.findViewById(R.id.comma);
         logo=(ImageView)myFragmentView.findViewById(R.id.logo);
+
         font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
+
         addressView.setTypeface(font);
-        phoneView.setTypeface(font);
-        emailView.setTypeface(font);
+        cityView.setTypeface(font);
+        countryView.setTypeface(font);
+        about_fax.setTypeface(font);
+        about_phone.setTypeface(font);
+        about_facebook.setTypeface(font);
+        about_twitter.setTypeface(font);
+        about_gmail.setTypeface(font);
+
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int height = display.getHeight();
         int width = display.getWidth();
@@ -95,11 +109,22 @@ Typeface font;
                 try {
                     JSONArray aboutArray = jsonObject.getJSONArray("about");
                     JSONObject about = aboutArray.getJSONObject(0);
+                    String city = about.getString("city");
+                    String country = about.getString("country");
+                    String phone = about.getString("tel");
+                    String fax = about.getString("fax");
                     String fb_account = about.getString("facebook_account");
+                    String twitter_account = about.getString("twitter_account");
                     String google_account = about.getString("google_account");
                     String address = about.getString("address");
                     addressView.setText(address);
-                    emailView.setText(google_account);
+                    cityView.setText(city);
+                    countryView.setText(country);
+                    about_fax.setText(fax);
+                    about_phone.setText(phone);
+                    about_facebook.setText(fb_account);
+                    about_twitter.setText(twitter_account);
+                    about_gmail.setText(google_account);
 
                     if (pDialog.isShowing())
                         pDialog.dismiss();
@@ -202,7 +227,7 @@ Typeface font;
                 pDialog.dismiss();
 
             addressView.setText(address);
-            emailView.setText(email);
+            //emailView.setText(email);
         }
 
     }

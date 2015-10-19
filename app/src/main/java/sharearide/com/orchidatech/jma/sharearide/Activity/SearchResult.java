@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import android.support.design.widget.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +48,7 @@ public class SearchResult extends ActionBarActivity {
     RecyclerView rv;
     private LinearLayoutManager llm;
     EditText ed_search;
-    private Button load_more;
+    private FloatingActionButton load_more;
     ImageView search;
     ArrayList<String> params;
     long last_id_server = -1;
@@ -90,7 +92,7 @@ Typeface font;
         mProgressBar = (ProgressBar) this.findViewById(R.id.search_progress);
         tool_bar = (Toolbar) findViewById(R.id.toolbar_2); // Attaching the layout to the toolbar object
 
-        load_more = (Button) findViewById(R.id.btn_load_more);
+        load_more = (FloatingActionButton) findViewById(R.id.btn_load_more);
         load_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +102,7 @@ Typeface font;
             }
         });
 
-        tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        tool_bar = (Toolbar) findViewById(R.id.toolbar_2); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

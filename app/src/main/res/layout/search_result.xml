@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="sharearide.com.orchidatech.jma.sharearide.Activity.Search">
 
@@ -42,21 +43,40 @@
         android:divider="@null"
         android:listSelector="@android:color/transparent"
         android:layout_below="@+id/toolbar_2"/>
-    <Button
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_load_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Load More"
+        android:layout_margin="15dp"
+        android:layout_gravity="bottom|end"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/btn_load_more" />
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/rv"
+        android:src="@drawable/ic_loop_white"
+        app:layout_anchorGravity="bottom|right|end"
+        fab:backgroundTint="@color/Floatbtn"
+        fab:fab_shadow="false"/>
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:text="Load More"-->
+        <!--android:layout_below="@+id/rv"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:drawableLeft="@drawable/ic_loop_white"-->
+        <!--android:drawablePadding="15dip"-->
+        <!--android:id="@+id/btn_load_more" />-->
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/search_progress"
         android:layout_marginTop="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignBottom="@+id/rv"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rv"
+
+        />
 
 </RelativeLayout>

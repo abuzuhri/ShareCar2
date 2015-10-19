@@ -468,7 +468,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/call"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/call"
+                    android:background="@drawable/ic_call"
                     android:layout_marginRight="10dp"/>
 
                 <ImageButton
@@ -476,7 +476,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/send_msg"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/sms"/>
+                    android:background="@drawable/ic_sms"/>
 
 
             </LinearLayout>
@@ -520,7 +520,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/send_mail"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/msg" />
+                    android:background="@drawable/ic_msg" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

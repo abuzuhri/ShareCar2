@@ -12,6 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,33 +24,29 @@ import org.json.JSONObject;
 
 import sharearide.com.orchidatech.jma.sharearide.Logic.ServiceHandler;
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.webservice.RequestQueueHandler;
 
 public class TermsOfUse extends Fragment {
 
     // URL to get contacts JSON
-    private static String url = "http://api.androidhive.info/contacts/";
-
-    // JSON Node names
-    private static final String TAG_TERMS = "terms";
-    private static final String TAG_ID = "id";
-    private static final String TAG_NAME = "name";
-    private static final String TAG_PHONE = "phone";
-    private static final String TAG_PHONE_MOBILE = "mobile";
+    private static String url ="http://orchidatech.com/sharearide/web-services/term_of_use.php";
 
     JSONArray termsJSONArray = null;
 
     private ProgressDialog pDialog;
 
     private View myFragmentView;
-Typeface font;
+    Typeface font;
     TextView termsView;
-    String terms;
     private  ImageView logo;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myFragmentView = inflater.inflate(R.layout.fragment_terms_of_use, container, false);
-
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+        pDialog.show();
         termsView = (TextView) myFragmentView.findViewById(R.id.terms);
         logo=(ImageView)myFragmentView.findViewById(R.id.logo);
         font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
@@ -56,75 +57,39 @@ Typeface font;
 
         logo.getLayoutParams().height=(int)(height*0.31);
         logo.getLayoutParams().width =(int)(height*0.26); // Calling async task to get json
-        new GetTermsOfUse().execute();
+        JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                try {
+                    JSONArray term_of_useArray = jsonObject.getJSONArray("term_of_use");
+                    JSONObject term_of_use = term_of_useArray.getJSONObject(0);
+                    String description = term_of_use.getString("description");
+                    String name = term_of_use.getString("name");
+                  //  Toast.makeText(getActivity(),""+name+ " "+description+"",Toast.LENGTH_LONG).show();
+                    termsView.setText(description);
+
+
+                    if (pDialog.isShowing())
+                        pDialog.dismiss();
+
+                } catch (JSONException e) {
+                    if (pDialog.isShowing())
+                        pDialog.dismiss();
+
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                if (pDialog.isShowing())
+                    pDialog.dismiss();
+
+            }
+        });
+        RequestQueueHandler.getInstance(getActivity()).addToRequestQueue(request);
+        ///  new GetAbout().execute();
 
         return myFragmentView;
     }
-
-    /**
-     * Async task class to get json by making HTTP call
-     */
-    private class GetTermsOfUse extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Showing progress dialog
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            // Creating service handler class instance
-            ServiceHandler sh = new ServiceHandler();
-
-            // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-
-            Log.d("Response: ", "> " + jsonStr);
-
-            if (jsonStr != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
-
-                    // Getting JSON Array node
-                    termsJSONArray = jsonObj.getJSONArray(TAG_TERMS);
-
-                    // looping through All Contacts
-                    for (int i = 0; i < termsJSONArray.length(); i++) {
-                        JSONObject c = termsJSONArray.getJSONObject(i);
-
-                        String id = c.getString(TAG_ID);
-                        String name = c.getString(TAG_NAME);
-
-                        // Phone node is JSON Object
-                        JSONObject phone = c.getJSONObject(TAG_PHONE);
-                        String mobile = phone.getString(TAG_PHONE_MOBILE);
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Log.e("ServiceHandler", "Couldn't get any data from the url");
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            // Dismiss the progress dialog
-            if (pDialog.isShowing())
-                pDialog.dismiss();
-
-            //termsView.setText(terms);
-        }
-
-    }
-
 }

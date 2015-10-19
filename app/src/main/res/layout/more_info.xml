@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/close_btn"
         android:visibility="gone"
-        android:background="@drawable/close"
+        android:background="@drawable/ic_close"
         />
 
 
