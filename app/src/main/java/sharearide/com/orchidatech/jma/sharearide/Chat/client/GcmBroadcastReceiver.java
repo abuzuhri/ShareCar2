@@ -15,6 +15,7 @@ import android.text.TextUtils;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import sharearide.com.orchidatech.jma.sharearide.Activity.SplashScreen;
 import sharearide.com.orchidatech.jma.sharearide.Chat.ChatActivity;
 import sharearide.com.orchidatech.jma.sharearide.Chat.Common;
 import sharearide.com.orchidatech.jma.sharearide.Chat.DataProvider;
@@ -91,7 +92,7 @@ public class GcmBroadcastReceiver extends BroadcastReceiver {
         }
 
         if (launchApp) {
-            Intent intent = new Intent(ctx, ChatActivity.class);
+            Intent intent = new Intent(ctx, SplashScreen.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pi);
