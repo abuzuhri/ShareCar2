@@ -86,12 +86,7 @@ Typeface font;
         more_info = (Button) findViewById(R.id.more_info);
         send_mail = (ImageButton) findViewById(R.id.send_mail);
         send_msg = (ImageButton) findViewById(R.id.send_msg);
-        if(user_id ==  getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1)){
-            quick_msg.setEnabled(false);
-            send_mail.setEnabled(false);
-            send_msg.setEnabled(false);
-            call.setEnabled(false);
-        }
+
         font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
         cityFrom.setTypeface(font);
         cityTo.setTypeface(font);
@@ -135,6 +130,12 @@ Typeface font;
             }
         });
         // set more_info.xml to alertdialog builder
+        if(user_id ==  getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1)){
+            quick_msg.setEnabled(false);
+            send_mail.setEnabled(false);
+            send_msg.setEnabled(false);
+            call.setEnabled(false);
+        }
         LayoutInflater li = LayoutInflater.from(ReviewRide.this);
         View dialogView = li.inflate(R.layout.more_info, null);
 
