@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
+import sharearide.com.orchidatech.jma.sharearide.Logic.GMailSender;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
@@ -66,11 +68,10 @@ public class ResetPassword extends ActionBarActivity {
 
                                 MainUserFunctions.forgetPassword(getApplicationContext(), ed_email.getText().toString(), new OnSendPasswordListener() {
                                     @Override
-                                    public void onSendingSuccess(String message) {
-                                        if (mProgressDialog.isShowing())
-                                            mProgressDialog.dismiss();
-                                        Toast.makeText(getApplicationContext(), "Password Send Successfully to your Email :) ", Toast.LENGTH_LONG).show();
-                                        ResetPassword.this.finish();
+                                    public void onSendingSuccess(String password) {
+
+                                        sendPassword(ed_email.getText().toString(), password);
+//                                        Toast.makeText(getApplicationContext(), "Password Send Successfully to your Email :) ", Toast.LENGTH_LONG).show();
                                         //            startActivity(new Intent(ResetPassword.this, Login.class));
                                         //  Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                     }
@@ -132,6 +133,32 @@ public class ResetPassword extends ActionBarActivity {
             }
         });*/
     }
+
+    private void sendPassword(String recipient, String password) {
+        GMailSender sender = new GMailSender("amalkhkonz@gmail.com",
+                "a@123456789"); // type ur mail id and password here and next
+        // line also
+        try {
+            sender.sendMail("Recover Password, Share A Ride","Your Password is: "
+                    + password, "amalkhkonz@gmail.com", recipient);
+            if (mProgressDialog.isShowing())
+                mProgressDialog.dismiss();
+
+            Toast.makeText(getApplicationContext(), "Password Send Successfully to your Email :) ", Toast.LENGTH_LONG).show();
+new Handler().postDelayed(new Runnable() {
+    @Override
+    public void run() {
+ResetPassword.this.finish();
+    }
+}, 1000);
+        } catch (Exception e) {
+            if (mProgressDialog.isShowing())
+                mProgressDialog.dismiss();
+
+            Toast.makeText(getApplicationContext(), "An Error Occurred, try again", Toast.LENGTH_LONG).show();        }
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

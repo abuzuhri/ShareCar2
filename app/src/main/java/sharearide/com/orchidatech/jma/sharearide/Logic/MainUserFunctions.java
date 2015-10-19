@@ -801,12 +801,15 @@ public class MainUserFunctions {
         UserOperations.getInstance(context).forgetPassword(params, new OnLoadFinished() {
             @Override
             public void onSuccess(JSONObject jsonObject) throws JSONException {
-                String message = jsonObject.getString("message");
                 boolean success = jsonObject.getBoolean("success");
-                if (success)
-                    listener.onSendingSuccess(message);
-                else
+                if (success) {
+                    String password = jsonObject.getString("password");
+                    listener.onSendingSuccess(password);
+                }
+                else {
+                    String message = jsonObject.getString("message");
                     listener.onSendingFails(message);
+                }
             }
 
             @Override
