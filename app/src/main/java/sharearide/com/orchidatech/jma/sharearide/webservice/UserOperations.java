@@ -279,9 +279,12 @@ public class UserOperations {
 
 
     public void getSearchAllResult(Map<String, String> params, final OnLoadFinished onLoadFinished) {
-        String url = UrlConstant.SEARCH_ALL_URL +"?item=" + params.get("item") + "&user_id=" + params.get("user_id");
+        String url = UrlConstant.SEARCH_ALL_URL +"?item=" + params.get("item")
+                +"&user_id=" + params.get("user_id")
+                +"&last_id=" + params.get("last_id")
+                +"&offset=" + params.get("offset");
         url=url.replace(" ","%20");
-        // Log.i("Ride", url);
+         Log.i("Ride", url);
         sendRequest(url, onLoadFinished);
 
 //        UserOperationsProcessor.getInstance(context).sendRequest(url, new Response.Listener<JSONObject>() {
