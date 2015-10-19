@@ -143,15 +143,19 @@ Typeface font;
 
             }
         });
-        phone.setOnClickListener(new View.OnClickListener() {
+        phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                save.setVisibility(View.VISIBLE);
+            }
+        });
+       phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 save.setVisibility(View.VISIBLE);
 
             }
         });
-
-
 
         username.setText(UserDAO.getUserById(id).getUsername());
         phone.setText(UserDAO.getUserById(id).getPhone());
