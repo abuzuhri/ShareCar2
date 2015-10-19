@@ -7,8 +7,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ public class SplashScreen extends ActionBarActivity {
     private Timer mTimer;
     private long user_id;
     Intent intent;
-
+private  ImageView logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,14 @@ public class SplashScreen extends ActionBarActivity {
 //       UserDAO.deleteAllUsers();
 //       RideDAO.deleteAllRides();
         user_id =  getSharedPreferences("pref", MODE_PRIVATE).getLong("id",-1);
+        logo=(ImageView)findViewById(R.id.logo);
+
+        Display display=getWindowManager().getDefaultDisplay();
+        int height=display.getHeight();
+        int width=display.getWidth();
+        logo.getLayoutParams().height=(int)(height*0.33);
+        logo.getLayoutParams().width =(int)(height*0.29);
+
 
         if (user_id == -1)
             intent = new Intent(SplashScreen.this, Login.class);

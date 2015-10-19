@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_mapshow"
+        android:src="@drawable/ic_showmap"
         app:layout_anchorGravity="bottom|right|end"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

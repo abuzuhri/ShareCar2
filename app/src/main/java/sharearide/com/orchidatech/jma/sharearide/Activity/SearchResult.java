@@ -20,6 +20,8 @@ import android.widget.ProgressBar;
 
 import android.support.design.widget.FloatingActionButton;
 
+import android.support.design.widget.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

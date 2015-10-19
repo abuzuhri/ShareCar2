@@ -36,7 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="2dp"
                 android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginTop="@dimen/vertical_margin"
@@ -77,7 +76,7 @@
                     android:id="@+id/firstlocation_lat_long"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/navigation"/>
+                    android:background="@drawable/ic_location"/>
 
             </LinearLayout>
 
@@ -256,7 +255,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginRight="@dimen/horizontal_marginLeft"
-                android:padding="2dp"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
@@ -294,7 +292,7 @@
                     android:id="@+id/secondlocation_lat_long"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/navigation"/>
+                    android:background="@drawable/ic_location"/>
 
             </LinearLayout>
             <LinearLayout

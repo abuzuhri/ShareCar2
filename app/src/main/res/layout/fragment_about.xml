@@ -1,70 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="sharearide.com.orchidatech.jma.sharearide.Fragment.About">
 
-    <RelativeLayout
+
+
+    <LinearLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="#eeeeee"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/header"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="@color/ColorPrimary"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/orchida" />
+    </LinearLayout>
 
-        </LinearLayout>
 
-        <RelativeLayout
+    <ScrollView
+        android:id="@+id/company"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/header"
-            android:gravity="center_horizontal"
-            android:padding="16dp">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
+            <TextView
+                android:id="@+id/textView_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Version 1.0"
+                android:layout_marginBottom="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_version"
+                android:layout_centerHorizontal="true"
+                android:text="2015 Orchida Co."
+                android:layout_marginBottom="15dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+            <TextView
+                android:id="@+id/about_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Abdulaziz St, Al-Yazji Building"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <LinearLayout
-                android:id="@+id/company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:layout_marginBottom="10dp"
+                >
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="About Share a Ride"
                     android:layout_marginBottom="10dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:text="Gaza"
+                    android:layout_marginRight="5dp"
+
+                    android:textAppearance="?android:attr/textAppearanceMedium" /> <TextView
+                android:id="@+id/comma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text=" , "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/textView_version"
+                    android:id="@+id/country"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textView11"
-                    android:layout_centerHorizontal="true"
-                    android:text="Version 1.0"
                     android:layout_marginBottom="10dp"
+                    android:text="Palestine"
+                    android:layout_marginLeft="5dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView_version"
-                    android:layout_centerHorizontal="true"
-                    android:text="2015 Orchida Co."
-                    android:layout_marginBottom="10dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
 
             </LinearLayout>
 
@@ -72,44 +110,140 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/company"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginBottom="10dp">
 
-                <TextView
-                    android:id="@+id/about_address"
+
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="Abdulaziz St, Al-Yazji Building"
+                    android:src="@drawable/ic_fb"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"/>
+
+                <TextView
+                    android:id="@+id/about_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView9"
+                    android:text="Orchidatech@gmail.com"
+                    android:layout_gravity="center_vertical"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_twitter"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"/>
+                <TextView
+                    android:id="@+id/about_twitter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView9"
+                    android:text="Orchidatech@gmail.com"
+                    android:layout_gravity="center_vertical"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginBottom="10dp">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/google"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"/>
+                <TextView
+                    android:id="@+id/about_gmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView9"
+                    android:text="Orchidatech@gmail.com"
+                    android:layout_gravity="center_vertical"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                >
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView"
+                    android:src="@drawable/about_phone"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:id="@+id/about_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="28-12345"
-                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center_vertical"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
-                <TextView
-                    android:id="@+id/about_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/textView9"
-                    android:layout_toEndOf="@+id/textView9"
-                    android:layout_toRightOf="@+id/textView9"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Orchidatech@gmail.com"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginBottom="15dp">
 
-        </RelativeLayout>
 
-    </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewa"
+                    android:src="@drawable/fax"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+                    />
 
-</FrameLayout>
+                <TextView
+                    android:id="@+id/about_fax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="28-12345"
+                    android:layout_gravity="center_vertical"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

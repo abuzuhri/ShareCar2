@@ -8,7 +8,7 @@
         android:id="@+id/action_location"
         android:orderInCategory="100"
         android:title="Location"
-        android:icon="@drawable/ic_mapshow"
+        android:icon="@drawable/ic_showmap"
         app:showAsAction="ifRoom"
         ></item>
 </menu>
