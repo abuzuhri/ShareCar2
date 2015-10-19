@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +43,7 @@ public class MyRides extends Fragment {
     private LinearLayoutManager llm;
     private User user;
     long last_id_server = -1;
-    private FloatingActionButton load_more;
+    private LinearLayout load_more;
 
 
 
@@ -70,13 +71,14 @@ public class MyRides extends Fragment {
         });
         my_rides_rv.setAdapter(adapter);
 
-        load_more = (FloatingActionButton) view.findViewById(R.id.btn_load_more);
+        load_more = (LinearLayout) view.findViewById(R.id.btn_load_more);
+
         load_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 my_rides_progress.setVisibility(View.VISIBLE);
                 v.setVisibility(View.GONE);
-               getMyRides();
+                getMyRides();
             }
         });
         InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {

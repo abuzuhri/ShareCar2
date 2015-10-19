@@ -10,12 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -48,8 +50,9 @@ public class SearchAll extends AppCompatActivity {
     Map<Ride, User> ridesData;
     private LinearLayoutManager llm;
     Typeface font;
-    private FloatingActionButton load_more;
+    private LinearLayout load_more;
     long last_id_server = -1;
+    private int fetched_count=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +86,24 @@ public class SearchAll extends AppCompatActivity {
             }
         });
         rv.setAdapter(adapter);
-
-        load_more = (FloatingActionButton) findViewById(R.id.btn_load_more);
+//rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//    @Override
+//    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//        super.onScrollStateChanged(recyclerView, newState);
+//    }
+//
+//    @Override
+//    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//if((llm.getChildCount()+llm.findFirstVisibleItemPosition()>=llm.getItemCount()) && fetched_count != -1){
+//    load_more.setVisibility(View.VISIBLE);
+//
+//    Log.i("rv","refresh"+llm.getChildCount()+"  "+llm.findFirstVisibleItemPosition()+", "+llm.getItemCount() +"  "+fetched_count);
+//
+//}else
+//    load_more.setVisibility(View.GONE);
+//    }
+//});
+        load_more = (LinearLayout) findViewById(R.id.btn_load_more);
         load_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,14 +137,15 @@ public class SearchAll extends AppCompatActivity {
                     //UserDAO.addNewUser(matchedRidesData.get(ride));
 
                 }
+                fetched_count = count;
+                last_id_server = last_id_server == -1?last_id:last_id_server;
 
+                mProgressBar.setVisibility(View.GONE);
 
                 rides.addAll(matchedRides);
                 ridesData.putAll(matchedRidesData);
                 adapter.notifyDataSetChanged();
-                mProgressBar.setVisibility(View.GONE);
                 load_more.setVisibility(count == -1?View.GONE:View.VISIBLE);
-                last_id_server = last_id_server == -1?last_id:last_id_server;
 //Toast.makeText(getActivity(), matchedRidesData.get(matchedRides.get(0)).getUsername()+"" + matchedRidesData.size(), Toast.LENGTH_LONG).show();
 
             }

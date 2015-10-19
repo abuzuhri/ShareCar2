@@ -48,7 +48,7 @@ public class SearchResult extends ActionBarActivity {
     RecyclerView rv;
     private LinearLayoutManager llm;
     EditText ed_search;
-    private FloatingActionButton load_more;
+    private LinearLayout load_more;
     ImageView search;
     ArrayList<String> params;
     long last_id_server = -1;
@@ -91,7 +91,7 @@ public class SearchResult extends ActionBarActivity {
         mProgressBar = (ProgressBar) this.findViewById(R.id.search_progress);
         tool_bar = (Toolbar) findViewById(R.id.toolbar_2); // Attaching the layout to the toolbar object
 
-        load_more = (FloatingActionButton) findViewById(R.id.btn_load_more);
+        load_more = (LinearLayout) findViewById(R.id.btn_load_more);
         load_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
