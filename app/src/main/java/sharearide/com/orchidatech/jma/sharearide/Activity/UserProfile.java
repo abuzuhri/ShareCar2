@@ -136,10 +136,11 @@ Typeface font;
                     }
                 });
 
-        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        email.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public void onClick(View view) {
                 save.setVisibility(View.VISIBLE);
+
             }
         });
         phone.setOnClickListener(new View.OnClickListener() {
