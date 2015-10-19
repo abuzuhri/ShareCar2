@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,6 +51,7 @@ public class SearchAll extends AppCompatActivity {
     Map<Ride, User> orginal_ridesData;
     private LinearLayoutManager llm;
     Typeface font;
+    private FloatingActionButton load_more;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,8 @@ public class SearchAll extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
         ed_search = (MaterialEditText) findViewById(R.id.ed_search);
+        load_more = (FloatingActionButton) findViewById(R.id.btn_load_more);
+
         searchAll = (ImageButton) findViewById(R.id.search);
         mProgressBar = (ProgressBar) findViewById(R.id.search_progress);
         mProgressBar.setVisibility(View.GONE);

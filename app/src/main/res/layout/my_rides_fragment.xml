@@ -3,6 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     >
 
 
@@ -10,7 +13,7 @@
         android:id="@+id/my_rides_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f8f8f8"
+        android:background="#fff"
         android:divider="@null"
         android:listSelector="@android:color/transparent" />
 
@@ -21,6 +24,18 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_load_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_gravity="bottom|end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/my_rides_rv"
+        android:src="@drawable/ic_loop_white"
+        app:layout_anchorGravity="bottom|right|end"
+        fab:backgroundTint="@color/Floatbtn"
+        fab:fab_shadow="false"/>
 
 </RelativeLayout>

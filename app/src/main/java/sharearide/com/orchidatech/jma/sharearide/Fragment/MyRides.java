@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class MyRides extends Fragment {
     ProgressBar my_rides_progress;
     private LinearLayoutManager llm;
     private User user;
+    FloatingActionButton load_more;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class MyRides extends Fragment {
         my_rides_rv = (RecyclerView) view.findViewById(R.id.my_rides_rv);
         my_rides_progress = (ProgressBar) view.findViewById(R.id.my_rides_progress);
         my_rides_rv.setHasFixedSize(true);
+        load_more = (FloatingActionButton) view.findViewById(R.id.btn_load_more);
         llm = new LinearLayoutManager(getActivity());
         my_rides_rv.setLayoutManager(llm);
         my_rides = new ArrayList<>();
