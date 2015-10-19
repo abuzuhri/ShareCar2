@@ -77,8 +77,8 @@ Typeface font;
                 profile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Log.i("Photo", "pressed");
-                        //      photoClickingListener.onClicked(profile, uploadingImageProgress);
+
+                            photoClickingListener.onClicked();
                     }
                 });
 

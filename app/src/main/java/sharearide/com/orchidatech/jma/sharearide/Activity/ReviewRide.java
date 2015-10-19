@@ -57,6 +57,13 @@ Typeface font;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.save_info);
+        Intent intent = getIntent();
+
+        long ride_id = intent.getLongExtra("ride_id", -1);
+        long user_id = intent.getLongExtra("user_id", -1);
+        ride = RideDAO.getRideByRemoteId(ride_id);
+        user = UserDAO.getUserById(user_id);
+
         tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,7 +86,12 @@ Typeface font;
         more_info = (Button) findViewById(R.id.more_info);
         send_mail = (ImageButton) findViewById(R.id.send_mail);
         send_msg = (ImageButton) findViewById(R.id.send_msg);
-
+        if(user_id ==  getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1)){
+            quick_msg.setEnabled(false);
+            send_mail.setEnabled(false);
+            send_msg.setEnabled(false);
+            call.setEnabled(false);
+        }
         font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
         cityFrom.setTypeface(font);
         cityTo.setTypeface(font);
@@ -190,12 +202,7 @@ Typeface font;
         });
 
 
-        Intent intent = getIntent();
 
-        long ride_id = intent.getLongExtra("ride_id", -1);
-        long user_id = intent.getLongExtra("user_id", -1);
-        ride = RideDAO.getRideByRemoteId(ride_id);
-        user = UserDAO.getUserById(user_id);
         email.setText(user.getEmail());
         username.setText(user.getUsername());
         cityFrom.setText(ride.getFromCity());

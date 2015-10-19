@@ -13,12 +13,12 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
+import android.support.design.widget.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,12 +46,11 @@ public class SearchResult extends ActionBarActivity {
     RecyclerView rv;
     private LinearLayoutManager llm;
     EditText ed_search;
-    private Button load_more;
+    private FloatingActionButton load_more;
     ImageView search;
     ArrayList<String> params;
     long last_id_server = -1;
-Typeface font;
-    private int rides_count_in_server=-1;
+    Typeface font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,7 @@ Typeface font;
         mProgressBar = (ProgressBar) this.findViewById(R.id.search_progress);
         tool_bar = (Toolbar) findViewById(R.id.toolbar_2); // Attaching the layout to the toolbar object
 
-        load_more = (Button) findViewById(R.id.btn_load_more);
+        load_more = (FloatingActionButton) findViewById(R.id.btn_load_more);
         load_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +99,7 @@ Typeface font;
             }
         });
 
-        tool_bar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        tool_bar = (Toolbar) findViewById(R.id.toolbar_2); // Attaching the layout to the toolbar object
         setSupportActionBar(tool_bar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -120,14 +119,14 @@ Typeface font;
 //        });
 
 
-       ed_search.addTextChangedListener(new TextWatcher() {
+        ed_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                searchLocal(s.toString());
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchLocal(s.toString());
 
             }
 
@@ -157,7 +156,7 @@ Typeface font;
         rv.setAdapter(adapter);
 
     }
-//
+    //
 //    private void getLastRecord() {
 //
 //        MainUserFunctions.get_last_record(this, getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1), new OnLoadFinished() {
@@ -186,29 +185,29 @@ Typeface font;
         load_more.setVisibility(View.GONE);
         MainUserFunctions.find_a_ride(new OnSearchListener() {
                                           @Override
-                                          public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count) {
+                                          public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count, long last_id) {
                                               for (Ride ride : matchedRides) {
                                                   RideDAO.addNewRide(ride.getRemoteId(), ride.getUserId(), ride.getFromCity(), ride.getToCity(), ride.getFromCountry(), ride.getToCountry(), ride.getFromState(), ride.getToState(),
                                                           ride.getDateTime(), ride.getCost(), ride.getMore_info(),ride.getFrom_Longitude(), ride.getTo_longitude(), ride.getFrom_Lattitude(), ride.getTo_latitude());
-                                                User user = matchedRidesData.get(ride);
-                                                UserDAO.addNewUser(user.getRemoteId(), user.getUsername(), user.getPassword(), user.getImage(), user.getAddress(), user.getBirthdate(), user.getGender(), user.getPhone(), user.getEmail());
+                                                  User user = matchedRidesData.get(ride);
+                                                  UserDAO.addNewUser(user.getRemoteId(), user.getUsername(), user.getPassword(), user.getImage(), user.getAddress(), user.getBirthdate(), user.getGender(), user.getPhone(), user.getEmail());
 //                                                  UserDAO.addNewUser(matchedRidesData.get(ride));
-                                                  if(rides_count_in_server == -1)
-                                                      rides_count_in_server = count;
+
 
                                               }
 
-                                              mProgressBar.setVisibility(View.GONE);
-                                              load_more.setVisibility(View.VISIBLE);
+
                                               rides.addAll(matchedRides);
                                               ridesData.putAll(matchedRidesData);
                                               orginal_rides.addAll(rides);
                                               orginal_ridesData.putAll(matchedRidesData);
                                               adapter.notifyDataSetChanged();
-                                              if(rides.size() > 0 && rides_count_in_server == rides.size()) {
-                                                  load_more.setVisibility(View.GONE);
-                                                  mProgressBar.setVisibility(View.GONE);
-                                              }
+                                              mProgressBar.setVisibility(View.GONE);
+
+
+                                                  load_more.setVisibility(count == -1?View.GONE:View.VISIBLE);
+                                                   last_id_server =last_id_server == -1?last_id:last_id_server;
+
 
 //                                                     Toast.makeText(SearchResult.this.getApplicationContext(), matchedRidesData.get(matchedRides.get(0)).getUsername()+"" + matchedRidesData.size(), Toast.LENGTH_LONG).show();
 

@@ -10,6 +10,6 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
  * Created by Bahaa on 15/9/2015.
  */
 public interface OnSearchListener {
-    public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count);
+    public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count, long last_id);
     public void onSearchFailed(String error);
 }

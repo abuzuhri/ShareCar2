@@ -100,7 +100,7 @@ Typeface font;
         current_password.setTypeface(font);
         re_password.setTypeface(font);
         password.setTypeface(font);
-        if(UserDAO.getUserById(id).getEmail()==null || UserDAO.getUserById(id).getPhone()==null)
+        if(TextUtils.isEmpty(UserDAO.getUserById(id).getEmail()) || TextUtils.isEmpty(UserDAO.getUserById(id).getPhone()))
             tv_completeProfile.setVisibility(View.VISIBLE);
         update_save_progress= (ProgressBar) findViewById(R.id.update_save_progress);
         btn_changePassword= (Button) findViewById(R.id.btn_changePassword);

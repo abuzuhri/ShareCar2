@@ -33,7 +33,6 @@ import java.io.ByteArrayOutputStream;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.About;
-import sharearide.com.orchidatech.jma.sharearide.Fragment.FindAllRide;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.Inbox;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.MyRides;
 import sharearide.com.orchidatech.jma.sharearide.Fragment.ShareRideFragment;
@@ -68,7 +67,6 @@ public class ShareRide extends ActionBarActivity {
     private Toolbar toolbar;                              // Declaring the Toolbar Object
     ShareRideFragment shareRideFragment;
     Inbox inboxFragment;
-    FindAllRide findAllRideFragment;
     RecyclerView mRecyclerView;                           // Declaring RecyclerView
     DrawerAdapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
@@ -95,7 +93,6 @@ public class ShareRide extends ActionBarActivity {
         getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).commit();
         getFragmentManager().executePendingTransactions();
 
-        findAllRideFragment= new FindAllRide();
 
         NAME= UserDAO.getUserById(getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1)).getUsername();
         EMAIL=UserDAO.getUserById(getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id",-1)).getEmail();
@@ -242,11 +239,10 @@ public class ShareRide extends ActionBarActivity {
             }
         }, new OnPhotoClicked() {
             @Override
-            public void onClicked(ImageView image,ProgressBar _uploadImageProgress) {
-                profileImageView = image;
-                uploadImageProgress = _uploadImageProgress;
-                Intent i=new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            public void onClicked() {
+                startActivity(new Intent(ShareRide.this, UserProfile.class));
+//                Intent i=new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(i, RESULT_LOAD_IMAGE);
 
 
             }

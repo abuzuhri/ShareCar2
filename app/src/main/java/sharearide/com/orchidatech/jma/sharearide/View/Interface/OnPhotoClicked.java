@@ -7,5 +7,5 @@ import android.widget.ProgressBar;
  * Created by Bahaa on 8/10/2015.
  */
 public interface OnPhotoClicked {
-    public void onClicked(ImageView image,ProgressBar uploadProgressBar);
+    public void onClicked();
 }

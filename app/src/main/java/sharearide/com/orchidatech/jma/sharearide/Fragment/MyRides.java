@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,6 +41,10 @@ public class MyRides extends Fragment {
     ProgressBar my_rides_progress;
     private LinearLayoutManager llm;
     private User user;
+    long last_id_server = -1;
+    private FloatingActionButton load_more;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,17 +55,6 @@ public class MyRides extends Fragment {
         llm = new LinearLayoutManager(getActivity());
         my_rides_rv.setLayoutManager(llm);
         my_rides = new ArrayList<>();
-//        btn_offer_ride = (Button) view.findViewById(R.id.btn_offer_ride);
-//        btn_offer_ride.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getFragmentManager().popBackStack();
-//                ShareRideFragment shareRideFragment = new ShareRideFragment();
-//                getFragmentManager().beginTransaction().replace(R.id.fragment_place, shareRideFragment).addToBackStack(null).commit();
-//                getFragmentManager().executePendingTransactions();
-////                shareRideFragment.selectTab(0);
-//            }
-//        });
         user = UserDAO.getUserById(getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
         adapter = new MyRidesAdapter(getActivity(), my_rides, user, new MyRidesAdapter.OnRecycleViewItemClicked() {
             @Override
@@ -76,7 +70,15 @@ public class MyRides extends Fragment {
         });
         my_rides_rv.setAdapter(adapter);
 
-
+        load_more = (FloatingActionButton) view.findViewById(R.id.btn_load_more);
+        load_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                my_rides_progress.setVisibility(View.VISIBLE);
+                v.setVisibility(View.GONE);
+               getMyRides();
+            }
+        });
         InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
             @Override
             public void internetConnectionStatus(boolean status) {
@@ -115,10 +117,12 @@ public class MyRides extends Fragment {
     private void getMyRides() {
         MainUserFunctions.get_my_rides(getActivity(), new OnFetchMyRides() {
             @Override
-            public void onFetched(ArrayList<Ride> all_my_rides) {
+            public void onFetched(ArrayList<Ride> all_my_rides, int count, long last_id) {
                 my_rides_progress.setVisibility(View.GONE);
                     my_rides.addAll(all_my_rides);
                     adapter.notifyDataSetChanged();
+                load_more.setVisibility(count == -1?View.GONE:View.VISIBLE);
+                last_id_server =last_id_server == -1?last_id:last_id_server;
 
 
             }
@@ -126,6 +130,8 @@ public class MyRides extends Fragment {
             @Override
             public void onFailed(String error) {
                 my_rides_progress.setVisibility(View.GONE);
+                load_more.setVisibility(View.VISIBLE);
+
                 Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
                 //   Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
                 new Handler().postDelayed(new Runnable() {
@@ -140,6 +146,6 @@ public class MyRides extends Fragment {
                 }, 2000);
 
             }
-        }, user.getRemoteId());
+        }, user.getRemoteId(), llm.getItemCount(), last_id_server);
     }
 }

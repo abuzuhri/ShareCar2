@@ -5,16 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,11 +45,11 @@ public class SearchAll extends AppCompatActivity {
     RecyclerView rv;
     private ProgressBar mProgressBar;
     ArrayList<Ride> rides;
-    ArrayList<Ride> orginal_rides;
     Map<Ride, User> ridesData;
-    Map<Ride, User> orginal_ridesData;
     private LinearLayoutManager llm;
     Typeface font;
+    private FloatingActionButton load_more;
+    long last_id_server = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +60,7 @@ public class SearchAll extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
         ed_search = (MaterialEditText) findViewById(R.id.ed_search);
+
         searchAll = (ImageButton) findViewById(R.id.search);
         mProgressBar = (ProgressBar) findViewById(R.id.search_progress);
         mProgressBar.setVisibility(View.GONE);
@@ -83,16 +84,28 @@ public class SearchAll extends AppCompatActivity {
         });
         rv.setAdapter(adapter);
 
+        load_more = (FloatingActionButton) findViewById(R.id.btn_load_more);
+        load_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
+                v.setVisibility(View.GONE);
+                findAllRide(ed_search.getText().toString(), SearchAll.this.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
+
+            }
+        });
+
+
+
     }
 
 
     private void findAllRide(final String s, long user_id) {
-        rides.clear();
-        ridesData.clear();
+
         MainUserFunctions.find_all_ride(new OnSearchListener() {
 
             @Override
-            public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count) {
+            public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count, long last_id) {
                 for (Ride ride : matchedRides) {
 
 
@@ -106,10 +119,13 @@ public class SearchAll extends AppCompatActivity {
 
                 }
 
-                mProgressBar.setVisibility(View.GONE);
+
                 rides.addAll(matchedRides);
                 ridesData.putAll(matchedRidesData);
                 adapter.notifyDataSetChanged();
+                mProgressBar.setVisibility(View.GONE);
+                load_more.setVisibility(count == -1?View.GONE:View.VISIBLE);
+                last_id_server = last_id_server == -1?last_id:last_id_server;
 //Toast.makeText(getActivity(), matchedRidesData.get(matchedRides.get(0)).getUsername()+"" + matchedRidesData.size(), Toast.LENGTH_LONG).show();
 
             }
@@ -118,7 +134,7 @@ public class SearchAll extends AppCompatActivity {
             public void onSearchFailed(String error) {
                 mProgressBar.setVisibility(View.GONE);
             }
-        }, SearchAll.this, s, user_id);
+        }, SearchAll.this, s, user_id, llm.getItemCount(), last_id_server);
 
 
     }
@@ -144,16 +160,20 @@ public class SearchAll extends AppCompatActivity {
 
         if (id == R.id.action_search) {
             ed_search.setTypeface(font);
-            if (TextUtils.isEmpty(ed_search.getText().toString())) {
-                //  ed_search.setError("Nothing to search for");
-            } else {
+//            if (TextUtils.isEmpty(ed_search.getText().toString())) {
+//                //  ed_search.setError("Nothing to search for");
+//            } else
+            {
 
                 InternetConnectionChecker.isConnectedToInternet(SearchAll.this, new OnInternetConnectionListener() {
                     @Override
                     public void internetConnectionStatus(boolean status) {
                         if (status) {
                             //mProgressDialog.show();
+                            rides.clear();
+                            ridesData.clear();
                             mProgressBar.setVisibility(View.VISIBLE);
+                            last_id_server = -1;
                             findAllRide(ed_search.getText().toString(), SearchAll.this.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
                             //   Toast.makeText(getActivity(),"DONE",Toast.LENGTH_LONG).show();
 

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
@@ -117,12 +118,14 @@ public class MainUserFunctions {
         });
     }
 
-    public static void find_all_ride(final OnSearchListener listener, final Context context, final String item, final long user_id ){
+    public static void find_all_ride(final OnSearchListener listener, final Context context, final String item, final long user_id, final int offset, long last_id_server ){
         Map<String, String> params = new HashMap<>();
 
 
         params.put("item", item);
         params.put("user_id", user_id + "");
+        params.put("offset", String.valueOf(offset));
+        params.put("last_id", String.valueOf(last_id_server));
         final ArrayList<Ride> allMatchedRides = new ArrayList<Ride>();
         final  Map<Ride, User> matchedRidesData = new HashMap<Ride, User>();
         UserOperations.getInstance(context).getSearchAllResult(params, new OnLoadFinished() {
@@ -166,7 +169,9 @@ public class MainUserFunctions {
 
                         }
                         int count = jsonObject.getInt("count");
-                        listener.onSearchSucceed(allMatchedRides, matchedRidesData, count);
+                        long last_id = Long.parseLong(jsonObject.getString("last_id"));
+                        listener.onSearchSucceed(allMatchedRides, matchedRidesData, count, last_id);
+
                    /* Ride ride = new Ride(remoteId, user_id, city_from, city_to, state_from, state_to, country_from, country_to, date_time, price);
                     RideDAO.addNewRide(ride);*/
                         //  Toast.makeText(context, "Added Successfully", Toast.LENGTH_LONG).show();
@@ -174,7 +179,7 @@ public class MainUserFunctions {
                     } else {
                         String message = jsonObject.getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                        listener.onSearchFailed(message);
+                        listener.onSearchSucceed(allMatchedRides, matchedRidesData, -1, -1);
 
                     }
 
@@ -469,10 +474,11 @@ public class MainUserFunctions {
 
                         }
                         int count = jsonObject.getInt("count");
-                        listener.onSearchSucceed(allMatchedRides, matchedRidesData, count);
+                        long last_id = Long.parseLong(jsonObject.getString("last_id"));
+                        listener.onSearchSucceed(allMatchedRides, matchedRidesData, count, last_id);
                     } else {
                         Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-                        listener.onSearchFailed(jsonObject.getString("message"));
+                        listener.onSearchSucceed(allMatchedRides, matchedRidesData, -1, -1);
                     }
                 } catch (JSONException e) {
                     Toast.makeText(context, "An error occurred, try again", Toast.LENGTH_LONG).show();
@@ -590,10 +596,11 @@ public class MainUserFunctions {
 
                         Intent intent;
                         User user = UserDAO.getUserById(user_id);
-                        if(user.getEmail() == null || user.getPhone()==null)
+                        if(TextUtils.isEmpty(user.getEmail()) || TextUtils.isEmpty(user.getPhone()))
                             intent = new Intent(context, UserProfile.class);
                         else
                             intent = new Intent(context, ShareRide.class);
+
 
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
@@ -947,9 +954,11 @@ public class MainUserFunctions {
 
     }
 
-    public static void get_my_rides(final Context context, final OnFetchMyRides listener, long user_id){
+    public static void get_my_rides(final Context context, final OnFetchMyRides listener, long user_id,final int offset, long last_id_server){
         Map<String, String> params = new HashMap<>();
         params.put("user_id", String.valueOf(user_id));
+        params.put("offset", String.valueOf(offset));
+        params.put("last_id", String.valueOf(last_id_server));
         final ArrayList<Ride> all_my_rides = new ArrayList<>();
 
         UserOperations.getInstance(context).get_my_rides(params, new OnLoadFinished() {
@@ -987,9 +996,12 @@ public class MainUserFunctions {
                             all_my_rides.add(ride);
                         }
                         // Toast.makeText(context, all_my_rides.size()+"", Toast.LENGTH_LONG).show();
-                        listener.onFetched(all_my_rides);
+                        int count = jsonObject.getInt("count");
+                        long last_id = Long.parseLong(jsonObject.getString("last_id"));
+                        listener.onFetched(all_my_rides, count, last_id);
                     }else{
-                        listener.onFailed(jsonObject.getString("message"));
+                        Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                        listener.onFetched(all_my_rides, -1, -1);
                     }
                 } catch (JSONException e) {
                     listener.onFailed("An error occurred, try again");
