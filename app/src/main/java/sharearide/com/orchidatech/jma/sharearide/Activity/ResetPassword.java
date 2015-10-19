@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import sharearide.com.orchidatech.jma.sharearide.Database.DAO.UserDAO;
-import sharearide.com.orchidatech.jma.sharearide.Logic.GMailSender;
+//import sharearide.com.orchidatech.jma.sharearide.Logic.GMailSender;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
 import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
@@ -135,27 +135,28 @@ public class ResetPassword extends ActionBarActivity {
     }
 
     private void sendPassword(String recipient, String password) {
-        GMailSender sender = new GMailSender("amalkhkonz@gmail.com",
-                "a@123456789"); // type ur mail id and password here and next
-        // line also
-        try {
-            sender.sendMail("Recover Password, Share A Ride","Your Password is: "
-                    + password, "amalkhkonz@gmail.com", recipient);
-            if (mProgressDialog.isShowing())
-                mProgressDialog.dismiss();
-
-            Toast.makeText(getApplicationContext(), "Password Send Successfully to your Email :) ", Toast.LENGTH_LONG).show();
-new Handler().postDelayed(new Runnable() {
-    @Override
-    public void run() {
-ResetPassword.this.finish();
-    }
-}, 1000);
-        } catch (Exception e) {
-            if (mProgressDialog.isShowing())
-                mProgressDialog.dismiss();
-
-            Toast.makeText(getApplicationContext(), "An Error Occurred, try again", Toast.LENGTH_LONG).show();        }
+//        GMailSender sender = new GMailSender("amalkhkonz@gmail.com",
+//                "a@123456789"); // type ur mail id and password here and next
+//        // line also
+//        try {
+//            sender.sendMail("Recover Password, Share A Ride","Your Password is: "
+//                    + password, "amalkhkonz@gmail.com", recipient);
+//            if (mProgressDialog.isShowing())
+//                mProgressDialog.dismiss();
+//
+//            Toast.makeText(getApplicationContext(), "Password Send Successfully to your Email :) ", Toast.LENGTH_LONG).show();
+//new Handler().postDelayed(new Runnable() {
+//    @Override
+//    public void run() {
+//            ResetPassword.this.finish();
+//    }
+//}, 1000);
+//        } catch (Exception e) {
+//            if (mProgressDialog.isShowing())
+//                mProgressDialog.dismiss();
+//
+//            Toast.makeText(getApplicationContext(), "An Error Occurred, try again", Toast.LENGTH_LONG).show();
+//        }
 
     }
 
