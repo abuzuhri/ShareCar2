@@ -20,6 +20,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
     private  ImageButton firstlocation_lat_long,secondlocation_lat_long;
     private String from_Lattitude,from_Longitude,to_Lattitude,to_Longitude;
     private EditText info;
+    private LinearLayout   shadow;
     private ProgressBar progressBar;
 
     @Override
@@ -74,6 +76,7 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
         time=(EditText)v.findViewById(R.id.time);
         date=(EditText)v.findViewById(R.id.date);
         price=(EditText)v.findViewById(R.id.price);
+        shadow=(LinearLayout)v.findViewById(R.id.shadow);
 
         font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
         cityFrom.setTypeface(font);
@@ -259,7 +262,7 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                         public void internetConnectionStatus(boolean status) {
                             if (status) {
                                 progressBar.setVisibility(View.VISIBLE);
-
+                                shadow.setVisibility(View.GONE);
                                 offerRide(context.getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1),
                                         cityFrom.getText().toString(), cityTo.getText().toString(),
                                         stateFrom.getText().toString(), stateTo.getText().toString(),
@@ -270,6 +273,8 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                                             @Override
                                             public void onFinished() {
                                                 progressBar.setVisibility(View.GONE);
+                                                shadow.setVisibility(View.VISIBLE);
+
                                             }
                                         });
                             } else {
@@ -283,7 +288,8 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                                 alertDialogBuilder.setView(v);
                                 TextView tittle = (TextView) v.findViewById(R.id.tittle);
                                 ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
-
+                                    tittle.setTypeface(font);
+                                    tittle.setTypeface(font);
                                 // create alert dialog
                                 final AlertDialog alertDialog = alertDialogBuilder.create();
                                 close_btn.setOnClickListener(new View.OnClickListener() {
@@ -364,6 +370,8 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                                 @Override
                                 public void onFinished(String message) {
                                     progressBar.setVisibility(View.GONE);
+                                    shadow.setVisibility(View.VISIBLE);
+
                                     // context.startActivity(new Intent(context, MyRides.class));
                                     MyRides myRidesFragment = new MyRides();
                                     getFragmentManager().beginTransaction().replace(R.id.fragment_place, myRidesFragment).addToBackStack(null).commit();
@@ -381,6 +389,8 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                 else
                 {
                     progressBar.setVisibility(View.GONE);
+                    shadow.setVisibility(View.VISIBLE);
+
                     LayoutInflater li = LayoutInflater.from(getActivity());
                     View v = li.inflate(R.layout.warning, null);
 
@@ -389,8 +399,10 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                     // set more_info.xml to alertdialog builder
                     alertDialogBuilder.setView(v);
                     TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                    TextView textView7 = (TextView) v.findViewById(R.id.textView7);
                     ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
-
+                    tittle.setTypeface(font);
+                    textView7.setTypeface(font);
                     // create alert dialog
                     final AlertDialog alertDialog = alertDialogBuilder.create();
                     close_btn.setOnClickListener(new View.OnClickListener() {

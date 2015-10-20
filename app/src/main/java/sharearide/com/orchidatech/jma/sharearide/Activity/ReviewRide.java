@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,11 +46,13 @@ public class ReviewRide extends ActionBarActivity {
     Ride ride;
     User user;
     private Button quick_msg,more_info;
-    private TextView email, phone, username, cityFrom, cityTo,stateFrom,stateTo, countryFrom, countryTo, date, time, price;
+    private TextView  email, phone, username, cityFrom, cityTo,stateFrom,stateTo, countryFrom, countryTo, date, time, price;
     private ImageButton send_msg, send_mail, call;
     private ArrayList<String> user_data;
     private  Toolbar tool_bar;
     private EditText info;
+    private  LinearLayout message_btn;
+
     String more_Info;
 Typeface font;
 
@@ -83,6 +86,8 @@ Typeface font;
         phone = (TextView) findViewById(R.id.phone);
         username = (TextView) findViewById(R.id.username);
         quick_msg = (Button) findViewById(R.id.quick_msg);
+        message_btn = (LinearLayout) findViewById(R.id.message_btn);
+
         more_info = (Button) findViewById(R.id.more_info);
         send_mail = (ImageButton) findViewById(R.id.send_mail);
         send_msg = (ImageButton) findViewById(R.id.send_msg);
@@ -150,6 +155,7 @@ Typeface font;
         close_btn.setVisibility(View.VISIBLE);
         info = (EditText) dialogView.findViewById(R.id.info);
         info.setTypeface(font);
+        tittle.setTypeface(font);
         final AlertDialog alertDialog = alertDialogBuilder.create();
 
         more_info.setOnClickListener(new View.OnClickListener() {

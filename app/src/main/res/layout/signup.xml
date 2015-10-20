@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="User Name"
-                android:padding="5dp"
+                android:padding="@dimen/ed_padding"
                 android:textDirection="ltr"
                 android:inputType="text"
                 android:imeOptions="actionNext"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/password"
                 android:hint="Password"
-                android:padding="5dp"
+                android:padding="@dimen/ed_padding"
                 android:textDirection="ltr"
                 android:inputType="textPassword"
                 android:imeOptions="actionNext"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/re_password"
                 android:hint="Retype Password"
-                android:padding="5dp"
+                android:padding="@dimen/ed_padding"
                 android:textDirection="ltr"
                 android:inputType="textPassword"
                 android:textColorHint="#bbbbbb"
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/email"
                 android:hint="Email"
-                android:padding="5dp"
+                android:padding="@dimen/ed_padding"
                 android:textDirection="ltr"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/phone"
                 android:hint="Phone"
-                android:padding="5dp"
+                android:padding="@dimen/ed_padding"
                 android:textDirection="ltr"
                 android:textColorHint="#bbbbbb"
                 android:imeOptions="actionGo"
@@ -110,23 +110,34 @@
                 android:layout_marginLeft="@dimen/horizontal_margin"/>
         </LinearLayout>
     </ScrollView>
-
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:textColor="@color/whiteText"
-        android:background="@color/Floatbtn"
-        android:id="@+id/register"
-        android:layout_alignParentBottom="true"/>
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/signup_progress"
-        android:visibility="gone"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#fdb557"></LinearLayout>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textColor="@color/whiteText"
+            android:background="@color/Floatbtn"
+            android:id="@+id/register"
+            android:textSize="@dimen/text_size"
+            android:layout_alignParentBottom="true"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/signup_progress"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+    </LinearLayout>
 
 </RelativeLayout>

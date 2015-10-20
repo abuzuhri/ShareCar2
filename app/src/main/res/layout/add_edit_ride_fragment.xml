@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,435 +13,455 @@
         android:layout_weight="1"
         android:id="@+id/scrollView">
 
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#fff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="From"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"
+                android:id="@+id/textView"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginTop="@dimen/vertical_topmargin"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginTop="@dimen/vertical_topheader"
+                android:layout_marginBottom="@dimen/date_marginTop"
+
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/im1"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_city"
+                    />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"></LinearLayout>
+                <EditText
+                    android:id="@+id/cityFrom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
+                    android:enabled="false"
+                    android:layout_marginLeft="10dp"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size"
+                    android:ellipsize="end"
+                    android:textDirection="ltr"
+                    android:background="#fff"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:layout_weight="0.8" />
+
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/firstlocation_lat_long"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_location"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginBottom="@dimen/date_marginTop">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageVieew6"
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_country"
+                    />
+
+                <EditText
+                    android:id="@+id/countryFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Country"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
+                    android:textSize="@dimen/text_size"
+                    android:enabled="false"
+                    android:layout_marginLeft="10dp"
+
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textDirection="ltr"
+                    android:background="#fff"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginBottom="@dimen/date_marginTop">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/statefgg"
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_flag"
+                    />
+
+                <EditText
+                    android:id="@+id/stateFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:enabled="false"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/text_size"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
+                    android:textDirection="ltr"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:background="#fff"
+                    android:layout_marginRight="@dimen/horizontal_margin"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginBottom="@dimen/date_marginTop">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imagew6"
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_time"
+                    />
+
+                <EditText
+                    android:id="@+id/time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Time"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
+                    android:enabled="false"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/text_size"
+                    android:background="#fff"
+                    android:layout_marginRight="@dimen/horizontal_margin"
+                    android:imeOptions="actionNext"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginBottom="@dimen/vertical_topheader">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/aa"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_date"
+                    />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"></LinearLayout>
+                <EditText
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date"
+                    android:padding="5dp"
+                    android:enabled="false"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/text_size"
+                    android:textColorHint="#bbbbbb"
+                    android:textDirection="ltr"
+                    android:background="#fff"
+                    android:layout_marginRight="@dimen/horizontal_margin"
+                    android:imeOptions="actionNext"
+                    />
+
+            </LinearLayout>
+
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageViews"
+                android:background="@drawable/line"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginBottom="@dimen/vertical_topheader"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="To"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"
+                android:id="@+id/textView1"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/vertical_topheader"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginBottom="@dimen/date_marginTop"
+
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageVie5"
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_city"
+                    />
+
+                <EditText
+                    android:id="@+id/cityTo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
+                    android:enabled="false"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
+                    android:textDirection="ltr"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:background="#fff"
+                    android:inputType="text"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/text_size"
+                    android:imeOptions="actionNext"
+                    android:layout_weight="0.8"
+                    />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/secondlocation_lat_long"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_location"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginBottom="@dimen/date_marginTop">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageV6"
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_country"
+                    />
+
+                <EditText
+                    android:id="@+id/countryTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Country"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
+                    android:textDirection="ltr"
+                    android:background="#fff"
+                    android:singleLine="true"
+                    android:enabled="false"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/text_size"
+                    android:ellipsize="end"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                android:layout_marginBottom="@dimen/date_marginTop">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dfd"
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_flag"
+                    />
+
+                <EditText
+                    android:id="@+id/stateTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
+                    android:textDirection="ltr"
+                    android:background="#fff"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:enabled="false"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/text_size"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/horizontal_marginLeft"
+                android:layout_marginLeft="@dimen/horizontal_marginLeft"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ss"
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/ic_price"
+                    />
+
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Price"
+                    android:textColorHint="#bbbbbb"
+                    android:padding="5dp"
+                    android:textDirection="ltr"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:enabled="false"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/text_size"
+                    android:background="#fff"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
+                    />
+            </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="More Information"
+                android:id="@+id/more_info"
+                android:background="@drawable/cyan_roundrect"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/vertical_margintopTextView"
+                android:layout_marginBottom="@dimen/vertical_margin"
+                android:textStyle="bold"
+                android:textColor="@color/whiteText"
+                />
+
+        </LinearLayout>
+    </ScrollView>
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#fff">
-        <TextView
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:id="@+id/shadow"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:background="#fdb557"></LinearLayout>
+
+        <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="From"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold"
-            android:id="@+id/textView"
-            android:textColor="#000"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginTop="@dimen/vertical_margin"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/horizontal_marginLeft"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginTop="@dimen/vertical_margin"
-            android:layout_marginBottom="@dimen/date_marginTop"
-
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/im1"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_city"
-                />
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"></LinearLayout>
-            <EditText
-                android:id="@+id/cityFrom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="City"
-                android:enabled="false"
-                android:layout_marginLeft="10dp"
-                android:textColorHint="#bbbbbb"
-                android:padding="5dp"
-                android:singleLine="true"
-                android:textSize="@dimen/text_size"
-                android:ellipsize="end"
-                android:textDirection="ltr"
-                android:background="#fff"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                android:layout_weight="0.8" />
-
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/firstlocation_lat_long"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_location"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/horizontal_marginLeft"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/date_marginTop">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageVieew6"
-                android:layout_gravity="center_vertical"
-
-                android:background="@drawable/ic_country"
-                />
-
-            <EditText
-                android:id="@+id/countryFrom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Country"
-                android:textColorHint="#bbbbbb"
-                android:padding="5dp"
-                android:textSize="@dimen/text_size"
-                android:enabled="false"
-                android:layout_marginLeft="10dp"
-
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:textDirection="ltr"
-                android:background="#fff"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/horizontal_marginLeft"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/date_marginTop">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/statefgg"
-                android:layout_gravity="center_vertical"
-
-                android:background="@drawable/ic_flag"
-                />
-
-            <EditText
-                android:id="@+id/stateFrom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="State"
-                android:enabled="false"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/text_size"
-                android:textColorHint="#bbbbbb"
-                android:padding="5dp"
-                android:textDirection="ltr"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/horizontal_marginLeft"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/date_marginTop">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imagew6"
-                android:layout_gravity="center_vertical"
-
-                android:background="@drawable/ic_time"
-                />
-
-            <EditText
-                android:id="@+id/time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Time"
-                android:textColorHint="#bbbbbb"
-                android:padding="5dp"
-                android:enabled="false"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/text_size"
-                android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
-                android:imeOptions="actionNext"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/horizontal_marginLeft"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/vertical_margin">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/aa"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_date"
-                />
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"></LinearLayout>
-            <EditText
-                android:id="@+id/date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Date"
-                android:padding="5dp"
-                android:enabled="false"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/text_size"
-                android:textColorHint="#bbbbbb"
-                android:textDirection="ltr"
-                android:background="#fff"
-                android:layout_marginRight="@dimen/horizontal_margin"
-                android:imeOptions="actionNext"
-                />
-
-        </LinearLayout>
-
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageViews"
-            android:background="@drawable/line"
-            android:layout_marginLeft="@dimen/horizontal_margin"
-            android:layout_marginBottom="@dimen/vertical_margin"/>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="To"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold"
-            android:id="@+id/textView1"
-            android:textColor="#000"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/vertical_margin"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
             />
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/horizontal_marginLeft"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/date_marginTop"
-
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageVie5"
-                android:layout_gravity="center_vertical"
-
-                android:background="@drawable/ic_city"
-                />
-
-            <EditText
-                android:id="@+id/cityTo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="City"
-                android:enabled="false"
-                android:textColorHint="#bbbbbb"
-                android:padding="5dp"
-                android:textDirection="ltr"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:background="#fff"
-                android:inputType="text"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/text_size"
-                android:imeOptions="actionNext"
-                android:layout_weight="0.8"
-                />
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/secondlocation_lat_long"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_location"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/horizontal_marginLeft"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/date_marginTop">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageV6"
-                android:layout_gravity="center_vertical"
-
-                android:background="@drawable/ic_country"
-                />
-
-            <EditText
-                android:id="@+id/countryTo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Country"
-                android:textColorHint="#bbbbbb"
-                android:padding="5dp"
-                android:textDirection="ltr"
-                android:background="#fff"
-                android:singleLine="true"
-                android:enabled="false"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/text_size"
-                android:ellipsize="end"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/horizontal_marginLeft"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            android:layout_marginBottom="@dimen/date_marginTop">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/dfd"
-                android:layout_gravity="center_vertical"
-
-                android:background="@drawable/ic_flag"
-                />
-
-            <EditText
-                android:id="@+id/stateTo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="State"
-                android:textColorHint="#bbbbbb"
-                android:padding="5dp"
-                android:textDirection="ltr"
-                android:background="#fff"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:enabled="false"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/text_size"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/horizontal_marginLeft"
-            android:layout_marginLeft="@dimen/horizontal_marginLeft"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ss"
-                android:layout_gravity="center_vertical"
-
-                android:background="@drawable/ic_price"
-                />
-
-            <EditText
-                android:id="@+id/price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Price"
-                android:textColorHint="#bbbbbb"
-                android:padding="5dp"
-                android:textDirection="ltr"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:enabled="false"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/text_size"
-                android:background="#fff"
-                android:inputType="number"
-                android:imeOptions="actionNext"
-                />
-        </LinearLayout>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="More Information"
-            android:id="@+id/more_info"
-            android:background="@drawable/cyan_roundrect"
+            android:text="Save"
+            android:id="@+id/save"
+            android:background="#ff9d1e"
             android:gravity="center"
-            android:layout_marginLeft="@dimen/horizontal_margin"
-            android:layout_marginRight="@dimen/horizontal_margin"
-            android:layout_marginTop="@dimen/vertical_margintopTextView"
-            android:layout_marginBottom="@dimen/vertical_margin"
             android:textStyle="bold"
             android:textColor="@color/whiteText"
             />
-
     </LinearLayout>
-</ScrollView>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/save"
-        android:background="#ff9d1e"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/vertical_margin"
-        android:layout_marginBottom="0dp"
-        android:textStyle="bold"
-        android:textColor="@color/whiteText"
 
-        />
+
 </LinearLayout>

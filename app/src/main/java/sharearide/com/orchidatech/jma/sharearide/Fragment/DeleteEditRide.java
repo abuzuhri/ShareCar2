@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
@@ -45,7 +46,7 @@ import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnUpdateRideList
  */
 public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     private ArrayList<EditText> allEditText;
-
+     ProgressDialog pd ;
     EditText cityFrom;
     EditText countryFrom;
     EditText stateFrom;
@@ -66,6 +67,8 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
     private String from_Lattitude,from_Longitude,to_Lattitude,to_Longitude;
     private Calendar calendar;
      AlertDialog alertDialog;
+    private LinearLayout shadow;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +80,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_edit_ride_fragment, null, false);
         setHasOptionsMenu(true);
-
+      pd  = new ProgressDialog(getActivity());
         ride = RideDAO.getRideByRemoteId(getArguments().getLong("id", -1));
         origin_ride = ride;
         allEditText = new ArrayList<>();
@@ -100,8 +103,10 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
         price = (EditText) view.findViewById(R.id.price);
         allEditText.add(price);
         more_info = (Button) view.findViewById(R.id.more_info);
+        shadow = (LinearLayout) view.findViewById(R.id.shadow);
         save = (Button) view.findViewById(R.id.save);
         save.setVisibility(View.GONE);
+        shadow.setVisibility(View.GONE);
         font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
         cityFrom.setTypeface(font);
         cityTo.setTypeface(font);
@@ -121,7 +126,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
 //                        Toast.makeText(getActivity(), "No Changes Found..", Toast.LENGTH_LONG).show();
 //                        return;
 //                    }
-                final ProgressDialog pd = new ProgressDialog(getActivity());
+
                 pd.setMessage("Updating...");
                 pd.setCancelable(false);
 
@@ -194,6 +199,8 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
           close_btn = (ImageButton) dialog_view.findViewById(R.id.close_btn);
         info = (EditText) dialog_view.findViewById(R.id.info);
         info.setEnabled(false);
+        info.setTypeface(font);
+
         allEditText.add(info);
 
          alertDialog = alertDialogBuilder.create();
@@ -330,6 +337,8 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
                 for(EditText editText : allEditText)
                     editText.setEnabled(true);
                 save.setVisibility(View.VISIBLE);
+                shadow.setVisibility(View.VISIBLE);
+
                 firstlocation_lat_long.setEnabled(true);
                 secondlocation_lat_long.setEnabled(true);
 
@@ -349,6 +358,7 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
                             }
                         });
                         info.setText(ride.more_info);
+                        info.setTypeface(font);
                         alertDialog.show();
 
                     }
@@ -362,7 +372,6 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
                         setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                final ProgressDialog pd = new ProgressDialog(getActivity());
                                 pd.setMessage("Deleting...");
                                 pd.show();
                                 MainUserFunctions.deleteRide(getActivity(), ride.getRemoteId(), new OnRequestFinished() {

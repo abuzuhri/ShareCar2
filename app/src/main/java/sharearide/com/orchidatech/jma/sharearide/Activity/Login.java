@@ -79,12 +79,12 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
     private ConnectionResult mConnectionResult;
 
     private ImageView logo;
-    private TextView signUpbtn,resetPwbtn;
+    private TextView signUpbtn,resetPwbtn,textView2;
     private ImageButton fBbtn,gplusbtn,Gobtnx;
     private Toolbar tool_bar;
     private EditText ed_email,ed_password;
     CallbackManager callbackManager;
-    Typeface font;
+    Typeface font,fontbold;
 
     ProgressDialog mProgressDialog ;
 
@@ -104,12 +104,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage("Please Wait...");
 //        mProgressDialog.dismiss();
-       // font= Typeface.createFromAsset(getAssets(), "fonts/roboto_medium.ttf");
+        // font= Typeface.createFromAsset(getAssets(), "fonts/roboto_medium.ttf");
         font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
-
-        ed_email.setTypeface(font);
-        ed_password.setTypeface(font);
-
+        fontbold= Typeface.createFromAsset(getAssets(), "fonts/roboto_bold.ttf");
 
         logo=(ImageView)findViewById(R.id.logo);
         fBbtn=(ImageButton)findViewById(R.id.fBbtn);
@@ -117,6 +114,12 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         Gobtnx=(ImageButton)findViewById(R.id.Gobtnx);
         signUpbtn=(TextView)findViewById(R.id.signUpbtn);
         resetPwbtn=(TextView)findViewById(R.id.resetPwbtn);
+        textView2=(TextView)findViewById(R.id.textView2);
+        ed_email.setTypeface(font);
+        ed_password.setTypeface(font);
+        resetPwbtn.setTypeface(font);
+        signUpbtn.setTypeface(fontbold);
+        textView2.setTypeface(font);
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
 
         fBbtn.setOnClickListener(new View.OnClickListener() {
@@ -288,8 +291,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         Display display=getWindowManager().getDefaultDisplay();
         int height=display.getHeight();
         int width=display.getWidth();
-        logo.getLayoutParams().height=(int)(height*0.31);
-        logo.getLayoutParams().width =(int)(height*0.26);
+        logo.getLayoutParams().height=(int)(height*0.29);
+        logo.getLayoutParams().width =(int)(height*0.30);
 
         fBbtn.getLayoutParams().height=(int)(height*0.09);
         fBbtn.getLayoutParams().width =(int)(height*0.09);

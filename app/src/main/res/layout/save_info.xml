@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff">
-<include
-    android:id="@+id/tool_bar"
-    layout="@layout/toolbar" />
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar" />
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                     android:layout_gravity="center_vertical"
 
                     android:background="@drawable/ic_city"
-                   />
+                    />
 
                 <TextView
                     android:id="@+id/cityFrom"
@@ -65,7 +65,7 @@
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -97,8 +97,8 @@
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
-                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textColorHint="#bbbbbb"
+                    android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -132,7 +132,7 @@
                     android:ellipsize="end"
                     android:background="#fff"
                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/text_size"
                     />
 
             </LinearLayout>
@@ -152,7 +152,7 @@
                     android:id="@+id/imagew6"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/ic_time"
-                  />
+                    />
 
                 <TextView
                     android:id="@+id/time"
@@ -163,8 +163,8 @@
                     android:layout_marginLeft="10dp"
                     android:singleLine="true"
                     android:ellipsize="end"
-                   android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textColorHint="#bbbbbb"
+                    android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -194,8 +194,8 @@
                     android:text="11/09/2015"
                     android:padding="5dp"
                     android:layout_marginLeft="10dp"
-                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textColorHint="#bbbbbb"
+                    android:textSize="@dimen/text_size"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textDirection="ltr"
@@ -247,7 +247,7 @@
                     android:id="@+id/imageVie5"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/ic_city"
-                   />
+                    />
 
                 <TextView
                     android:id="@+id/cityTo"
@@ -255,8 +255,8 @@
                     android:layout_height="wrap_content"
                     android:text="Gaza"
                     android:layout_marginLeft="10dp"
-                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textColorHint="#bbbbbb"
+                    android:textSize="@dimen/text_size"
                     android:padding="5dp"
                     android:singleLine="true"
                     android:ellipsize="end"
@@ -280,15 +280,15 @@
                     android:id="@+id/flag"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/ic_flag"
-                   />
+                    />
 
                 <TextView
                     android:id="@+id/stateTo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textColorHint="#bbbbbb"
+                    android:textSize="@dimen/text_size"
                     android:text="State"
                     android:layout_marginLeft="10dp"
                     android:singleLine="true"
@@ -322,7 +322,7 @@
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -353,7 +353,7 @@
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -415,7 +415,7 @@
                     android:id="@+id/imageccVie5"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/ic_profile"
-                  />
+                    />
 
                 <TextView
                     android:id="@+id/username"
@@ -427,7 +427,7 @@
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     />
@@ -458,7 +458,7 @@
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/text_size"
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:layout_weight="0.1"
@@ -512,7 +512,7 @@
                     android:textDirection="ltr"
                     android:background="#fff"
                     android:textColorHint="#bbbbbb"
-                     android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/text_size"
                     android:layout_weight="0.1"
                     />
                 <ImageButton
@@ -524,6 +524,20 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/message_btn"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:id="@+id/shadow"
+            android:visibility="visible"
+            android:orientation="horizontal"
+            android:background="#fdb557"></LinearLayout>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -531,10 +545,10 @@
         android:id="@+id/quick_msg"
         android:background="#ff9d1e"
         android:gravity="center"
-        android:layout_marginTop="@dimen/vertical_margin"
         android:layout_marginBottom="0dp"
         android:textStyle="bold"
         android:textColor="#fff"
         />
+    </LinearLayout>
 </LinearLayout>
 

@@ -34,8 +34,9 @@ public class ResetPassword extends ActionBarActivity {
     private Button CancleBtn,SendBtn;
     private Toolbar tool_bar;
     private EditText ed_email;
+    private TextView textView,textView2;
     ProgressDialog mProgressDialog;
-    Typeface font;
+    Typeface font,fontbold;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +49,17 @@ public class ResetPassword extends ActionBarActivity {
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage("Please Wait...");
         ed_email=(EditText)findViewById(R.id.ed_email);
-        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
-        ed_email.setTypeface(font);
-
+        textView2=(TextView)findViewById(R.id.textView2);
+        textView=(TextView)findViewById(R.id.textView);
         SendBtn=(Button)findViewById(R.id.SendBtn);
+        font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
+        fontbold= Typeface.createFromAsset(getAssets(), "fonts/roboto_bold.ttf");
+        ed_email.setTypeface(font);
+        textView2.setTypeface(font);
+        textView.setTypeface(fontbold);
+        SendBtn.setTypeface(fontbold);
+
+
         SendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +80,7 @@ public class ResetPassword extends ActionBarActivity {
 
                                         if (mProgressDialog.isShowing())
                                             mProgressDialog.dismiss();
-                                       Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                         //            startActivity(new Intent(ResetPassword.this, Login.class));
                                         //  Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                         new Handler().postDelayed(new Runnable() {
