@@ -468,7 +468,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
                 String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
                 String social_id = currentPerson.getId();
                 SocialUser googleUser = new SocialUser();
-                googleUser.email = email;
+               //////////// googleUser.email = email;
                 googleUser.name = personName;
                 googleUser.avatarURL = personPhotoUrl;
                 googleUser.network = SocialUser.NetworkType.GOOGLEPLUS;
@@ -518,7 +518,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
             }
             mIntentInProgress = false;
             if (!mGoogleApiClient.isConnecting()) {
-                mGoogleApiClient.connect();
+                //Log.i("sds", resultCode+"");
+                if(resultCode != 0)
+                 mGoogleApiClient.connect();
             }
 
         }else
