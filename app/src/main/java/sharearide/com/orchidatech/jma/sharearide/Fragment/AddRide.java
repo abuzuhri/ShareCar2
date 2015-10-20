@@ -250,6 +250,9 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                 } else if (countryTo.getText().toString().equals("")) {
                     countryTo.setError("Required Field ");
                     ViewAnimation.bounce(getActivity(), countryTo);
+                }  else if (price.getText().toString().equals("")) {
+                    price.setError("Required Field ");
+                        ViewAnimation.bounce(getActivity(), price);
                 }else if(from_Lattitude!=null & to_Lattitude!=null){
                     InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
                         @Override
