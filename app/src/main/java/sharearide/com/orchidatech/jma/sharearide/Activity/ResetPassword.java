@@ -68,12 +68,19 @@ public class ResetPassword extends ActionBarActivity {
 
                                 MainUserFunctions.forgetPassword(getApplicationContext(), ed_email.getText().toString(), new OnSendPasswordListener() {
                                     @Override
-                                    public void onSendingSuccess(String password) {
+                                    public void onSendingSuccess(String message) {
 
-                                        sendPassword(ed_email.getText().toString(), password);
-//                                        Toast.makeText(getApplicationContext(), "Password Send Successfully to your Email :) ", Toast.LENGTH_LONG).show();
+                                        if (mProgressDialog.isShowing())
+                                            mProgressDialog.dismiss();
+                                       Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                         //            startActivity(new Intent(ResetPassword.this, Login.class));
                                         //  Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ResetPassword.this.finish();
+                                            }
+                                        }, 1000);
                                     }
 
                                     @Override

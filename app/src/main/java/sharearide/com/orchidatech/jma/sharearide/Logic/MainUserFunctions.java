@@ -803,8 +803,8 @@ public class MainUserFunctions {
             public void onSuccess(JSONObject jsonObject) throws JSONException {
                 boolean success = jsonObject.getBoolean("success");
                 if (success) {
-                    String password = jsonObject.getString("password");
-                    listener.onSendingSuccess(password);
+                    String message = jsonObject.getString("message");
+                    listener.onSendingSuccess(message);
                 }
                 else {
                     String message = jsonObject.getString("message");
