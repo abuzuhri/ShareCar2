@@ -111,7 +111,10 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                                 // set more_info.xml to alertdialog builder
                                 alertDialogBuilder.setView(v);
                                 TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                                TextView textView7 = (TextView) v.findViewById(R.id.textView7);
                                 ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
+                                tittle.setTypeface(font);
+                                textView7.setTypeface(font);
 
                                 // create alert dialog
                                 final AlertDialog alertDialog = alertDialogBuilder.create();
@@ -153,7 +156,10 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                                 // set more_info.xml to alertdialog builder
                                 alertDialogBuilder.setView(v);
                                 TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                                TextView textView7 = (TextView) v.findViewById(R.id.textView7);
                                 ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
+                                tittle.setTypeface(font);
+                                textView7.setTypeface(font);
 
                                 // create alert dialog
                                 final AlertDialog alertDialog = alertDialogBuilder.create();
@@ -230,6 +236,7 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
         close_btn.setVisibility(View.GONE);
         info = (EditText) dialogView.findViewById(R.id.info);
         info.setTypeface(font);
+        tittle.setTypeface(font);
         final AlertDialog alertDialog = alertDialogBuilder.create();
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -287,9 +294,11 @@ public class AddRide extends Fragment implements DatePickerDialog.OnDateSetListe
                                 // set more_info.xml to alertdialog builder
                                 alertDialogBuilder.setView(v);
                                 TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                                TextView textView7 = (TextView) v.findViewById(R.id.textView7);
                                 ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
-                                    tittle.setTypeface(font);
-                                    tittle.setTypeface(font);
+                                Typeface font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
+                                tittle.setTypeface(font);
+                                textView7.setTypeface(font);
                                 // create alert dialog
                                 final AlertDialog alertDialog = alertDialogBuilder.create();
                                 close_btn.setOnClickListener(new View.OnClickListener() {

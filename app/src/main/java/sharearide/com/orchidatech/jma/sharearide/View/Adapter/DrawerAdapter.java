@@ -71,7 +71,6 @@ Typeface font;
                 email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from header.xml for email
                 profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
                 uploadingImageProgress = (ProgressBar) itemView.findViewById(R.id.uploadingImageProgress);
-                font= Typeface.createFromAsset(context.getAssets(), "fonts/roboto_light.ttf");
                 Name.setTypeface(font);
                 email.setTypeface(font);
                 profile.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +152,9 @@ Typeface font;
     public void onBindViewHolder( final  ViewHolder holder, int position) {
         if(holder.Holderid ==1) {                              // as the list view is going to be called after the header view so we decrement the
             // position by 1 and pass it to the holder while setting the text and image
-            holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
+            holder.textView.setText(mNavTitles[position - 1]);
+             holder.textView.setTypeface(font);
+             // Setting the Text with the array of our Titles
         }
         else{
             holder.uploadingImageProgress.setVisibility(View.VISIBLE);

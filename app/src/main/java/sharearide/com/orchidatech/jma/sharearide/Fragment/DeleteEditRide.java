@@ -117,7 +117,6 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
         stateFrom.setTypeface(font);
         stateTo.setTypeface(font);
         price.setTypeface(font);
-      //  info.setTypeface(font);
         calendar = Calendar.getInstance();
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +199,6 @@ public class DeleteEditRide extends Fragment implements DatePickerDialog.OnDateS
         info = (EditText) dialog_view.findViewById(R.id.info);
         info.setEnabled(false);
         info.setTypeface(font);
-
         allEditText.add(info);
 
          alertDialog = alertDialogBuilder.create();

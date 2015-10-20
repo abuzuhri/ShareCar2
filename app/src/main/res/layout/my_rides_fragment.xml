@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/my_rides_progress"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"
+        android:visibility="visible"
         />
     <LinearLayout
         android:layout_width="match_parent"

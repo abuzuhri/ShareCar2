@@ -51,8 +51,8 @@ private  ImageView logo;
         Display display=getWindowManager().getDefaultDisplay();
         int height=display.getHeight();
         int width=display.getWidth();
-        logo.getLayoutParams().height=(int)(height*0.33);
-        logo.getLayoutParams().width =(int)(height*0.29);
+        logo.getLayoutParams().width =(int)(height*0.5);
+        logo.getLayoutParams().height =(int)(height*0.45);
 
 
         if (user_id == -1)

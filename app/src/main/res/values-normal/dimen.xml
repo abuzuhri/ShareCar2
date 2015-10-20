@@ -9,7 +9,7 @@
 
     <dimen name="horizontal_margin">50dp</dimen>
     <dimen name="vertical_margintopPage">100dp</dimen>
-    <dimen name="vertical_topPage">140dp</dimen>
+    <dimen name="vertical_topPage">120dp</dimen>
     <dimen name="little_margin">5dp</dimen>
     <dimen name="vertical_topmargin">60dp</dimen>
     <dimen name="vertical_topheader">30dp</dimen>

@@ -125,7 +125,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         fBbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ViewAnimation.bounce(Login.this, fBbtn);
+                ViewAnimation.clockwise(Login.this, fBbtn);
 
                 InternetConnectionChecker.isConnectedToInternet(Login.this, new OnInternetConnectionListener() {
                     @Override
@@ -170,7 +170,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         gplusbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ViewAnimation.bounce(Login.this, gplusbtn);
+                ViewAnimation.clockwise(Login.this, gplusbtn );
 
                 InternetConnectionChecker.isConnectedToInternet(Login.this, new OnInternetConnectionListener() {
                     @Override

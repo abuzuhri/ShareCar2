@@ -8,7 +8,7 @@
     <dimen name="ed_padding">10dp</dimen>
 
     <dimen name="vertical_margintopPage">80dp</dimen>
-    <dimen name="vertical_topPage">110dp</dimen>
+    <dimen name="vertical_topPage">100dp</dimen>
     <dimen name="little_margin">5dp</dimen>
     <dimen name="vertical_margintopTextView">30dp</dimen>
     <dimen name="vertical_margin_btwn_view">10dp</dimen>

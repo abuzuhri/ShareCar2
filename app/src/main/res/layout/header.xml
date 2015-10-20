@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="200dp"
     android:background="@drawable/headerback"
     android:orientation="vertical"
     android:weightSum="1">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/emp"
             android:id="@+id/circleView"
 
@@ -33,8 +33,8 @@
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
         android:text="Akash Bangad"
-        android:textSize="14sp"
-        android:layout_marginTop="10dp"
+        android:textSize="@dimen/text_size"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="20dp"
         android:textStyle="bold" />
 
@@ -43,10 +43,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_marginLeft="20dp"
         android:text="akash.bangad93@gmail.com"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:textStyle="normal" />
 
 

@@ -1,6 +1,7 @@
 package sharearide.com.orchidatech.jma.sharearide.Activity;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,10 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -21,6 +24,7 @@ import android.widget.ProgressBar;
 import android.support.design.widget.FloatingActionButton;
 
 import android.support.design.widget.FloatingActionButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +36,9 @@ import sharearide.com.orchidatech.jma.sharearide.Database.Model.Ride;
 import sharearide.com.orchidatech.jma.sharearide.Database.Model.User;
 import sharearide.com.orchidatech.jma.sharearide.Logic.MainUserFunctions;
 import sharearide.com.orchidatech.jma.sharearide.R;
+import sharearide.com.orchidatech.jma.sharearide.Utility.InternetConnectionChecker;
 import sharearide.com.orchidatech.jma.sharearide.View.Adapter.MyAdapter;
+import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnInternetConnectionListener;
 import sharearide.com.orchidatech.jma.sharearide.View.Interface.OnSearchListener;
 
 
@@ -140,6 +146,7 @@ public class SearchResult extends ActionBarActivity {
         rv = (RecyclerView) findViewById(R.id.rv);
         rv.setHasFixedSize(true);
         llm = new LinearLayoutManager(this);
+        llm.setSmoothScrollbarEnabled(true);
 
         rides = new ArrayList<>();
         ridesData = new HashMap<>();
@@ -155,6 +162,7 @@ public class SearchResult extends ActionBarActivity {
             }
         });
         rv.setLayoutManager(llm);
+        rv.setScrollbarFadingEnabled(true);
         rv.setAdapter(adapter);
 
     }
@@ -185,44 +193,83 @@ public class SearchResult extends ActionBarActivity {
 
         mProgressBar.setVisibility(View.VISIBLE);
         load_more.setVisibility(View.GONE);
-        MainUserFunctions.find_a_ride(new OnSearchListener() {
-                                          @Override
-                                          public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count, long last_id) {
-                                              for (Ride ride : matchedRides) {
-                                                  RideDAO.addNewRide(ride.getRemoteId(), ride.getUserId(), ride.getFromCity(), ride.getToCity(), ride.getFromCountry(), ride.getToCountry(), ride.getFromState(), ride.getToState(),
-                                                          ride.getDateTime(), ride.getCost(), ride.getMore_info(),ride.getFrom_Longitude(), ride.getTo_longitude(), ride.getFrom_Lattitude(), ride.getTo_latitude());
-                                                  User user = matchedRidesData.get(ride);
-                                                  UserDAO.addNewUser(user.getRemoteId(), user.getUsername(), user.getPassword(), user.getImage(), user.getAddress(), user.getBirthdate(), user.getGender(), user.getPhone(), user.getEmail());
+        InternetConnectionChecker.isConnectedToInternet(SearchResult.this, new OnInternetConnectionListener() {
+            @Override
+            public void internetConnectionStatus(boolean status) {
+                if (status)
+
+                    MainUserFunctions.find_a_ride(new OnSearchListener() {
+                                                      @Override
+                                                      public void onSearchSucceed(ArrayList<Ride> matchedRides, Map<Ride, User> matchedRidesData, int count, long last_id) {
+                                                          for (Ride ride : matchedRides) {
+                                                              RideDAO.addNewRide(ride.getRemoteId(), ride.getUserId(), ride.getFromCity(), ride.getToCity(), ride.getFromCountry(), ride.getToCountry(), ride.getFromState(), ride.getToState(),
+                                                                      ride.getDateTime(), ride.getCost(), ride.getMore_info(), ride.getFrom_Longitude(), ride.getTo_longitude(), ride.getFrom_Lattitude(), ride.getTo_latitude());
+                                                              User user = matchedRidesData.get(ride);
+                                                              UserDAO.addNewUser(user.getRemoteId(), user.getUsername(), user.getPassword(), user.getImage(), user.getAddress(), user.getBirthdate(), user.getGender(), user.getPhone(), user.getEmail());
 //                                                  UserDAO.addNewUser(matchedRidesData.get(ride));
 
 
-                                              }
+                                                          }
 
 
-                                              rides.addAll(matchedRides);
-                                              ridesData.putAll(matchedRidesData);
-                                              orginal_rides.addAll(rides);
-                                              orginal_ridesData.putAll(matchedRidesData);
-                                              adapter.notifyDataSetChanged();
-                                              mProgressBar.setVisibility(View.GONE);
+                                                          rides.addAll(matchedRides);
+                                                          ridesData.putAll(matchedRidesData);
+                                                          orginal_rides.addAll(rides);
+                                                          orginal_ridesData.putAll(matchedRidesData);
+                                                          adapter.notifyDataSetChanged();
+                                                          mProgressBar.setVisibility(View.GONE);
 
 
-                                                  load_more.setVisibility(count == -1?View.GONE:View.VISIBLE);
-                                                   last_id_server =last_id_server == -1?last_id:last_id_server;
+                                                          load_more.setVisibility(count == -1 ? View.GONE : View.VISIBLE);
+                                                          last_id_server = last_id_server == -1 ? last_id : last_id_server;
 
 
 //                                                     Toast.makeText(SearchResult.this.getApplicationContext(), matchedRidesData.get(matchedRides.get(0)).getUsername()+"" + matchedRidesData.size(), Toast.LENGTH_LONG).show();
 
-                                          }
+                                                      }
 
-                                          @Override
-                                          public void onSearchFailed(String error) {
-                                              mProgressBar.setVisibility(View.GONE);
-                                              load_more.setVisibility(View.VISIBLE);
-                                          }
-                                      }, SearchResult.this.getApplicationContext(), city_from, city_to, state_from,
-                state_to, country_from, country_to,
-                getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1), llm.getItemCount(), last_id_server);
+                                                      @Override
+                                                      public void onSearchFailed(String error) {
+                                                          mProgressBar.setVisibility(View.GONE);
+                                                          load_more.setVisibility(View.VISIBLE);
+                                                      }
+                                                  }, SearchResult.this.getApplicationContext(), city_from, city_to, state_from,
+                            state_to, country_from, country_to,
+                            getSharedPreferences("pref", MODE_PRIVATE).getLong("id", -1), llm.getItemCount(), last_id_server);
+                else {
+                    mProgressBar.setVisibility(View.GONE);
+                    load_more.setVisibility(View.GONE);
+
+
+                    LayoutInflater li = LayoutInflater.from(SearchResult.this);
+                    View v = li.inflate(R.layout.warning, null);
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SearchResult.this);
+
+                    // set more_info.xml to alertdialog builder
+                    alertDialogBuilder.setView(v);
+                    TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                    TextView textView7 = (TextView) v.findViewById(R.id.textView7);
+                    ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
+                    Typeface font = Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
+                    tittle.setTypeface(font);
+                    textView7.setTypeface(font);
+                    // create alert dialog
+                    final AlertDialog alertDialog = alertDialogBuilder.create();
+                    close_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+
+                        }
+                    });
+                    // show it
+                    alertDialog.show();
+                }
+
+
+            }
+        });
 
 
 

@@ -1,8 +1,10 @@
 package sharearide.com.orchidatech.jma.sharearide.Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -11,7 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -90,23 +94,61 @@ public class Inbox extends Fragment {
         inbox_rv.setLayoutManager(llm);
 
         inbox_rv.setAdapter(adapter);
-        last_chatting_users(getActivity(), new OnInboxFetchListener() {
-
+        InternetConnectionChecker.isConnectedToInternet(getActivity(), new OnInternetConnectionListener() {
             @Override
-            public void onFetchInboxSucceed(ArrayList<Chat> allMessages, Map<Chat, ArrayList<User>> allMessagesData) {
-                messages.addAll(allMessages);
-                messagesData.putAll(allMessagesData);
-                inbox_progress.setVisibility(View.GONE);
-                adapter.notifyDataSetChanged();
+            public void internetConnectionStatus(boolean status) {
+                if (status) {
+                    last_chatting_users(getActivity(), new OnInboxFetchListener() {
+
+                        @Override
+                        public void onFetchInboxSucceed(ArrayList<Chat> allMessages, Map<Chat, ArrayList<User>> allMessagesData) {
+                            messages.addAll(allMessages);
+                            messagesData.putAll(allMessagesData);
+                            inbox_progress.setVisibility(View.GONE);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onFetchInboxFailed(String error) {
+                            inbox_progress.setVisibility(View.GONE);
+
+
+                        }
+                    }, getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
+                } else {
+                    LayoutInflater li = LayoutInflater.from(getActivity());
+                    View v = li.inflate(R.layout.warning, null);
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+                    // set more_info.xml to alertdialog builder
+                    alertDialogBuilder.setView(v);
+                    TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                    TextView textView7 = (TextView) v.findViewById(R.id.textView7);
+                    ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
+                    Typeface font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
+                    tittle.setTypeface(font);
+                    textView7.setTypeface(font);
+
+
+                    // create alert dialog
+                    final AlertDialog alertDialog = alertDialogBuilder.create();
+                    close_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                            inbox_progress.setVisibility(View.GONE);
+
+                        }
+                    });
+                    // show it
+                    alertDialog.show();
+                }
+
+
             }
+        });
 
-            @Override
-            public void onFetchInboxFailed(String error) {
-                inbox_progress.setVisibility(View.GONE);
-
-
-            }
-        }, getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).getLong("id", -1));
         return view;
     }
 

@@ -3,6 +3,7 @@ package sharearide.com.orchidatech.jma.sharearide.Fragment;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -88,6 +89,8 @@ public class MyRides extends Fragment {
                     getMyRides();
                 else
                 {
+                    my_rides_progress.setVisibility(View.GONE);
+
                     LayoutInflater li = LayoutInflater.from(getActivity());
                     View v = li.inflate(R.layout.warning, null);
 
@@ -96,14 +99,19 @@ public class MyRides extends Fragment {
                     // set more_info.xml to alertdialog builder
                     alertDialogBuilder.setView(v);
                     TextView tittle = (TextView) v.findViewById(R.id.tittle);
+                    TextView textView7 = (TextView) v.findViewById(R.id.textView7);
                     ImageButton close_btn = (ImageButton) v.findViewById(R.id.close_btn);
-
+                    Typeface font= Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto_light.ttf");
+                    tittle.setTypeface(font);
+                    textView7.setTypeface(font);
                     // create alert dialog
                     final AlertDialog alertDialog = alertDialogBuilder.create();
                     close_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             alertDialog.dismiss();
+                            my_rides_progress.setVisibility(View.VISIBLE);
+
                         }
                     });
                     // show it

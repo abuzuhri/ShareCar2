@@ -33,6 +33,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="20dp"
+                android:id="@+id/LL_term_use"
                 android:layout_below="@+id/header"
                 >
 
@@ -40,7 +41,8 @@
                     android:id="@+id/about_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="The following terms and conditions govern the use of ..."
+                    android:layout_marginBottom="10dp"
+                    android:text="The following terms and conditions govern the use of application:"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <ScrollView

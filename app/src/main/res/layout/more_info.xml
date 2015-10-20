@@ -23,7 +23,6 @@
             android:id="@+id/tittle"
             android:layout_weight="0.3"
             android:textColor="#fff"
-            android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"/>
 
@@ -49,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:inputType="textMultiLine"
-        android:hint="write more information..."
+        android:hint=""
         android:textColor="#c4c3c3"
         android:gravity="top"
         android:padding="40dp"
