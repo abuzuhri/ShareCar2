@@ -30,7 +30,7 @@
                 android:textColor="#000"
                 android:gravity="center"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
-                android:layout_marginTop="@dimen/vertical_margin"/>
+                android:layout_marginTop="@dimen/vertical_topmargin"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:orientation="horizontal"
                 android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
-                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginTop="@dimen/vertical_topheader"
                 android:layout_marginBottom="@dimen/date_marginTop"
                 >
 
@@ -95,7 +95,7 @@
                     android:layout_gravity="center_vertical"
 
                     android:background="@drawable/ic_country"
-                  />
+                    />
 
                 <EditText
                     android:id="@+id/countryFrom"
@@ -131,7 +131,7 @@
                     android:layout_gravity="center_vertical"
 
                     android:background="@drawable/ic_flag"
-                   />
+                    />
 
                 <EditText
                     android:id="@+id/stateFrom"
@@ -168,7 +168,7 @@
                     android:layout_gravity="center_vertical"
 
                     android:background="@drawable/ic_time"
-                 />
+                    />
 
                 <EditText
                     android:id="@+id/time"
@@ -192,7 +192,7 @@
                 android:orientation="horizontal"
                 android:layout_marginRight="@dimen/horizontal_marginLeft"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
-                android:layout_marginBottom="@dimen/vertical_margin">
+                android:layout_marginBottom="@dimen/vertical_topheader">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -200,7 +200,7 @@
                     android:id="@+id/aa"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/ic_date"
-                  />
+                    />
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -232,7 +232,7 @@
                 android:background="@drawable/line"
                 android:layout_marginLeft="@dimen/horizontal_margin"
                 android:layout_marginRight="@dimen/horizontal_margin"
-                android:layout_marginBottom="@dimen/vertical_margin"/>
+                android:layout_marginBottom="@dimen/vertical_topheader"/>
 
 
             <TextView
@@ -245,7 +245,7 @@
                 android:id="@+id/textView1"
                 android:textColor="#000"
                 android:gravity="center"
-                android:layout_marginBottom="@dimen/vertical_margin"
+                android:layout_marginBottom="@dimen/vertical_topheader"
                 android:layout_marginLeft="@dimen/horizontal_marginLeft"
                 />
 
@@ -266,7 +266,7 @@
                     android:layout_gravity="center_vertical"
 
                     android:background="@drawable/ic_city"
-                  />
+                    />
 
                 <EditText
                     android:id="@+id/cityTo"
@@ -310,7 +310,7 @@
                     android:layout_gravity="center_vertical"
 
                     android:background="@drawable/ic_country"
-                   />
+                    />
 
                 <EditText
                     android:id="@+id/countryTo"
@@ -415,7 +415,7 @@
                 android:gravity="center"
                 android:layout_marginLeft="@dimen/horizontal_margin"
                 android:layout_marginRight="@dimen/horizontal_margin"
-                android:layout_marginTop="@dimen/vertical_margintopTextView"
+                android:layout_marginTop="@dimen/vertical_topmargin"
                 android:layout_marginBottom="@dimen/vertical_margin"
                 android:textStyle="bold"
                 android:textColor="@color/whiteText"
@@ -423,25 +423,37 @@
 
         </LinearLayout>
     </ScrollView>
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone"
-        />
-
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/save"
-        android:background="#ff9d1e"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/vertical_margin"
-        android:textStyle="bold"
-        android:textColor="@color/whiteText"
-        />
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:id="@+id/shadow"
+            android:orientation="horizontal"
+            android:background="#fdb557"></LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/save"
+            android:background="#ff9d1e"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/whiteText"
+            />
+    </LinearLayout>
+
 
 
 </LinearLayout>

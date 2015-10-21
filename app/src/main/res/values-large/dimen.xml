@@ -2,14 +2,20 @@
 <resources>
     <dimen name="text_size">17dp</dimen>
     <dimen name="text_size_smaller">15dp</dimen>
+    <dimen name="big_text_size">20dp</dimen>
+
+    <dimen name="ed_padding">20dp</dimen>
 
     <dimen name="horizontal_margin">90dp</dimen>
-    <dimen name="vertical_margintopPage">160dp</dimen>
+    <dimen name="vertical_margintopPage">130dp</dimen>
+    <dimen name="vertical_topPage">160dp</dimen>
+    <dimen name="little_margin">10dp</dimen>
+
     <dimen name="vertical_margintopTextView">90dp</dimen>
     <dimen name="vertical_margin_btwn_view">20dp</dimen>
     <dimen name="horizontal_BTW_Btn">120dp</dimen>
 
-    <dimen name="vertical_logoTop">110dp</dimen>
+    <dimen name="vertical_logoTop">80dp</dimen>
     <dimen name="vertical_logoBottom">40dp</dimen>
     <dimen name="vertical_topBtn">20dp</dimen>
 
@@ -28,6 +34,8 @@
 
     <dimen name="vertical_margin">45dp</dimen>
     <dimen name="horizontal_marginLeft">40dp</dimen>
+    <dimen name="vertical_topmargin">60dp</dimen>
+    <dimen name="vertical_topheader">30dp</dimen>
 
     <dimen name="tab_height">50dp</dimen>
 

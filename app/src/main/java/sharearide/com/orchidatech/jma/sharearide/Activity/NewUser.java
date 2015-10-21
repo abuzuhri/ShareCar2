@@ -40,7 +40,7 @@ public class NewUser extends AppCompatActivity {
     private EditText username,password,re_password,email,phone;
     private Button register;
     private ProgressBar signup_progress;
-    Typeface font;
+    Typeface font,fontbold;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,11 +57,14 @@ public class NewUser extends AppCompatActivity {
         email=(EditText)findViewById(R.id.email);
         phone=(EditText)findViewById(R.id.phone);
         font= Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
+        fontbold= Typeface.createFromAsset(getAssets(), "fonts/roboto_bold.ttf");
+
         username.setTypeface(font);
         password.setTypeface(font);
         re_password.setTypeface(font);
         email.setTypeface(font);
         phone.setTypeface(font);
+        register.setTypeface(fontbold);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

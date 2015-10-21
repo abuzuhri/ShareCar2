@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_size">10dp</dimen>
+    <dimen name="big_text_size">15dp</dimen>
     <dimen name="text_size_smaller">8dp</dimen>
 
     <dimen name="horizontal_margin">50dp</dimen>
+    <dimen name="ed_padding">10dp</dimen>
 
-    <dimen name="vertical_margintopPage">70dp</dimen>
+    <dimen name="vertical_margintopPage">80dp</dimen>
+    <dimen name="vertical_topPage">110dp</dimen>
+    <dimen name="little_margin">5dp</dimen>
     <dimen name="vertical_margintopTextView">30dp</dimen>
     <dimen name="vertical_margin_btwn_view">10dp</dimen>
-    <dimen name="vertical_logoTop">50dp</dimen>
+    <dimen name="vertical_logoTop">20dp</dimen>
+    <dimen name="vertical_topmargin">60dp</dimen>
+    <dimen name="vertical_topheader">30dp</dimen>
 
     <dimen name="vertical_logoBottom">20dp</dimen>
     <dimen name="vertical_topBtn">20dp</dimen>
