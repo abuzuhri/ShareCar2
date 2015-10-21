@@ -587,7 +587,11 @@ public class MainUserFunctions {
                         JSONArray mJsonArray = jsonObject.getJSONArray("signup");
                         JSONObject mJsonObject = mJsonArray.getJSONObject(0);
                         final long user_id = Long.parseLong(mJsonObject.getString("id"));
+                        final String email = mJsonObject.getString("email");
+                        final String password = mJsonObject.getString("password");
                         user.setId(user_id + "");
+                        user.setEmail(email);
+                        user.setPassword(password);
 //
 //                        Toast.makeText(context, user_id + "", Toast.LENGTH_LONG).show();
                         UserDAO.addNewSocialUser(user);

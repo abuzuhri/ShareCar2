@@ -518,8 +518,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
             }
             mIntentInProgress = false;
             if (!mGoogleApiClient.isConnecting()) {
-                Log.i("sds", resultCode+"");
-               mGoogleApiClient.connect();
+                //Log.i("sds", resultCode+"");
+                if(resultCode != 0)
+                 mGoogleApiClient.connect();
             }
 
         }else
